@@ -16,16 +16,16 @@ export default defineConfig({
         S.list()
           .title('Content')
           .items([
-            S.listItem().title('Site Settings').child(
+            S.listItem().id('siteSettings').title('Site Settings').schemaType('siteSettings').child(
               S.document().schemaType('siteSettings').documentId('siteSettings')
             ),
-            S.listItem().title('Home Page').child(
+            S.listItem().id('homePage').title('Home Page').schemaType('homePage').child(
               S.document().schemaType('homePage').documentId('homePage')
             ),
-            S.listItem().title('About Page').child(
+            S.listItem().id('aboutPage').title('About Page').schemaType('aboutPage').child(
               S.document().schemaType('aboutPage').documentId('aboutPage')
             ),
-            S.listItem().title('Contact Page').child(
+            S.listItem().id('contactPage').title('Contact Page').schemaType('contactPage').child(
               S.document().schemaType('contactPage').documentId('contactPage')
             ),
             S.divider(),
