@@ -112,56 +112,127 @@ export default async function HomePage() {
       {/* TREATMENTS */}
       <section style={{ padding: '72px 20px' }}>
         <div style={{ maxWidth: 1180, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <span className="eyebrow">{page?.treatmentsSection?.eyebrow || 'Our Services'}</span>
-            <h2 style={{ fontWeight: 500, color: 'var(--text)' }}>{page?.treatmentsSection?.heading || 'Treatments we offer'}</h2>
-            <p style={{ fontSize: 14, fontWeight: 300, color: '#7A6A5A', marginTop: 10, maxWidth: 480, marginInline: 'auto' }}>
-              {page?.treatmentsSection?.subtext || 'Each treatment is customised to your skin type and concern.'}
-            </p>
+          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 40, flexWrap: 'wrap', gap: 12 }}>
+            <div>
+              <span className="eyebrow">{page?.treatmentsSection?.eyebrow || 'Our Services'}</span>
+              <h2 style={{ fontWeight: 500, color: 'var(--text)', margin: 0 }}>{page?.treatmentsSection?.heading || 'Treatments we offer'}</h2>
+            </div>
+            <Link href="/treatments" style={{ fontSize: 13, fontWeight: 400, color: '#1A2744', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>View all treatments →</Link>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 20 }}>
-            {['HydraFacial MD', 'Carbon Laser Facial', 'Acne Clearance Program', 'PRP Hair Restoration', 'Anti-Wrinkle Botox', 'Laser Hair Reduction'].map((name, i) => (
-              <Link key={i} href="/treatments" className="card-hover" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', background: '#fff', borderRadius: 16, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.09)' }}>
-                <div style={{ height: 160, background: '#F0E8DF', flexShrink: 0 }} />
-                <div style={{ padding: '18px 20px 20px' }}>
-                  <div style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#B8916A', marginBottom: 6 }}>Skin & Glow</div>
-                  <h3 style={{ fontWeight: 500, fontSize: 15, color: 'var(--text)', marginBottom: 8 }}>{name}</h3>
-                  <p style={{ fontSize: 13, fontWeight: 300, color: '#7A6A5A', lineHeight: 1.65 }}>Doctor-led treatment tailored to your skin needs.</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 18 }}>
+            {[
+              { name: 'HydraFacial MD', slug: 'hydrafacial-md', badge: 'SKIN', desc: 'Deep-cleanse, exfoliate and hydrate in one session. Instant glow, zero downtime.', duration: '45 min' },
+              { name: 'Carbon Laser Facial', slug: 'carbon-laser-facial', badge: 'LASERS', desc: 'Tightens pores, controls oil and brightens dull skin — the Hollywood peel.', duration: '30 min' },
+              { name: 'Acne Clearance Program', slug: 'acne-clearance', badge: 'SIGNATURE', desc: 'A complete medical plan combining therapy, peels and devices to clear active acne.', duration: '60 min' },
+              { name: 'Acne Scar Revision (MNRF)', slug: 'acne-scar-mnrf', badge: 'ACNE SCARS', desc: 'Microneedling RF to rebuild collagen and smooth pitted scars.', duration: '60 min' },
+              { name: 'Melasma Treatment', slug: 'melasma', badge: 'PIGMENTATION', desc: 'Combination laser toning, peels and topicals for stubborn melasma.', duration: '45 min' },
+              { name: 'Anti-Wrinkle (Botox)', slug: 'botox', badge: 'POPULAR', desc: 'Soften frown lines, crow\'s feet and forehead lines with precise, natural-looking results.', duration: '20 min' },
+              { name: 'Dermal Fillers', slug: 'fillers', badge: 'INJECTABLES', desc: 'Restore volume, define cheeks and lips with hyaluronic acid fillers.', duration: '30 min' },
+              { name: 'Laser Hair Reduction', slug: 'laser-hair', badge: 'POPULAR', desc: 'Diode laser tuned for Indian skin — near-painless, long-lasting hair reduction.', duration: '30–60 min' },
+              { name: 'PRP Hair Restoration', slug: 'prp-hair', badge: 'HAIR', desc: 'Platelet-rich plasma to reduce hair fall, nourish follicles and boost density.', duration: '45 min' },
+              { name: 'GFC Hair Therapy', slug: 'gfc-hair', badge: 'HAIR', desc: 'Growth-factor concentrate therapy for thinning hair, clinically proven regrowth.', duration: '45 min' },
+            ].map((t, i) => (
+              <Link key={i} href={`/treatments/${t.slug}`} className="card-hover" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', background: '#fff', borderRadius: 16, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.08)' }}>
+                <div style={{ height: 160, background: '#F0E8DF', flexShrink: 0, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(184,145,106,0.4)" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  <div style={{ position: 'absolute', top: 12, left: 12, background: 'rgba(26,17,9,0.78)', color: '#FAF7F2', fontSize: 9.5, fontWeight: 500, letterSpacing: '0.1em', padding: '3px 8px', borderRadius: 999 }}>{t.badge}</div>
+                </div>
+                <div style={{ padding: '16px 18px 20px', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                  <h3 style={{ fontWeight: 500, fontSize: 14.5, color: 'var(--text)', marginBottom: 7, lineHeight: 1.3 }}>{t.name}</h3>
+                  <p style={{ fontSize: 12.5, fontWeight: 300, color: '#7A6A5A', lineHeight: 1.65, flex: 1 }}>{t.desc}</p>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 14, paddingTop: 12, borderTop: '1px solid rgba(26,17,9,0.07)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 12, fontWeight: 300, color: '#9A8A7A' }}>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#9A8A7A" strokeWidth="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                      {t.duration}
+                    </div>
+                    <span style={{ fontSize: 12, fontWeight: 400, color: '#1A2744', display: 'flex', alignItems: 'center', gap: 3 }}>Explore →</span>
+                  </div>
                 </div>
               </Link>
             ))}
-          </div>
-          <div style={{ textAlign: 'center', marginTop: 36 }}>
-            <Link href="/treatments" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 400, color: '#1A2744', border: '1.5px solid rgba(26,39,68,0.2)', padding: '12px 28px', borderRadius: 999, textDecoration: 'none' }}>
-              View all treatments →
+            <Link href="/treatments" className="card-hover" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', background: '#3B2210', borderRadius: 16, overflow: 'hidden', minHeight: 280, padding: '28px 24px', position: 'relative' }}>
+              <div style={{ position: 'absolute', top: 20, left: 20, fontSize: 10.5, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#B8916A' }}>15 TREATMENTS</div>
+              <h3 style={{ fontWeight: 400, fontSize: 22, color: '#FAF7F2', fontStyle: 'italic', lineHeight: 1.2, marginBottom: 20 }}>Explore the full menu</h3>
+              <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'rgba(255,255,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FAF7F2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </div>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* CONCERNS */}
+      {/* BROWSE BY CONCERN */}
+      <section style={{ padding: '72px 20px', background: '#FAF7F2' }}>
+        <div style={{ maxWidth: 1180, margin: '0 auto' }}>
+          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 40, flexWrap: 'wrap', gap: 12 }}>
+            <div>
+              <span className="eyebrow">{page?.concernsSection?.eyebrow || 'Browse by Concern'}</span>
+              <h2 style={{ fontWeight: 500, color: 'var(--text)', margin: 0 }}>{page?.concernsSection?.heading || 'New & popular concerns'}</h2>
+            </div>
+            <Link href="/concerns" style={{ fontSize: 13, fontWeight: 400, color: '#1A2744', textDecoration: 'none' }}>See all concerns →</Link>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 28 }}>
+            {[
+              { cat: 'Skin & Face', slug: '/concerns', items: [
+                { name: 'Acne & Breakouts', count: 5, slug: 'acne' },
+                { name: 'Acne Scars', count: 4, slug: 'acne-scars' },
+                { name: 'Pigmentation', count: 4, slug: 'pigmentation' },
+              ]},
+              { cat: 'Hair & Scalp', slug: '/concerns', items: [
+                { name: 'Hair Fall & Thinning', count: 4, slug: 'hair-fall' },
+                { name: 'Hair Regrowth', count: 3, slug: 'hair-regrowth' },
+                { name: 'Unwanted Body Hair', count: 2, slug: 'unwanted-hair' },
+              ]},
+              { cat: 'Anti-Ageing', slug: '/concerns', items: [
+                { name: 'Wrinkles & Fine Lines', count: 3, slug: 'wrinkles' },
+                { name: 'Volume Loss', count: 2, slug: 'volume-loss' },
+                { name: 'Sagging & Laxity', count: 3, slug: 'sagging' },
+              ]},
+            ].map((col, ci) => (
+              <div key={ci}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14, paddingBottom: 12, borderBottom: '1.5px solid rgba(26,17,9,0.1)' }}>
+                  <h3 style={{ fontSize: 15, fontWeight: 500, color: 'var(--text)', margin: 0 }}>{col.cat}</h3>
+                  <Link href="/concerns" style={{ fontSize: 12, color: '#9A8A7A', textDecoration: 'none' }}>→</Link>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  {col.items.map((item, ii) => (
+                    <Link key={ii} href={`/concerns/${item.slug}`} className="card-hover" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 12, padding: '14px 16px', background: '#fff', borderRadius: 12, border: '1.5px solid rgba(26,17,9,0.08)' }}>
+                      <div style={{ width: 34, height: 34, borderRadius: 9, background: '#F5EDE4', flexShrink: 0 }} />
+                      <div style={{ flex: 1 }}>
+                        <div style={{ fontSize: 13.5, fontWeight: 400, color: 'var(--text)' }}>{item.name}</div>
+                        <div style={{ fontSize: 11.5, fontWeight: 300, color: '#9A8A7A', marginTop: 2 }}>{item.count} treatments</div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CURRENT OFFERS */}
       <section style={{ padding: '72px 20px', background: '#F5EDE4' }}>
         <div style={{ maxWidth: 1180, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <span className="eyebrow">{page?.concernsSection?.eyebrow || 'Find Your Concern'}</span>
-            <h2 style={{ fontWeight: 500, color: 'var(--text)' }}>{page?.concernsSection?.heading || 'What are you dealing with?'}</h2>
+          <div style={{ textAlign: 'center', marginBottom: 40 }}>
+            <span className="eyebrow">Offers & Promotions</span>
+            <h2 style={{ fontWeight: 500, color: 'var(--text)', margin: 0 }}>Current offers</h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(170px, 1fr))', gap: 14 }}>
-            {[
-              { name: 'Acne & Breakouts', bg: '#FFF0EE', color: '#C4847E' },
-              { name: 'Pigmentation', bg: '#F5EDE4', color: '#B8916A' },
-              { name: 'Hair Fall', bg: '#EEFAF2', color: '#2E7D52' },
-              { name: 'Acne Scars', bg: '#FFF0EE', color: '#C4847E' },
-              { name: 'Wrinkles', bg: '#F5EDE4', color: '#B8916A' },
-              { name: 'Dull Skin', bg: '#EEF6FF', color: '#6B9EC7' },
-              { name: 'Dark Circles', bg: '#EEF1F8', color: '#1A2744' },
-              { name: 'Pores & Texture', bg: '#EEFAF2', color: '#2E7D52' },
-            ].map((c, i) => (
-              <Link key={i} href="/concerns" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10, padding: '14px 16px', background: '#fff', borderRadius: 12, border: '1.5px solid rgba(26,17,9,0.09)', transition: 'transform .2s, box-shadow .2s' }}>
-                <span style={{ width: 32, height: 32, borderRadius: 8, background: c.bg, flexShrink: 0 }} />
-                <span style={{ fontSize: 13, fontWeight: 400, color: 'var(--text)' }}>{c.name}</span>
-              </Link>
-            ))}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+            <div style={{ background: '#1A2744', borderRadius: 20, padding: '36px 32px', position: 'relative', overflow: 'hidden' }}>
+              <div style={{ position: 'absolute', top: -20, right: -20, width: 120, height: 120, borderRadius: '50%', background: 'rgba(255,255,255,0.06)' }} />
+              <div style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#B8916A', marginBottom: 16 }}>Monsoon Special</div>
+              <h3 style={{ fontWeight: 500, fontSize: 22, color: '#FAF7F2', marginBottom: 10, lineHeight: 1.2 }}>20% off Acne & Scar treatments</h3>
+              <p style={{ fontSize: 13.5, fontWeight: 300, color: '#A0B4C8', marginBottom: 28, lineHeight: 1.7 }}>Valid through July 2026. Book now to lock in the offer.</p>
+              <Link href="/contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#B8916A', color: '#fff', fontSize: 13, fontWeight: 400, padding: '11px 22px', borderRadius: 999, textDecoration: 'none' }}>Claim offer →</Link>
+            </div>
+            <div style={{ background: '#3B2210', borderRadius: 20, padding: '36px 32px', position: 'relative', overflow: 'hidden' }}>
+              <div style={{ position: 'absolute', top: -20, right: -20, width: 120, height: 120, borderRadius: '50%', background: 'rgba(255,255,255,0.06)' }} />
+              <div style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#B8916A', marginBottom: 16 }}>New Patient Offer</div>
+              <h3 style={{ fontWeight: 500, fontSize: 22, color: '#FAF7F2', marginBottom: 10, lineHeight: 1.2 }}>Free consultation for first-timers</h3>
+              <p style={{ fontSize: 13.5, fontWeight: 300, color: '#C4A998', marginBottom: 28, lineHeight: 1.7 }}>New to Tvak? Your first dermatologist consultation is on us.</p>
+              <Link href="/contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#C4847E', color: '#fff', fontSize: 13, fontWeight: 400, padding: '11px 22px', borderRadius: 999, textDecoration: 'none' }}>Book free consult →</Link>
+            </div>
           </div>
         </div>
       </section>
