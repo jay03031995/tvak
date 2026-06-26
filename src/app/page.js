@@ -260,6 +260,59 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* BEFORE & AFTER */}
+      <section style={{ padding: '72px 20px', background: '#fff' }}>
+        <div style={{ maxWidth: 1180, margin: '0 auto' }}>
+          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 44, flexWrap: 'wrap', gap: 12 }}>
+            <div>
+              <span className="eyebrow">Real Results</span>
+              <h2 style={{ fontWeight: 500, color: 'var(--text)', margin: 0 }}>Before & After</h2>
+            </div>
+            <Link href="/contact" style={{ fontSize: 13, fontWeight: 400, color: '#1A2744', textDecoration: 'none' }}>Book your consultation →</Link>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 20 }}>
+            {[
+              { treatment: 'Acne Clearance Program', result: 'Active acne cleared in 6 sessions', weeks: '8 weeks', cat: 'Acne & Scars', slug: 'acne-clearance', accent: '#FFF0EE', dot: '#C4847E' },
+              { treatment: 'Acne Scar Revision MNRF', result: 'Pitted scars visibly reduced', weeks: '12 weeks', cat: 'Acne & Scars', slug: 'acne-scar-mnrf', accent: '#F5EDE4', dot: '#B8916A' },
+              { treatment: 'Melasma Treatment', result: 'Dark patches significantly faded', weeks: '10 weeks', cat: 'Pigmentation', slug: 'melasma', accent: '#EEF6FF', dot: '#6B9EC7' },
+              { treatment: 'PRP Hair Restoration', result: 'Visible density improvement', weeks: '16 weeks', cat: 'Hair Restoration', slug: 'prp-hair', accent: '#EEFAF2', dot: '#2E7D52' },
+            ].map((item, i) => (
+              <Link key={i} href={`/treatments/${item.slug}`} className="card-hover" style={{ textDecoration: 'none', background: '#fff', borderRadius: 18, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.08)' }}>
+                {/* Before / After split */}
+                <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', height: 200, background: '#F0E8DF' }}>
+                  <div style={{ background: '#E2D8CE', display: 'flex', alignItems: 'flex-end', padding: '10px', justifyContent: 'flex-start' }}>
+                    <span style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(255,255,255,0.85)', color: '#4A3728', padding: '4px 8px', borderRadius: 4 }}>Before</span>
+                  </div>
+                  <div style={{ background: '#D4C9BC', display: 'flex', alignItems: 'flex-end', padding: '10px', justifyContent: 'flex-end' }}>
+                    <span style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(26,39,68,0.8)', color: '#FAF7F2', padding: '4px 8px', borderRadius: 4 }}>After</span>
+                  </div>
+                  {/* divider */}
+                  <div style={{ position: 'absolute', left: '50%', top: 0, bottom: 0, width: 2, background: '#fff', transform: 'translateX(-50%)' }}>
+                    <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 28, height: 28, borderRadius: '50%', background: '#fff', boxShadow: '0 2px 8px rgba(0,0,0,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4A3728" strokeWidth="2.5"><path d="M9 18l-6-6 6-6M15 6l6 6-6 6"/></svg>
+                    </div>
+                  </div>
+                  <div style={{ position: 'absolute', top: 12, left: 12, background: item.accent, borderRadius: 6, padding: '3px 9px' }}>
+                    <span style={{ fontSize: 10, fontWeight: 500, color: item.dot, letterSpacing: '0.06em' }}>{item.cat}</span>
+                  </div>
+                </div>
+                <div style={{ padding: '16px 18px 20px' }}>
+                  <h3 style={{ fontWeight: 500, fontSize: 14, color: 'var(--text)', marginBottom: 6, lineHeight: 1.3 }}>{item.treatment}</h3>
+                  <p style={{ fontSize: 13, fontWeight: 300, color: '#7A6A5A', marginBottom: 12, lineHeight: 1.55 }}>{item.result}</p>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <span style={{ fontSize: 11.5, fontWeight: 400, color: '#9A8A7A', background: '#F5EDE4', padding: '4px 10px', borderRadius: 999 }}>Results in {item.weeks}</span>
+                    <span style={{ fontSize: 12, fontWeight: 400, color: '#1A2744' }}>View treatment →</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <p style={{ textAlign: 'center', fontSize: 12, fontWeight: 300, color: '#9A8A7A', marginTop: 28 }}>
+            Individual results may vary. All procedures performed by Dr. Omaima Jawed, MBBS.
+          </p>
+        </div>
+      </section>
+
       {/* TESTIMONIALS */}
       <section style={{ padding: '72px 20px', background: '#FAF7F2' }}>
         <div style={{ maxWidth: 1180, margin: '0 auto' }}>
