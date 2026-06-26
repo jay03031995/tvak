@@ -1,68 +1,58 @@
-export default {
+import { defineType, defineField, defineArrayMember } from 'sanity'
+
+export default defineType({
   name: 'aboutPage',
   title: 'About Page',
   type: 'document',
   fields: [
-    {
+    defineField({
       name: 'hero', title: 'Hero Section', type: 'object',
       fields: [
-        { name: 'eyebrow', title: 'Eyebrow', type: 'string' },
-        { name: 'headingLine1', title: 'Heading Line 1', type: 'string' },
-        { name: 'headingItalic', title: 'Italic Part', type: 'string' },
-        { name: 'subtext', title: 'Subtext', type: 'text' },
+        defineField({ name: 'eyebrow', title: 'Eyebrow', type: 'string' }),
+        defineField({ name: 'headingLine1', title: 'Heading Line 1', type: 'string' }),
+        defineField({ name: 'headingItalic', title: 'Heading — Italic Part', type: 'string' }),
+        defineField({ name: 'subtext', title: 'Sub Text', type: 'text', rows: 3 }),
       ]
-    },
-    {
-      name: 'stats', title: 'Stats', type: 'array',
-      of: [{
+    }),
+    defineField({
+      name: 'stats', title: 'Stats Bar', type: 'array',
+      of: [defineArrayMember({
         type: 'object',
         fields: [
-          { name: 'value', title: 'Value', type: 'string' },
-          { name: 'label', title: 'Label', type: 'string' },
-        ]
-      }]
-    },
-    {
-      name: 'story', title: 'Our Story', type: 'object',
+          defineField({ name: 'value', title: 'Value (e.g. 500+)', type: 'string' }),
+          defineField({ name: 'label', title: 'Label', type: 'string' }),
+        ],
+        preview: { select: { title: 'value', subtitle: 'label' } }
+      })]
+    }),
+    defineField({
+      name: 'values', title: 'Our Values Section', type: 'object',
       fields: [
-        { name: 'heading', title: 'Heading', type: 'string' },
-        { name: 'content', title: 'Content', type: 'array', of: [{ type: 'block' }] },
-      ]
-    },
-    {
-      name: 'values', title: 'Our Values', type: 'object',
-      fields: [
-        { name: 'heading', title: 'Heading', type: 'string' },
-        {
+        defineField({ name: 'heading', title: 'Section Heading', type: 'string' }),
+        defineField({
           name: 'items', title: 'Value Cards', type: 'array',
-          of: [{
+          of: [defineArrayMember({
             type: 'object',
             fields: [
-              { name: 'title', title: 'Title', type: 'string' },
-              { name: 'description', title: 'Description', type: 'text' },
-            ]
-          }]
-        },
+              defineField({ name: 'title', title: 'Card Title', type: 'string' }),
+              defineField({ name: 'description', title: 'Card Description', type: 'text', rows: 3 }),
+            ],
+            preview: { select: { title: 'title' } }
+          })]
+        }),
       ]
-    },
-    {
-      name: 'doctor', title: 'Doctor Section',
+    }),
+    defineField({
+      name: 'doctor', title: 'Doctor (reference)',
       type: 'reference', to: [{ type: 'doctor' }]
-    },
-    {
-      name: 'location', title: 'Location Section', type: 'object',
-      fields: [
-        { name: 'heading', title: 'Heading', type: 'string' },
-        { name: 'mapEmbedUrl', title: 'Google Maps Embed URL', type: 'url' },
-      ]
-    },
-    {
+    }),
+    defineField({
       name: 'seo', title: 'SEO', type: 'object',
       fields: [
-        { name: 'title', title: 'Meta Title', type: 'string' },
-        { name: 'description', title: 'Meta Description', type: 'text', rows: 2 },
+        defineField({ name: 'title', title: 'Meta Title', type: 'string' }),
+        defineField({ name: 'description', title: 'Meta Description', type: 'text', rows: 2 }),
       ]
-    },
+    }),
   ],
-  preview: { prepare: () => ({ title: 'About Page' }) }
-}
+  preview: { prepare: () => ({ title: 'About Page' }) },
+})

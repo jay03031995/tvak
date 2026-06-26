@@ -1,65 +1,37 @@
-export default {
+import { defineType, defineField, defineArrayMember } from 'sanity'
+
+export default defineType({
   name: 'contactPage',
   title: 'Contact Page',
   type: 'document',
   fields: [
-    {
+    defineField({
       name: 'hero', title: 'Hero Section', type: 'object',
       fields: [
-        { name: 'eyebrow', title: 'Eyebrow', type: 'string' },
-        { name: 'heading', title: 'Heading', type: 'string' },
-        { name: 'subtext', title: 'Subtext', type: 'text' },
+        defineField({ name: 'eyebrow', title: 'Eyebrow', type: 'string' }),
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({ name: 'subtext', title: 'Sub Text', type: 'text', rows: 2 }),
       ]
-    },
-    {
-      name: 'form', title: 'Contact Form', type: 'object',
-      fields: [
-        { name: 'heading', title: 'Form Heading', type: 'string' },
-        { name: 'subtext', title: 'Form Subtext', type: 'string' },
-        { name: 'submitLabel', title: 'Submit Button Label', type: 'string' },
-        {
-          name: 'fields', title: 'Form Fields', type: 'array',
-          of: [{
-            type: 'object',
-            fields: [
-              { name: 'label', title: 'Label', type: 'string' },
-              { name: 'placeholder', title: 'Placeholder', type: 'string' },
-              { name: 'type', title: 'Field Type', type: 'string', options: { list: ['text', 'email', 'tel', 'textarea', 'select'] } },
-              { name: 'required', title: 'Required', type: 'boolean' },
-            ]
-          }]
-        },
-      ]
-    },
-    {
-      name: 'info', title: 'Contact Info Cards', type: 'array',
-      of: [{
-        type: 'object',
-        fields: [
-          { name: 'label', title: 'Label (e.g. Phone)', type: 'string' },
-          { name: 'value', title: 'Value', type: 'string' },
-          { name: 'link', title: 'Link (optional)', type: 'string' },
-        ]
-      }]
-    },
-    {
+    }),
+    defineField({
       name: 'hours', title: 'Clinic Hours', type: 'array',
-      of: [{
+      of: [defineArrayMember({
         type: 'object',
         fields: [
-          { name: 'days', title: 'Days', type: 'string' },
-          { name: 'time', title: 'Time', type: 'string' },
-        ]
-      }]
-    },
-    { name: 'mapEmbedUrl', title: 'Google Maps Embed URL', type: 'url' },
-    {
+          defineField({ name: 'days', title: 'Days (e.g. Mon – Sat)', type: 'string' }),
+          defineField({ name: 'time', title: 'Hours (e.g. 10:00 AM – 7:00 PM)', type: 'string' }),
+        ],
+        preview: { select: { title: 'days', subtitle: 'time' } }
+      })]
+    }),
+    defineField({ name: 'mapEmbedUrl', title: 'Google Maps Embed URL', type: 'url' }),
+    defineField({
       name: 'seo', title: 'SEO', type: 'object',
       fields: [
-        { name: 'title', title: 'Meta Title', type: 'string' },
-        { name: 'description', title: 'Meta Description', type: 'text', rows: 2 },
+        defineField({ name: 'title', title: 'Meta Title', type: 'string' }),
+        defineField({ name: 'description', title: 'Meta Description', type: 'text', rows: 2 }),
       ]
-    },
+    }),
   ],
-  preview: { prepare: () => ({ title: 'Contact Page' }) }
-}
+  preview: { prepare: () => ({ title: 'Contact Page' }) },
+})

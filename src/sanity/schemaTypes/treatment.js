@@ -1,78 +1,81 @@
-export default {
+import { defineType, defineField, defineArrayMember } from 'sanity'
+
+export default defineType({
   name: 'treatment',
   title: 'Treatment',
   type: 'document',
   fields: [
-    { name: 'name', title: 'Treatment Name', type: 'string', validation: R => R.required() },
-    { name: 'slug', title: 'Slug', type: 'slug', options: { source: 'name' }, validation: R => R.required() },
-    {
+    defineField({ name: 'name', title: 'Treatment Name', type: 'string', validation: r => r.required() }),
+    defineField({ name: 'slug', title: 'Slug', type: 'slug', options: { source: 'name' }, validation: r => r.required() }),
+    defineField({
       name: 'category', title: 'Category', type: 'string',
       options: { list: ['Skin & Glow', 'Acne & Scars', 'Pigmentation', 'Anti-Ageing', 'Hair Restoration', 'Laser & Devices'] }
-    },
-    { name: 'tagline', title: 'Short Tagline', type: 'string' },
-    { name: 'description', title: 'Description', type: 'text', rows: 4 },
-    { name: 'image', title: 'Main Image', type: 'image', options: { hotspot: true } },
-    {
+    }),
+    defineField({ name: 'tagline', title: 'Short Tagline', type: 'string' }),
+    defineField({ name: 'description', title: 'Description', type: 'text', rows: 4 }),
+    defineField({ name: 'image', title: 'Main Image', type: 'image', options: { hotspot: true } }),
+    defineField({
       name: 'meta', title: 'Key Details', type: 'object',
       fields: [
-        { name: 'duration', title: 'Session Duration', type: 'string' },
-        { name: 'sessions', title: 'Recommended Sessions', type: 'string' },
-        { name: 'recovery', title: 'Recovery Time', type: 'string' },
-        { name: 'results', title: 'Results Visible', type: 'string' },
+        defineField({ name: 'duration', title: 'Session Duration (e.g. 45 min)', type: 'string' }),
+        defineField({ name: 'sessions', title: 'Recommended Sessions (e.g. 4–6)', type: 'string' }),
+        defineField({ name: 'recovery', title: 'Recovery Time', type: 'string' }),
+        defineField({ name: 'results', title: 'Results Visible In', type: 'string' }),
       ]
-    },
-    {
-      name: 'howItWorks', title: 'How It Works', type: 'array',
-      of: [{
+    }),
+    defineField({
+      name: 'howItWorks', title: 'How It Works — Steps', type: 'array',
+      of: [defineArrayMember({
         type: 'object',
         fields: [
-          { name: 'step', title: 'Step Number', type: 'number' },
-          { name: 'title', title: 'Step Title', type: 'string' },
-          { name: 'description', title: 'Step Description', type: 'text' },
-        ]
-      }]
-    },
-    {
-      name: 'benefits', title: 'Benefits', type: 'array',
-      of: [{ type: 'string' }]
-    },
-    {
-      name: 'beforeAfter', title: 'Before & After', type: 'array',
-      of: [{
+          defineField({ name: 'step', title: 'Step Number', type: 'number' }),
+          defineField({ name: 'title', title: 'Step Title', type: 'string' }),
+          defineField({ name: 'description', title: 'Step Description', type: 'text' }),
+        ],
+        preview: { select: { title: 'title', subtitle: 'step' } }
+      })]
+    }),
+    defineField({
+      name: 'benefits', title: 'Benefits (one per line)', type: 'array',
+      of: [defineArrayMember({ type: 'string' })]
+    }),
+    defineField({
+      name: 'beforeAfter', title: 'Before & After Photos', type: 'array',
+      of: [defineArrayMember({
         type: 'object',
         fields: [
-          { name: 'before', title: 'Before Image', type: 'image', options: { hotspot: true } },
-          { name: 'after', title: 'After Image', type: 'image', options: { hotspot: true } },
-          { name: 'sessions', title: 'Sessions taken', type: 'string' },
-          { name: 'label', title: 'Result Label', type: 'string' },
-        ]
-      }]
-    },
-    {
+          defineField({ name: 'before', title: 'Before Image', type: 'image', options: { hotspot: true } }),
+          defineField({ name: 'after', title: 'After Image', type: 'image', options: { hotspot: true } }),
+          defineField({ name: 'sessions', title: 'Sessions Taken', type: 'string' }),
+          defineField({ name: 'label', title: 'Result Label (e.g. 80% scar reduction)', type: 'string' }),
+        ],
+        preview: { select: { title: 'label', media: 'after' } }
+      })]
+    }),
+    defineField({
       name: 'faqs', title: 'FAQs', type: 'array',
-      of: [{
+      of: [defineArrayMember({
         type: 'object',
         fields: [
-          { name: 'question', title: 'Question', type: 'string' },
-          { name: 'answer', title: 'Answer', type: 'text' },
-        ]
-      }]
-    },
-    {
+          defineField({ name: 'question', title: 'Question', type: 'string' }),
+          defineField({ name: 'answer', title: 'Answer', type: 'text' }),
+        ],
+        preview: { select: { title: 'question' } }
+      })]
+    }),
+    defineField({
       name: 'relatedTreatments', title: 'Related Treatments',
-      type: 'array', of: [{ type: 'reference', to: [{ type: 'treatment' }] }]
-    },
-    {
+      type: 'array', of: [defineArrayMember({ type: 'reference', to: [{ type: 'treatment' }] })]
+    }),
+    defineField({
       name: 'relatedConcerns', title: 'Related Concerns',
-      type: 'array', of: [{ type: 'reference', to: [{ type: 'concern' }] }]
-    },
-    { name: 'rating', title: 'Star Rating', type: 'number' },
-    { name: 'reviewCount', title: 'Review Count', type: 'number' },
-    { name: 'featured', title: 'Featured on Homepage', type: 'boolean' },
-    { name: 'order', title: 'Sort Order', type: 'number' },
+      type: 'array', of: [defineArrayMember({ type: 'reference', to: [{ type: 'concern' }] })]
+    }),
+    defineField({ name: 'rating', title: 'Star Rating (e.g. 4.9)', type: 'number' }),
+    defineField({ name: 'reviewCount', title: 'Number of Reviews', type: 'number' }),
+    defineField({ name: 'featured', title: 'Featured on Homepage', type: 'boolean' }),
+    defineField({ name: 'order', title: 'Sort Order', type: 'number' }),
   ],
-  preview: {
-    select: { title: 'name', subtitle: 'category', media: 'image' }
-  },
-  orderings: [{ title: 'Sort Order', name: 'order', by: [{ field: 'order', direction: 'asc' }] }]
-}
+  preview: { select: { title: 'name', subtitle: 'category', media: 'image' } },
+  orderings: [{ title: 'Sort Order', name: 'order', by: [{ field: 'order', direction: 'asc' }] }],
+})
