@@ -28,7 +28,7 @@ export default async function AboutPage() {
       </section>
 
       <section style={{ padding: '56px 20px', background: '#1A2744' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 32, textAlign: 'center' }}>
+        <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }} className="grid-stats">
           {(page?.stats || [
             { value: '5+', label: 'Years Experience' },
             { value: '500+', label: 'Happy Patients' },
@@ -62,7 +62,7 @@ export default async function AboutPage() {
       </section>
 
       <section style={{ padding: '72px 20px', background: '#FAF7F2' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60, alignItems: 'center' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }} className="grid-hero">
           <div style={{ borderRadius: 20, overflow: 'hidden', background: '#E8DED4', aspectRatio: '4/5' }} />
           <div>
             <span className="eyebrow">Meet the Doctor</span>

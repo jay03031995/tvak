@@ -12,12 +12,12 @@ export default function ContactPage() {
       </section>
 
       <section style={{ padding: '48px 20px 80px' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 380px', gap: 52, alignItems: 'start' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }} className="grid-contact">
           {/* Form */}
           <div style={{ background: '#fff', borderRadius: 20, padding: '36px 32px', border: '1.5px solid rgba(26,17,9,0.09)' }}>
             <h2 style={{ fontWeight: 500, fontSize: 18, marginBottom: 28 }}>Send us a message</h2>
             <form style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+              <div className="grid-form">
                 <div>
                   <label style={{ display: 'block', fontSize: 12, fontWeight: 500, color: '#4A3728', marginBottom: 6, letterSpacing: '0.04em' }}>Full Name</label>
                   <input type="text" placeholder="Your name" style={{ width: '100%', padding: '11px 14px', borderRadius: 10, border: '1.5px solid rgba(26,17,9,0.14)', fontSize: 13.5, fontWeight: 300, outline: 'none', background: '#FAF7F2', fontFamily: 'inherit' }} />

@@ -46,7 +46,7 @@ export default async function HomePage() {
 
       {/* HERO */}
       <section style={{ padding: '72px 20px 64px', background: 'linear-gradient(160deg, #FAF7F2 55%, #F5EDE4)' }}>
-        <div style={{ maxWidth: 1180, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60, alignItems: 'center' }}>
+        <div style={{ maxWidth: 1180, margin: '0 auto' }} className="grid-hero">
           <div className="au">
             <span className="eyebrow">Dermatology · Aesthetics · Trichology</span>
             <h1 style={{ fontWeight: 500, fontSize: 'clamp(28px,4.5vw,50px)', lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: 20, color: 'var(--text)' }}>
@@ -84,7 +84,7 @@ export default async function HomePage() {
               ))}
             </div>
           </div>
-          <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+          <div className="hero-imgs" style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             {[1, 2, 3, 4].map(i => (
               <div key={i} style={{ borderRadius: 16, overflow: 'hidden', background: '#E8DED4', aspectRatio: i === 1 || i === 4 ? '3/4' : '1/1' }} />
             ))}
@@ -171,7 +171,7 @@ export default async function HomePage() {
             </div>
             <Link href="/concerns" style={{ fontSize: 13, fontWeight: 400, color: '#1A2744', textDecoration: 'none' }}>See all concerns →</Link>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 28 }}>
+          <div className="grid-3">
             {[
               { cat: 'Skin & Face', slug: '/concerns', items: [
                 { name: 'Acne & Breakouts', count: 5, slug: 'acne' },
@@ -218,7 +218,7 @@ export default async function HomePage() {
             <span className="eyebrow">Offers & Promotions</span>
             <h2 style={{ fontWeight: 500, color: 'var(--text)', margin: 0 }}>Current offers</h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+          <div className="grid-2">
             <div style={{ background: '#1A2744', borderRadius: 20, padding: '36px 32px', position: 'relative', overflow: 'hidden' }}>
               <div style={{ position: 'absolute', top: -20, right: -20, width: 120, height: 120, borderRadius: '50%', background: 'rgba(255,255,255,0.06)' }} />
               <div style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#B8916A', marginBottom: 16 }}>Monsoon Special</div>
@@ -239,7 +239,7 @@ export default async function HomePage() {
 
       {/* DOCTOR */}
       <section style={{ padding: '72px 20px' }}>
-        <div style={{ maxWidth: 1180, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60, alignItems: 'center' }}>
+        <div style={{ maxWidth: 1180, margin: '0 auto' }} className="grid-hero">
           <div style={{ borderRadius: 20, overflow: 'hidden', background: '#E8DED4', aspectRatio: '4/5' }} />
           <div>
             <span className="eyebrow">Your Doctor</span>

@@ -30,7 +30,7 @@ export default async function DoctorPage() {
     <div style={{ background: 'var(--cream)' }}>
       {/* STATS STRIP */}
       <section style={{ padding: '40px 20px', background: '#1A2744' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', justifyContent: 'center', gap: 60, flexWrap: 'wrap' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }} className="grid-stats">
           {stats.map((s, i) => (
             <div key={i} style={{ textAlign: 'center' }}>
               <div style={{ fontSize: 'clamp(24px,3.5vw,36px)', fontWeight: 500, color: '#FAF7F2', lineHeight: 1 }}>{s.value}</div>
@@ -42,7 +42,7 @@ export default async function DoctorPage() {
 
       {/* MAIN CONTENT */}
       <section style={{ padding: '64px 20px 80px' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 340px', gap: 56, alignItems: 'start' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }} className="grid-doctor">
 
           {/* LEFT: Content */}
           <div>
@@ -63,7 +63,7 @@ export default async function DoctorPage() {
 
             {/* Areas of Expertise */}
             <h2 style={{ fontWeight: 500, fontSize: 20, marginBottom: 20 }}>Areas of Expertise</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 40 }}>
+            <div style={{ marginBottom: 40 }} className="grid-expertise">
               {specialties.map((s, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4A6741" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -99,7 +99,7 @@ export default async function DoctorPage() {
           </div>
 
           {/* RIGHT: Photo + Booking card */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16, position: 'sticky', top: 88 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             {/* Photo */}
             <div style={{ borderRadius: 20, overflow: 'hidden', background: '#E8DED4', aspectRatio: '3/4', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 8 }}>
               <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(184,145,106,0.5)" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
