@@ -121,9 +121,7 @@ export default async function HomePage() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 20 }}>
             {['HydraFacial MD', 'Carbon Laser Facial', 'Acne Clearance Program', 'PRP Hair Restoration', 'Anti-Wrinkle Botox', 'Laser Hair Reduction'].map((name, i) => (
-              <Link key={i} href="/treatments" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', background: '#fff', borderRadius: 16, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.09)', transition: 'transform .22s, box-shadow .22s' }}
-                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 12px 36px rgba(26,17,9,0.10)' }}
-                onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '' }}>
+              <Link key={i} href="/treatments" className="card-hover" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', background: '#fff', borderRadius: 16, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.09)' }}>
                 <div style={{ height: 160, background: '#F0E8DF', flexShrink: 0 }} />
                 <div style={{ padding: '18px 20px 20px' }}>
                   <div style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#B8916A', marginBottom: 6 }}>Skin & Glow</div>
