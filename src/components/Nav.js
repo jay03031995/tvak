@@ -40,7 +40,7 @@ const concernCategories = {
   ],
 }
 
-export default function Nav() {
+export default function Nav({ onBook }) {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
@@ -134,10 +134,10 @@ export default function Nav() {
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
             </button>
           </div>
-          <Link href="/contact"
-            className="hidden lg:inline-flex ml-2 items-center bg-[#1A2744] text-white text-[12.5px] font-medium px-5 py-2.5 rounded-full hover:bg-[#243562] transition-colors flex-shrink-0">
+          <button onClick={onBook}
+            className="hidden lg:inline-flex ml-2 items-center bg-[#1A2744] text-white text-[12.5px] font-medium px-5 py-2.5 rounded-full hover:bg-[#243562] transition-colors flex-shrink-0 border-none cursor-pointer">
             Book Now
-          </Link>
+          </button>
 
           {/* Mobile */}
           <div className="flex lg:hidden items-center gap-2 ml-auto">
@@ -190,10 +190,10 @@ export default function Nav() {
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B8916A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </Link>
               ))}
-              <Link href="/contact" onClick={() => setMenuOpen(false)}
-                className="mt-3 flex items-center justify-center bg-[#1A2744] text-white text-[13px] font-medium py-3.5 rounded-full">
+              <button onClick={() => { setMenuOpen(false); onBook() }}
+                className="mt-3 flex items-center justify-center bg-[#1A2744] text-white text-[13px] font-medium py-3.5 rounded-full border-none cursor-pointer w-full">
                 Book Appointment
-              </Link>
+              </button>
             </div>
           </div>
         )}
