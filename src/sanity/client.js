@@ -1,25 +1,44 @@
 import { createClient } from 'next-sanity'
-import imageUrlBuilder from '@sanity/image-url'
+import { createImageUrlBuilder } from '@sanity/image-url'
 
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'l8z1brxo'
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
+const apiVersion = '2024-06-01'
+const token = process.env.SANITY_API_TOKEN
+
+// Public CDN client — fast reads for published content
 export const client = createClient({
-  projectId: 'l8z1brxo',
-  dataset: 'production',
-  apiVersion: '2024-06-01',
+  projectId,
+  dataset,
+  apiVersion,
   useCdn: true,
 })
 
-const builder = imageUrlBuilder(client)
+// Authenticated server client — bypasses CDN, reads drafts, used for all page fetches
+export const serverClient = createClient({
+  projectId,
+  dataset,
+  apiVersion,
+  useCdn: false,
+  token,
+})
+
+// Write client — same as serverClient (token has read+write)
+export const writeClient = serverClient
+
+const builder = createImageUrlBuilder({ projectId, dataset })
 export function urlFor(source) {
   return builder.image(source)
 }
 
-// Fetch helpers
+// ── Fetch helpers (all use serverClient for fresh, authenticated data) ──
+
 export async function fetchSiteSettings() {
-  return client.fetch(`*[_type == "siteSettings"][0]`)
+  return serverClient.fetch(`*[_type == "siteSettings"][0]`)
 }
 
 export async function fetchHomePage() {
-  return client.fetch(`*[_type == "homePage"][0]{
+  return serverClient.fetch(`*[_type == "homePage"][0]{
     ...,
     treatmentsSection{
       ...,
@@ -33,13 +52,13 @@ export async function fetchHomePage() {
 }
 
 export async function fetchTreatments() {
-  return client.fetch(`*[_type == "treatment"] | order(order asc){
+  return serverClient.fetch(`*[_type == "treatment"] | order(order asc){
     name, slug, category, tagline, image, rating, reviewCount, featured
   }`)
 }
 
 export async function fetchTreatment(slug) {
-  return client.fetch(`*[_type == "treatment" && slug.current == $slug][0]{
+  return serverClient.fetch(`*[_type == "treatment" && slug.current == $slug][0]{
     ...,
     relatedTreatments[]->{name, slug, category, image},
     relatedConcerns[]->{name, slug, category}
@@ -47,13 +66,13 @@ export async function fetchTreatment(slug) {
 }
 
 export async function fetchConcerns() {
-  return client.fetch(`*[_type == "concern"] | order(order asc){
+  return serverClient.fetch(`*[_type == "concern"] | order(order asc){
     name, slug, category, iconColor, iconBg
   }`)
 }
 
 export async function fetchConcern(slug) {
-  return client.fetch(`*[_type == "concern" && slug.current == $slug][0]{
+  return serverClient.fetch(`*[_type == "concern" && slug.current == $slug][0]{
     ...,
     treatments[]->{name, slug, category, image, rating, reviewCount},
     relatedConcerns[]->{name, slug, category, iconColor, iconBg}
@@ -61,13 +80,13 @@ export async function fetchConcern(slug) {
 }
 
 export async function fetchDoctor() {
-  return client.fetch(`*[_type == "doctor"][0]`)
+  return serverClient.fetch(`*[_type == "doctor"][0]`)
 }
 
 export async function fetchAboutPage() {
-  return client.fetch(`*[_type == "aboutPage"][0]{..., doctor->{...}}`)
+  return serverClient.fetch(`*[_type == "aboutPage"][0]{..., doctor->{...}}`)
 }
 
 export async function fetchContactPage() {
-  return client.fetch(`*[_type == "contactPage"][0]`)
+  return serverClient.fetch(`*[_type == "contactPage"][0]`)
 }
