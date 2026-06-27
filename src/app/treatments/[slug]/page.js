@@ -9,7 +9,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const t = await fetchTreatment(params.slug).catch(() => null)
+  const { slug } = await params
+  const t = await fetchTreatment(slug).catch(() => null)
   return { title: t ? `${t.name} — Tvak & Asthi` : 'Treatment — Tvak & Asthi' }
 }
 
@@ -197,9 +198,10 @@ const FALLBACK_TREATMENTS = {
 }
 
 export default async function TreatmentPage({ params }) {
-  const treatment = await fetchTreatment(params.slug).catch(() => null)
-  const t = treatment || FALLBACK_TREATMENTS[params.slug] || {
-    name: params.slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
+  const { slug } = await params
+  const treatment = await fetchTreatment(slug).catch(() => null)
+  const t = treatment || FALLBACK_TREATMENTS[slug] || {
+    name: slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
     category: 'Treatment', tagline: '', description: 'Our doctor-led treatment is customised to your skin type and concern.',
     meta: {}, howItWorks: [], benefits: [], faqs: [],
   }

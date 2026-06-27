@@ -268,7 +268,7 @@ export default async function HomePage() {
               <span className="eyebrow">Real Results</span>
               <h2 style={{ fontWeight: 500, color: 'var(--text)', margin: 0 }}>Before & After</h2>
             </div>
-            <Link href="/contact" style={{ fontSize: 13, fontWeight: 400, color: '#1A2744', textDecoration: 'none' }}>Book your consultation →</Link>
+            <Link href="/before-after" style={{ fontSize: 13, fontWeight: 400, color: '#1A2744', textDecoration: 'none' }}>View all results →</Link>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 20 }}>
             {[

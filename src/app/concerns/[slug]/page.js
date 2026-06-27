@@ -1,10 +1,29 @@
 import Link from 'next/link'
-import { fetchConcern } from '@/sanity/client'
+import { fetchConcern, fetchConcerns } from '@/sanity/client'
 
 export const revalidate = 60
 
+export async function generateStaticParams() {
+  const base = [
+    'acne','acne-scars','pigmentation','dull-skin','pores',
+    'hair-fall','dandruff','hair-regrowth','unwanted-hair',
+    'wrinkles','sagging','volume-loss','dark-circles',
+  ].map(slug => ({ slug }))
+  try {
+    const concerns = await fetchConcerns()
+    const extra = concerns
+      .map(c => c.slug?.current)
+      .filter(s => s && !base.some(b => b.slug === s))
+      .map(slug => ({ slug }))
+    return [...base, ...extra]
+  } catch {
+    return base
+  }
+}
+
 export async function generateMetadata({ params }) {
-  const c = await fetchConcern(params.slug).catch(() => null)
+  const { slug } = await params
+  const c = await fetchConcern(slug).catch(() => null)
   return { title: c ? `${c.name} — Tvak & Asthi` : 'Concern — Tvak & Asthi' }
 }
 
@@ -210,9 +229,10 @@ const FALLBACK_CONCERNS = {
 }
 
 export default async function ConcernPage({ params }) {
-  const concern = await fetchConcern(params.slug).catch(() => null)
-  const c = concern || FALLBACK_CONCERNS[params.slug] || {
-    name: params.slug.replace(/-/g, ' ').replace(/\b\w/g, ch => ch.toUpperCase()),
+  const { slug } = await params
+  const concern = await fetchConcern(slug).catch(() => null)
+  const c = concern || FALLBACK_CONCERNS[slug] || {
+    name: slug.replace(/-/g, ' ').replace(/\b\w/g, ch => ch.toUpperCase()),
     category: 'Skin & Face', description: 'Our doctor-led approach addresses this concern with a personalised treatment plan.',
     tags: [], approach: [], treatments: [],
   }

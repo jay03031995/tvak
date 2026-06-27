@@ -4,24 +4,40 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const treatmentCategories = [
-  { label: 'Skin & Glow', sub: 'HydraFacial, peels, brightening' },
-  { label: 'Acne & Scars', sub: 'MNRF, clearance program' },
-  { label: 'Pigmentation', sub: 'Laser toning, melasma' },
-  { label: 'Anti-Ageing', sub: 'Botox, fillers, skin boosters' },
-  { label: 'Hair Restoration', sub: 'PRP, GFC therapy' },
-  { label: 'Laser & Devices', sub: 'Carbon laser, hair reduction' },
+  { label: 'Skin & Glow', sub: 'HydraFacial, peels, brightening', slug: 'hydrafacial-md' },
+  { label: 'Acne & Scars', sub: 'MNRF, clearance program', slug: 'acne-clearance' },
+  { label: 'Pigmentation', sub: 'Laser toning, melasma', slug: 'melasma' },
+  { label: 'Anti-Ageing', sub: 'Botox, fillers, skin boosters', slug: 'botox' },
+  { label: 'Hair Restoration', sub: 'PRP, GFC therapy', slug: 'prp-hair' },
+  { label: 'Laser & Devices', sub: 'Carbon laser, hair reduction', slug: 'laser-hair' },
 ]
 
 const popularTreatments = [
-  { name: 'HydraFacial MD', meta: 'Deep cleanse · 45 min' },
-  { name: 'Carbon Laser Facial', meta: 'Pores · oil control · 30 min' },
-  { name: 'PRP Hair Restoration', meta: 'Hair fall · regrowth · 45 min' },
+  { name: 'HydraFacial MD', meta: 'Deep cleanse · 45 min', slug: 'hydrafacial-md' },
+  { name: 'Carbon Laser Facial', meta: 'Pores · oil control · 30 min', slug: 'carbon-laser-facial' },
+  { name: 'PRP Hair Restoration', meta: 'Hair fall · regrowth · 45 min', slug: 'prp-hair' },
 ]
 
 const concernCategories = {
-  'Skin & Face': ['Acne & Breakouts', 'Acne Scars', 'Pigmentation & Melasma', 'Dull & Dry Skin', 'Pores & Texture'],
-  'Hair & Scalp': ['Hair Fall & Thinning', 'Dandruff & Scalp Issues', 'Hair Regrowth', 'Unwanted Body Hair'],
-  'Anti-Ageing': ['Wrinkles & Fine Lines', 'Sagging & Laxity', 'Volume Loss', 'Dark Circles & Eye Area'],
+  'Skin & Face': [
+    { name: 'Acne & Breakouts', slug: 'acne' },
+    { name: 'Acne Scars', slug: 'acne-scars' },
+    { name: 'Pigmentation & Melasma', slug: 'pigmentation' },
+    { name: 'Dull & Dry Skin', slug: 'dull-skin' },
+    { name: 'Pores & Texture', slug: 'pores' },
+  ],
+  'Hair & Scalp': [
+    { name: 'Hair Fall & Thinning', slug: 'hair-fall' },
+    { name: 'Dandruff & Scalp Issues', slug: 'dandruff' },
+    { name: 'Hair Regrowth', slug: 'hair-regrowth' },
+    { name: 'Unwanted Body Hair', slug: 'unwanted-hair' },
+  ],
+  'Anti-Ageing': [
+    { name: 'Wrinkles & Fine Lines', slug: 'wrinkles' },
+    { name: 'Sagging & Laxity', slug: 'sagging' },
+    { name: 'Volume Loss', slug: 'volume-loss' },
+    { name: 'Dark Circles & Eye Area', slug: 'dark-circles' },
+  ],
 }
 
 export default function Nav() {
@@ -192,7 +208,7 @@ export default function Nav() {
             <div>
               <span className="block text-[10.5px] font-[500] tracking-[0.14em] uppercase text-[#B8A898] mb-3">Browse by category</span>
               {treatmentCategories.map(c => (
-                <Link key={c.label} href="/treatments"
+                <Link key={c.label} href={`/treatments/${c.slug}`}
                   className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg hover:bg-[#F5EDE4] transition-colors">
                   <div>
                     <div className="text-[13px] font-[400] text-[#1A1109]">{c.label}</div>
@@ -205,7 +221,7 @@ export default function Nav() {
               <span className="block text-[10.5px] font-[500] tracking-[0.14em] uppercase text-[#B8A898] mb-3">Popular this season</span>
               <div className="flex flex-col gap-2.5">
                 {popularTreatments.map(t => (
-                  <Link key={t.name} href="/treatments"
+                  <Link key={t.name} href={`/treatments/${t.slug}`}
                     className="flex items-center gap-3 px-3 py-3 bg-[#FAF7F2] rounded-xl border border-[rgba(26,17,9,0.08)] hover:bg-[#F5EDE4] transition-colors">
                     <div className="w-10 h-10 rounded-lg bg-[#F0E8DF] flex-shrink-0"/>
                     <div>
@@ -245,9 +261,9 @@ export default function Nav() {
               <div key={cat}>
                 <span className="block text-[10.5px] font-[500] tracking-[0.14em] uppercase text-[#B8A898] mb-3">{cat}</span>
                 {items.map(item => (
-                  <Link key={item} href="/concerns"
+                  <Link key={item.slug} href={`/concerns/${item.slug}`}
                     className="flex items-center gap-2 px-3 py-2 rounded-lg text-[13px] font-[300] text-[#5A4A3A] hover:bg-[#F5EDE4] hover:text-[#1A1109] transition-colors">
-                    {item}
+                    {item.name}
                   </Link>
                 ))}
               </div>
