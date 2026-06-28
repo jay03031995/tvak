@@ -3,43 +3,141 @@ import { useState, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-const treatmentCategories = [
-  { label: 'Skin & Glow', sub: 'HydraFacial, peels, brightening', slug: 'hydrafacial-md' },
-  { label: 'Acne & Scars', sub: 'MNRF, clearance program', slug: 'acne-clearance' },
-  { label: 'Pigmentation', sub: 'Laser toning, melasma', slug: 'melasma' },
-  { label: 'Anti-Ageing', sub: 'Botox, fillers, skin boosters', slug: 'botox' },
-  { label: 'Hair Restoration', sub: 'PRP, GFC therapy', slug: 'prp-hair' },
-  { label: 'Laser & Devices', sub: 'Carbon laser, hair reduction', slug: 'laser-hair' },
+// ── CONDITIONS DATA ──────────────────────────────────────────────
+const CONDITIONS = [
+  {
+    heading: 'SKIN',
+    items: [
+      { name: 'Acne', href: '/concerns/acne' },
+      { name: 'Acne Scar', href: '/concerns/acne-scars' },
+      { name: 'Melasma', href: '/concerns/pigmentation' },
+      { name: 'Freckles', href: '/concerns/pigmentation' },
+      { name: 'Moles', href: '/concerns' },
+      { name: 'Rosacea', href: '/concerns' },
+      { name: 'Open Pores', href: '/concerns/pores' },
+      { name: 'Sensitive Skin', href: '/concerns' },
+      { name: 'Dark Circles', href: '/concerns/dark-circles' },
+      { name: 'Dull Complexion / Uneven Skintone', href: '/concerns/dull-skin' },
+      { name: 'Fungal Infections', href: '/concerns' },
+      { name: 'Skin Allergies', href: '/concerns' },
+      { name: 'Vitiligo / Leucoderma', href: '/concerns' },
+      { name: 'Excess Body & Facial Hair', href: '/concerns/unwanted-hair' },
+    ],
+  },
+  {
+    heading: 'HAIR',
+    items: [
+      { name: 'Hair Loss In Men', href: '/concerns/hair-fall' },
+      { name: 'Hair Loss In Women', href: '/concerns/hair-fall' },
+      { name: 'Alopecia Areata', href: '/concerns/hair-fall' },
+      { name: 'Scarring Alopecia', href: '/concerns/hair-fall' },
+      { name: 'Baldness', href: '/concerns/hair-fall' },
+      { name: 'Dandruff', href: '/concerns/dandruff' },
+      { name: 'Premature Greying', href: '/concerns/hair-regrowth' },
+    ],
+  },
+  {
+    heading: 'ANTI AGEING',
+    items: [
+      { name: 'Wrinkled Skin', href: '/concerns/wrinkles' },
+      { name: 'Sagging Skin', href: '/concerns/sagging' },
+      { name: 'Deep Folds', href: '/concerns/volume-loss' },
+      { name: 'Dehydrated Skin', href: '/concerns/dull-skin' },
+    ],
+  },
+  {
+    heading: 'BODY CONTOURING',
+    items: [
+      { name: 'Unwanted Fat', href: '/concerns' },
+      { name: 'Skin Laxity', href: '/concerns/sagging' },
+    ],
+  },
 ]
 
-const popularTreatments = [
-  { name: 'HydraFacial MD', meta: 'Deep cleanse · 45 min', slug: 'hydrafacial-md' },
-  { name: 'Carbon Laser Facial', meta: 'Pores · oil control · 30 min', slug: 'carbon-laser-facial' },
-  { name: 'PRP Hair Restoration', meta: 'Hair fall · regrowth · 45 min', slug: 'prp-hair' },
+// ── TREATMENTS DATA ──────────────────────────────────────────────
+const TREATMENTS_MENU = [
+  {
+    heading: 'SKIN',
+    items: [
+      { name: 'Blemish Removal / Complexion Enhancement / Freckles', href: '/treatments/carbon-laser-facial' },
+      { name: 'Acne / Acne Scars / Oily Skin & Open Pores', href: '/treatments/acne-clearance' },
+      { name: 'Skin Glow & Maintenance Therapies', href: '/treatments/hydrafacial-md' },
+      { name: 'Skin Toning, Lifting & Contouring', href: '/treatments/carbon-laser-facial' },
+      { name: 'Under Eye Dark Circles Treatment', href: '/treatments/fillers' },
+      { name: 'Laser Tattoo Removal', href: '/treatments' },
+    ],
+  },
+  {
+    heading: 'HAIR & SCALP TREATMENTS',
+    items: [
+      { name: 'PRP Therapy', href: '/treatments/prp-hair' },
+      { name: 'Exosomes (Face)', href: '/treatments' },
+      { name: 'Micro-Mesotherapy', href: '/treatments' },
+      { name: 'Cold Laser Therapy', href: '/treatments' },
+      { name: 'Scalp Micro Pigmentation (SMP)', href: '/treatments' },
+      { name: 'GFC / Regenera Scalp Therapy', href: '/treatments/gfc-hair' },
+    ],
+  },
+  {
+    heading: 'NON SURGICAL FACIAL ENHANCEMENTS',
+    items: [
+      { name: 'Lip Enhancement', href: '/treatments/fillers' },
+      { name: 'Cheek Enhancement', href: '/treatments/fillers' },
+      { name: 'Chin Enhancement', href: '/treatments/fillers' },
+      { name: 'Nose Enhancement', href: '/treatments/fillers' },
+    ],
+  },
+  {
+    heading: 'HAIR REMOVAL SERVICES',
+    items: [
+      { name: 'Diode Laser LightSheer Duet', href: '/treatments/laser-hair' },
+      { name: 'Diode Laser Alma Soprano', href: '/treatments/laser-hair' },
+      { name: 'eLight Hair Removal', href: '/treatments/laser-hair' },
+    ],
+  },
+  {
+    heading: 'BODY TREATMENTS',
+    items: [
+      { name: 'Cool Shape Cryolipolysis', href: '/treatments' },
+      { name: 'Ultralift — HIFU', href: '/treatments' },
+      { name: 'Intragen', href: '/treatments' },
+      { name: 'VANQUISH', href: '/treatments' },
+      { name: 'Bio Re Peel', href: '/treatments' },
+    ],
+  },
+  {
+    heading: 'COSMETIC SURGERIES',
+    items: [
+      { name: 'Liposuction', href: '/treatments' },
+      { name: 'Tummy Tuck', href: '/treatments' },
+      { name: 'Blepharoplasty', href: '/treatments' },
+      { name: 'Rhinoplasty', href: '/treatments' },
+      { name: 'Dimple Creation', href: '/treatments' },
+    ],
+  },
+  {
+    heading: 'LEUCODERMA',
+    items: [
+      { name: 'Suction Blister Grafting', href: '/treatments' },
+      { name: 'Split Thickness Skin Grafting', href: '/treatments' },
+      { name: 'Melanocyte Transfer', href: '/treatments' },
+    ],
+  },
 ]
 
-const concernCategories = {
-  'Skin & Face': [
-    { name: 'Acne & Breakouts', slug: 'acne' },
-    { name: 'Acne Scars', slug: 'acne-scars' },
-    { name: 'Pigmentation & Melasma', slug: 'pigmentation' },
-    { name: 'Dull & Dry Skin', slug: 'dull-skin' },
-    { name: 'Pores & Texture', slug: 'pores' },
-  ],
-  'Hair & Scalp': [
-    { name: 'Hair Fall & Thinning', slug: 'hair-fall' },
-    { name: 'Dandruff & Scalp Issues', slug: 'dandruff' },
-    { name: 'Hair Regrowth', slug: 'hair-regrowth' },
-    { name: 'Unwanted Body Hair', slug: 'unwanted-hair' },
-  ],
-  'Anti-Ageing': [
-    { name: 'Wrinkles & Fine Lines', slug: 'wrinkles' },
-    { name: 'Sagging & Laxity', slug: 'sagging' },
-    { name: 'Volume Loss', slug: 'volume-loss' },
-    { name: 'Dark Circles & Eye Area', slug: 'dark-circles' },
-  ],
-}
+// ── SPECIALIZED CLINICS DATA ─────────────────────────────────────
+const CLINICS = [
+  { name: 'Laser Hair Removal', href: '/treatments/laser-hair' },
+  { name: 'Acne & Pigmentation', href: '/concerns/acne' },
+  { name: 'Anti Ageing', href: '/concerns/wrinkles' },
+  { name: 'Body Contouring', href: '/concerns' },
+  { name: 'Hair Loss Treatment', href: '/concerns/hair-fall' },
+  { name: 'Anti Wrinkle Injection & Filler', href: '/treatments/botox' },
+  { name: 'Skin Whitening', href: '/concerns/pigmentation' },
+  { name: 'Signature Treatments', href: '/treatments' },
+]
 
+// ── NAV COMPONENT ────────────────────────────────────────────────
 export default function Nav({ onBook }) {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
@@ -47,6 +145,7 @@ export default function Nav({ onBook }) {
   const [searchQ, setSearchQ] = useState('')
   const [hoverMenu, setHoverMenu] = useState('')
   const closeTimer = useRef(null)
+  const [mobileExpanded, setMobileExpanded] = useState('')
 
   const openMega = (key) => {
     if (closeTimer.current) { clearTimeout(closeTimer.current); closeTimer.current = null }
@@ -65,228 +164,262 @@ export default function Nav({ onBook }) {
 
   const isOn = (path) => pathname === path || pathname.startsWith(path + '/') ? 'on' : ''
 
-  const navLinkCls = (path) =>
-    `inline-flex items-center gap-1 px-3 py-2 rounded-lg text-[13px] font-[400] transition-colors duration-150 ${isOn(path) ? 'text-[#1A2744] bg-[#F0E8DF]' : 'text-[#5A4A3A] hover:text-[#1A2744] hover:bg-[#F0E8DF]'}`
+  const navLinkStyle = (active) => ({
+    display: 'inline-flex', alignItems: 'center', gap: 3, padding: '8px 12px', borderRadius: 8,
+    fontSize: 13, fontWeight: 400, textDecoration: 'none', transition: 'all .15s', cursor: 'pointer', border: 'none', background: 'none',
+    color: active ? '#1A2744' : '#5A4A3A',
+    backgroundColor: active ? '#F0E8DF' : 'transparent',
+  })
+
+  const chevron = (open) => (
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"
+      style={{ transform: open ? 'rotate(180deg)' : 'none', transition: 'transform .2s', flexShrink: 0 }}>
+      <path d="m6 9 6 6 6-6"/>
+    </svg>
+  )
+
+  const megaHeading = { fontSize: 10.5, fontWeight: 600, letterSpacing: '0.13em', textTransform: 'uppercase', color: '#B8916A', marginBottom: 10, display: 'block' }
+  const megaLink = { display: 'block', padding: '4px 0', fontSize: 13, fontWeight: 300, color: '#1A1109', textDecoration: 'none', lineHeight: 1.6, transition: 'color .15s' }
 
   return (
     <>
       {/* ── STICKY NAV ── */}
-      <header className="sticky top-0 z-[200] bg-[rgba(250,247,242,0.97)] backdrop-blur-md border-b border-[rgba(26,17,9,0.08)]"
-        style={{ fontFamily: 'var(--font-poppins), system-ui, sans-serif' }}>
-        <div className="max-w-[1280px] mx-auto px-5 h-16 flex items-center gap-2">
+      <header style={{ position: 'sticky', top: 0, zIndex: 200, background: 'rgba(250,247,242,0.97)', backdropFilter: 'blur(10px)', borderBottom: '1px solid rgba(26,17,9,0.08)', fontFamily: 'var(--font-poppins), system-ui, sans-serif' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 20px', height: 64, display: 'flex', alignItems: 'center', gap: 4 }}>
 
           {/* Logo */}
-          <Link href="/" className="flex-shrink-0 flex items-center gap-2.5 no-underline">
-            <div className="w-9 h-9 rounded-[9px] flex items-center justify-center flex-shrink-0"
-              style={{ background: 'linear-gradient(135deg,#1A2744 50%,#C4847E)' }}>
-              <span className="font-bold text-lg text-white" style={{ letterSpacing: '-0.04em' }}>A</span>
+          <Link href="/" style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
+            <div style={{ width: 36, height: 36, borderRadius: 9, background: 'linear-gradient(135deg,#1A2744 50%,#C4847E)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <span style={{ fontWeight: 700, fontSize: 18, color: '#fff', letterSpacing: '-0.04em' }}>A</span>
             </div>
             <div style={{ lineHeight: 1 }}>
-              <div className="flex items-baseline gap-0.5">
-                <span className="text-[13px] font-semibold text-[#1A2744] tracking-[0.07em]">TVAK</span>
-                <span className="text-[11px] font-light text-[#B8916A] mx-0.5">&amp;</span>
-                <span className="text-[13px] font-semibold text-[#C4847E] tracking-[0.07em]">ASTHI</span>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 2 }}>
+                <span style={{ fontSize: 13, fontWeight: 600, color: '#1A2744', letterSpacing: '0.07em' }}>TVAK</span>
+                <span style={{ fontSize: 11, fontWeight: 300, color: '#B8916A', margin: '0 2px' }}>&amp;</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: '#C4847E', letterSpacing: '0.07em' }}>ASTHI</span>
               </div>
-              <div className="text-[7.5px] font-medium tracking-[0.25em] text-[#B8916A] mt-0.5">BY ARTHAM</div>
+              <div style={{ fontSize: 7.5, fontWeight: 500, letterSpacing: '0.25em', color: '#B8916A', marginTop: 2 }}>BY ARTHAM</div>
             </div>
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-0 ml-6"
-            onMouseLeave={closeMegaSoon}>
-            <Link href="/treatments" className={navLinkCls('/treatments')}
-              onMouseEnter={() => openMega('treatments')}>
-              Treatments
-              <svg className={`w-3 h-3 transition-transform duration-200 ${hoverMenu === 'treatments' ? 'rotate-180' : ''}`}
-                viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="m6 9 6 6 6-6"/>
-              </svg>
-            </Link>
-            <Link href="/concerns" className={navLinkCls('/concerns')}
-              onMouseEnter={() => openMega('concerns')}>
-              Concerns
-              <svg className={`w-3 h-3 transition-transform duration-200 ${hoverMenu === 'concerns' ? 'rotate-180' : ''}`}
-                viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="m6 9 6 6 6-6"/>
-              </svg>
-            </Link>
-            <Link href="/doctor" className={navLinkCls('/doctor')} onMouseEnter={closeMega}>Our Doctor</Link>
-            <Link href="/about" className={navLinkCls('/about')} onMouseEnter={closeMega}>About</Link>
-            <Link href="/contact" className={navLinkCls('/contact')} onMouseEnter={closeMega}>Contact</Link>
+          <nav style={{ display: 'flex', alignItems: 'center', marginLeft: 20, gap: 2 }} onMouseLeave={closeMegaSoon}>
+            {/* Conditions */}
+            <button style={navLinkStyle(isOn('/concerns'))} onMouseEnter={() => openMega('conditions')} onClick={() => openMega(hoverMenu === 'conditions' ? '' : 'conditions')}>
+              Conditions {chevron(hoverMenu === 'conditions')}
+            </button>
+            {/* Treatments */}
+            <button style={navLinkStyle(isOn('/treatments'))} onMouseEnter={() => openMega('treatments')} onClick={() => openMega(hoverMenu === 'treatments' ? '' : 'treatments')}>
+              Treatments {chevron(hoverMenu === 'treatments')}
+            </button>
+            {/* Specialized Clinics */}
+            <button style={navLinkStyle(false)} onMouseEnter={() => openMega('clinics')} onClick={() => openMega(hoverMenu === 'clinics' ? '' : 'clinics')}>
+              Specialized Clinics {chevron(hoverMenu === 'clinics')}
+            </button>
+            <Link href="/doctor" style={navLinkStyle(isOn('/doctor'))} onMouseEnter={closeMega}>Our Doctor</Link>
+            <Link href="/about" style={navLinkStyle(isOn('/about'))} onMouseEnter={closeMega}>About</Link>
+            <Link href="/contact" style={navLinkStyle(isOn('/contact'))} onMouseEnter={closeMega}>Contact</Link>
           </nav>
 
           {/* Desktop right */}
-          <div className="hidden lg:flex items-center gap-3 ml-auto">
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginLeft: 'auto' }}>
             {[
-              { href: 'https://instagram.com', label: 'Instagram', path: 'M2 2h20v20a5 5 0 0 1 0 0H2zM12 12m-4 0a4 4 0 0 0 8 0 4 4 0 0 0-8 0', d: <><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></> },
-              { href: 'https://facebook.com', label: 'Facebook', d: <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/> },
-              { href: 'https://youtube.com', label: 'YouTube', d: <><rect x="2" y="5" width="20" height="14" rx="4"/><polygon points="10,9 16,12 10,15" fill="currentColor" stroke="none"/></> },
+              { href: 'https://instagram.com', label: 'Instagram', d: <><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></> },
               { href: 'https://wa.me/919811997993', label: 'WhatsApp', d: <path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 21l2.2-5.3A8.5 8.5 0 1 1 21 11.5Z"/> },
             ].map(s => (
               <a key={s.label} href={s.href} target="_blank" rel="noopener" aria-label={s.label}
-                className="text-[#7A6A5A] hover:text-[#B8916A] flex transition-colors">
+                style={{ color: '#7A6A5A', display: 'flex', transition: 'color .15s' }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{s.d}</svg>
               </a>
             ))}
-            <div className="w-px h-5 bg-[rgba(26,17,9,0.12)] mx-1" />
+            <div style={{ width: 1, height: 20, background: 'rgba(26,17,9,0.12)' }} />
             <button onClick={() => { setSearchOpen(o => !o); setHoverMenu('') }}
-              className="flex items-center justify-center w-8 h-8 rounded-lg text-[#7A6A5A] hover:text-[#1A2744] hover:bg-[#F0E8DF] transition-colors border-none bg-transparent cursor-pointer">
+              style={{ width: 32, height: 32, borderRadius: 8, border: 'none', background: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#7A6A5A' }}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
             </button>
+            <button onClick={onBook}
+              style={{ background: '#1A2744', color: '#fff', fontSize: 12.5, fontWeight: 500, padding: '8px 20px', borderRadius: 999, border: 'none', cursor: 'pointer', flexShrink: 0, transition: 'background .18s' }}>
+              Book Now
+            </button>
           </div>
-          <button onClick={onBook}
-            className="hidden lg:inline-flex ml-2 items-center bg-[#1A2744] text-white text-[12.5px] font-medium px-5 py-2.5 rounded-full hover:bg-[#243562] transition-colors flex-shrink-0 border-none cursor-pointer">
-            Book Now
-          </button>
 
-          {/* Mobile */}
-          <div className="flex lg:hidden items-center gap-2 ml-auto">
+          {/* Mobile toggle */}
+          <div style={{ display: 'none', alignItems: 'center', gap: 8, marginLeft: 'auto' }} className="mobile-nav-toggle">
             <button onClick={() => { setSearchOpen(o => !o); setMenuOpen(false) }}
-              className="w-9 h-9 flex items-center justify-center rounded-lg border border-[rgba(26,17,9,0.13)] bg-white cursor-pointer text-[#7A6A5A]">
+              style={{ width: 36, height: 36, borderRadius: 8, border: '1px solid rgba(26,17,9,0.13)', background: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#7A6A5A' }}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
             </button>
             <button onClick={() => { setMenuOpen(o => !o); setSearchOpen(false) }}
-              className="w-9 h-9 flex items-center justify-center rounded-lg border border-[rgba(26,17,9,0.13)] bg-white cursor-pointer">
+              style={{ width: 36, height: 36, borderRadius: 8, border: '1px solid rgba(26,17,9,0.13)', background: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1A2744" strokeWidth="2" strokeLinecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
             </button>
           </div>
         </div>
 
-        {/* Search */}
+        {/* Search bar */}
         {searchOpen && (
-          <div className="border-t border-[rgba(26,17,9,0.08)] bg-white shadow-lg">
-            <div className="max-w-[640px] mx-auto px-5 py-4">
-              <div className="flex items-center gap-2.5 bg-[#F5EDE4] rounded-xl px-3.5">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9A8A7A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-                <input value={searchQ} onChange={e => setSearchQ(e.target.value)}
-                  placeholder="Search treatments, concerns…"
-                  className="flex-1 bg-transparent border-none outline-none py-3.5 text-[14px] text-[#1A1109] font-light placeholder:text-[#9A8A7A]"
-                  autoFocus />
-                <button onClick={() => { setSearchOpen(false); setSearchQ('') }} className="bg-none border-none cursor-pointer text-[#9A8A7A] flex p-1">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Mobile menu */}
-        {menuOpen && (
-          <div className="border-t border-[rgba(26,17,9,0.07)] bg-white lg:hidden max-h-[calc(100vh-64px)] overflow-y-auto">
-            <div className="px-4 py-3 flex flex-col gap-0.5">
-              {[
-                { href: '/treatments', label: 'Treatments', sub: 'Skin, hair, laser & more' },
-                { href: '/concerns', label: 'Concerns', sub: 'Browse by concern' },
-                { href: '/doctor', label: 'Our Doctor', sub: 'Dr. Omaima Jawed' },
-                { href: '/about', label: 'About', sub: 'Our clinic & philosophy' },
-                { href: '/contact', label: 'Contact', sub: 'Book a consultation' },
-              ].map(item => (
-                <Link key={item.href} href={item.href} onClick={() => setMenuOpen(false)}
-                  className="flex items-center justify-between px-3 py-3.5 rounded-lg hover:bg-[#F5EDE4] transition-colors border-b border-[rgba(26,17,9,0.05)] last:border-0">
-                  <div>
-                    <div className="text-[14px] font-[400] text-[#1A1109]">{item.label}</div>
-                    <div className="text-[12px] font-[300] text-[#9A8A7A] mt-0.5">{item.sub}</div>
-                  </div>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B8916A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </Link>
-              ))}
-              <button onClick={() => { setMenuOpen(false); onBook() }}
-                className="mt-3 flex items-center justify-center bg-[#1A2744] text-white text-[13px] font-medium py-3.5 rounded-full border-none cursor-pointer w-full">
-                Book Appointment
+          <div style={{ borderTop: '1px solid rgba(26,17,9,0.08)', background: '#fff', boxShadow: '0 4px 20px rgba(26,17,9,0.06)' }}>
+            <div style={{ maxWidth: 640, margin: '0 auto', padding: '12px 20px', display: 'flex', alignItems: 'center', gap: 10, background: '#F5EDE4', borderRadius: 12, margin: '8px 20px' }}>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9A8A7A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+              <input value={searchQ} onChange={e => setSearchQ(e.target.value)} placeholder="Search treatments, concerns…"
+                style={{ flex: 1, background: 'none', border: 'none', outline: 'none', padding: '8px 0', fontSize: 14, color: '#1A1109', fontWeight: 300 }} autoFocus />
+              <button onClick={() => { setSearchOpen(false); setSearchQ('') }} style={{ border: 'none', background: 'none', cursor: 'pointer', color: '#9A8A7A', display: 'flex', padding: 4 }}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
               </button>
             </div>
           </div>
         )}
       </header>
 
-      {/* ── TREATMENTS MEGA ── */}
-      <div className="mega-wrap fixed left-0 right-0 z-[190]"
-        style={{ top: 64, opacity: hoverMenu === 'treatments' ? 1 : 0, pointerEvents: hoverMenu === 'treatments' ? 'auto' : 'none', transform: hoverMenu === 'treatments' ? 'translateY(0)' : 'translateY(-8px)', transition: 'opacity .2s ease, transform .22s cubic-bezier(.22,.68,0,.99)' }}
+      {/* ── CONDITIONS MEGA ── */}
+      <div style={{ position: 'fixed', left: 0, right: 0, zIndex: 190, top: 64, opacity: hoverMenu === 'conditions' ? 1 : 0, pointerEvents: hoverMenu === 'conditions' ? 'auto' : 'none', transform: hoverMenu === 'conditions' ? 'translateY(0)' : 'translateY(-8px)', transition: 'opacity .2s, transform .22s' }}
         onMouseEnter={keepMega} onMouseLeave={closeMegaSoon}>
-        <div className="bg-white border-b border-[rgba(26,17,9,0.08)] shadow-xl">
-          <div className="max-w-[1280px] mx-auto px-5 py-7 grid gap-10" style={{ gridTemplateColumns: '1fr 1fr 220px' }}>
-            <div>
-              <span className="block text-[10.5px] font-[500] tracking-[0.14em] uppercase text-[#B8A898] mb-3">Browse by category</span>
-              {treatmentCategories.map(c => (
-                <Link key={c.label} href={`/treatments/${c.slug}`}
-                  className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg hover:bg-[#F5EDE4] transition-colors">
-                  <div>
-                    <div className="text-[13px] font-[400] text-[#1A1109]">{c.label}</div>
-                    <div className="text-[11.5px] font-[300] text-[#9A8A7A]">{c.sub}</div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-            <div>
-              <span className="block text-[10.5px] font-[500] tracking-[0.14em] uppercase text-[#B8A898] mb-3">Popular this season</span>
-              <div className="flex flex-col gap-2.5">
-                {popularTreatments.map(t => (
-                  <Link key={t.name} href={`/treatments/${t.slug}`}
-                    className="flex items-center gap-3 px-3 py-3 bg-[#FAF7F2] rounded-xl border border-[rgba(26,17,9,0.08)] hover:bg-[#F5EDE4] transition-colors">
-                    <div className="w-10 h-10 rounded-lg bg-[#F0E8DF] flex-shrink-0"/>
-                    <div>
-                      <div className="text-[13px] font-[400] text-[#1A1109]">{t.name}</div>
-                      <div className="text-[11.5px] font-[300] text-[#9A8A7A] mt-0.5">{t.meta}</div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-            <div className="flex flex-col gap-2.5">
-              <Link href="/treatments" className="flex items-center justify-between p-4 bg-[#1A2744] rounded-2xl no-underline">
-                <div>
-                  <div className="text-[13px] font-[400] text-[#FAF7F2]">All treatments →</div>
-                  <div className="text-[11.5px] font-[300] text-[#A0BDD8] mt-0.5">Browse full menu</div>
-                </div>
-              </Link>
-              <Link href="/contact" className="flex items-center justify-between p-4 bg-[#F5EDE4] rounded-2xl border border-[rgba(26,17,9,0.08)] no-underline">
-                <div>
-                  <div className="text-[13px] font-[400] text-[#1A1109]">Book consultation</div>
-                  <div className="text-[11.5px] font-[300] text-[#9A8A7A] mt-0.5">with Dr. Omaima</div>
-                </div>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B8916A" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ── CONCERNS MEGA ── */}
-      <div className="fixed left-0 right-0 z-[190]"
-        style={{ top: 64, opacity: hoverMenu === 'concerns' ? 1 : 0, pointerEvents: hoverMenu === 'concerns' ? 'auto' : 'none', transform: hoverMenu === 'concerns' ? 'translateY(0)' : 'translateY(-8px)', transition: 'opacity .2s ease, transform .22s cubic-bezier(.22,.68,0,.99)' }}
-        onMouseEnter={keepMega} onMouseLeave={closeMegaSoon}>
-        <div className="bg-white border-b border-[rgba(26,17,9,0.08)] shadow-xl">
-          <div className="max-w-[1280px] mx-auto px-5 py-7 grid gap-8" style={{ gridTemplateColumns: '1fr 1fr 1fr 180px' }}>
-            {Object.entries(concernCategories).map(([cat, items]) => (
-              <div key={cat}>
-                <span className="block text-[10.5px] font-[500] tracking-[0.14em] uppercase text-[#B8A898] mb-3">{cat}</span>
-                {items.map(item => (
-                  <Link key={item.slug} href={`/concerns/${item.slug}`}
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg text-[13px] font-[300] text-[#5A4A3A] hover:bg-[#F5EDE4] hover:text-[#1A1109] transition-colors">
+        <div style={{ background: '#fff', borderBottom: '1px solid rgba(26,17,9,0.08)', boxShadow: '0 16px 48px rgba(26,17,9,0.1)' }}>
+          <div style={{ maxWidth: 1280, margin: '0 auto', padding: '28px 20px 32px', display: 'grid', gridTemplateColumns: '2fr 1.2fr 1fr 0.8fr', gap: 40 }}>
+            {CONDITIONS.map(col => (
+              <div key={col.heading}>
+                <span style={megaHeading}>{col.heading}</span>
+                {col.items.map(item => (
+                  <Link key={item.name} href={item.href} onClick={closeMega}
+                    style={megaLink}
+                    onMouseEnter={e => e.currentTarget.style.color = '#B8916A'}
+                    onMouseLeave={e => e.currentTarget.style.color = '#1A1109'}>
                     {item.name}
                   </Link>
                 ))}
               </div>
             ))}
-            <div className="flex flex-col gap-2.5">
-              <Link href="/concerns" className="p-4 bg-[#1A2744] rounded-2xl no-underline">
-                <div className="text-[13px] font-[400] text-[#FAF7F2]">All concerns →</div>
-                <div className="text-[11.5px] font-[300] text-[#A0BDD8] mt-0.5">See full list</div>
-              </Link>
-              <Link href="/contact" className="flex items-center justify-between p-4 bg-[#F5EDE4] rounded-2xl border border-[rgba(26,17,9,0.08)] no-underline">
-                <div>
-                  <div className="text-[13px] font-[400] text-[#1A1109]">Not sure?</div>
-                  <div className="text-[11.5px] font-[300] text-[#9A8A7A] mt-0.5">Free consult</div>
-                </div>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B8916A" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <div style={{ gridColumn: '1 / -1', borderTop: '1px solid rgba(26,17,9,0.07)', marginTop: 4, paddingTop: 14, display: 'flex', justifyContent: 'flex-end' }}>
+              <Link href="/concerns" onClick={closeMega} style={{ fontSize: 12.5, fontWeight: 400, color: '#1A2744', textDecoration: 'none' }}>
+                View all concerns →
               </Link>
             </div>
           </div>
         </div>
       </div>
 
+      {/* ── TREATMENTS MEGA ── */}
+      <div style={{ position: 'fixed', left: 0, right: 0, zIndex: 190, top: 64, opacity: hoverMenu === 'treatments' ? 1 : 0, pointerEvents: hoverMenu === 'treatments' ? 'auto' : 'none', transform: hoverMenu === 'treatments' ? 'translateY(0)' : 'translateY(-8px)', transition: 'opacity .2s, transform .22s' }}
+        onMouseEnter={keepMega} onMouseLeave={closeMegaSoon}>
+        <div style={{ background: '#fff', borderBottom: '1px solid rgba(26,17,9,0.08)', boxShadow: '0 16px 48px rgba(26,17,9,0.1)', maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}>
+          <div style={{ maxWidth: 1280, margin: '0 auto', padding: '28px 20px 32px', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 32 }}>
+            {TREATMENTS_MENU.map(col => (
+              <div key={col.heading}>
+                <span style={megaHeading}>{col.heading}</span>
+                {col.items.map(item => (
+                  <Link key={item.name} href={item.href} onClick={closeMega}
+                    style={megaLink}
+                    onMouseEnter={e => e.currentTarget.style.color = '#B8916A'}
+                    onMouseLeave={e => e.currentTarget.style.color = '#1A1109'}>
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            ))}
+            <div style={{ gridColumn: '1 / -1', borderTop: '1px solid rgba(26,17,9,0.07)', marginTop: 4, paddingTop: 14, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Link href="/treatments" onClick={closeMega} style={{ fontSize: 12.5, fontWeight: 400, color: '#1A2744', textDecoration: 'none' }}>
+                View all treatments →
+              </Link>
+              <button onClick={() => { closeMega(); onBook() }} style={{ fontSize: 12.5, fontWeight: 500, padding: '8px 18px', borderRadius: 999, background: '#1A2744', color: '#fff', border: 'none', cursor: 'pointer' }}>
+                Book Consultation
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── SPECIALIZED CLINICS DROPDOWN ── */}
+      <div style={{ position: 'fixed', left: 0, right: 0, zIndex: 190, top: 64, opacity: hoverMenu === 'clinics' ? 1 : 0, pointerEvents: hoverMenu === 'clinics' ? 'auto' : 'none', transform: hoverMenu === 'clinics' ? 'translateY(0)' : 'translateY(-8px)', transition: 'opacity .2s, transform .22s' }}
+        onMouseEnter={keepMega} onMouseLeave={closeMegaSoon}>
+        <div style={{ background: '#fff', borderBottom: '1px solid rgba(26,17,9,0.08)', boxShadow: '0 16px 48px rgba(26,17,9,0.1)' }}>
+          <div style={{ maxWidth: 1280, margin: '0 auto', padding: '24px 20px 28px', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8 }}>
+            {CLINICS.map(item => (
+              <Link key={item.name} href={item.href} onClick={closeMega}
+                style={{ ...megaLink, padding: '8px 12px', borderRadius: 8, background: '#FAF7F2', border: '1px solid rgba(26,17,9,0.07)', fontWeight: 400, fontSize: 13.5 }}
+                onMouseEnter={e => { e.currentTarget.style.background = '#F0E8DF'; e.currentTarget.style.color = '#1A2744' }}
+                onMouseLeave={e => { e.currentTarget.style.background = '#FAF7F2'; e.currentTarget.style.color = '#1A1109' }}>
+                {item.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Backdrop */}
-      {hoverMenu && <div className="fixed inset-0 z-[189]" onClick={closeMega} />}
+      {hoverMenu && <div style={{ position: 'fixed', inset: 0, zIndex: 189 }} onClick={closeMega} />}
+
+      {/* ── MOBILE MENU ── */}
+      {menuOpen && (
+        <div style={{ position: 'fixed', top: 64, left: 0, right: 0, bottom: 0, zIndex: 300, background: '#fff', overflowY: 'auto' }}>
+          <div style={{ padding: '12px 16px', display: 'flex', flexDirection: 'column', gap: 2 }}>
+            {/* Conditions */}
+            {[
+              { key: 'conditions', label: 'Conditions', sub: 'Browse by skin concern', data: CONDITIONS },
+              { key: 'treatments', label: 'Treatments', sub: 'All procedures & services', data: TREATMENTS_MENU },
+              { key: 'clinics', label: 'Specialized Clinics', sub: 'Expert clinic services', data: null, items: CLINICS },
+            ].map(section => (
+              <div key={section.key} style={{ borderBottom: '1px solid rgba(26,17,9,0.06)' }}>
+                <button onClick={() => setMobileExpanded(mobileExpanded === section.key ? '' : section.key)}
+                  style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 12px', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left' }}>
+                  <div>
+                    <div style={{ fontSize: 14, fontWeight: 400, color: '#1A1109' }}>{section.label}</div>
+                    <div style={{ fontSize: 12, fontWeight: 300, color: '#9A8A7A', marginTop: 2 }}>{section.sub}</div>
+                  </div>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B8916A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                    style={{ transform: mobileExpanded === section.key ? 'rotate(180deg)' : 'none', transition: 'transform .2s' }}>
+                    <path d="m6 9 6 6 6-6"/>
+                  </svg>
+                </button>
+                {mobileExpanded === section.key && (
+                  <div style={{ paddingBottom: 12, paddingLeft: 12 }}>
+                    {section.data ? section.data.map(col => (
+                      <div key={col.heading} style={{ marginBottom: 14 }}>
+                        <span style={{ fontSize: 10.5, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#B8916A', display: 'block', marginBottom: 6, paddingLeft: 4 }}>{col.heading}</span>
+                        {col.items.map(item => (
+                          <Link key={item.name} href={item.href} onClick={() => setMenuOpen(false)}
+                            style={{ display: 'block', padding: '6px', fontSize: 13.5, fontWeight: 300, color: '#4A3728', textDecoration: 'none' }}>
+                            {item.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )) : section.items?.map(item => (
+                      <Link key={item.name} href={item.href} onClick={() => setMenuOpen(false)}
+                        style={{ display: 'block', padding: '6px', fontSize: 13.5, fontWeight: 300, color: '#4A3728', textDecoration: 'none' }}>
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+            {[
+              { href: '/doctor', label: 'Our Doctor', sub: 'Dr. Omaima Jawed' },
+              { href: '/about', label: 'About', sub: 'Our clinic & philosophy' },
+              { href: '/contact', label: 'Contact', sub: 'Book a consultation' },
+            ].map(item => (
+              <Link key={item.href} href={item.href} onClick={() => setMenuOpen(false)}
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 12px', textDecoration: 'none', borderBottom: '1px solid rgba(26,17,9,0.06)' }}>
+                <div>
+                  <div style={{ fontSize: 14, fontWeight: 400, color: '#1A1109' }}>{item.label}</div>
+                  <div style={{ fontSize: 12, fontWeight: 300, color: '#9A8A7A', marginTop: 2 }}>{item.sub}</div>
+                </div>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B8916A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </Link>
+            ))}
+            <button onClick={() => { setMenuOpen(false); onBook() }}
+              style={{ marginTop: 12, width: '100%', padding: '14px', borderRadius: 999, background: '#1A2744', color: '#fff', fontSize: 13, fontWeight: 500, border: 'none', cursor: 'pointer' }}>
+              Book Appointment
+            </button>
+          </div>
+        </div>
+      )}
+
+      <style>{`
+        @media (max-width: 1024px) {
+          nav { display: none !important; }
+          .mobile-nav-toggle { display: flex !important; }
+        }
+      `}</style>
     </>
   )
 }
