@@ -436,60 +436,343 @@ const FALLBACK_TREATMENTS = {
       { question: 'How far apart are sessions?', answer: 'Sessions are spaced 4–6 weeks apart for body areas and 3–4 weeks for the face, aligned with hair growth cycles.' },
     ],
   },
+  'chemical-peel': {
+    name: 'Chemical Peel', category: 'Skin & Glow', tagline: 'Resurface, renew & brighten',
+    description: 'Chemical peels use clinically formulated acid solutions to remove damaged outer skin layers, triggering cellular renewal and revealing fresher, brighter skin. From superficial glycolic peels to medium-depth TCA peels, Dr. Omaima selects the right formulation for your skin type, concern, and tolerance.',
+    meta: { Duration: '30–45 min', Sessions: '4–6 sessions', Recovery: '3–7 days', Results: '1–2 weeks' },
+    howItWorks: [
+      { step: 1, title: 'Skin Assessment', description: 'Dr. Omaima evaluates your skin type, Fitzpatrick scale, current concerns, and contraindications to select the appropriate peel formulation and strength.' },
+      { step: 2, title: 'Pre-Peel Prep', description: 'The skin is cleansed and degreased with an acetone or alcohol prep solution to ensure even, controlled acid penetration.' },
+      { step: 3, title: 'Peel Application', description: 'The acid solution is applied in controlled layers. Application time is monitored precisely — the peel is neutralised at the optimal point of skin response.' },
+      { step: 4, title: 'Neutralisation & Aftercare', description: 'The peel is neutralised with bicarbonate solution, followed by a soothing mask and SPF application. Detailed post-peel home care instructions are provided.' },
+    ],
+    benefits: ['Brightens dull, uneven skin', 'Reduces acne and congestion', 'Fades pigmentation and dark spots', 'Stimulates collagen synthesis', 'Reduces fine lines and texture', 'Tightens enlarged pores'],
+    faqs: [
+      { question: 'Is it safe for dark Indian skin?', answer: 'Yes, when the correct peel type and strength are chosen. Dr. Omaima uses peels validated for Fitzpatrick III–V skin. Appropriate pre-peel priming prevents post-inflammatory hyperpigmentation.' },
+      { question: 'How much peeling should I expect?', answer: 'Superficial peels cause minimal or no visible peeling. Medium peels cause visible flaking from day 3–7. Dr. Omaima explains exactly what to expect from your specific peel beforehand.' },
+      { question: 'How many sessions for acne scars?', answer: 'Superficial scars typically need 4–6 sessions. Deeper scars benefit from combination therapy — a peel series combined with microneedling or MNRF for superior results.' },
+      { question: 'Can I wear makeup after?', answer: 'Avoid makeup for 24 hours. During the peeling phase, use mineral makeup only if needed. Never manually pick or peel flaking skin.' },
+    ],
+  },
+  'microneedling': {
+    name: 'Microneedling (MNRF)', category: 'Acne & Scars', tagline: 'Collagen induction for scar & skin repair',
+    description: 'Microneedling with Radiofrequency (MNRF) creates controlled micro-injuries in the dermis using insulated gold-plated needles that simultaneously deliver RF energy at precisely calibrated depths. This triggers intensive collagen and elastin remodelling — the most effective non-surgical treatment for acne scars, enlarged pores, and skin laxity.',
+    meta: { Duration: '60–75 min', Sessions: '3–5 sessions', Recovery: '2–3 days redness', Results: '4–8 weeks per session' },
+    howItWorks: [
+      { step: 1, title: 'Topical Anaesthesia', description: 'A numbing cream is applied for 30–45 minutes before the session to ensure complete comfort throughout the procedure.' },
+      { step: 2, title: 'Microneedling Pass', description: 'The MNRF device creates a matrix of controlled micro-injuries using insulated needles at adjustable depths (1–3.5mm depending on the area and concern).' },
+      { step: 3, title: 'RF Energy Delivery', description: 'At each needle point, fractional RF energy is released, creating a thermal coagulation zone in the deep dermis that triggers intensive collagen production.' },
+      { step: 4, title: 'Healing Response', description: 'The wound healing cascade begins — new collagen and elastin fill scar depressions, tighten pores, and improve overall skin quality progressively over 4–8 weeks.' },
+    ],
+    benefits: ['Reduces ice-pick, boxcar and rolling scars', 'Minimises enlarged pores', 'Tightens loose skin', 'Improves skin texture', 'Safe for all skin tones', 'Deep dermal repair, minimal surface damage'],
+    faqs: [
+      { question: 'Is it painful?', answer: 'Numbing cream is applied before the session. During treatment, most patients feel light scratching or vibration. The area may feel warm for a few hours after.' },
+      { question: 'What is the downtime?', answer: 'Redness and mild puffiness resolve in 24–72 hours. You can resume normal activities the next day with SPF and a gentle moisturiser.' },
+      { question: 'How many sessions for acne scars?', answer: 'Most patients need 3–5 sessions spaced 4–6 weeks apart. Dr. Omaima will assess your scar grade and set realistic expectations at consultation.' },
+      { question: 'Can it treat active acne?', answer: 'Microneedling should not be performed over active, inflamed acne lesions. We treat active acne first, then follow with microneedling once the skin has stabilised.' },
+    ],
+  },
+  'dermal-fillers': {
+    name: 'Dermal Fillers', category: 'Anti-Ageing', tagline: 'Volume restoration & contouring',
+    description: 'Dermal fillers are hyaluronic acid-based injectable gels that restore lost facial volume, smooth deep folds, and enhance natural facial contours. Dr. Omaima uses only premium FDA-approved fillers and precise anatomical injection techniques to create subtle, harmonious, and natural-looking results.',
+    meta: { Duration: '30–45 min', Sessions: '1 (every 9–18 months)', Recovery: '24–48 hrs mild swelling', Results: 'Immediate' },
+    howItWorks: [
+      { step: 1, title: 'Aesthetic Consultation', description: 'Dr. Omaima discusses your goals, analyses facial proportions, and recommends the most appropriate filler product, volume, and placement for a natural result.' },
+      { step: 2, title: 'Topical Numbing', description: 'Numbing cream is applied. Most premium fillers also contain built-in lidocaine for added comfort during injection.' },
+      { step: 3, title: 'Precise Injection', description: 'Filler is injected at the anatomically correct plane for each zone — using a needle or cannula as appropriate for safety and precision.' },
+      { step: 4, title: 'Moulding & Review', description: 'The filler is gently moulded for symmetry. A follow-up review is included at 2–4 weeks to assess results and refine if needed.' },
+    ],
+    benefits: ['Restores lost cheek volume', 'Smoothes nasolabial folds', 'Defines lips and cupid\'s bow', 'Softens under-eye hollows', 'Sharpens jawline definition', 'Immediate, reversible results'],
+    faqs: [
+      { question: 'Are dermal fillers safe?', answer: 'When administered by a trained medical professional using FDA-approved products, dermal fillers are extremely safe. Dr. Omaima is a qualified MBBS physician trained in facial anatomy and advanced injection techniques.' },
+      { question: 'How long do fillers last?', answer: 'Results last 9–18 months depending on the product and area. Cheeks and jawline last longer; lips and tear troughs metabolise faster due to higher muscle movement.' },
+      { question: 'Is it reversible?', answer: 'Yes — hyaluronic acid fillers can be dissolved completely with hyaluronidase at any time if you are unhappy with the result.' },
+      { question: 'What is the difference between Botox and fillers?', answer: 'Botox relaxes muscles to soften dynamic wrinkles. Fillers add volume to restore structure and fill static lines and hollows. They complement each other well in a combined treatment plan.' },
+    ],
+  },
+  'acne-treatment': {
+    name: 'Acne Clearance Program', category: 'Acne & Scars', tagline: 'Root-cause acne treatment',
+    description: 'Our Acne Clearance Program is a structured multi-session protocol addressing the root causes of acne — excess sebum, C. acnes bacteria, inflammation, and hormonal triggers. It combines in-clinic treatments with a personalised topical prescription protocol so results persist long after the treatment course ends.',
+    meta: { Duration: '30–45 min / session', Sessions: '4–8 sessions', Recovery: 'Minimal', Results: '4–6 weeks' },
+    howItWorks: [
+      { step: 1, title: 'Skin Assessment & Diagnosis', description: 'Dr. Omaima grades your acne severity, identifies triggers (hormonal, dietary, lifestyle), and designs a personalised treatment and home care plan.' },
+      { step: 2, title: 'Chemical Peel (Salicylic / Combination)', description: 'BHA and combination peels exfoliate the follicle lining, reduce sebum, and clear congested pores with each in-clinic session.' },
+      { step: 3, title: 'Blue Light or Laser Therapy', description: 'Anti-bacterial blue light or low-fluence Nd:YAG laser targets and destroys C. acnes bacteria within the follicle, reducing active breakouts rapidly.' },
+      { step: 4, title: 'Prescription Home Protocol', description: 'A customised home care plan with prescription-strength actives (retinoids, azelaic acid, antibiotics as needed) maintains results between sessions.' },
+    ],
+    benefits: ['Clears active breakouts within 2–4 weeks', 'Prevents new acne formation', 'Reduces skin redness and inflammation', 'Addresses root biological cause', 'Prescription-backed protocol', 'Suitable for all acne grades'],
+    faqs: [
+      { question: 'How quickly will I see results?', answer: 'Most patients notice significant reduction in active breakouts after 2–3 sessions. Some experience a brief purging phase before the skin clears fully.' },
+      { question: 'Will the acne come back?', answer: 'With the correct maintenance protocol and home skincare plan, long-term control is achievable. Dr. Omaima will identify your specific triggers to prevent relapse.' },
+      { question: 'Is it safe with other medications?', answer: 'Please inform Dr. Omaima of all medications — including oral antibiotics and isotretinoin. Certain in-clinic treatments need to be modified or avoided.' },
+      { question: 'Can I wear makeup during treatment?', answer: 'Switch to non-comedogenic products during the program. Dr. Omaima will advise which products are safe to continue with your skin type.' },
+    ],
+  },
+}
+
+// Additional SEO content per treatment (merged on top of FALLBACK_TREATMENTS)
+const TREATMENT_EXTRAS = {
+  'hydrafacial-md': {
+    about: `HydraFacial MD is the world's most popular non-invasive skin treatment, combining deep cleansing, exfoliation, extraction, hydration, and antioxidant infusion in a single 45-minute session. Unlike harsh peels or aggressive microdermabrasion, HydraFacial uses a patented Vortex-Fusion® serum delivery system that treats even the most sensitive skin without irritation or downtime.\n\nThe treatment is entirely customisable — Dr. Omaima selects boosters and serums based on your specific concerns before every session. Whether your goal is to address dullness, enlarged pores, fine lines, or dehydration, HydraFacial's multi-step protocol is tailored to deliver targeted results.\n\nDermatologists worldwide recommend HydraFacial as a monthly maintenance treatment because it delivers consistent, measurable skin improvement without cumulative irritation.`,
+    concerns: [{ name: 'Dull Skin', slug: 'dull-skin' }, { name: 'Enlarged Pores', slug: 'pores' }, { name: 'Pigmentation', slug: 'pigmentation' }, { name: 'Acne', slug: 'acne' }],
+    idealCandidate: 'HydraFacial is suitable for virtually all skin types and ages. Ideal if you want immediate skin improvement with zero downtime, or if you have sensitive skin that reacts to more aggressive treatments. It is especially popular before weddings, events, or as a monthly maintenance treatment.',
+    preparation: ['Avoid retinoids and active exfoliants (AHAs/BHAs) for 3 days before', 'Come with a clean, makeup-free face if possible', 'Mention any new skincare products or medications at your consultation', 'Stay well-hydrated in the days leading up to your session'],
+    aftercare: 'Skin may appear slightly flushed for 2–4 hours — this resolves quickly. Avoid heavy makeup for 4–6 hours to allow serums to fully absorb. Apply SPF 50 the following morning. Avoid active exfoliants for 3–5 days after treatment. Results are visible immediately and continue improving over 3–5 days.',
+    risks: ['Mild temporary redness (resolves within hours)', 'Rarely, temporary tingling in very sensitive skin', 'Pre-existing skin sensitivity may be temporarily heightened', 'Not recommended immediately after Botox or dermal fillers'],
+    relatedTreatments: [{ name: 'Carbon Laser Facial', slug: 'carbon-laser-facial' }, { name: 'Chemical Peel', slug: 'chemical-peel' }, { name: 'Bio Re Peel', slug: 'bio-re-peel' }],
+    preventionTips: ['Use SPF 50 every morning — UV damage is the primary cause of skin ageing and dullness', 'Maintain a gentle twice-daily cleanse with a mild pH-balanced cleanser', 'Stay hydrated — dehydration worsens fine lines and dullness significantly', 'Monthly HydraFacial sessions maintain results year-round'],
+  },
+  'prp-hair': {
+    about: `Platelet-Rich Plasma (PRP) therapy is a regenerative medicine technique that harnesses your own blood's growth factors to stimulate dormant hair follicles. Platelets contain growth factors — PDGF, VEGF, EGF, and FGF — that signal stem cells to regenerate and repair tissue. When concentrated PRP is injected into the scalp, these growth factors activate follicles that have entered the resting (telogen) phase.\n\nPRP is entirely autologous — derived from your own blood — eliminating any risk of allergic reaction or rejection. It is one of the most extensively studied non-surgical hair loss treatments available, with multiple randomised controlled trials demonstrating significant improvements in hair count, density, and thickness.\n\nDermatologists recommend PRP because it addresses the biological cause of hair miniaturisation rather than just masking the symptom. When combined with GFC therapy, it produces superior results for androgenetic alopecia, diffuse thinning, and early-to-moderate alopecia areata.`,
+    concerns: [{ name: 'Hair Fall', slug: 'hair-fall' }, { name: 'Hair Regrowth', slug: 'hair-regrowth' }, { name: 'Dandruff & Scalp Health', slug: 'dandruff' }],
+    idealCandidate: 'PRP is ideal for men and women with androgenetic alopecia (pattern hair loss), diffuse thinning, or early-stage alopecia areata. It works best when some follicular activity is still present — completely bald areas with no follicles cannot respond. Patients in good general health with no bleeding disorders are suitable.',
+    preparation: ['Avoid blood thinners (aspirin, ibuprofen, omega-3) for 5–7 days before', 'Stay well-hydrated on the day of your session — good hydration improves blood draw quality', 'Wash your hair normally the morning of the session', 'Eat a light meal before your appointment to avoid feeling faint during the blood draw', 'Avoid smoking for 24 hours before — nicotine affects platelet function'],
+    aftercare: 'Mild scalp tenderness and pinpoint marks at injection sites are normal and resolve within 24–48 hours. Avoid washing your hair for 6–8 hours after treatment. Avoid intense scalp massage or vigorous exercise on the day of treatment. Temporary shedding in weeks 2–4 is a normal part of the growth cycle activation.',
+    risks: ['Mild scalp tenderness at injection sites (resolves in 1–2 days)', 'Occasional temporary headache', 'Very rarely, small bruises at injection points', 'Temporary shedding in the first 2–4 weeks (normal cycle activation)', 'Not suitable during active infection, chemotherapy, or with blood disorders'],
+    relatedTreatments: [{ name: 'GFC Hair Therapy', slug: 'gfc-hair' }, { name: 'Exosomes Treatment', slug: 'exosomes-face' }, { name: 'Cold Laser Therapy', slug: 'cold-laser-therapy' }],
+    preventionTips: ['Use a mild sulphate-free shampoo — harsh shampoos damage the scalp microbiome', 'Manage stress — cortisol is one of the most significant triggers for hair fall', 'Ensure adequate protein, iron, and B-vitamin intake in your diet', 'Avoid tight hairstyles that create traction alopecia', 'Maintenance PRP sessions every 4–6 months preserve results long-term'],
+  },
+  'botox': {
+    about: `Botulinum toxin (Botox) is the world's most studied aesthetic treatment, with an unparalleled safety record built over 30 years of clinical use. It works by temporarily blocking the nerve signal to specific facial muscles, causing them to relax and the overlying dynamic wrinkles to soften naturally.\n\nThe key to natural-looking Botox is expert dosing and anatomical placement. Dr. Omaima's philosophy is never to freeze expression but to soften lines while preserving the full range of facial movement. When administered conservatively, even colleagues and family often cannot tell you have had treatment.\n\nBotox is also recommended as a preventive treatment for patients in their late 20s and 30s who want to slow wrinkle development before lines become permanently etched. It is also used medically for hyperhidrosis (excessive sweating) and masseter reduction (jaw slimming).`,
+    concerns: [{ name: 'Wrinkles & Fine Lines', slug: 'wrinkles' }, { name: 'Sagging Skin', slug: 'sagging' }, { name: 'Volume Loss', slug: 'volume-loss' }],
+    idealCandidate: 'Ideal for adults aged 25–65 who have dynamic wrinkles (lines caused by muscle movement) on the forehead, between the brows, or around the eyes. Also suitable for patients wanting preventive treatment before wrinkles become permanent. Not recommended during pregnancy or breastfeeding.',
+    preparation: ['Avoid blood thinners and anti-inflammatories (aspirin, ibuprofen) for 1 week before', 'Avoid alcohol for 24 hours before to reduce bruising risk', 'Come to your appointment makeup-free if possible', 'Avoid vigorous exercise on the day of treatment', 'Discuss all medications and medical conditions with Dr. Omaima at consultation'],
+    aftercare: 'Results appear in 3–5 days and peak at 2 weeks. Avoid lying flat or bending forward for 4 hours after treatment. Do not rub or massage treated areas for 24 hours. Avoid saunas, steam rooms, and vigorous exercise for 24 hours. A complimentary 2-week review assesses results and adds a touch-up if needed.',
+    risks: ['Mild temporary redness or swelling at injection points (resolves in hours)', 'Rare temporary bruising', 'Temporary mild headache (uncommon)', 'Temporary brow heaviness if too much product placed in forehead (avoided with careful technique)', 'Eyelid droop is extremely rare with experienced injectors', 'All effects fully reverse over 4–6 months'],
+    relatedTreatments: [{ name: 'Dermal Fillers', slug: 'dermal-fillers' }, { name: 'HIFU Ultralift', slug: 'hifu' }, { name: 'Cheek Enhancement', slug: 'cheek-enhancement' }],
+    preventionTips: ['Use SPF 50 daily — UV radiation is the primary driver of premature skin ageing', 'Sleep on your back to avoid creating sleep wrinkles on the face', 'Use a medical-grade retinoid at night to stimulate collagen and slow wrinkle formation', 'Regular Botox every 4–6 months prevents lines from becoming permanently etched'],
+  },
+  'laser-hair': {
+    about: `Laser hair reduction uses the principle of selective photothermolysis — targeting melanin pigment in hair follicles with a specific wavelength of light that heats and destroys the follicle while leaving surrounding skin unaffected. Our US-FDA cleared diode laser delivers 808nm wavelength energy, the gold standard for effective hair reduction across a wide range of skin tones.\n\nAfter a full course of 6–8 sessions, most patients achieve 70–90% permanent reduction and need only occasional maintenance top-ups. It solves a daily grooming problem permanently, is cost-effective over time compared to waxing, and eliminates painful ingrown hairs.\n\nDermatologists recommend laser hair reduction not only cosmetically but medically: it eliminates pseudofolliculitis barbae, reduces folliculitis, and is the treatment of choice for hirsutism in PCOS. Our diode laser has built-in cooling and parameters calibrated specifically for Indian skin tones.`,
+    concerns: [{ name: 'Unwanted Hair', slug: 'unwanted-hair' }],
+    idealCandidate: 'Works best on patients with darker hair on lighter to medium skin where the contrast is highest. Also effective on Indian skin tones (Fitzpatrick III–V) with our diode laser. Not effective on white, grey, or very fine vellus hair. Suitable for most adults, though not during pregnancy.',
+    preparation: ['Shave the treatment area 24 hours before (do NOT wax or thread for 4 weeks before)', 'Avoid sun exposure for 2 weeks before — tanned skin increases risk', 'Remove all cosmetics, deodorant, and topical products from the area before treatment', 'Avoid self-tanners for 4 weeks before', 'Inform Dr. Omaima of any medications — some photosensitising drugs require spacing'],
+    aftercare: 'Treated hair will shed over 1–3 weeks — this is the follicle being expelled, not new growth. Apply soothing aloe vera gel if skin feels warm. Avoid sun exposure for 1 week and always apply SPF 50 to treated areas. Avoid heat treatments (saunas, hot yoga) for 48 hours. Sessions are spaced 4–6 weeks apart for body, 3–4 weeks for face.',
+    risks: ['Temporary redness and mild swelling (resolves in 2–24 hours)', 'Rarely, temporary hyperpigmentation (avoided with correct settings for your skin type)', 'Very rarely, blistering if skin is recently tanned', 'Not effective on white, grey, or very fair hair', 'Paradoxical hair stimulation (rare — fine pale hair occasionally grows thicker)'],
+    relatedTreatments: [{ name: 'Carbon Laser Facial', slug: 'carbon-laser-facial' }, { name: 'Scalp Micro Pigmentation', slug: 'scalp-micro-pigmentation' }],
+    preventionTips: ['Only shave between sessions — never wax or thread (preserves follicle integrity for laser)', 'Use SPF 50 daily on treated areas to prevent post-treatment hyperpigmentation', 'Maintenance sessions every 6–12 months address any regrowth', 'Exfoliate gently once weekly between sessions to prevent ingrown hairs as treated hair sheds'],
+  },
+  'chemical-peel': {
+    about: `Chemical peels are one of the most versatile and evidence-based treatments in dermatology, with a history of safe use spanning over 50 years. By applying a controlled acid solution to the skin, peels induce a predictable wound response — removing damaged outer skin cells and triggering the body's natural repair mechanisms to produce fresh collagen, elastin, and melanin-balanced skin.\n\nDr. Omaima uses a range of peels matched to skin type and concern: superficial peels (glycolic, lactic, mandelic) for regular brightening and maintenance; medium-depth peels (Jessner's, TCA) for acne scars and pigmentation; and specialty peels (salicylic, combination) for oily and acne-prone skin.\n\nFor Indian skin tones, peels must be chosen carefully to avoid post-inflammatory hyperpigmentation — which is why Dr. Omaima uses only clinically validated, skin-tone-appropriate protocols with mandatory pre-peel priming for all medium-depth procedures.`,
+    concerns: [{ name: 'Acne', slug: 'acne' }, { name: 'Acne Scars', slug: 'acne-scars' }, { name: 'Pigmentation', slug: 'pigmentation' }, { name: 'Dull Skin', slug: 'dull-skin' }, { name: 'Pores', slug: 'pores' }],
+    idealCandidate: 'Chemical peels suit a wide range of patients — from teenagers with acne to adults with pigmentation and ageing concerns. Ideal for acne-prone oily skin, surface pigmentation, uneven skin tone, mild scarring, or skin that needs regular maintenance. Not suitable during pregnancy or while using isotretinoin.',
+    preparation: ['Begin a 2-week pre-peel prep with a prescribed priming cream if recommended', 'Stop retinoids and active exfoliants (AHAs/BHAs) 5–7 days before your session', 'Avoid sun exposure for 2 weeks before treatment', 'Do not wax, thread, or use hair removal creams on the face for 1 week before', 'Inform Dr. Omaima of all medications — especially antibiotics and hormonal treatments'],
+    aftercare: 'Post-peel skin may be red and mildly tight for 24–48 hours. Peeling begins on day 3 and resolves by day 7 — do not pick or peel the skin manually. Use only a mild cleanser and fragrance-free moisturiser during healing. SPF 50 every morning is non-negotiable to prevent rebound pigmentation.',
+    risks: ['Temporary redness, tightness, and dryness (normal healing response)', 'Peeling and flaking for 3–7 days after treatment', 'Post-inflammatory hyperpigmentation in darker skin if not managed correctly (avoided with pre-peel prep and SPF)', 'Herpes flare in susceptible patients (prophylactic antivirals prescribed if risk exists)', 'Prolonged redness in very sensitive or rosacea-prone skin'],
+    relatedTreatments: [{ name: 'HydraFacial MD', slug: 'hydrafacial-md' }, { name: 'Bio Re Peel', slug: 'bio-re-peel' }, { name: 'Microneedling', slug: 'microneedling' }],
+    preventionTips: ['Use SPF 50 every day — UV exposure is the primary driver of pigmentation recurrence', 'Incorporate a gentle AHA in your home routine between sessions to maintain results', 'Stay out of direct midday sun (11am–3pm) and use a hat outdoors', 'Maintain skin hydration with a ceramide-based moisturiser to support barrier health'],
+  },
+  'gfc-hair': {
+    concerns: [{ name: 'Hair Fall', slug: 'hair-fall' }, { name: 'Hair Regrowth', slug: 'hair-regrowth' }],
+    idealCandidate: 'GFC is ideal for patients with androgenetic alopecia who want the strongest possible non-surgical hair restoration, or those who have not achieved desired results with PRP. It is also recommended as a first-line premium option for moderate-to-severe diffuse thinning.',
+    preparation: ['Avoid blood thinners for 5–7 days before', 'Stay well-hydrated on the day of your session', 'Eat a light meal before your appointment'],
+    aftercare: 'Mild scalp tenderness resolves in 24–48 hours. Avoid washing hair for 6–8 hours. Avoid vigorous exercise on the day of treatment.',
+    risks: ['Mild scalp tenderness at injection sites', 'Occasional temporary headache', 'Very rarely, small bruises at injection points'],
+    relatedTreatments: [{ name: 'PRP Hair Restoration', slug: 'prp-hair' }, { name: 'Exosomes Treatment', slug: 'exosomes-face' }, { name: 'Cold Laser Therapy', slug: 'cold-laser-therapy' }],
+    preventionTips: ['Use a mild sulphate-free shampoo', 'Manage stress levels — cortisol directly triggers hair fall', 'Ensure adequate dietary protein, iron, and B-vitamins', 'Maintenance sessions every 6 months preserve results'],
+  },
+  'microneedling': {
+    about: `Microneedling with Radiofrequency (MNRF) is the dermatologist's gold standard for atrophic acne scars. By combining the controlled skin injury of microneedling with the deep thermal stimulus of RF energy, MNRF triggers collagen and elastin remodelling at a depth that topical treatments and superficial peels simply cannot reach.\n\nThe insulated gold-plated needles ensure that RF energy is delivered only at the intended dermal depth — protecting the epidermis from heat damage and making the procedure safe for all skin tones including darker Indian skin. This is a significant advantage over ablative lasers, which carry a higher risk of post-inflammatory hyperpigmentation in Fitzpatrick III–V patients.\n\nDermatologists recommend MNRF as the most effective non-surgical option for rolling, boxcar, and mixed-type acne scars, skin laxity, enlarged pores, and stretch marks.`,
+    concerns: [{ name: 'Acne Scars', slug: 'acne-scars' }, { name: 'Acne', slug: 'acne' }, { name: 'Pores', slug: 'pores' }],
+    idealCandidate: 'Ideal for patients with atrophic acne scars (rolling, boxcar, or mixed type), enlarged pores, or early skin laxity. Best results in patients who have had no active acne breakouts for at least 3 months. Suitable for all skin tones.',
+    preparation: ['Avoid blood thinners for 5–7 days before', 'Avoid sun exposure for 2 weeks before', 'Stop retinoids for 5 days before treatment', 'Do not use any active skin treatments within 1 week of your session'],
+    aftercare: 'Redness and mild swelling resolve in 24–72 hours. Use a gentle cleanser and plain moisturiser only for 5 days after. SPF 50 is mandatory. Avoid active skincare ingredients for 7 days post-treatment.',
+    risks: ['Temporary redness and swelling (resolves in 1–3 days)', 'Rare pinpoint bleeding during procedure (normal, resolves immediately)', 'Rarely, temporary post-inflammatory darkening in very sensitive skin', 'Not suitable during active acne flares, pregnancy, or with metal implants in face'],
+    relatedTreatments: [{ name: 'Chemical Peel', slug: 'chemical-peel' }, { name: 'PRP Hair Restoration', slug: 'prp-hair' }, { name: 'HydraFacial MD', slug: 'hydrafacial-md' }],
+    preventionTips: ['Never pick or squeeze acne lesions — this directly causes the scars that microneedling treats', 'Use a broad-spectrum SPF 50 daily to prevent existing scars from darkening with UV exposure', 'Keep a consistent home routine with gentle actives between sessions to maximise results', 'Maintenance sessions every 6–12 months help sustain the collagen improvement'],
+  },
+  'dermal-fillers': {
+    about: `Dermal fillers represent the most versatile non-surgical facial restoration tool available in modern aesthetic medicine. Unlike Botox, which relaxes muscles, fillers work by physically replacing volume that has been lost through ageing, or by strategically adding structure to enhance features that were never as prominent as desired.\n\nHyaluronic acid — the foundation of modern fillers — is a naturally occurring molecule found in all human skin that attracts and binds water, providing hydration and plumpness. As we age, natural HA production declines. Injectable HA fillers replenish this loss, creating immediate, soft, natural results.\n\nDr. Omaima uses a layered injection approach — placing different filler textures at different anatomical depths (periosteum, supraperiosteal, subcutaneous, and intradermal) to create structural support and surface-level refinement simultaneously. This is what produces a natural, three-dimensional result rather than a flat or puffy appearance.`,
+    concerns: [{ name: 'Volume Loss', slug: 'volume-loss' }, { name: 'Wrinkles & Fine Lines', slug: 'wrinkles' }, { name: 'Sagging Skin', slug: 'sagging' }, { name: 'Dark Circles', slug: 'dark-circles' }],
+    idealCandidate: 'Ideal for adults experiencing mid-face volume loss, deep nasolabial folds, lip deflation, under-eye hollowing, or weak chin and jawline definition. Also suitable for younger patients who want to enhance features. Not recommended during pregnancy or breastfeeding.',
+    preparation: ['Avoid blood thinners (aspirin, ibuprofen, vitamin E, fish oil) for 1 week before', 'Avoid alcohol for 24 hours before to reduce bruising risk', 'Come makeup-free if possible', 'Do not schedule directly before an important event — allow 2 weeks for final results'],
+    aftercare: 'Mild swelling and occasional bruising at injection points are normal and resolve within 48–72 hours. Apply cold compresses in the first 6 hours. Avoid touching or massaging treated areas for 24 hours. Sleep with head slightly elevated on night of treatment. Full results are visible at 2 weeks when swelling has fully resolved.',
+    risks: ['Mild temporary swelling and bruising (resolves in 2–5 days)', 'Rarely, lumpiness or asymmetry (corrected at 2-week review or dissolved with hyaluronidase)', 'Very rarely, vascular occlusion (an emergency managed with immediate hyaluronidase — risk is minimised by using cannulas and aspiration technique)', 'Temporary tenderness at injection sites'],
+    relatedTreatments: [{ name: 'Anti-Wrinkle Botox', slug: 'botox' }, { name: 'Cheek Enhancement', slug: 'cheek-enhancement' }, { name: 'Lip Enhancement', slug: 'lip-enhancement' }],
+    preventionTips: ['Use SPF 50 daily — UV damage accelerates the facial volume loss that fillers correct', 'Maintain a diet rich in collagen-supporting nutrients (vitamin C, zinc, protein)', 'Stay well-hydrated to maintain skin plumpness between filler sessions', 'Touch-up sessions every 12–18 months maintain optimal results'],
+  },
+  'acne-treatment': {
+    concerns: [{ name: 'Acne', slug: 'acne' }, { name: 'Acne Scars', slug: 'acne-scars' }, { name: 'Pores', slug: 'pores' }],
+    idealCandidate: 'Suitable for teenagers and adults of all ages with mild, moderate, or severe acne — including comedonal, inflammatory, cystic, and hormonal types. Also suitable for patients with post-acne redness (PIE) or early post-acne scars who want a combined clearance and prevention approach.',
+    preparation: ['Continue any existing prescribed medications unless specifically told to stop', 'Wash your face with a gentle cleanser on the morning of your session', 'Avoid new skincare products in the week before treatment', 'Inform Dr. Omaima if you are on hormonal contraception, antibiotics, or isotretinoin'],
+    aftercare: 'Avoid touching your face after in-clinic procedures. Do not use active exfoliants on the day of treatment. SPF 50 is essential every day — sun exposure worsens post-acne marks. Follow the prescribed home care plan consistently between sessions for best results.',
+    risks: ['Temporary skin sensitivity or mild irritation after chemical peels (resolves in 24–48 hours)', 'Initial purging (increased breakouts in week 1–2 before clearing)', 'Not recommended during pregnancy (some prescription actives are contraindicated)', 'Isotretinoin users need specific treatment modifications — always disclose this'],
+    relatedTreatments: [{ name: 'Chemical Peel', slug: 'chemical-peel' }, { name: 'Microneedling', slug: 'microneedling' }, { name: 'Carbon Laser Facial', slug: 'carbon-laser-facial' }],
+    preventionTips: ['Never squeeze or pop acne lesions — this pushes bacteria deeper and causes scarring', 'Use non-comedogenic (oil-free) sunscreen, moisturiser, and makeup', 'Change your pillowcase twice weekly — it harbours oil and bacteria', 'Avoid excessive dairy, refined sugar, and high-GI foods which worsen hormonal acne'],
+  },
 }
 
 export default async function TreatmentPage({ params }) {
   const { slug } = await params
-  const treatment = await fetchTreatment(slug).catch(() => null)
-  const t = treatment || FALLBACK_TREATMENTS[slug] || {
+  const sanityData = await fetchTreatment(slug).catch(() => null)
+  const fallback = FALLBACK_TREATMENTS[slug] || {
     name: slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
     category: 'Treatment', tagline: '', description: 'Our doctor-led treatment is customised to your skin type and concern.',
     meta: {}, howItWorks: [], benefits: [], faqs: [],
   }
+  const extras = TREATMENT_EXTRAS[slug] || {}
+  const t = { ...fallback, ...extras, ...(sanityData || {}) }
 
   return (
-    <div style={{ background: 'var(--cream)' }}>
-      {/* HERO */}
-      <section style={{ padding: '44px 20px 36px', background: 'linear-gradient(180deg,#F5EDE4,#FAF7F2)' }}>
-        <div style={{ maxWidth: 1180, margin: '0 auto' }}>
-          <div style={{ fontSize: 12.5, color: '#9A8A7A', fontWeight: 300, marginBottom: 20, display: 'flex', gap: 6 }}>
+    <article style={{ background: 'var(--cream)' }}>
+
+      {/* ── 1. HERO ── */}
+      <section style={{ padding: '48px 20px 44px', background: 'linear-gradient(160deg,#F5EDE4 0%,#FAF7F2 60%,#EEE8E2 100%)' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <nav style={{ fontSize: 12, color: '#9A8A7A', fontWeight: 300, marginBottom: 24, display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             <Link href="/" style={{ color: '#9A8A7A' }}>Home</Link><span>/</span>
             <Link href="/treatments" style={{ color: '#9A8A7A' }}>Treatments</Link><span>/</span>
-            <span style={{ color: 'var(--text)', fontWeight: 400 }}>{t.name}</span>
-          </div>
+            <span style={{ color: 'var(--text)' }}>{t.name}</span>
+          </nav>
           <span className="eyebrow">{t.category}</span>
-          <h1 style={{ fontWeight: 500, marginBottom: 14 }}>{t.name}</h1>
-          <p style={{ fontSize: 14.5, fontWeight: 300, color: '#4A3728', maxWidth: 640, lineHeight: 1.85 }}>{t.description}</p>
+          <h1 style={{ fontWeight: 500, fontSize: 'clamp(26px,4vw,46px)', lineHeight: 1.15, marginBottom: 16, maxWidth: 700 }}>{t.name}</h1>
+          <p style={{ fontSize: 16, fontWeight: 300, color: '#4A3728', maxWidth: 620, lineHeight: 1.85, marginBottom: 28 }}>{t.tagline || t.description}</p>
           {t.meta && Object.keys(t.meta).length > 0 && (
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 28 }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 28 }}>
               {Object.entries(t.meta).filter(([, v]) => v).map(([k, v]) => (
                 <div key={k} style={{ background: '#fff', borderRadius: 10, padding: '10px 18px', border: '1.5px solid rgba(26,17,9,0.09)' }}>
                   <div style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#B8916A' }}>{k}</div>
-                  <div style={{ fontSize: 13.5, fontWeight: 400, color: 'var(--text)', marginTop: 3 }}>{v}</div>
+                  <div style={{ fontSize: 13, fontWeight: 400, color: 'var(--text)', marginTop: 3 }}>{v}</div>
                 </div>
               ))}
             </div>
           )}
-          <div style={{ display: 'flex', gap: 10, marginTop: 28, flexWrap: 'wrap' }}>
-            <Link href="/contact" style={{ background: '#1A2744', color: '#fff', fontSize: 13, fontWeight: 400, padding: '12px 26px', borderRadius: 999, textDecoration: 'none' }}>Book Consultation</Link>
-            <a href="tel:09811997993" style={{ background: 'transparent', color: '#1A2744', fontSize: 13, fontWeight: 400, padding: '12px 26px', borderRadius: 999, border: '1.5px solid rgba(26,39,68,0.2)', textDecoration: 'none' }}>Call 098119 97993</a>
+          {t.benefits?.length > 0 && (
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 32 }}>
+              {t.benefits.slice(0, 3).map((b, i) => (
+                <span key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12.5, fontWeight: 400, color: '#1A2744', background: 'rgba(26,39,68,0.07)', padding: '6px 14px', borderRadius: 999 }}>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4A6741" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  {b}
+                </span>
+              ))}
+            </div>
+          )}
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <Link href="/contact" style={{ background: '#1A2744', color: '#fff', fontSize: 13.5, fontWeight: 400, padding: '13px 28px', borderRadius: 999, textDecoration: 'none' }}>Book Consultation</Link>
+            <a href="tel:09811997993" style={{ background: 'transparent', color: '#1A2744', fontSize: 13.5, fontWeight: 400, padding: '13px 28px', borderRadius: 999, border: '1.5px solid rgba(26,39,68,0.2)', textDecoration: 'none' }}>Call 098119 97993</a>
           </div>
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
+      {/* ── 2. ABOUT THE TREATMENT ── */}
+      <section style={{ padding: '72px 20px', background: '#fff' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 290px', gap: 48, alignItems: 'start' }}>
+          <div>
+            <span className="eyebrow">About the Treatment</span>
+            <h2 style={{ fontWeight: 500, marginBottom: 22 }}>What is {t.name}?</h2>
+            <div style={{ fontSize: 14.5, fontWeight: 300, color: '#4A3728', lineHeight: 1.9 }}>
+              {(t.about || t.description || '').split('\n\n').map((para, i) => (
+                <p key={i} style={{ marginBottom: 18 }}>{para}</p>
+              ))}
+            </div>
+            <div style={{ marginTop: 8, padding: '20px 22px', background: '#F5F9F4', borderRadius: 12, border: '1.5px solid rgba(74,103,65,0.15)' }}>
+              <div style={{ fontSize: 11.5, fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#4A6741', marginBottom: 8 }}>Why dermatologists recommend it</div>
+              <p style={{ fontSize: 13.5, fontWeight: 300, color: '#3A2A1A', lineHeight: 1.75, margin: 0 }}>
+                {t.name} is a clinically validated procedure performed by Dr. Omaima using medical-grade technology. Every treatment plan is personalised based on your skin type, concern severity, and treatment goals.
+              </p>
+            </div>
+          </div>
+          <div style={{ background: '#F5EDE4', borderRadius: 16, padding: '28px 24px', border: '1.5px solid rgba(184,145,106,0.2)', position: 'sticky', top: 20 }}>
+            <div style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#B8916A', marginBottom: 18 }}>Quick Facts</div>
+            {t.meta && Object.entries(t.meta).filter(([, v]) => v).map(([k, v]) => (
+              <div key={k} style={{ marginBottom: 14, paddingBottom: 14, borderBottom: '1px solid rgba(184,145,106,0.15)' }}>
+                <div style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9A8A7A', marginBottom: 3 }}>{k}</div>
+                <div style={{ fontSize: 13.5, fontWeight: 400, color: '#3A2A1A' }}>{v}</div>
+              </div>
+            ))}
+            <Link href="/contact" style={{ display: 'block', textAlign: 'center', background: '#1A2744', color: '#fff', fontSize: 13, fontWeight: 400, padding: '12px 20px', borderRadius: 999, textDecoration: 'none', marginTop: 8 }}>Book a Free Consultation</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 3 + 4. WHAT IT HELPS WITH + CONDITIONS TREATED ── */}
+      {t.concerns?.length > 0 && (
+        <section style={{ padding: '72px 20px', background: 'var(--cream)' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <span className="eyebrow">Conditions Treated</span>
+            <h2 style={{ fontWeight: 500, marginBottom: 12 }}>What does {t.name} help with?</h2>
+            <p style={{ fontSize: 14, fontWeight: 300, color: '#5A4A3A', maxWidth: 640, lineHeight: 1.8, marginBottom: 32 }}>
+              {t.name} is clinically effective for the following skin and hair concerns. Click any condition to learn more about our approach.
+            </p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 40 }}>
+              {t.concerns.map((c, i) => (
+                <Link key={i} href={`/concerns/${c.slug}`} style={{ fontSize: 13, fontWeight: 400, color: '#1A2744', background: '#fff', border: '1.5px solid rgba(26,39,68,0.15)', padding: '8px 18px', borderRadius: 999, textDecoration: 'none' }}>
+                  {c.name} →
+                </Link>
+              ))}
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 16 }}>
+              {t.concerns.map((c, i) => (
+                <Link key={i} href={`/concerns/${c.slug}`} style={{ textDecoration: 'none' }}>
+                  <div style={{ background: '#fff', borderRadius: 14, padding: '22px 20px', border: '1.5px solid rgba(26,17,9,0.09)', height: '100%', display: 'flex', flexDirection: 'column', gap: 10 }}>
+                    <div style={{ width: 36, height: 36, borderRadius: '50%', background: '#F5EDE4', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#B8916A" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 8 16 12 12 16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                    </div>
+                    <div style={{ fontSize: 13.5, fontWeight: 500, color: 'var(--text)' }}>{c.name}</div>
+                    <div style={{ fontSize: 12, fontWeight: 300, color: '#B8916A', marginTop: 'auto' }}>View concern page →</div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── 5. BENEFITS ── */}
+      {t.benefits?.length > 0 && (
+        <section style={{ padding: '72px 20px', background: '#1A2744' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <span className="eyebrow" style={{ color: '#B8916A' }}>Why Choose This</span>
+            <h2 style={{ fontWeight: 500, color: '#FAF7F2', marginBottom: 36 }}>Benefits of {t.name}</h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 14 }}>
+              {t.benefits.map((b, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 12, padding: '18px 20px', background: 'rgba(255,255,255,0.07)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.1)' }}>
+                  <span style={{ width: 24, height: 24, borderRadius: '50%', background: '#B8916A', color: '#fff', fontSize: 11, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>✓</span>
+                  <span style={{ fontSize: 13.5, fontWeight: 300, color: '#E8DED4', lineHeight: 1.6 }}>{b}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── 6. IDEAL CANDIDATE ── */}
+      {t.idealCandidate && (
+        <section style={{ padding: '72px 20px', background: '#FAF7F2' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
+            <div>
+              <span className="eyebrow">Is This Right For You?</span>
+              <h2 style={{ fontWeight: 500, marginBottom: 18 }}>Who is an ideal candidate?</h2>
+              <p style={{ fontSize: 14.5, fontWeight: 300, color: '#4A3728', lineHeight: 1.85, marginBottom: 28 }}>{t.idealCandidate}</p>
+              <Link href="/contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 400, color: '#1A2744', border: '1.5px solid rgba(26,39,68,0.2)', padding: '11px 22px', borderRadius: 999, textDecoration: 'none' }}>Check if you're suitable →</Link>
+            </div>
+            <div style={{ background: '#fff', borderRadius: 16, padding: '28px 24px', border: '1.5px solid rgba(26,17,9,0.09)' }}>
+              <div style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#B8916A', marginBottom: 16 }}>Good candidates typically have</div>
+              {(t.concerns?.length ? t.concerns : t.benefits?.slice(0, 5).map(b => ({ name: b })) || []).map((item, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', borderBottom: '1px solid rgba(26,17,9,0.07)' }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4A6741" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span style={{ fontSize: 13, fontWeight: 300, color: '#4A3728' }}>{item.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── 7. HOW IT IS PERFORMED ── */}
       {t.howItWorks?.length > 0 && (
-        <section style={{ padding: '64px 20px', background: '#1A2744' }}>
-          <div style={{ maxWidth: 900, margin: '0 auto' }}>
-            <span className="eyebrow" style={{ color: '#B8916A' }}>Process</span>
-            <h2 style={{ fontWeight: 500, color: '#FAF7F2', marginBottom: 36 }}>How it works</h2>
-            <div style={{ display: 'grid', gap: 14 }}>
+        <section style={{ padding: '72px 20px', background: '#fff' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <span className="eyebrow">The Procedure</span>
+            <h2 style={{ fontWeight: 500, marginBottom: 10 }}>How {t.name} is performed</h2>
+            <p style={{ fontSize: 14, fontWeight: 300, color: '#5A4A3A', maxWidth: 580, lineHeight: 1.8, marginBottom: 36 }}>Every treatment at Tvak & Asthi is personally performed by Dr. Omaima — not a therapist or technician.</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {t.howItWorks.map((step, i) => (
-                <div key={i} style={{ display: 'flex', gap: 16, alignItems: 'flex-start', padding: '22px', background: 'rgba(255,255,255,0.06)', borderRadius: 14, border: '1px solid rgba(255,255,255,0.1)' }}>
-                  <span style={{ width: 34, height: 34, borderRadius: '50%', background: '#B8916A', color: '#fff', fontSize: 13.5, fontWeight: 500, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{step.step || i + 1}</span>
+                <div key={i} style={{ display: 'flex', gap: 20, alignItems: 'flex-start', padding: '24px', background: '#F9F6F2', borderRadius: 16, border: '1.5px solid rgba(26,17,9,0.07)' }}>
+                  <span style={{ width: 40, height: 40, borderRadius: '50%', background: '#1A2744', color: '#FAF7F2', fontSize: 14, fontWeight: 500, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{step.step || i + 1}</span>
                   <div>
-                    <div style={{ fontSize: 14.5, fontWeight: 500, color: '#FAF7F2', marginBottom: 6 }}>{step.title}</div>
-                    <div style={{ fontSize: 13.5, fontWeight: 300, color: '#C4A998', lineHeight: 1.7 }}>{step.description}</div>
+                    <div style={{ fontSize: 15, fontWeight: 500, color: 'var(--text)', marginBottom: 6 }}>{step.title}</div>
+                    <div style={{ fontSize: 13.5, fontWeight: 300, color: '#5A4A3A', lineHeight: 1.75 }}>{step.description}</div>
                   </div>
                 </div>
               ))}
@@ -498,37 +781,57 @@ export default async function TreatmentPage({ params }) {
         </section>
       )}
 
-      {/* BENEFITS */}
-      {t.benefits?.length > 0 && (
-        <section style={{ padding: '64px 20px', background: '#FAF7F2' }}>
-          <div style={{ maxWidth: 900, margin: '0 auto' }}>
-            <span className="eyebrow">Results</span>
-            <h2 style={{ fontWeight: 500, marginBottom: 32 }}>What you can expect</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 14 }}>
-              {t.benefits.map((b, i) => (
-                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '16px 18px', background: '#fff', borderRadius: 12, border: '1.5px solid rgba(26,17,9,0.09)' }}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4A6741" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span style={{ fontSize: 13.5, fontWeight: 400, color: 'var(--text)' }}>{b}</span>
+      {/* ── 8 + 9. PREPARATION & AFTERCARE ── */}
+      {(t.preparation?.length > 0 || t.aftercare) && (
+        <section style={{ padding: '72px 20px', background: 'var(--cream)' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48 }}>
+            {t.preparation?.length > 0 && (
+              <div>
+                <span className="eyebrow">Before Your Session</span>
+                <h2 style={{ fontWeight: 500, marginBottom: 22 }}>Preparation before treatment</h2>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {t.preparation.map((step, i) => (
+                    <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', padding: '14px 16px', background: '#fff', borderRadius: 12, border: '1.5px solid rgba(26,17,9,0.08)' }}>
+                      <span style={{ width: 22, height: 22, borderRadius: '50%', background: '#F5EDE4', color: '#B8916A', fontSize: 11, fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{i + 1}</span>
+                      <span style={{ fontSize: 13.5, fontWeight: 300, color: '#4A3728', lineHeight: 1.65 }}>{step}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            )}
+            {t.aftercare && (
+              <div>
+                <span className="eyebrow">After Your Session</span>
+                <h2 style={{ fontWeight: 500, marginBottom: 22 }}>Recovery & Aftercare</h2>
+                <div style={{ fontSize: 14, fontWeight: 300, color: '#4A3728', lineHeight: 1.85, background: '#fff', borderRadius: 16, padding: '24px', border: '1.5px solid rgba(26,17,9,0.08)', marginBottom: 16 }}>{t.aftercare}</div>
+                <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                  {t.meta?.Recovery && <span style={{ background: '#E8F5E9', borderRadius: 8, padding: '8px 14px', fontSize: 12.5, fontWeight: 400, color: '#2E7D32' }}>Recovery: {t.meta.Recovery}</span>}
+                  {t.meta?.Results && <span style={{ background: '#E3F2FD', borderRadius: 8, padding: '8px 14px', fontSize: 12.5, fontWeight: 400, color: '#1565C0' }}>Results: {t.meta.Results}</span>}
+                </div>
+              </div>
+            )}
           </div>
         </section>
       )}
 
-      {/* BEFORE & AFTER */}
-      <section style={{ padding: '64px 20px', background: '#fff' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto' }}>
+      {/* ── 10. RESULTS & BEFORE/AFTER ── */}
+      <section style={{ padding: '72px 20px', background: '#fff' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <span className="eyebrow">Real Results</span>
-          <h2 style={{ fontWeight: 500, marginBottom: 32 }}>Before & After</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 20 }}>
+          <h2 style={{ fontWeight: 500, marginBottom: 10 }}>What results can you expect?</h2>
+          {t.meta?.Results && (
+            <p style={{ fontSize: 14, fontWeight: 300, color: '#5A4A3A', marginBottom: 32, maxWidth: 560 }}>
+              Most patients see {t.meta.Results.toLowerCase()} results. Individual outcomes vary based on skin type, concern severity, and adherence to aftercare.
+            </p>
+          )}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 20, marginBottom: 32 }}>
             {[1, 2, 3].map(i => (
               <div key={i} style={{ background: '#FAF7F2', borderRadius: 16, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.08)' }}>
-                <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', height: 200, background: '#F0E8DF' }}>
+                <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', height: 210, background: '#F0E8DF' }}>
                   <div style={{ background: '#E2D8CE', display: 'flex', alignItems: 'flex-end', padding: '10px' }}>
                     <span style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(255,255,255,0.85)', color: '#4A3728', padding: '4px 8px', borderRadius: 4 }}>Before</span>
                   </div>
-                  <div style={{ background: '#D4C9BC', display: 'flex', alignItems: 'flex-end', padding: '10px', justifyContent: 'flex-end' }}>
+                  <div style={{ background: '#C8BDB0', display: 'flex', alignItems: 'flex-end', padding: '10px', justifyContent: 'flex-end' }}>
                     <span style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(26,39,68,0.8)', color: '#FAF7F2', padding: '4px 8px', borderRadius: 4 }}>After</span>
                   </div>
                   <div style={{ position: 'absolute', left: '50%', top: 0, bottom: 0, width: 2, background: '#fff', transform: 'translateX(-50%)' }}>
@@ -538,47 +841,68 @@ export default async function TreatmentPage({ params }) {
                   </div>
                 </div>
                 <div style={{ padding: '14px 16px 18px' }}>
-                  <p style={{ fontSize: 12.5, fontWeight: 300, color: '#7A6A5A', margin: 0 }}>Patient result · {t.meta?.Sessions || '3 sessions'}</p>
-                  <p style={{ fontSize: 11, fontWeight: 300, color: '#B8A898', marginTop: 6 }}>Individual results may vary.</p>
+                  <p style={{ fontSize: 12.5, fontWeight: 400, color: '#5A4A3A', margin: 0 }}>Patient result · {t.meta?.Sessions || '3–6 sessions'}</p>
+                  <p style={{ fontSize: 11, fontWeight: 300, color: '#B8A898', marginTop: 4 }}>Individual results may vary.</p>
                 </div>
               </div>
             ))}
           </div>
-          <div style={{ textAlign: 'center', marginTop: 28 }}>
-            <Link href="/contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 400, color: '#1A2744', border: '1.5px solid rgba(26,39,68,0.2)', padding: '11px 24px', borderRadius: 999, textDecoration: 'none' }}>
-              Book a consultation to see what's possible for you →
+          <div style={{ textAlign: 'center' }}>
+            <Link href="/before-after" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 400, color: '#1A2744', border: '1.5px solid rgba(26,39,68,0.2)', padding: '11px 24px', borderRadius: 999, textDecoration: 'none' }}>
+              View full Before & After gallery →
             </Link>
           </div>
         </div>
       </section>
 
-      {/* DOCTOR NOTE */}
-      <section style={{ padding: '56px 20px' }}>
+      {/* ── 11. RISKS & SIDE EFFECTS ── */}
+      {t.risks?.length > 0 && (
+        <section style={{ padding: '72px 20px', background: '#FFFDF9' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <span className="eyebrow">Transparency</span>
+            <h2 style={{ fontWeight: 500, marginBottom: 12 }}>Risks & Side Effects</h2>
+            <p style={{ fontSize: 14, fontWeight: 300, color: '#5A4A3A', maxWidth: 600, lineHeight: 1.8, marginBottom: 28 }}>
+              At Tvak & Asthi, we believe in complete transparency. While {t.name} is a clinically established procedure, the following effects can occasionally occur:
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 12 }}>
+              {t.risks.map((risk, i) => (
+                <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', padding: '14px 16px', background: '#FFF8F3', borderRadius: 12, border: '1.5px solid rgba(184,145,106,0.2)' }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B8916A" strokeWidth="2" strokeLinecap="round" style={{ flexShrink: 0, marginTop: 1 }}><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  <span style={{ fontSize: 13.5, fontWeight: 300, color: '#4A3728', lineHeight: 1.65 }}>{risk}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── 12. DOCTOR NOTE ── */}
+      <section style={{ padding: '64px 20px', background: 'var(--cream)' }}>
         <div style={{ maxWidth: 900, margin: '0 auto', background: '#fff', borderRadius: 20, padding: '32px', border: '1.5px solid rgba(26,17,9,0.09)', display: 'grid', gridTemplateColumns: '80px 1fr', gap: 24, alignItems: 'start' }}>
-          <div style={{ width: 80, height: 80, borderRadius: '50%', background: '#E8DED4', flexShrink: 0 }} />
+          <div style={{ width: 80, height: 80, borderRadius: '50%', background: 'linear-gradient(135deg,#E8DED4,#D4C8BC)', flexShrink: 0 }} />
           <div>
             <div style={{ fontSize: 12, fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#B8916A', marginBottom: 8 }}>A note from Dr. Omaima</div>
-            <p style={{ fontSize: 14, fontWeight: 300, color: '#4A3728', lineHeight: 1.85, marginBottom: 16 }}>
-              "Every treatment at Tvak & Asthi is personally performed by me — not a therapist or technician. I believe in transparent medicine: I will tell you exactly what to expect, how many sessions are realistic, and what results are achievable for your specific skin."
+            <p style={{ fontSize: 14.5, fontWeight: 300, color: '#4A3728', lineHeight: 1.9, marginBottom: 16, fontStyle: 'italic' }}>
+              "Every {t.name} treatment at Tvak & Asthi is personally performed by me — not a technician. I will give you an honest assessment of what results are genuinely achievable for your specific skin, and how many sessions are realistically needed."
             </p>
-            <div style={{ fontSize: 13, fontWeight: 500, color: 'var(--text)' }}>Dr. Omaima Jawed</div>
+            <div style={{ fontSize: 13.5, fontWeight: 500, color: 'var(--text)' }}>Dr. Omaima Jawed</div>
             <div style={{ fontSize: 12.5, fontWeight: 300, color: '#9A8A7A' }}>MBBS · Aesthetic Physician · 5 Years Experience</div>
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* ── 13. FAQ ── */}
       {t.faqs?.length > 0 && (
-        <section style={{ padding: '56px 20px' }}>
+        <section style={{ padding: '72px 20px', background: '#fff' }}>
           <div style={{ maxWidth: 720, margin: '0 auto' }}>
             <span className="eyebrow">FAQ</span>
-            <h2 style={{ fontWeight: 500, marginBottom: 28 }}>Common questions</h2>
+            <h2 style={{ fontWeight: 500, marginBottom: 32 }}>Frequently asked questions</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               {t.faqs.map((f, i) => (
-                <details key={i} style={{ background: '#fff', borderRadius: 12, border: '1.5px solid rgba(26,17,9,0.09)', overflow: 'hidden' }}>
-                  <summary style={{ padding: '18px 22px', fontSize: 14, fontWeight: 400, cursor: 'pointer', listStyle: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+                <details key={i} style={{ background: '#F9F6F2', borderRadius: 12, border: '1.5px solid rgba(26,17,9,0.07)', overflow: 'hidden' }}>
+                  <summary style={{ padding: '18px 22px', fontSize: 14, fontWeight: 400, cursor: 'pointer', listStyle: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, color: 'var(--text)' }}>
                     {f.question}
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B8916A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><path d="m6 9 6 6 6-6"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B8916A" strokeWidth="2" strokeLinecap="round" style={{ flexShrink: 0 }}><path d="m6 9 6 6 6-6"/></svg>
                   </summary>
                   <p style={{ margin: 0, padding: '4px 22px 20px', fontSize: 13.5, fontWeight: 300, color: '#4A3728', lineHeight: 1.8 }}>{f.answer}</p>
                 </details>
@@ -588,17 +912,60 @@ export default async function TreatmentPage({ params }) {
         </section>
       )}
 
-      {/* CTA */}
-      <section style={{ padding: '56px 20px', background: '#3B2210' }}>
+      {/* ── 14. RELATED TREATMENTS ── */}
+      {t.relatedTreatments?.length > 0 && (
+        <section style={{ padding: '72px 20px', background: 'var(--cream)' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <span className="eyebrow">You May Also Consider</span>
+            <h2 style={{ fontWeight: 500, marginBottom: 32 }}>Related Treatments</h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 16 }}>
+              {t.relatedTreatments.map((rt, i) => (
+                <Link key={i} href={`/treatments/${rt.slug}`} style={{ textDecoration: 'none' }}>
+                  <div style={{ background: '#fff', borderRadius: 14, padding: '22px 20px', border: '1.5px solid rgba(26,17,9,0.09)', height: '100%', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    <div style={{ fontSize: 14, fontWeight: 500, color: 'var(--text)' }}>{rt.name}</div>
+                    <div style={{ fontSize: 12, fontWeight: 300, color: '#B8916A', marginTop: 'auto' }}>Explore treatment →</div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── 15. PREVENTION TIPS ── */}
+      {t.preventionTips?.length > 0 && (
+        <section style={{ padding: '72px 20px', background: '#fff' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <span className="eyebrow">Maintain Your Results</span>
+            <h2 style={{ fontWeight: 500, marginBottom: 28 }}>Prevention & Maintenance Tips</h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 14 }}>
+              {t.preventionTips.map((tip, i) => (
+                <div key={i} style={{ display: 'flex', gap: 14, alignItems: 'flex-start', padding: '18px 20px', background: '#F9F6F2', borderRadius: 12, border: '1.5px solid rgba(26,17,9,0.07)' }}>
+                  <span style={{ width: 28, height: 28, borderRadius: '50%', background: '#E8F0E4', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4A6741" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  <span style={{ fontSize: 13.5, fontWeight: 300, color: '#4A3728', lineHeight: 1.7 }}>{tip}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── 16. BOOK CTA ── */}
+      <section style={{ padding: '80px 20px', background: '#3B2210' }}>
         <div style={{ maxWidth: 600, margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{ fontWeight: 500, color: '#FAF7F2', marginBottom: 10 }}>Book your {t.name} session</h2>
-          <p style={{ fontSize: 13.5, fontWeight: 300, color: '#C4A998', marginBottom: 28 }}>Speak with Dr. Omaima to find out if this treatment is right for your skin.</p>
+          <div style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#B8916A', marginBottom: 14 }}>Ready to start?</div>
+          <h2 style={{ fontWeight: 500, color: '#FAF7F2', marginBottom: 14 }}>Book your {t.name} consultation</h2>
+          <p style={{ fontSize: 14, fontWeight: 300, color: '#C4A998', marginBottom: 36 }}>
+            Speak directly with Dr. Omaima to find out if {t.name} is right for your skin. All consultations are medical-grade and personalised.
+          </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/contact" style={{ background: '#C4847E', color: '#fff', fontSize: 13, fontWeight: 400, padding: '13px 32px', borderRadius: 999, textDecoration: 'none' }}>Book Consultation</Link>
-            <a href="https://wa.me/919811997993" target="_blank" rel="noopener" style={{ background: 'rgba(255,255,255,0.1)', color: '#FAF7F2', fontSize: 13, fontWeight: 400, padding: '13px 32px', borderRadius: 999, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }}>WhatsApp Us</a>
+            <Link href="/contact" style={{ background: '#C4847E', color: '#fff', fontSize: 13.5, fontWeight: 400, padding: '14px 32px', borderRadius: 999, textDecoration: 'none' }}>Book Consultation</Link>
+            <a href="https://wa.me/919811997993" target="_blank" rel="noopener" style={{ background: 'rgba(255,255,255,0.1)', color: '#FAF7F2', fontSize: 13.5, fontWeight: 400, padding: '14px 32px', borderRadius: 999, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }}>WhatsApp Us</a>
           </div>
         </div>
       </section>
-    </div>
+    </article>
   )
 }
