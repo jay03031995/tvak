@@ -8,6 +8,8 @@ export async function generateStaticParams() {
     'acne','acne-scars','pigmentation','dull-skin','pores',
     'hair-fall','dandruff','hair-regrowth','unwanted-hair',
     'wrinkles','sagging','volume-loss','dark-circles',
+    'rosacea','sensitive-skin','moles','fungal-infections',
+    'skin-allergies','vitiligo','body-contouring',
   ].map(slug => ({ slug }))
   try {
     const concerns = await fetchConcerns()
@@ -224,6 +226,107 @@ const FALLBACK_CONCERNS = {
     treatments: [
       { name: 'Dermal Fillers', slug: { current: 'fillers' }, rating: 4.8, reviewCount: 210 },
       { name: 'Melasma Treatment', slug: { current: 'melasma' }, rating: 4.8, reviewCount: 290 },
+    ],
+  },
+  'rosacea': {
+    name: 'Rosacea', category: 'Skin & Face',
+    description: 'Rosacea is a chronic inflammatory skin condition causing persistent redness, visible blood vessels, and acne-like bumps on the face. It predominantly affects fair-skinned individuals and is often triggered by sun exposure, heat, spicy food, and stress. With the right medical management and laser treatment, rosacea can be well-controlled.',
+    tags: ['Facial redness', 'Flushing', 'Visible blood vessels', 'Acne-like bumps', 'Sensitive skin', 'Broken capillaries'],
+    approach: [
+      { step: 1, title: 'Rosacea Assessment', description: 'Dr. Omaima identifies your rosacea subtype (erythematotelangiectatic, papulopustular, or phymatous) as each requires a different treatment approach.' },
+      { step: 2, title: 'Trigger Identification', description: 'Common triggers including sun exposure, heat, alcohol, spicy foods, and skincare products are identified and managed through lifestyle advice.' },
+      { step: 3, title: 'Laser & Light Therapy', description: 'Vascular lasers target broken capillaries and visible blood vessels, reducing persistent redness and flushing significantly.' },
+      { step: 4, title: 'Medical Management', description: 'Topical and oral prescription medications reduce inflammation and control papulopustular rosacea during flare-ups.' },
+    ],
+    treatments: [
+      { name: 'Carbon Laser Facial', slug: { current: 'carbon-laser-facial' }, rating: 4.8, reviewCount: 320 },
+      { name: 'HydraFacial MD', slug: { current: 'hydrafacial-md' }, rating: 4.9, reviewCount: 410 },
+    ],
+  },
+  'sensitive-skin': {
+    name: 'Sensitive Skin', category: 'Skin & Face',
+    description: 'Sensitive skin is characterised by a weakened skin barrier that reacts easily to environmental triggers, products, and temperature changes. Symptoms include redness, stinging, burning, tightness, and frequent flushing. Strengthening the skin barrier with medical-grade treatments can significantly reduce sensitivity over time.',
+    tags: ['Easily irritated skin', 'Redness', 'Stinging', 'Burning', 'Tight skin', 'Reaction-prone'],
+    approach: [
+      { step: 1, title: 'Barrier Assessment', description: 'Dr. Omaima evaluates the integrity of your skin barrier, identifies triggers, and rules out underlying conditions such as rosacea or eczema.' },
+      { step: 2, title: 'Barrier Repair', description: 'Gentle treatments using ceramide-rich and barrier-repairing serums restore the skin\'s protective function and reduce reactivity.' },
+      { step: 3, title: 'Calming Procedures', description: 'HydraFacial and gentle chemical exfoliation using lactic acid improve skin texture without triggering sensitivity reactions.' },
+      { step: 4, title: 'Personalised Home Regime', description: 'A minimal, fragrance-free skincare routine is designed to strengthen the skin barrier and prevent future sensitisation.' },
+    ],
+    treatments: [
+      { name: 'HydraFacial MD', slug: { current: 'hydrafacial-md' }, rating: 4.9, reviewCount: 410 },
+      { name: 'Carbon Laser Facial', slug: { current: 'carbon-laser-facial' }, rating: 4.8, reviewCount: 320 },
+    ],
+  },
+  'moles': {
+    name: 'Moles', category: 'Skin & Face',
+    description: 'Moles are common pigmented skin growths that can be flat or raised, singular or multiple. While most moles are benign, some may change in appearance over time. At Tvak & Asthi, Dr. Omaima assesses and monitors moles, and can advise on removal options for cosmetic or medical reasons.',
+    tags: ['Pigmented moles', 'Raised moles', 'Flat moles', 'Atypical moles', 'Cosmetic removal'],
+    approach: [
+      { step: 1, title: 'Dermoscopic Examination', description: 'Dr. Omaima performs a thorough clinical examination to classify moles and assess whether any require biopsy or referral.' },
+      { step: 2, title: 'Risk Assessment', description: 'Moles showing the ABCDE signs (Asymmetry, Border, Colour, Diameter, Evolution) are assessed carefully and referred if needed.' },
+      { step: 3, title: 'Cosmetic Removal', description: 'Benign moles causing cosmetic concern can be removed using radiofrequency ablation or laser, leaving minimal scarring.' },
+      { step: 4, title: 'Post-removal Care', description: 'Scar management and sun protection are advised post-procedure to ensure the best cosmetic outcome.' },
+    ],
+    treatments: [
+      { name: 'Carbon Laser Facial', slug: { current: 'carbon-laser-facial' }, rating: 4.8, reviewCount: 320 },
+      { name: 'Melasma Treatment', slug: { current: 'melasma' }, rating: 4.8, reviewCount: 290 },
+    ],
+  },
+  'fungal-infections': {
+    name: 'Fungal Infections', category: 'Skin & Face',
+    description: 'Fungal skin infections including ringworm, tinea versicolor, athlete\'s foot, and nail fungus are common in India\'s warm, humid climate. They present as scaly, itchy, discoloured patches. Medical dermatology treatment with prescription antifungals clears infections effectively and prevents recurrence.',
+    tags: ['Ringworm', 'Tinea versicolor', 'Athlete\'s foot', 'Nail fungus', 'Itchy patches', 'Discolouration'],
+    approach: [
+      { step: 1, title: 'Clinical Diagnosis', description: 'Dr. Omaima confirms the fungal species and infection extent through clinical examination and, where needed, a skin scraping for microscopy.' },
+      { step: 2, title: 'Prescription Antifungals', description: 'Oral antifungal medications (fluconazole, itraconazole) combined with topical antifungal creams deliver rapid and complete clearance.' },
+      { step: 3, title: 'Lifestyle Guidance', description: 'Hygiene practices, clothing choices, and environmental factors contributing to recurrent infections are identified and managed.' },
+      { step: 4, title: 'Maintenance', description: 'A maintenance plan prevents relapse, particularly for chronic nail fungus or recurrent tinea versicolor.' },
+    ],
+    treatments: [
+      { name: 'HydraFacial MD', slug: { current: 'hydrafacial-md' }, rating: 4.9, reviewCount: 410 },
+    ],
+  },
+  'skin-allergies': {
+    name: 'Skin Allergies', category: 'Skin & Face',
+    description: 'Skin allergies including contact dermatitis, urticaria (hives), and atopic eczema cause redness, itching, swelling, and rashes. They are triggered by food, medications, environmental allergens, or direct contact with irritants. Medical management with antihistamines and topical steroids provides relief while allergen identification prevents recurrence.',
+    tags: ['Contact dermatitis', 'Hives', 'Eczema', 'Itchy rash', 'Skin swelling', 'Allergen reactions'],
+    approach: [
+      { step: 1, title: 'Allergen Identification', description: 'A detailed history and patch testing identify the specific triggers — whether food, cosmetic ingredients, metals, or environmental allergens.' },
+      { step: 2, title: 'Immediate Relief', description: 'Antihistamines, topical corticosteroids, and calamine formulations rapidly reduce itching, swelling, and redness during acute flare-ups.' },
+      { step: 3, title: 'Barrier Repair', description: 'Gentle barrier-repairing moisturisers reduce skin reactivity and prevent future allergic responses.' },
+      { step: 4, title: 'Trigger Avoidance Plan', description: 'Dr. Omaima designs a practical trigger avoidance strategy tailored to your lifestyle to minimise future reactions.' },
+    ],
+    treatments: [
+      { name: 'HydraFacial MD', slug: { current: 'hydrafacial-md' }, rating: 4.9, reviewCount: 410 },
+    ],
+  },
+  'vitiligo': {
+    name: 'Vitiligo / Leucoderma', category: 'Skin & Face',
+    description: 'Vitiligo is an autoimmune condition causing progressive depigmentation of the skin in patches. It affects all skin tones but is more visible and emotionally distressing in darker Indian skin. Medical treatment can halt progression and restore pigment in many cases, especially when started early.',
+    tags: ['Depigmented patches', 'White patches', 'Autoimmune skin condition', 'Leucoderma', 'Pigment loss'],
+    approach: [
+      { step: 1, title: 'Assessment & Staging', description: 'Dr. Omaima assesses the extent, activity, and duration of vitiligo to determine whether it is stable (suitable for surgical restoration) or active (requiring medical stabilisation first).' },
+      { step: 2, title: 'Medical Stabilisation', description: 'Topical immunomodulators, oral immunosuppressants, and narrow-band UVB phototherapy halt the autoimmune attack on melanocytes.' },
+      { step: 3, title: 'Repigmentation', description: 'Once stable, repigmentation is accelerated with targeted phototherapy, topical prostaglandins, and micro-needling into depigmented patches.' },
+      { step: 4, title: 'Surgical Restoration', description: 'For stable, refractory vitiligo, surgical melanocyte transfer or suction blister grafting can restore pigment in resistant patches.' },
+    ],
+    treatments: [
+      { name: 'Melasma Treatment', slug: { current: 'melasma' }, rating: 4.8, reviewCount: 290 },
+    ],
+  },
+  'body-contouring': {
+    name: 'Body Contouring & Unwanted Fat', category: 'Skin & Face',
+    description: 'Non-surgical body contouring treatments target stubborn fat deposits that are resistant to diet and exercise. Modern technology allows targeted fat reduction and skin tightening without surgery, downtime, or anaesthesia — ideal for areas like the abdomen, flanks, thighs, and double chin.',
+    tags: ['Stubborn fat', 'Love handles', 'Double chin', 'Belly fat', 'Skin laxity', 'Non-surgical slimming'],
+    approach: [
+      { step: 1, title: 'Body Analysis', description: 'Dr. Omaima performs a body composition assessment and identifies target areas where fat deposits are resistant to lifestyle interventions.' },
+      { step: 2, title: 'Cryolipolysis', description: 'Controlled cooling destroys fat cells in targeted areas without damaging surrounding tissue. Results develop over 4–12 weeks as the body eliminates destroyed fat cells.' },
+      { step: 3, title: 'HIFU / Radiofrequency', description: 'High-intensity focused ultrasound tightens skin laxity that may accompany fat loss, providing a smoother contoured result.' },
+      { step: 4, title: 'Maintenance', description: 'A healthy diet and exercise plan is advised alongside treatment to maintain and enhance results long-term.' },
+    ],
+    treatments: [
+      { name: 'Dermal Fillers', slug: { current: 'fillers' }, rating: 4.8, reviewCount: 210 },
     ],
   },
 }

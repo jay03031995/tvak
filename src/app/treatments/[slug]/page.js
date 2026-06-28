@@ -4,8 +4,20 @@ import { fetchTreatment, fetchTreatments } from '@/sanity/client'
 export const revalidate = 60
 
 export async function generateStaticParams() {
-  const treatments = await fetchTreatments().catch(() => [])
-  return treatments.map(t => ({ slug: t.slug?.current }))
+  const base = [
+    'hydrafacial-md', 'carbon-laser-facial', 'prp-hair', 'gfc-hair', 'chemical-peel',
+    'microneedling', 'dermal-fillers', 'botox', 'laser-hair', 'acne-treatment',
+    'laser-tattoo-removal', 'exosomes-face', 'micro-mesotherapy', 'cold-laser-therapy',
+    'scalp-micro-pigmentation', 'lip-enhancement', 'cheek-enhancement', 'chin-enhancement',
+    'nose-enhancement', 'cryolipolysis', 'hifu', 'intragen', 'vanquish', 'bio-re-peel',
+  ].map(slug => ({ slug }))
+  const sanity = await fetchTreatments().catch(() => [])
+  const sanityParams = sanity
+    .filter(t => t.slug?.current)
+    .map(t => ({ slug: t.slug.current }))
+  const seen = new Set(base.map(p => p.slug))
+  sanityParams.forEach(p => { if (!seen.has(p.slug)) base.push(p) })
+  return base
 }
 
 export async function generateMetadata({ params }) {
@@ -175,6 +187,235 @@ const FALLBACK_TREATMENTS = {
       { question: 'Is GFC better than PRP?', answer: 'Clinical studies show GFC produces superior hair density improvement with fewer sessions. For patients who want the best possible outcome, GFC is our first recommendation.' },
       { question: 'How many sessions do I need?', answer: 'Three monthly sessions form the primary course. A maintenance session every 6 months is recommended thereafter.' },
       { question: 'Can GFC be combined with PRP?', answer: 'Some patients alternate between GFC primary sessions and PRP maintenance sessions as a cost-effective strategy. Dr. Omaima will advise based on your response and goals.' },
+    ],
+  },
+  'laser-tattoo-removal': {
+    name: 'Laser Tattoo Removal', category: 'Skin & Glow', tagline: 'Safe tattoo fading & removal',
+    description: 'Laser tattoo removal uses Q-switched Nd:YAG laser technology to break down tattoo ink particles into fragments small enough for the immune system to eliminate. Multiple sessions are required depending on tattoo size, ink colour, age, and depth. Our laser is safe for Indian skin tones.',
+    meta: { Duration: '15–45 min', Sessions: '6–12 sessions', Recovery: '2–5 days healing', Results: 'Progressive fading' },
+    howItWorks: [
+      { step: 1, title: 'Tattoo Assessment', description: 'Dr. Omaima evaluates ink colours, depth, age, and skin tone to estimate the number of sessions required and set realistic expectations.' },
+      { step: 2, title: 'Laser Treatment', description: 'Q-switched Nd:YAG laser pulses break ink pigment into tiny particles. Black and dark blue inks respond fastest; greens and yellows take more sessions.' },
+      { step: 3, title: 'Immune Clearance', description: 'The body\'s lymphatic system gradually eliminates the fragmented ink particles over 6–8 weeks between sessions.' },
+      { step: 4, title: 'Progressive Fading', description: 'Each session delivers further fading. Complete removal depends on ink depth and colours but most tattoos can be significantly lightened or cleared.' },
+    ],
+    benefits: ['Gradual, safe removal', 'Safe for Indian skin tones', 'Minimal scarring risk', 'Can lighten for cover-up', 'Treats all tattoo colours', 'No permanent marks'],
+    faqs: [
+      { question: 'How many sessions will I need?', answer: 'Amateur tattoos typically need 4–6 sessions; professional tattoos need 8–12. Black ink responds fastest. Dr. Omaima will estimate based on your tattoo.' },
+      { question: 'Does it hurt?', answer: 'The procedure feels like a rubber band snapping against the skin. Topical numbing cream is applied before treatment. A cold air device also helps during the session.' },
+      { question: 'Will it leave a scar?', answer: 'When performed correctly, laser tattoo removal should not scar. Following aftercare instructions — keeping the area clean, avoiding sun, and not picking — is critical.' },
+      { question: 'How long between sessions?', answer: 'Sessions are spaced 6–8 weeks apart to allow the immune system to clear broken-down ink and for the skin to fully heal.' },
+    ],
+  },
+  'exosomes-face': {
+    name: 'Exosomes Face Treatment', category: 'Hair Restoration', tagline: 'Next-gen skin & hair regeneration',
+    description: 'Exosomes are nano-sized vesicles derived from stem cells that carry powerful growth factors, proteins, and genetic signalling molecules. When applied to the skin or scalp, they trigger cellular regeneration, collagen synthesis, and hair follicle activation — representing the cutting edge of regenerative aesthetics.',
+    meta: { Duration: '45–60 min', Sessions: '3–4 sessions', Recovery: 'None', Results: '4–8 weeks' },
+    howItWorks: [
+      { step: 1, title: 'Skin Preparation', description: 'The skin is cleansed and optionally micro-needled to create micro-channels that maximise exosome penetration into the dermis or scalp.' },
+      { step: 2, title: 'Exosome Application', description: 'Purified exosome solution is applied topically or injected into the treatment area, delivering concentrated regenerative signals directly to target cells.' },
+      { step: 3, title: 'Cellular Signalling', description: 'Exosomes communicate with skin cells and hair follicles, triggering collagen production, anti-inflammatory responses, and stem cell activation.' },
+      { step: 4, title: 'Progressive Regeneration', description: 'Skin texture, hydration, and elasticity improve over 4–8 weeks. For hair, follicle reactivation is visible at 3–4 months.' },
+    ],
+    benefits: ['Superior to PRP in growth factor concentration', 'Anti-inflammatory & regenerative', 'Improves skin texture and glow', 'Stimulates hair follicles', 'No downtime', 'Safe for all skin types'],
+    faqs: [
+      { question: 'How are exosomes different from PRP?', answer: 'Exosomes are much smaller than platelets and carry a more targeted payload of growth factors and genetic signals. They have stronger regenerative effects with less inflammation than PRP.' },
+      { question: 'Is this treatment for face or hair?', answer: 'Exosomes work for both. Facial exosome treatment improves skin quality, elasticity, and radiance. Scalp exosome treatment stimulates dormant hair follicles for regrowth.' },
+      { question: 'How many sessions are needed?', answer: 'Three to four sessions spaced 4 weeks apart give optimal initial results. A maintenance session every 6 months is recommended.' },
+    ],
+  },
+  'micro-mesotherapy': {
+    name: 'Micro-Mesotherapy', category: 'Hair Restoration', tagline: 'Micronutrient scalp & skin infusion',
+    description: 'Micro-mesotherapy delivers a customised cocktail of vitamins, minerals, amino acids, hyaluronic acid, and growth factors directly into the mesoderm (middle layer) of skin or scalp using a series of micro-injections. It nourishes hair follicles, hydrates skin, and stimulates cellular renewal at a targeted depth.',
+    meta: { Duration: '30–45 min', Sessions: '4–6 sessions', Recovery: 'None', Results: '4–6 weeks' },
+    howItWorks: [
+      { step: 1, title: 'Bespoke Cocktail Design', description: 'Dr. Omaima selects a targeted mesotherapy cocktail based on your hair loss pattern, skin type, or specific deficiencies identified during consultation.' },
+      { step: 2, title: 'Micro-injection Delivery', description: 'A fine meso-gun or manual technique delivers the cocktail into the scalp or skin at precise depths of 1–4mm for maximum absorption.' },
+      { step: 3, title: 'Follicle & Cell Nourishment', description: 'Micronutrients directly feed hair follicles and skin cells, improving circulation, reducing inflammation, and stimulating collagen and keratin production.' },
+      { step: 4, title: 'Progressive Improvement', description: 'Hair fall reduces noticeably from session 3. Skin hydration, glow, and firmness improve progressively with each session.' },
+    ],
+    benefits: ['Customised to individual needs', 'Directly targets hair follicles', 'Improves scalp circulation', 'Boosts skin hydration', 'Minimal discomfort', 'Safe for all hair types'],
+    faqs: [
+      { question: 'Is mesotherapy the same as PRP?', answer: 'No — mesotherapy uses a pharmaceutical cocktail of vitamins and growth factors, while PRP uses your own blood-derived platelets. They can be combined for enhanced results.' },
+      { question: 'Is it painful?', answer: 'The needles used are very fine. Most patients experience mild pinprick sensations. Numbing cream can be applied beforehand if preferred.' },
+    ],
+  },
+  'cold-laser-therapy': {
+    name: 'Cold Laser Therapy (LLLT)', category: 'Hair Restoration', tagline: 'Low-level laser for hair & skin',
+    description: 'Low-Level Laser Therapy (LLLT) uses specific wavelengths of red or near-infrared light to stimulate cellular activity without generating heat. For hair loss, it increases blood flow to hair follicles and stimulates the anagen (growth) phase. For skin, it accelerates wound healing and reduces inflammation.',
+    meta: { Duration: '20–30 min', Sessions: '12–16 sessions', Recovery: 'None', Results: '3–6 months' },
+    howItWorks: [
+      { step: 1, title: 'Device Application', description: 'A cold laser device emitting 630–670nm red light is applied to the scalp or skin. No heat is generated — the therapy is completely painless.' },
+      { step: 2, title: 'Photobiomodulation', description: 'Laser photons are absorbed by mitochondria in hair follicle cells, increasing ATP (energy) production and cellular metabolism.' },
+      { step: 3, title: 'Follicle Stimulation', description: 'Improved cellular energy extends the anagen growth phase and increases scalp blood flow, leading to thicker and more numerous hairs over time.' },
+      { step: 4, title: 'Cumulative Results', description: 'Results build over months. Cold laser works best as a standalone treatment for mild-moderate hair loss or in combination with PRP/GFC.' },
+    ],
+    benefits: ['Completely painless', 'No downtime', 'Safe for all skin types', 'Stimulates hair growth cycle', 'Reduces shedding', 'Can combine with PRP or GFC'],
+    faqs: [
+      { question: 'Is it effective on its own?', answer: 'Cold laser is effective for mild to moderate androgenetic alopecia. For best results, Dr. Omaima often combines it with PRP or GFC therapy.' },
+      { question: 'How many sessions are needed?', answer: 'A course of 12–16 sessions (2 per week for 8 weeks) forms the primary treatment. Maintenance sessions every 2–4 weeks are recommended thereafter.' },
+    ],
+  },
+  'scalp-micro-pigmentation': {
+    name: 'Scalp Micro Pigmentation (SMP)', category: 'Hair Restoration', tagline: 'Hair follicle tattoo for density illusion',
+    description: 'Scalp Micro Pigmentation is a specialised cosmetic tattooing technique that replicates the appearance of shaved hair follicles on the scalp. It creates the illusion of density, fills hairline recessions, and camouflages scars — making it ideal for patients with advanced baldness or alopecia who want an immediate, long-lasting solution.',
+    meta: { Duration: '3–5 hours / session', Sessions: '2–3 sessions', Recovery: '5–7 days', Results: 'Immediate, lasts 3–5 years' },
+    howItWorks: [
+      { step: 1, title: 'Design & Consultation', description: 'Dr. Omaima designs the hairline and density pattern to match your face shape, existing hair, and personal preference. The design is agreed before any procedure begins.' },
+      { step: 2, title: 'Pigment Application', description: 'Medical-grade pigments are deposited into the scalp using a specialised micro-needle at precise depths to replicate natural follicle dots.' },
+      { step: 3, title: 'Multiple Sessions', description: 'Two to three sessions build layered pigment depth for a natural, realistic result. Each session refines and adds density.' },
+      { step: 4, title: 'Fading & Maintenance', description: 'SMP fades gradually over 3–5 years. A single maintenance session restores colour and sharpness as needed.' },
+    ],
+    benefits: ['Immediate visible result', 'Works for all baldness grades', 'Covers scars and alopecia patches', 'No surgery or downtime', 'Natural, realistic appearance', 'Long-lasting 3–5 years'],
+    faqs: [
+      { question: 'Does SMP look natural?', answer: 'When performed by a skilled practitioner, SMP is indistinguishable from a closely shaved head. Pigment selection and dot placement are critical for a realistic result.' },
+      { question: 'Is it suitable for women?', answer: 'Yes — SMP can increase the appearance of hair density in women with diffuse thinning, creating the illusion of a fuller scalp.' },
+      { question: 'Does it hurt?', answer: 'Topical numbing cream is applied before the session. Most patients experience mild discomfort, similar to a traditional tattoo.' },
+    ],
+  },
+  'lip-enhancement': {
+    name: 'Lip Enhancement', category: 'Anti-Ageing', tagline: 'Fuller, defined, naturally beautiful lips',
+    description: 'Lip enhancement using hyaluronic acid fillers adds volume, definition, and symmetry to the lips without an artificial appearance. From subtle hydration to significant augmentation, Dr. Omaima tailors every lip treatment to your facial proportions and personal goals — prioritising a natural, kissable result.',
+    meta: { Duration: '30–45 min', Sessions: '1 session', Recovery: '24–48 hrs mild swelling', Results: 'Immediate, lasts 9–12 months' },
+    howItWorks: [
+      { step: 1, title: 'Lip Design Consultation', description: 'Dr. Omaima assesses your lip anatomy, facial proportions, and goals. A lip design is sketched and agreed before treatment begins.' },
+      { step: 2, title: 'Numbing', description: 'Topical anaesthetic cream is applied for 20 minutes. Most fillers also contain built-in lidocaine for comfort throughout the procedure.' },
+      { step: 3, title: 'Filler Injection', description: 'Small amounts of soft hyaluronic acid filler are injected into specific lip zones (vermillion border, body, cupid\'s bow, corners) using a fine needle or cannula.' },
+      { step: 4, title: 'Moulding & Review', description: 'The filler is gently moulded to achieve symmetry. A 2-week review is included to assess results and add touch-up if needed.' },
+    ],
+    benefits: ['Immediate natural-looking fullness', 'Define lip border & cupid\'s bow', 'Correct lip asymmetry', 'Hydrated, plump appearance', 'Reversible with hyaluronidase', 'Lasts 9–12 months'],
+    faqs: [
+      { question: 'Will it look overdone?', answer: 'Dr. Omaima\'s philosophy is always natural enhancement. Conservative amounts are used, and the 2-week review allows for gradual build-up to your desired result.' },
+      { question: 'How long does swelling last?', answer: 'Mild swelling and bruising typically resolve within 24–72 hours. Final results are fully visible at 2 weeks.' },
+      { question: 'Is it reversible?', answer: 'Yes — hyaluronic acid fillers can be dissolved with hyaluronidase at any time if you\'re unhappy with the result.' },
+    ],
+  },
+  'cheek-enhancement': {
+    name: 'Cheek Enhancement', category: 'Anti-Ageing', tagline: 'Lift, contour & restore cheek volume',
+    description: 'Cheek enhancement using dermal fillers restores the mid-face volume lost with ageing, creating a lifted, youthful facial contour. Strategic filler placement in the cheeks also indirectly lifts nasolabial folds and jowls, providing a natural non-surgical facelift effect.',
+    meta: { Duration: '30–45 min', Sessions: '1 session', Recovery: '24–48 hrs mild swelling', Results: 'Immediate, lasts 12–18 months' },
+    howItWorks: [
+      { step: 1, title: 'Facial Analysis', description: 'Dr. Omaima assesses cheekbone structure, volume distribution, and the degree of mid-face deflation to plan precise filler placement.' },
+      { step: 2, title: 'Topical Numbing', description: 'Anaesthetic cream is applied for patient comfort. The fillers used also contain lidocaine to minimise discomfort during injection.' },
+      { step: 3, title: 'Filler Placement', description: 'Premium hyaluronic acid filler is placed at the correct supraperiosteal plane (above the cheekbone) using a cannula for safety and natural lift.' },
+      { step: 4, title: 'Sculpting & Assessment', description: 'The filler is sculpted for symmetry and the overall facial result is assessed before completing the procedure.' },
+    ],
+    benefits: ['Restores youthful mid-face volume', 'Creates natural cheekbone definition', 'Indirectly lifts nasolabial folds', 'Immediate result', 'Lasts 12–18 months', 'Safe, reversible procedure'],
+    faqs: [
+      { question: 'How much filler do cheeks need?', answer: 'Typically 1–2ml per side depending on the degree of volume loss. Dr. Omaima always recommends starting conservatively and building up at a review.' },
+      { question: 'Will it look natural?', answer: 'When placed correctly on the bone, cheek filler looks completely natural and does not create an artificial puffiness.' },
+    ],
+  },
+  'chin-enhancement': {
+    name: 'Chin Enhancement', category: 'Anti-Ageing', tagline: 'Define your jawline non-surgically',
+    description: 'Chin enhancement with dermal fillers projects and defines a weak or recessed chin, improving facial balance and profile. A well-projected chin also makes the jawline appear more defined and the neck slimmer — without surgery, anaesthesia, or significant downtime.',
+    meta: { Duration: '20–30 min', Sessions: '1 session', Recovery: '24–48 hrs mild swelling', Results: 'Immediate, lasts 12–18 months' },
+    howItWorks: [
+      { step: 1, title: 'Profile Analysis', description: 'Dr. Omaima analyses the chin from frontal and lateral views to assess the degree of projection needed for ideal facial balance.' },
+      { step: 2, title: 'Structural Filler Injection', description: 'A firmer hyaluronic acid filler is injected at the chin bone, providing structural support and projection similar to a surgical implant effect.' },
+      { step: 3, title: 'Profile Refinement', description: 'The chin shape is refined for symmetry and the desired degree of projection, checking the profile view throughout.' },
+      { step: 4, title: 'Review', description: 'A 2-week review checks for symmetry and allows for any refinement before results are finalised.' },
+    ],
+    benefits: ['Projects recessed chin', 'Defines jawline without surgery', 'Creates better facial balance', 'Immediate result', 'Lasts 12–18 months', 'Reversible'],
+    faqs: [
+      { question: 'Can it replace chin implant surgery?', answer: 'For moderate projection needs, chin filler provides excellent results without surgery. For significant projection requirements, surgical implants may give a more permanent result — Dr. Omaima will advise honestly.' },
+    ],
+  },
+  'nose-enhancement': {
+    name: 'Non-Surgical Nose Enhancement', category: 'Anti-Ageing', tagline: 'Reshape your nose without surgery',
+    description: 'Non-surgical rhinoplasty uses small amounts of dermal filler to smooth bumps, lift the nasal tip, straighten the nose, or improve symmetry — with immediate results and no surgical risk. It is an excellent option for patients who want to address a specific nasal concern without committing to rhinoplasty surgery.',
+    meta: { Duration: '20–30 min', Sessions: '1 session', Recovery: 'None to 24 hrs mild swelling', Results: 'Immediate, lasts 9–12 months' },
+    howItWorks: [
+      { step: 1, title: 'Nasal Assessment', description: 'Dr. Omaima evaluates the nasal anatomy and identifies specific areas for improvement — dorsal hump, nasal tip, bridge irregularities, or asymmetry.' },
+      { step: 2, title: 'Topical Numbing', description: 'Topical anaesthetic is applied before injection. The filler contains lidocaine for comfort during the procedure.' },
+      { step: 3, title: 'Precise Filler Placement', description: 'Small amounts of filler are placed at strategic points to disguise bumps, lift the tip, or improve nasal symmetry. The nasal area requires extreme precision due to blood vessel proximity.' },
+      { step: 4, title: 'Immediate Assessment', description: 'Results are visible immediately. Photographs are compared to confirm the desired improvement has been achieved.' },
+    ],
+    benefits: ['Immediate result', 'No surgery or anaesthesia', 'Corrects dorsal humps', 'Lifts drooping nasal tip', 'Improves symmetry', 'Reversible with hyaluronidase'],
+    faqs: [
+      { question: 'Is non-surgical rhinoplasty safe?', answer: 'The nose has a complex blood supply and requires an experienced injector. Dr. Omaima uses blunt cannulas and aspiration technique to minimise vascular risk.' },
+      { question: 'Can it make my nose smaller?', answer: 'Non-surgical rhinoplasty can create the illusion of a slimmer nose by camouflaging bumps and improving tip projection, but cannot physically reduce nose size.' },
+    ],
+  },
+  'cryolipolysis': {
+    name: 'Cool Shape Cryolipolysis', category: 'Laser & Devices', tagline: 'Freeze away stubborn fat non-surgically',
+    description: 'Cryolipolysis uses controlled cooling to selectively destroy fat cells in targeted areas. Fat cells are more sensitive to cold than surrounding tissue, so the treatment eliminates them while leaving skin and nerves unaffected. The body then gradually eliminates the destroyed fat cells over 4–12 weeks.',
+    meta: { Duration: '45–60 min / area', Sessions: '1–2 sessions per area', Recovery: 'None', Results: '4–12 weeks' },
+    howItWorks: [
+      { step: 1, title: 'Target Area Marking', description: 'Dr. Omaima marks the target fat deposit areas — typically abdomen, flanks, thighs, arms, or double chin — and selects appropriate applicator cups.' },
+      { step: 2, title: 'Cooling Application', description: 'The cryolipolysis applicator suctions the fat tissue and cools it to -9°C to -11°C, inducing controlled fat cell apoptosis (cell death).' },
+      { step: 3, title: 'Fat Cell Death', description: 'Chilled fat cells crystallise and trigger a natural cell death process (apoptosis) while surrounding tissue remains unaffected.' },
+      { step: 4, title: 'Lymphatic Elimination', description: 'Over 4–12 weeks, the immune system gradually eliminates dead fat cells through the lymphatic system, reducing fat layer thickness by 20–25%.' },
+    ],
+    benefits: ['20–25% fat reduction per treatment', 'No surgery or needles', 'Multiple areas treatable simultaneously', 'No downtime', 'Long-lasting results', 'Safe, FDA-cleared technology'],
+    faqs: [
+      { question: 'Is cryolipolysis a weight loss treatment?', answer: 'No — cryolipolysis is for targeting specific fat deposits that are resistant to diet and exercise. It is not a substitute for weight loss and works best when you are near your target weight.' },
+      { question: 'How many sessions are needed?', answer: 'Most patients see significant results from one session per area. A second session can enhance results further if desired.' },
+      { question: 'Is it painful?', answer: 'The first 5–10 minutes of cooling may cause intense cold, tingling, and pulling sensations. After that, the area numbs and most patients read or use their phone during treatment.' },
+    ],
+  },
+  'hifu': {
+    name: 'Ultralift — HIFU', category: 'Anti-Ageing', tagline: 'Non-surgical skin lifting & tightening',
+    description: 'High-Intensity Focused Ultrasound (HIFU) delivers focused ultrasound energy to the SMAS layer — the same layer targeted in surgical facelifts. This triggers collagen contraction and new collagen synthesis, providing a gradual, natural lifting and tightening effect on the face, neck, and brow without surgery.',
+    meta: { Duration: '60–90 min', Sessions: '1 session (annual)', Recovery: 'None to mild redness 24 hrs', Results: '3–6 months (progressive)' },
+    howItWorks: [
+      { step: 1, title: 'Facial Mapping', description: 'Dr. Omaima uses HIFU ultrasound imaging to map the tissue depth and identify the correct energy delivery planes for maximum lifting effect.' },
+      { step: 2, title: 'Energy Delivery', description: 'Focused ultrasound energy is delivered at precise depths of 1.5mm, 3mm, and 4.5mm — targeting superficial dermis, deep dermis, and SMAS layer respectively.' },
+      { step: 3, title: 'Thermal Coagulation', description: 'At each focal point, temperatures reach 60–70°C briefly, coagulating tissue and triggering an intense collagen repair response.' },
+      { step: 4, title: 'Progressive Lifting', description: 'New collagen forms and contracts over 3–6 months, producing visible lifting of the brow, jawline, cheeks, and neck. Results last 12–18 months.' },
+    ],
+    benefits: ['Lifts brow, cheeks, jawline, neck', 'Targets SMAS (surgical facelift layer)', 'Progressive, natural-looking result', 'No downtime', 'Single annual session', 'Safe, FDA-cleared technology'],
+    faqs: [
+      { question: 'How does HIFU compare to a surgical facelift?', answer: 'HIFU targets the same SMAS layer as a facelift but produces a more subtle, gradual improvement over months. It\'s ideal for patients with mild-moderate laxity who want to delay surgery.' },
+      { question: 'Is it painful?', answer: 'Some areas produce a brief intense heat sensation as energy is delivered. Dr. Omaima adjusts energy levels and can provide oral analgesia for sensitive patients.' },
+    ],
+  },
+  'bio-re-peel': {
+    name: 'Bio Re Peel', category: 'Skin & Glow', tagline: 'Advanced no-downtime chemical peel',
+    description: 'Bio Re Peel is an innovative biostimulating chemical peel that works at the dermal level without surface peeling. Its unique tricholoroacetic acid (TCA) formula combines a keratolytic phase with a biostimulating phase, improving skin texture, tone, pores, and acne scars — with no visible peeling or downtime.',
+    meta: { Duration: '30 min', Sessions: '4–6 sessions', Recovery: 'None (no visible peeling)', Results: '2–4 weeks' },
+    howItWorks: [
+      { step: 1, title: 'Skin Preparation', description: 'The skin is cleansed and degreased. A skin sensitivity assessment ensures the peel is safe and appropriate for your skin type.' },
+      { step: 2, title: 'Peel Application', description: 'Bio Re Peel solution is applied in two phases — first the keratolytic phase (TCA) penetrates the skin, then the biostimulating phase activates regenerative processes.' },
+      { step: 3, title: 'Penetration', description: 'Unlike traditional peels, Bio Re Peel works without visible surface peeling. Clients experience mild warmth during application and no significant discomfort.' },
+      { step: 4, title: 'Post-treatment Glow', description: 'Immediately after, skin looks brighter and smoother. Over the following days, continued collagen synthesis and cell turnover improve texture progressively.' },
+    ],
+    benefits: ['No visible peeling or downtime', 'Safe for all skin tones', 'Improves acne scars', 'Reduces pore size', 'Boosts collagen synthesis', 'Immediate brightening effect'],
+    faqs: [
+      { question: 'If there is no peeling, how does it work?', answer: 'Bio Re Peel works at the dermal level, stimulating collagen and accelerating cell renewal without damaging the surface epidermis enough to cause visible peeling.' },
+      { question: 'Is it suitable for dark Indian skin?', answer: 'Yes — because it avoids surface peeling, the risk of post-inflammatory hyperpigmentation (PIH) is significantly lower than traditional TCA peels.' },
+    ],
+  },
+  'intragen': {
+    name: 'Intragen Radiofrequency', category: 'Anti-Ageing', tagline: 'Deep RF for skin tightening & hair growth',
+    description: 'Intragen is a professional radiofrequency technology that delivers multi-polar RF energy to heat the deep dermis and stimulate collagen contraction and new synthesis. For the scalp, it improves blood circulation and follicle health. For the face, it tightens skin and reduces fine lines.',
+    meta: { Duration: '45–60 min', Sessions: '4–6 sessions', Recovery: 'None', Results: '4–8 weeks' },
+    howItWorks: [
+      { step: 1, title: 'RF Energy Application', description: 'Multi-polar radiofrequency energy is delivered through an applicator handpiece, heating the deep dermis to 40–42°C — the optimal temperature for collagen stimulation.' },
+      { step: 2, title: 'Collagen Contraction', description: 'Existing collagen fibres contract immediately under heat, producing an immediate tightening effect visible even after the first session.' },
+      { step: 3, title: 'New Collagen Synthesis', description: 'The thermal stimulus triggers fibroblasts to produce new collagen over 4–8 weeks, progressively tightening and firming the skin.' },
+      { step: 4, title: 'Scalp Stimulation', description: 'On the scalp, Intragen improves blood microcirculation and follicle oxygenation, supporting hair growth and reducing shedding.' },
+    ],
+    benefits: ['Tightens skin without surgery', 'Improves scalp circulation for hair growth', 'Immediate visible result', 'No downtime', 'Progressive collagen improvement', 'Comfortable, warming sensation'],
+    faqs: [
+      { question: 'Is Intragen safe for all skin tones?', answer: 'Yes — radiofrequency is colour-blind and safe for all Fitzpatrick skin types including darker Indian skin tones.' },
+      { question: 'How many sessions for visible results?', answer: 'Most patients notice results from session 2–3. A full course of 4–6 sessions gives optimal results, with improvement continuing for 3 months after the last session.' },
+    ],
+  },
+  'vanquish': {
+    name: 'VANQUISH Body Contouring', category: 'Laser & Devices', tagline: 'Contactless fat reduction technology',
+    description: 'VANQUISH uses selective radiofrequency energy to heat and destroy subcutaneous fat cells without any contact with the body. Its large panel heats a wide area simultaneously, making it ideal for treating the full abdomen or flanks in a single session. It is a comfortable, completely non-invasive fat reduction treatment.',
+    meta: { Duration: '45 min', Sessions: '4–6 sessions', Recovery: 'None', Results: '4–8 weeks' },
+    howItWorks: [
+      { step: 1, title: 'Non-Contact Energy Delivery', description: 'The VANQUISH panel is positioned 1–2cm above the treatment area without touching the skin, delivering uniform RF energy across the full treatment zone.' },
+      { step: 2, title: 'Selective Fat Heating', description: 'RF energy selectively heats fat cells to 45°C while the skin surface remains below 42°C, sparing skin and surrounding tissue.' },
+      { step: 3, title: 'Fat Cell Apoptosis', description: 'Heat-stressed fat cells undergo programmed cell death (apoptosis) over the days following treatment.' },
+      { step: 4, title: 'Gradual Elimination', description: 'Dead fat cells are removed by the lymphatic system over 4–8 weeks, reducing fat layer thickness and improving abdominal contour.' },
+    ],
+    benefits: ['Contactless — completely comfortable', 'Large area treatment in one session', 'No downtime', 'Reduces abdominal fat', 'Progressive results over weeks', 'Suitable for most body types'],
+    faqs: [
+      { question: 'Does VANQUISH hurt?', answer: 'No — VANQUISH produces a comfortable warming sensation throughout the treatment. No contact means no pressure, suction, or discomfort.' },
+      { question: 'How much fat does it remove?', answer: 'On average 3–5cm of circumference reduction is seen after a full course of 4–6 sessions. Results vary based on starting fat thickness.' },
     ],
   },
   'laser-hair': {
