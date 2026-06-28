@@ -5,6 +5,9 @@ import concern from './concern'
 import doctor from './doctor'
 import aboutPage from './aboutPage'
 import contactPage from './contactPage'
+import beforeAfter from './beforeAfter'
+import testimonial from './testimonial'
+import clinic from './clinic'
 
 export const schemaTypes = [
   siteSettings,
@@ -14,4 +17,7 @@ export const schemaTypes = [
   doctor,
   aboutPage,
   contactPage,
+  beforeAfter,
+  testimonial,
+  clinic,
 ]

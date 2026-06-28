@@ -12,6 +12,7 @@ export default defineType({
       options: { list: ['Skin & Face', 'Hair & Scalp', 'Anti-Ageing'] }
     }),
     defineField({ name: 'description', title: 'Description', type: 'text', rows: 4 }),
+    defineField({ name: 'iconColor', title: 'Icon Color (hex, e.g. #E05A5A)', type: 'string' }),
     defineField({ name: 'iconBg', title: 'Icon Background Color (hex, e.g. #FFF0EE)', type: 'string' }),
     defineField({
       name: 'tags', title: 'Sub-types / Tags', type: 'array',
