@@ -89,8 +89,22 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="hero-imgs" style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-            {[1, 2, 3, 4].map(i => (
-              <div key={i} style={{ borderRadius: 16, overflow: 'hidden', background: '#E8DED4', aspectRatio: i === 1 || i === 4 ? '3/4' : '1/1' }} />
+            {[
+              { img: hero.mainImage, ratio: '3/4' },
+              { img: hero.image2,    ratio: '1/1' },
+              { img: hero.image3,    ratio: '1/1' },
+              { img: hero.image4,    ratio: '3/4' },
+            ].map(({ img, ratio }, i) => (
+              <div key={i} style={{ borderRadius: 16, overflow: 'hidden', background: '#E8DED4', aspectRatio: ratio, position: 'relative' }}>
+                {img && (
+                  <Image
+                    src={urlFor(img).width(400).fit('crop').url()}
+                    alt=""
+                    fill
+                    style={{ objectFit: 'cover' }}
+                  />
+                )}
+              </div>
             ))}
             <div style={{ position: 'absolute', bottom: 16, left: -16, background: '#fff', borderRadius: 999, padding: '10px 18px', boxShadow: '0 4px 24px rgba(26,17,9,0.12)', fontSize: 12, fontWeight: 400 }}>
               Doctor-led every session
