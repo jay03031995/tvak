@@ -20,13 +20,13 @@ export default defineConfig({
               S.document().schemaType('siteSettings').documentId('siteSettings')
             ),
             S.listItem().id('homePage').title('🏠 Home Page').schemaType('homePage').child(
-              S.document().schemaType('homePage').documentId('homePage')
+              S.document().schemaType('homePage').documentId('singleton-homePage')
             ),
             S.listItem().id('aboutPage').title('👩‍⚕️ About Page').schemaType('aboutPage').child(
-              S.document().schemaType('aboutPage').documentId('aboutPage')
+              S.document().schemaType('aboutPage').documentId('singleton-aboutPage')
             ),
             S.listItem().id('contactPage').title('📍 Contact Page').schemaType('contactPage').child(
-              S.document().schemaType('contactPage').documentId('contactPage')
+              S.document().schemaType('contactPage').documentId('singleton-contactPage')
             ),
             S.divider(),
             // ── Collections ─────────────────────────────────────

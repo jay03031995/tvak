@@ -38,7 +38,7 @@ export async function fetchSiteSettings() {
 }
 
 export async function fetchHomePage() {
-  return serverClient.fetch(`*[_type == "homePage"][0]{
+  return serverClient.fetch(`*[_type == "homePage" && _id == "singleton-homePage"][0]{
     ...,
     treatmentsSection{
       ...,
@@ -60,6 +60,7 @@ export async function fetchTreatments() {
 export async function fetchTreatment(slug) {
   return serverClient.fetch(`*[_type == "treatment" && slug.current == $slug][0]{
     ...,
+    concerns[]->{name, slug, category},
     relatedTreatments[]->{name, slug, category, image},
     relatedConcerns[]->{name, slug, category}
   }`, { slug })
@@ -84,9 +85,9 @@ export async function fetchDoctor() {
 }
 
 export async function fetchAboutPage() {
-  return serverClient.fetch(`*[_type == "aboutPage"][0]{..., doctor->{...}}`)
+  return serverClient.fetch(`*[_type == "aboutPage" && _id == "singleton-aboutPage"][0]{..., doctor->{...}}`)
 }
 
 export async function fetchContactPage() {
-  return serverClient.fetch(`*[_type == "contactPage"][0]`)
+  return serverClient.fetch(`*[_type == "contactPage" && _id == "singleton-contactPage"][0]`)
 }
