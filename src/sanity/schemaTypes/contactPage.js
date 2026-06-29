@@ -26,6 +26,30 @@ export default defineType({
     }),
     defineField({ name: 'mapEmbedUrl', title: 'Google Maps Embed URL', type: 'url' }),
     defineField({
+      name: 'contactInfo', title: 'Contact Details', type: 'object',
+      description: 'Shown on the contact page info cards. Leave blank to use Site Settings values.',
+      fields: [
+        defineField({ name: 'phone', title: 'Phone Number', type: 'string' }),
+        defineField({ name: 'whatsapp', title: 'WhatsApp Number (with country code, e.g. +919811997993)', type: 'string' }),
+        defineField({ name: 'email', title: 'Email Address', type: 'string' }),
+        defineField({ name: 'addressLine1', title: 'Address Line 1', type: 'string' }),
+        defineField({ name: 'addressLine2', title: 'Address Line 2', type: 'string' }),
+        defineField({ name: 'mapsUrl', title: 'Google Maps Link', type: 'url' }),
+      ]
+    }),
+    defineField({
+      name: 'formConfig', title: 'Contact Form Settings', type: 'object',
+      fields: [
+        defineField({ name: 'heading', title: 'Form Heading (e.g. "Send us a message")', type: 'string' }),
+        defineField({
+          name: 'concerns', title: 'Concern Dropdown Options', type: 'array',
+          of: [defineArrayMember({ type: 'string' })],
+          description: 'Listed in the "Main Concern" dropdown on the contact form'
+        }),
+        defineField({ name: 'successMessage', title: 'Success Message after form submit', type: 'string' }),
+      ]
+    }),
+    defineField({
       name: 'seo', title: 'SEO', type: 'object',
       fields: [
         defineField({ name: 'title', title: 'Meta Title', type: 'string' }),

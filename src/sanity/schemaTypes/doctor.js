@@ -43,6 +43,33 @@ export default defineType({
         preview: { select: { title: 'value', subtitle: 'label' } }
       })]
     }),
+    defineField({ name: 'quote', title: 'Personal Quote (shown in blockquote on doctor page)', type: 'text', rows: 3 }),
+    defineField({ name: 'philosophy', title: 'Treatment Philosophy (paragraph shown below main bio)', type: 'text', rows: 4 }),
+    defineField({
+      name: 'awards', title: 'Awards & Recognitions', type: 'array',
+      of: [defineArrayMember({
+        type: 'object',
+        fields: [
+          defineField({ name: 'title', title: 'Award Title', type: 'string' }),
+          defineField({ name: 'organisation', title: 'Awarding Organisation', type: 'string' }),
+          defineField({ name: 'year', title: 'Year', type: 'string' }),
+        ],
+        preview: { select: { title: 'title', subtitle: 'year' } }
+      })]
+    }),
+    defineField({
+      name: 'availability', title: 'Consultation Availability', type: 'object',
+      fields: [
+        defineField({ name: 'days', title: 'Days Available (e.g. Mon–Sat)', type: 'string' }),
+        defineField({ name: 'hours', title: 'Hours (e.g. 10am–7pm)', type: 'string' }),
+        defineField({
+          name: 'modes', title: 'Consultation Modes', type: 'array',
+          of: [defineArrayMember({ type: 'string' })],
+          description: 'e.g. In-clinic, Online video, WhatsApp'
+        }),
+      ]
+    }),
+    defineField({ name: 'videoUrl', title: 'Intro Video URL (YouTube embed)', type: 'url' }),
   ],
   preview: { select: { title: 'name', subtitle: 'title', media: 'photo' } },
 })

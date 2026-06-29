@@ -12,7 +12,8 @@ export default defineType({
       options: { list: ['Skin & Glow', 'Acne & Scars', 'Pigmentation', 'Anti-Ageing', 'Hair Restoration', 'Laser & Devices'] }
     }),
     defineField({ name: 'tagline', title: 'Short Tagline', type: 'string' }),
-    defineField({ name: 'description', title: 'Description', type: 'text', rows: 4 }),
+    defineField({ name: 'description', title: 'Short Description (hero intro, 2–3 sentences)', type: 'text', rows: 3 }),
+    defineField({ name: 'about', title: 'About the Treatment (150–300 words for SEO section)', type: 'text', rows: 8 }),
     defineField({ name: 'image', title: 'Main Image', type: 'image', options: { hotspot: true } }),
     defineField({
       name: 'meta', title: 'Key Details', type: 'object',
@@ -36,7 +37,25 @@ export default defineType({
       })]
     }),
     defineField({
-      name: 'benefits', title: 'Benefits (one per line)', type: 'array',
+      name: 'benefits', title: 'Benefits (one per item)', type: 'array',
+      of: [defineArrayMember({ type: 'string' })]
+    }),
+    defineField({ name: 'idealCandidate', title: 'Ideal Candidate (who is suitable)', type: 'text', rows: 3 }),
+    defineField({
+      name: 'concerns', title: 'Conditions This Treatment Helps With',
+      type: 'array', of: [defineArrayMember({ type: 'reference', to: [{ type: 'concern' }] })]
+    }),
+    defineField({
+      name: 'preparation', title: 'Preparation Before Treatment (one per item)', type: 'array',
+      of: [defineArrayMember({ type: 'string' })]
+    }),
+    defineField({ name: 'aftercare', title: 'Recovery & Aftercare Instructions', type: 'text', rows: 4 }),
+    defineField({
+      name: 'risks', title: 'Risks & Side Effects (one per item)', type: 'array',
+      of: [defineArrayMember({ type: 'string' })]
+    }),
+    defineField({
+      name: 'preventionTips', title: 'Prevention & Maintenance Tips (one per item)', type: 'array',
       of: [defineArrayMember({ type: 'string' })]
     }),
     defineField({

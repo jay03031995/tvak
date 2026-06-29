@@ -94,6 +94,32 @@ export default defineType({
       ]
     }),
     defineField({
+      name: 'doctorSection', title: 'Doctor Section', type: 'object',
+      fields: [
+        defineField({ name: 'eyebrow', title: 'Eyebrow (e.g. "Meet the Doctor")', type: 'string' }),
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({ name: 'subtext', title: 'Sub Text', type: 'text', rows: 3 }),
+        defineField({ name: 'ctaText', title: 'Button Text (e.g. "View Full Profile")', type: 'string' }),
+      ]
+    }),
+    defineField({
+      name: 'beforeAfterSection', title: 'Before & After Section', type: 'object',
+      fields: [
+        defineField({ name: 'eyebrow', title: 'Eyebrow', type: 'string' }),
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({ name: 'subtext', title: 'Sub Text', type: 'text', rows: 2 }),
+        defineField({ name: 'ctaText', title: 'View All Button Text', type: 'string' }),
+      ]
+    }),
+    defineField({
+      name: 'clinicsSection', title: 'Specialized Clinics Section', type: 'object',
+      fields: [
+        defineField({ name: 'eyebrow', title: 'Eyebrow', type: 'string' }),
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({ name: 'subtext', title: 'Sub Text', type: 'text', rows: 2 }),
+      ]
+    }),
+    defineField({
       name: 'ctaBanner', title: 'CTA Banner (bottom)', type: 'object',
       fields: [
         defineField({ name: 'heading', title: 'Heading', type: 'string' }),

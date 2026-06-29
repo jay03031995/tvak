@@ -11,7 +11,9 @@ export default defineType({
       name: 'category', title: 'Category', type: 'string',
       options: { list: ['Skin & Face', 'Hair & Scalp', 'Anti-Ageing'] }
     }),
-    defineField({ name: 'description', title: 'Description', type: 'text', rows: 4 }),
+    defineField({ name: 'description', title: 'Description (intro paragraph for hero)', type: 'text', rows: 4 }),
+    defineField({ name: 'longDescription', title: 'Detailed Description (for SEO section)', type: 'text', rows: 6 }),
+    defineField({ name: 'heroImage', title: 'Hero / Banner Image', type: 'image', options: { hotspot: true } }),
     defineField({ name: 'iconColor', title: 'Icon Color (hex, e.g. #E05A5A)', type: 'string' }),
     defineField({ name: 'iconBg', title: 'Icon Background Color (hex, e.g. #FFF0EE)', type: 'string' }),
     defineField({
@@ -37,6 +39,21 @@ export default defineType({
     defineField({
       name: 'relatedConcerns', title: 'Related Concerns',
       type: 'array', of: [defineArrayMember({ type: 'reference', to: [{ type: 'concern' }] })]
+    }),
+    defineField({
+      name: 'preventionTips', title: 'Prevention & Lifestyle Tips (one per item)', type: 'array',
+      of: [defineArrayMember({ type: 'string' })]
+    }),
+    defineField({
+      name: 'faqs', title: 'FAQs about this Concern', type: 'array',
+      of: [defineArrayMember({
+        type: 'object',
+        fields: [
+          defineField({ name: 'question', title: 'Question', type: 'string' }),
+          defineField({ name: 'answer', title: 'Answer', type: 'text', rows: 3 }),
+        ],
+        preview: { select: { title: 'question' } }
+      })]
     }),
     defineField({ name: 'order', title: 'Sort Order', type: 'number' }),
   ],
