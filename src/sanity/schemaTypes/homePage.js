@@ -16,10 +16,6 @@ export default defineType({
         defineField({ name: 'subtext', title: 'Sub Paragraph', type: 'text', rows: 3 }),
         defineField({ name: 'ctaPrimary', title: 'Primary Button Text', type: 'string' }),
         defineField({ name: 'ctaSecondary', title: 'Secondary Button Text', type: 'string' }),
-        defineField({ name: 'mainImage', title: 'Hero Image (large — top left)', type: 'image', options: { hotspot: true } }),
-        defineField({ name: 'image2', title: 'Hero Image 2 (top right)', type: 'image', options: { hotspot: true } }),
-        defineField({ name: 'image3', title: 'Hero Image 3 (bottom left)', type: 'image', options: { hotspot: true } }),
-        defineField({ name: 'image4', title: 'Hero Image 4 (large — bottom right)', type: 'image', options: { hotspot: true } }),
         defineField({
           name: 'stats', title: 'Stats Row', type: 'array',
           of: [defineArrayMember({
@@ -33,6 +29,10 @@ export default defineType({
         }),
       ]
     }),
+    defineField({ name: 'heroImage1', title: '🖼 Hero Image 1 — Large Left', type: 'image', options: { hotspot: true } }),
+    defineField({ name: 'heroImage2', title: '🖼 Hero Image 2 — Top Right', type: 'image', options: { hotspot: true } }),
+    defineField({ name: 'heroImage3', title: '🖼 Hero Image 3 — Bottom Left', type: 'image', options: { hotspot: true } }),
+    defineField({ name: 'heroImage4', title: '🖼 Hero Image 4 — Large Right', type: 'image', options: { hotspot: true } }),
     defineField({
       name: 'trustBar', title: 'Trust Bar (badges below hero)', type: 'array',
       of: [defineArrayMember({

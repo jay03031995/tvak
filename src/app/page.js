@@ -90,10 +90,10 @@ export default async function HomePage() {
           </div>
           <div className="hero-imgs" style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             {[
-              { img: hero.mainImage, ratio: '3/4' },
-              { img: hero.image2,    ratio: '1/1' },
-              { img: hero.image3,    ratio: '1/1' },
-              { img: hero.image4,    ratio: '3/4' },
+              { img: page?.heroImage1, ratio: '3/4' },
+              { img: page?.heroImage2, ratio: '1/1' },
+              { img: page?.heroImage3, ratio: '1/1' },
+              { img: page?.heroImage4, ratio: '3/4' },
             ].map(({ img, ratio }, i) => (
               <div key={i} style={{ borderRadius: 16, overflow: 'hidden', background: '#E8DED4', aspectRatio: ratio, position: 'relative' }}>
                 {img && (
