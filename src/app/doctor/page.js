@@ -1,5 +1,6 @@
+import Image from 'next/image'
 import Link from 'next/link'
-import { fetchDoctor } from '@/sanity/client'
+import { fetchDoctor, urlFor } from '@/sanity/client'
 
 export const revalidate = 10
 export const metadata = { title: 'Dr. Omaima Jawed — Tvak & Asthi by Artham' }
@@ -101,9 +102,21 @@ export default async function DoctorPage() {
           {/* RIGHT: Photo + Booking card */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             {/* Photo */}
-            <div style={{ borderRadius: 20, overflow: 'hidden', background: '#E8DED4', aspectRatio: '3/4', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 8 }}>
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(184,145,106,0.5)" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              <span style={{ fontSize: 12, fontWeight: 300, color: 'rgba(184,145,106,0.7)' }}>Dr. Omaima Jawed</span>
+            <div style={{ borderRadius: 20, overflow: 'hidden', background: '#E8DED4', aspectRatio: '3/4', position: 'relative' }}>
+              {d.photo ? (
+                <Image
+                  src={urlFor(d.photo).width(600).height(800).fit('crop').url()}
+                  alt={d.name || 'Dr. Omaima Jawed'}
+                  fill
+                  style={{ objectFit: 'cover' }}
+                  priority
+                />
+              ) : (
+                <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 8 }}>
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(184,145,106,0.5)" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  <span style={{ fontSize: 12, fontWeight: 300, color: 'rgba(184,145,106,0.7)' }}>Dr. Omaima Jawed</span>
+                </div>
+              )}
             </div>
 
             {/* Booking card */}
