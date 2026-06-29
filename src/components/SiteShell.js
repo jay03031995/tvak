@@ -5,6 +5,7 @@ import Nav from './Nav'
 import Footer from './Footer'
 import FloatingButtons from './FloatingButtons'
 import BookingModal from './BookingModal'
+import ScrollReveal from './ScrollReveal'
 
 export const BookingCtx = createContext(() => {})
 export function useBooking() { return useContext(BookingCtx) }
@@ -19,6 +20,7 @@ export default function SiteShell({ children }) {
 
   return (
     <BookingCtx.Provider value={openModal}>
+      <ScrollReveal />
       <Nav onBook={openModal} />
       <main>{children}</main>
       <Footer />

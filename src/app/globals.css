@@ -53,11 +53,11 @@ a { color: inherit; text-decoration: none; }
 
 ::selection { background: var(--rose); color: #fff; }
 
-/* Scroll reveal */
+/* Scroll reveal — supports --d CSS var for stagger delay */
 .reveal {
   opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.5s ease, transform 0.55s cubic-bezier(.22,.68,0,.99);
+  transform: translateY(20px);
+  transition: opacity 0.55s ease var(--d, 0ms), transform 0.6s cubic-bezier(.22,.68,0,.99) var(--d, 0ms);
 }
 .reveal.vis { opacity: 1; transform: translateY(0); }
 
@@ -107,7 +107,47 @@ a { color: inherit; text-decoration: none; }
   .hero-imgs { display: none !important; }
 }
 
-/* Section eyebrow */
+/* ── Marquee trust bar ── */
+.marquee-track {
+  display: flex;
+  gap: 12px;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Testimonials auto-scroll ── */
+.testimonials-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: scrollTrack 38s linear infinite;
+}
+.testimonials-track:hover { animation-play-state: paused; }
+
+@keyframes scrollTrack {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-33.333%); }
+}
+
+/* ── Hero image staggered entrance ── */
+@keyframes imgFadeIn {
+  from { opacity: 0; transform: scale(0.96) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.hi-1 { animation: imgFadeIn 0.65s cubic-bezier(.22,.68,0,.99) 0.25s both; }
+.hi-2 { animation: imgFadeIn 0.65s cubic-bezier(.22,.68,0,.99) 0.40s both; }
+.hi-3 { animation: imgFadeIn 0.65s cubic-bezier(.22,.68,0,.99) 0.50s both; }
+.hi-4 { animation: imgFadeIn 0.65s cubic-bezier(.22,.68,0,.99) 0.60s both; }
+.hb-1 { animation: fadeUp 0.5s cubic-bezier(.22,.68,0,.99) 0.85s both; }
+.hb-2 { animation: fadeUp 0.5s cubic-bezier(.22,.68,0,.99) 0.95s both; }
+
+/* ── Section eyebrow ── */
 .eyebrow {
   font-size: 11px;
   font-weight: 500;

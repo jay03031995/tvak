@@ -1,6 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { fetchHomePage, fetchSiteSettings, fetchDoctor, fetchTreatments, urlFor } from '@/sanity/client'
+import AnimatedStats from '@/components/AnimatedStats'
+import MarqueeTrustBar from '@/components/MarqueeTrustBar'
+import AnimatedFAQ from '@/components/AnimatedFAQ'
+import AnimatedTestimonials from '@/components/AnimatedTestimonials'
 
 export const revalidate = 10
 
@@ -11,7 +15,6 @@ export default async function HomePage() {
     fetchTreatments().catch(() => []),
   ])
 
-  // Build slug → image map from Sanity for the home page treatment cards
   const treatmentImageMap = new Map(
     (sanityTreatments || []).filter(t => t.slug?.current && t.image).map(t => [t.slug.current, t.image])
   )
@@ -33,6 +36,13 @@ export default async function HomePage() {
     { question: 'Are the devices safe for Indian skin tones?', answer: 'All our devices are US-FDA cleared and selected specifically for darker Fitzpatrick skin types (III–V), which are common in India.' },
     { question: 'Do I need to take time off after a session?', answer: 'Most treatments have zero downtime. Procedures like peels or MNRF may have 2–3 days of mild redness, which we will discuss before booking.' },
     { question: 'How do I book a consultation?', answer: 'Call or WhatsApp 09811997993, or use the Book Now button. First consultations take 20–30 minutes and include a skin assessment.' },
+  ]
+
+  const heroStats = hero.stats || [
+    { value: '5+', label: 'Years Experience' },
+    { value: '500+', label: 'Patients Treated' },
+    { value: '15+', label: 'Treatments Offered' },
+    { value: '4.9★', label: 'Google Rating' },
   ]
 
   return (
@@ -57,6 +67,7 @@ export default async function HomePage() {
       {/* HERO */}
       <section style={{ padding: '72px 20px 64px', background: 'linear-gradient(160deg, #FAF7F2 55%, #F5EDE4)' }}>
         <div style={{ maxWidth: 1180, margin: '0 auto' }} className="grid-hero">
+          {/* Left — staggered text entrance via .au */}
           <div className="au">
             <span className="eyebrow">Dermatology · Aesthetics · Trichology</span>
             <h1 style={{ fontWeight: 500, fontSize: 'clamp(28px,4.5vw,50px)', lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: 20, color: 'var(--text)' }}>
@@ -80,28 +91,19 @@ export default async function HomePage() {
                 {hero.ctaSecondary || 'Explore Treatments'}
               </Link>
             </div>
-            <div style={{ display: 'flex', gap: 28, paddingTop: 20, borderTop: '1px solid rgba(26,17,9,0.1)', flexWrap: 'wrap' }}>
-              {(hero.stats || [
-                { value: '5+', label: 'Years Experience' },
-                { value: '500+', label: 'Patients Treated' },
-                { value: '15+', label: 'Treatments Offered' },
-                { value: '4.9', label: 'Google Rating' },
-              ]).map((s, i) => (
-                <div key={i} style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: 'clamp(18px,2.5vw,26px)', fontWeight: 500, color: '#1A2744', lineHeight: 1 }}>{s.value}</div>
-                  <div style={{ fontSize: 11, fontWeight: 300, color: '#9A8A7A', marginTop: 4, letterSpacing: '0.02em' }}>{s.label}</div>
-                </div>
-              ))}
-            </div>
+            {/* Animated count-up stats */}
+            <AnimatedStats stats={heroStats} />
           </div>
+
+          {/* Right — staggered image grid */}
           <div className="hero-imgs" style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             {[
-              { img: page?.heroImage1, ratio: '3/4' },
-              { img: page?.heroImage2, ratio: '1/1' },
-              { img: page?.heroImage3, ratio: '1/1' },
-              { img: page?.heroImage4, ratio: '3/4' },
-            ].map(({ img, ratio }, i) => (
-              <div key={i} style={{ borderRadius: 16, overflow: 'hidden', background: '#E8DED4', aspectRatio: ratio, position: 'relative' }}>
+              { img: page?.heroImage1, ratio: '3/4', cls: 'hi-1' },
+              { img: page?.heroImage2, ratio: '1/1', cls: 'hi-2' },
+              { img: page?.heroImage3, ratio: '1/1', cls: 'hi-3' },
+              { img: page?.heroImage4, ratio: '3/4', cls: 'hi-4' },
+            ].map(({ img, ratio, cls }, i) => (
+              <div key={i} className={cls} style={{ borderRadius: 16, overflow: 'hidden', background: '#E8DED4', aspectRatio: ratio, position: 'relative' }}>
                 {img && (
                   <Image
                     src={urlFor(img).width(400).fit('crop').url()}
@@ -112,31 +114,23 @@ export default async function HomePage() {
                 )}
               </div>
             ))}
-            <div style={{ position: 'absolute', bottom: 16, left: -16, background: '#fff', borderRadius: 999, padding: '10px 18px', boxShadow: '0 4px 24px rgba(26,17,9,0.12)', fontSize: 12, fontWeight: 400 }}>
+            <div className="hb-1" style={{ position: 'absolute', bottom: 16, left: -16, background: '#fff', borderRadius: 999, padding: '10px 18px', boxShadow: '0 4px 24px rgba(26,17,9,0.12)', fontSize: 12, fontWeight: 400 }}>
               Doctor-led every session
             </div>
-            <div style={{ position: 'absolute', top: 16, right: -16, background: '#fff', borderRadius: 999, padding: '10px 18px', boxShadow: '0 4px 24px rgba(26,17,9,0.12)', fontSize: 12, fontWeight: 400 }}>
+            <div className="hb-2" style={{ position: 'absolute', top: 16, right: -16, background: '#fff', borderRadius: 999, padding: '10px 18px', boxShadow: '0 4px 24px rgba(26,17,9,0.12)', fontSize: 12, fontWeight: 400 }}>
               US-FDA cleared devices
             </div>
           </div>
         </div>
       </section>
 
-      {/* TRUST BAR */}
-      <section style={{ background: '#fff', borderTop: '1px solid rgba(26,17,9,0.07)', borderBottom: '1px solid rgba(26,17,9,0.07)', padding: '16px 20px', overflowX: 'auto' }}>
-        <div style={{ maxWidth: 1180, margin: '0 auto', display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'nowrap', justifyContent: 'center' }}>
-          {trustBar.map((t, i) => (
-            <span key={i} style={{ background: '#FAF7F2', border: '1px solid rgba(26,17,9,0.1)', borderRadius: 999, padding: '6px 14px', fontSize: 12, fontWeight: 400, color: '#4A3728', whiteSpace: 'nowrap', flexShrink: 0 }}>
-              {t.text}
-            </span>
-          ))}
-        </div>
-      </section>
+      {/* TRUST BAR — infinite marquee */}
+      <MarqueeTrustBar items={trustBar} />
 
       {/* TREATMENTS */}
       <section style={{ padding: '72px 20px' }}>
         <div style={{ maxWidth: 1180, margin: '0 auto' }}>
-          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 40, flexWrap: 'wrap', gap: 12 }}>
+          <div className="reveal" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 40, flexWrap: 'wrap', gap: 12 }}>
             <div>
               <span className="eyebrow">{page?.treatmentsSection?.eyebrow || 'Our Services'}</span>
               <h2 style={{ fontWeight: 500, color: 'var(--text)', margin: 0 }}>{page?.treatmentsSection?.heading || 'Treatments we offer'}</h2>
@@ -156,7 +150,12 @@ export default async function HomePage() {
               { name: 'PRP Hair Restoration', slug: 'prp-hair', badge: 'HAIR', desc: 'Platelet-rich plasma to reduce hair fall, nourish follicles and boost density.', duration: '45 min' },
               { name: 'GFC Hair Therapy', slug: 'gfc-hair', badge: 'HAIR', desc: 'Growth-factor concentrate therapy for thinning hair, clinically proven regrowth.', duration: '45 min' },
             ].map((t, i) => (
-              <Link key={i} href={`/treatments/${t.slug}`} className="card-hover" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', background: '#fff', borderRadius: 16, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.08)' }}>
+              <Link
+                key={i}
+                href={`/treatments/${t.slug}`}
+                className="card-hover reveal"
+                style={{ '--d': `${i * 50}ms`, textDecoration: 'none', display: 'flex', flexDirection: 'column', background: '#fff', borderRadius: 16, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.08)' }}
+              >
                 <div style={{ height: 160, background: '#F0E8DF', flexShrink: 0, position: 'relative' }}>
                   {treatmentImageMap.get(t.slug) ? (
                     <Image
@@ -186,7 +185,7 @@ export default async function HomePage() {
                 </div>
               </Link>
             ))}
-            <Link href="/treatments" className="card-hover" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', background: '#3B2210', borderRadius: 16, overflow: 'hidden', minHeight: 280, padding: '28px 24px', position: 'relative' }}>
+            <Link href="/treatments" className="card-hover reveal" style={{ '--d': '500ms', textDecoration: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', background: '#3B2210', borderRadius: 16, overflow: 'hidden', minHeight: 280, padding: '28px 24px', position: 'relative' }}>
               <div style={{ position: 'absolute', top: 20, left: 20, fontSize: 10.5, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#B8916A' }}>15 TREATMENTS</div>
               <h3 style={{ fontWeight: 400, fontSize: 22, color: '#FAF7F2', fontStyle: 'italic', lineHeight: 1.2, marginBottom: 20 }}>Explore the full menu</h3>
               <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'rgba(255,255,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -200,7 +199,7 @@ export default async function HomePage() {
       {/* BROWSE BY CONCERN */}
       <section style={{ padding: '72px 20px', background: '#FAF7F2' }}>
         <div style={{ maxWidth: 1180, margin: '0 auto' }}>
-          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 40, flexWrap: 'wrap', gap: 12 }}>
+          <div className="reveal" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 40, flexWrap: 'wrap', gap: 12 }}>
             <div>
               <span className="eyebrow">{page?.concernsSection?.eyebrow || 'Browse by Concern'}</span>
               <h2 style={{ fontWeight: 500, color: 'var(--text)', margin: 0 }}>{page?.concernsSection?.heading || 'New & popular concerns'}</h2>
@@ -225,7 +224,7 @@ export default async function HomePage() {
                 { name: 'Sagging & Laxity', count: 3, slug: 'sagging' },
               ]},
             ].map((col, ci) => (
-              <div key={ci}>
+              <div key={ci} className="reveal" style={{ '--d': `${ci * 100}ms` }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14, paddingBottom: 12, borderBottom: '1.5px solid rgba(26,17,9,0.1)' }}>
                   <h3 style={{ fontSize: 15, fontWeight: 500, color: 'var(--text)', margin: 0 }}>{col.cat}</h3>
                   <Link href="/concerns" style={{ fontSize: 12, color: '#9A8A7A', textDecoration: 'none' }}>→</Link>
@@ -250,25 +249,23 @@ export default async function HomePage() {
       {/* CURRENT OFFERS */}
       <section style={{ padding: '72px 20px', background: '#F5EDE4' }}>
         <div style={{ maxWidth: 1180, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 40 }}>
+          <div className="reveal" style={{ textAlign: 'center', marginBottom: 40 }}>
             <span className="eyebrow">Offers & Promotions</span>
             <h2 style={{ fontWeight: 500, color: 'var(--text)', margin: 0 }}>Current offers</h2>
           </div>
           <div className="grid-2">
-            <div style={{ background: '#1A2744', borderRadius: 20, padding: '36px 32px', position: 'relative', overflow: 'hidden' }}>
-              <div style={{ position: 'absolute', top: -20, right: -20, width: 120, height: 120, borderRadius: '50%', background: 'rgba(255,255,255,0.06)' }} />
-              <div style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#B8916A', marginBottom: 16 }}>Monsoon Special</div>
-              <h3 style={{ fontWeight: 500, fontSize: 22, color: '#FAF7F2', marginBottom: 10, lineHeight: 1.2 }}>20% off Acne & Scar treatments</h3>
-              <p style={{ fontSize: 13.5, fontWeight: 300, color: '#A0B4C8', marginBottom: 28, lineHeight: 1.7 }}>Valid through July 2026. Book now to lock in the offer.</p>
-              <Link href="/contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#B8916A', color: '#fff', fontSize: 13, fontWeight: 400, padding: '11px 22px', borderRadius: 999, textDecoration: 'none' }}>Claim offer →</Link>
-            </div>
-            <div style={{ background: '#3B2210', borderRadius: 20, padding: '36px 32px', position: 'relative', overflow: 'hidden' }}>
-              <div style={{ position: 'absolute', top: -20, right: -20, width: 120, height: 120, borderRadius: '50%', background: 'rgba(255,255,255,0.06)' }} />
-              <div style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#B8916A', marginBottom: 16 }}>New Patient Offer</div>
-              <h3 style={{ fontWeight: 500, fontSize: 22, color: '#FAF7F2', marginBottom: 10, lineHeight: 1.2 }}>Free consultation for first-timers</h3>
-              <p style={{ fontSize: 13.5, fontWeight: 300, color: '#C4A998', marginBottom: 28, lineHeight: 1.7 }}>New to Tvak? Your first dermatologist consultation is on us.</p>
-              <Link href="/contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#C4847E', color: '#fff', fontSize: 13, fontWeight: 400, padding: '11px 22px', borderRadius: 999, textDecoration: 'none' }}>Book free consult →</Link>
-            </div>
+            {[
+              { bg: '#1A2744', eyebrow: 'Monsoon Special', heading: '20% off Acne & Scar treatments', sub: 'Valid through July 2026. Book now to lock in the offer.', btnBg: '#B8916A', btn: 'Claim offer →', delay: '0ms', subColor: '#A0B4C8' },
+              { bg: '#3B2210', eyebrow: 'New Patient Offer', heading: 'Free consultation for first-timers', sub: 'New to Tvak? Your first dermatologist consultation is on us.', btnBg: '#C4847E', btn: 'Book free consult →', delay: '100ms', subColor: '#C4A998' },
+            ].map((o, i) => (
+              <div key={i} className="reveal" style={{ '--d': o.delay, background: o.bg, borderRadius: 20, padding: '36px 32px', position: 'relative', overflow: 'hidden' }}>
+                <div style={{ position: 'absolute', top: -20, right: -20, width: 120, height: 120, borderRadius: '50%', background: 'rgba(255,255,255,0.06)' }} />
+                <div style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#B8916A', marginBottom: 16 }}>{o.eyebrow}</div>
+                <h3 style={{ fontWeight: 500, fontSize: 22, color: '#FAF7F2', marginBottom: 10, lineHeight: 1.2 }}>{o.heading}</h3>
+                <p style={{ fontSize: 13.5, fontWeight: 300, color: o.subColor, marginBottom: 28, lineHeight: 1.7 }}>{o.sub}</p>
+                <Link href="/contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: o.btnBg, color: '#fff', fontSize: 13, fontWeight: 400, padding: '11px 22px', borderRadius: 999, textDecoration: 'none' }}>{o.btn}</Link>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -276,7 +273,7 @@ export default async function HomePage() {
       {/* DOCTOR */}
       <section style={{ padding: '72px 20px' }}>
         <div style={{ maxWidth: 1180, margin: '0 auto', alignItems: 'start' }} className="grid-hero">
-          <div style={{ borderRadius: 20, overflow: 'hidden', background: '#E8DED4', aspectRatio: '3/4', position: 'relative' }}>
+          <div className="reveal" style={{ borderRadius: 20, overflow: 'hidden', background: '#E8DED4', aspectRatio: '3/4', position: 'relative' }}>
             {doctor?.photo && (
               <Image
                 src={urlFor(doctor.photo).width(700).height(933).fit('crop').url()}
@@ -286,7 +283,7 @@ export default async function HomePage() {
               />
             )}
           </div>
-          <div style={{ paddingTop: 8 }}>
+          <div className="reveal" style={{ '--d': '150ms', paddingTop: 8 }}>
             <span className="eyebrow">Your Doctor</span>
             <h2 style={{ fontWeight: 500, color: 'var(--text)', marginBottom: 16 }}>{doctor?.name || 'Dr. Omaima Jawed'}</h2>
             <p style={{ fontSize: 13, fontWeight: 300, color: '#B8916A', marginBottom: 16, letterSpacing: '0.04em' }}>
@@ -296,8 +293,8 @@ export default async function HomePage() {
               {doctor?.shortBio || 'Dr. Omaima completed her MBBS and trained in aesthetic dermatology at leading institutes. She personally leads every procedure — from your first consultation to each follow-up session.'}
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 28 }}>
-              {['Acne & Scar Treatment', 'Laser Procedures', 'Hair Restoration', 'Anti-Ageing', 'Chemical Peels'].map(s => (
-                <span key={s} style={{ fontSize: 12, fontWeight: 400, color: '#4A3728', background: '#F5EDE4', padding: '5px 12px', borderRadius: 999, border: '1px solid rgba(26,17,9,0.1)' }}>{s}</span>
+              {['Acne & Scar Treatment', 'Laser Procedures', 'Hair Restoration', 'Anti-Ageing', 'Chemical Peels'].map((s, si) => (
+                <span key={s} style={{ fontSize: 12, fontWeight: 400, color: '#4A3728', background: '#F5EDE4', padding: '5px 12px', borderRadius: 999, border: '1px solid rgba(26,17,9,0.1)', animation: `fadeUp 0.4s cubic-bezier(.22,.68,0,.99) ${si * 60 + 200}ms both` }}>{s}</span>
               ))}
             </div>
             <Link href="/doctor" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 400, color: '#fff', background: '#1A2744', padding: '12px 26px', borderRadius: 999, textDecoration: 'none' }}>
@@ -310,7 +307,7 @@ export default async function HomePage() {
       {/* BEFORE & AFTER */}
       <section style={{ padding: '72px 20px', background: '#fff' }}>
         <div style={{ maxWidth: 1180, margin: '0 auto' }}>
-          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 44, flexWrap: 'wrap', gap: 12 }}>
+          <div className="reveal" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 44, flexWrap: 'wrap', gap: 12 }}>
             <div>
               <span className="eyebrow">Real Results</span>
               <h2 style={{ fontWeight: 500, color: 'var(--text)', margin: 0 }}>Before & After</h2>
@@ -324,8 +321,7 @@ export default async function HomePage() {
               { treatment: 'Melasma Treatment', result: 'Dark patches significantly faded', weeks: '10 weeks', cat: 'Pigmentation', slug: 'melasma', accent: '#EEF6FF', dot: '#6B9EC7' },
               { treatment: 'PRP Hair Restoration', result: 'Visible density improvement', weeks: '16 weeks', cat: 'Hair Restoration', slug: 'prp-hair', accent: '#EEFAF2', dot: '#2E7D52' },
             ].map((item, i) => (
-              <Link key={i} href={`/treatments/${item.slug}`} className="card-hover" style={{ textDecoration: 'none', background: '#fff', borderRadius: 18, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.08)' }}>
-                {/* Before / After split */}
+              <Link key={i} href={`/treatments/${item.slug}`} className="card-hover reveal" style={{ '--d': `${i * 80}ms`, textDecoration: 'none', background: '#fff', borderRadius: 18, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.08)' }}>
                 <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', height: 200, background: '#F0E8DF' }}>
                   <div style={{ background: '#E2D8CE', display: 'flex', alignItems: 'flex-end', padding: '10px', justifyContent: 'flex-start' }}>
                     <span style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(255,255,255,0.85)', color: '#4A3728', padding: '4px 8px', borderRadius: 4 }}>Before</span>
@@ -333,7 +329,6 @@ export default async function HomePage() {
                   <div style={{ background: '#D4C9BC', display: 'flex', alignItems: 'flex-end', padding: '10px', justifyContent: 'flex-end' }}>
                     <span style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(26,39,68,0.8)', color: '#FAF7F2', padding: '4px 8px', borderRadius: 4 }}>After</span>
                   </div>
-                  {/* divider */}
                   <div style={{ position: 'absolute', left: '50%', top: 0, bottom: 0, width: 2, background: '#fff', transform: 'translateX(-50%)' }}>
                     <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 28, height: 28, borderRadius: '50%', background: '#fff', boxShadow: '0 2px 8px rgba(0,0,0,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4A3728" strokeWidth="2.5"><path d="M9 18l-6-6 6-6M15 6l6 6-6 6"/></svg>
@@ -360,65 +355,31 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
+      {/* TESTIMONIALS — auto-scrolling carousel */}
       <section style={{ padding: '72px 20px', background: '#FAF7F2' }}>
         <div style={{ maxWidth: 1180, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+          <div className="reveal" style={{ textAlign: 'center', marginBottom: 48 }}>
             <span className="eyebrow">{page?.testimonials?.eyebrow || 'Patient Stories'}</span>
             <h2 style={{ fontWeight: 500, color: 'var(--text)' }}>{page?.testimonials?.heading || 'Real results, real people'}</h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 20 }}>
-            {testimonials.map((t, i) => (
-              <div key={i} style={{ background: '#fff', borderRadius: 16, padding: '24px 22px', border: '1.5px solid rgba(26,17,9,0.08)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
-                  <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#1A2744', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <span style={{ fontSize: 13, fontWeight: 500, color: '#FAF7F2' }}>{t.initials}</span>
-                  </div>
-                  <div>
-                    <div style={{ fontSize: 13.5, fontWeight: 500, color: 'var(--text)' }}>{t.name}</div>
-                    <div style={{ fontSize: 11.5, fontWeight: 300, color: '#9A8A7A' }}>{t.treatment} · {t.date}</div>
-                  </div>
-                  <div style={{ marginLeft: 'auto', display: 'flex', gap: 1 }}>
-                    {[...Array(t.rating || 5)].map((_, si) => (
-                      <svg key={si} width="12" height="12" viewBox="0 0 24 24" fill="#FBBC04"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7Z"/></svg>
-                    ))}
-                  </div>
-                </div>
-                <p style={{ fontSize: 13.5, fontWeight: 300, lineHeight: 1.75, color: '#4A3728', margin: 0 }}>{t.text}</p>
-                <div style={{ marginTop: 14, display: 'flex', alignItems: 'center', gap: 6 }}>
-                  <svg width="13" height="13" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-                  <span style={{ fontSize: 11, fontWeight: 300, color: '#9A8A7A' }}>Google Review</span>
-                </div>
-              </div>
-            ))}
-          </div>
+          <AnimatedTestimonials testimonials={testimonials} />
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* FAQ — smooth animated accordion */}
       <section style={{ padding: '72px 20px' }}>
         <div style={{ maxWidth: 720, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+          <div className="reveal" style={{ textAlign: 'center', marginBottom: 48 }}>
             <span className="eyebrow">{page?.faqs?.eyebrow || 'FAQ'}</span>
             <h2 style={{ fontWeight: 500, color: 'var(--text)' }}>{page?.faqs?.heading || 'Common questions'}</h2>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            {faqs.map((f, i) => (
-              <details key={i} style={{ background: '#fff', borderRadius: 12, border: '1.5px solid rgba(26,17,9,0.09)', overflow: 'hidden' }}>
-                <summary style={{ padding: '18px 22px', fontSize: 14, fontWeight: 400, color: 'var(--text)', cursor: 'pointer', listStyle: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
-                  {f.question}
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B8916A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><path d="m6 9 6 6 6-6"/></svg>
-                </summary>
-                <p style={{ margin: 0, padding: '4px 22px 20px', fontSize: 13.5, fontWeight: 300, color: '#4A3728', lineHeight: 1.75 }}>{f.answer}</p>
-              </details>
-            ))}
-          </div>
+          <AnimatedFAQ faqs={faqs} />
         </div>
       </section>
 
       {/* CTA BANNER */}
       <section style={{ padding: '64px 20px', background: '#3B2210' }}>
-        <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
+        <div className="reveal" style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
           <h2 style={{ fontWeight: 500, color: '#FAF7F2', marginBottom: 12 }}>
             {page?.ctaBanner?.heading || 'Ready to correct, not just cover?'}
           </h2>
