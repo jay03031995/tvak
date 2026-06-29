@@ -84,6 +84,20 @@ export async function fetchDoctor() {
   return serverClient.fetch(`*[_type == "doctor"][0]`)
 }
 
+export async function fetchBeforeAfter() {
+  return serverClient.fetch(`*[_type == "beforeAfter" && defined(beforeImage) && defined(afterImage)] | order(_createdAt asc){
+    _id, patientLabel, concern, sessions, result, category,
+    beforeImage, afterImage,
+    treatment->{name, slug, category}
+  }`)
+}
+
+export async function fetchClinics() {
+  return serverClient.fetch(`*[_type == "clinic"] | order(order asc){
+    _id, name, slug, tagline, description, icon, highlights, conditions
+  }`)
+}
+
 export async function fetchAboutPage() {
   return serverClient.fetch(`*[_type == "aboutPage" && _id == "singleton-aboutPage"][0]{..., doctor->{...}}`)
 }

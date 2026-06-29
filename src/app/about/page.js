@@ -1,16 +1,28 @@
+import Image from 'next/image'
 import Link from 'next/link'
-import { fetchAboutPage } from '@/sanity/client'
+import { fetchAboutPage, fetchDoctor, urlFor } from '@/sanity/client'
 
 export const revalidate = 10
 export const metadata = { title: 'About — Tvak & Asthi by Artham' }
 
 export default async function AboutPage() {
-  const page = await fetchAboutPage().catch(() => null)
+  const [page, doctor] = await Promise.all([
+    fetchAboutPage().catch(() => null),
+    fetchDoctor().catch(() => null),
+  ])
+
+  const d = doctor || {}
   const values = page?.values?.items || [
     { title: 'Doctor-Led Every Session', description: 'Every procedure is performed by Dr. Omaima — not a therapist or technician.' },
     { title: 'Safety First', description: 'US-FDA cleared devices only. We never compromise on safety protocols.' },
     { title: 'Built for Indian Skin', description: 'All treatments are calibrated for Fitzpatrick III–V skin types, common in India.' },
   ]
+
+  const locationHeading = page?.locationSection?.heading || 'Visit us in Noida'
+  const locationAddress = page?.locationSection?.address || 'Lotus Plaza, near Mithaas Sweets, Hazipur, Sector 104, Noida 201304'
+  const directionsUrl = page?.locationSection?.directionsUrl || 'https://maps.app.goo.gl/jhaUTtPyvnzMNbKq5'
+  const directionsCta = page?.locationSection?.primaryCtaText || 'Get Directions'
+  const bookingCta = page?.locationSection?.secondaryCtaText || 'Book Appointment'
 
   return (
     <div style={{ background: 'var(--cream)' }}>
@@ -61,36 +73,49 @@ export default async function AboutPage() {
         </div>
       </section>
 
+      {/* DOCTOR SECTION */}
       <section style={{ padding: '72px 20px', background: '#FAF7F2' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }} className="grid-hero">
-          <div style={{ borderRadius: 20, overflow: 'hidden', background: '#E8DED4', aspectRatio: '4/5' }} />
+        <div style={{ maxWidth: 1100, margin: '0 auto', alignItems: 'start' }} className="grid-hero">
+          <div style={{ borderRadius: 20, overflow: 'hidden', background: '#E8DED4', aspectRatio: '3/4', position: 'relative' }}>
+            {d.photo && (
+              <Image
+                src={urlFor(d.photo).width(700).height(933).fit('crop').url()}
+                alt={d.name || 'Dr. Omaima Jawed'}
+                fill
+                style={{ objectFit: 'cover', objectPosition: 'top center' }}
+              />
+            )}
+          </div>
           <div>
-            <span className="eyebrow">Meet the Doctor</span>
-            <h2 style={{ fontWeight: 500, marginBottom: 10 }}>Dr. Omaima Jawed</h2>
-            <p style={{ fontSize: 13.5, fontWeight: 400, color: '#B8916A', marginBottom: 18 }}>MBBS · Aesthetic Physician · 5 Years Experience</p>
+            <span className="eyebrow">{page?.doctorSection?.eyebrow || 'Meet the Doctor'}</span>
+            <h2 style={{ fontWeight: 500, marginBottom: 10 }}>{d.name || 'Dr. Omaima Jawed'}</h2>
+            <p style={{ fontSize: 13.5, fontWeight: 400, color: '#B8916A', marginBottom: 18 }}>
+              {page?.doctorSection?.credentials || `${d.credentials || 'MBBS'} · ${d.title || 'Aesthetic Physician'} · ${d.experience || 5} Years Experience`}
+            </p>
             <p style={{ fontSize: 14, fontWeight: 300, color: '#4A3728', lineHeight: 1.85, marginBottom: 28 }}>
-              Dr. Omaima personally leads every procedure at Tvak & Asthi. Her training in aesthetic medicine and deep understanding of Indian skin types ensures treatments are both safe and effective.
+              {page?.doctorSection?.bio || d.shortBio || 'Dr. Omaima personally leads every procedure at Tvak & Asthi. Her training in aesthetic medicine and deep understanding of Indian skin types ensures treatments are both safe and effective.'}
             </p>
             <Link href="/doctor" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 400, color: '#fff', background: '#1A2744', padding: '12px 26px', borderRadius: 999, textDecoration: 'none' }}>
-              Full Profile →
+              {page?.doctorSection?.ctaText || 'Full Profile'} →
             </Link>
           </div>
         </div>
       </section>
 
+      {/* LOCATION SECTION */}
       <section style={{ padding: '64px 20px', background: '#3B2210' }}>
         <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{ fontWeight: 500, color: '#FAF7F2', marginBottom: 10 }}>Visit us in Noida</h2>
+          <h2 style={{ fontWeight: 500, color: '#FAF7F2', marginBottom: 10 }}>{locationHeading}</h2>
           <p style={{ fontSize: 13.5, fontWeight: 300, color: '#C4A998', marginBottom: 28, lineHeight: 1.75 }}>
-            Lotus Plaza, near Mithaas Sweets, Hazipur, Sector 104, Noida 201304
+            {locationAddress}
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="https://maps.app.goo.gl/jhaUTtPyvnzMNbKq5" target="_blank" rel="noopener"
+            <a href={directionsUrl} target="_blank" rel="noopener"
               style={{ background: '#C4847E', color: '#fff', fontSize: 13, fontWeight: 400, padding: '12px 28px', borderRadius: 999, textDecoration: 'none' }}>
-              Get Directions
+              {directionsCta}
             </a>
             <Link href="/contact" style={{ background: 'rgba(255,255,255,0.1)', color: '#FAF7F2', fontSize: 13, fontWeight: 400, padding: '12px 28px', borderRadius: 999, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }}>
-              Book Appointment
+              {bookingCta}
             </Link>
           </div>
         </div>

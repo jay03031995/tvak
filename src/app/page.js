@@ -243,23 +243,25 @@ export default async function HomePage() {
 
       {/* DOCTOR */}
       <section style={{ padding: '72px 20px' }}>
-        <div style={{ maxWidth: 1180, margin: '0 auto' }} className="grid-hero">
-          <div style={{ borderRadius: 20, overflow: 'hidden', background: '#E8DED4', aspectRatio: '4/5', position: 'relative' }}>
+        <div style={{ maxWidth: 1180, margin: '0 auto', alignItems: 'start' }} className="grid-hero">
+          <div style={{ borderRadius: 20, overflow: 'hidden', background: '#E8DED4', aspectRatio: '3/4', position: 'relative' }}>
             {doctor?.photo && (
               <Image
-                src={urlFor(doctor.photo).width(600).height(750).fit('crop').url()}
+                src={urlFor(doctor.photo).width(700).height(933).fit('crop').url()}
                 alt={doctor.name || 'Dr. Omaima Jawed'}
                 fill
-                style={{ objectFit: 'cover' }}
+                style={{ objectFit: 'cover', objectPosition: 'top center' }}
               />
             )}
           </div>
-          <div>
+          <div style={{ paddingTop: 8 }}>
             <span className="eyebrow">Your Doctor</span>
-            <h2 style={{ fontWeight: 500, color: 'var(--text)', marginBottom: 16 }}>Dr. Omaima Jawed</h2>
-            <p style={{ fontSize: 13, fontWeight: 300, color: '#B8916A', marginBottom: 16, letterSpacing: '0.04em' }}>MBBS · Aesthetic Physician · 5 Years Experience</p>
+            <h2 style={{ fontWeight: 500, color: 'var(--text)', marginBottom: 16 }}>{doctor?.name || 'Dr. Omaima Jawed'}</h2>
+            <p style={{ fontSize: 13, fontWeight: 300, color: '#B8916A', marginBottom: 16, letterSpacing: '0.04em' }}>
+              {doctor?.credentials || 'MBBS'} · {doctor?.title || 'Aesthetic Physician'} · {doctor?.experience || 5} Years Experience
+            </p>
             <p style={{ fontSize: 14, fontWeight: 300, color: '#4A3728', lineHeight: 1.8, marginBottom: 24 }}>
-              Dr. Omaima completed her MBBS and trained in aesthetic dermatology at leading institutes. She personally leads every procedure — from your first consultation to each follow-up session.
+              {doctor?.shortBio || 'Dr. Omaima completed her MBBS and trained in aesthetic dermatology at leading institutes. She personally leads every procedure — from your first consultation to each follow-up session.'}
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 28 }}>
               {['Acne & Scar Treatment', 'Laser Procedures', 'Hair Restoration', 'Anti-Ageing', 'Chemical Peels'].map(s => (
