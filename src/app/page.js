@@ -1,14 +1,20 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { fetchHomePage, fetchSiteSettings, fetchDoctor, urlFor } from '@/sanity/client'
+import { fetchHomePage, fetchSiteSettings, fetchDoctor, fetchTreatments, urlFor } from '@/sanity/client'
 
 export const revalidate = 10
 
 export default async function HomePage() {
-  const [[page, settings], doctor] = await Promise.all([
+  const [[page, settings], doctor, sanityTreatments] = await Promise.all([
     Promise.all([fetchHomePage(), fetchSiteSettings()]).catch(() => [null, null]),
     fetchDoctor().catch(() => null),
+    fetchTreatments().catch(() => []),
   ])
+
+  // Build slug → image map from Sanity for the home page treatment cards
+  const treatmentImageMap = new Map(
+    (sanityTreatments || []).filter(t => t.slug?.current && t.image).map(t => [t.slug.current, t.image])
+  )
 
   // Fallback data
   const hero = page?.hero || {}
@@ -151,8 +157,20 @@ export default async function HomePage() {
               { name: 'GFC Hair Therapy', slug: 'gfc-hair', badge: 'HAIR', desc: 'Growth-factor concentrate therapy for thinning hair, clinically proven regrowth.', duration: '45 min' },
             ].map((t, i) => (
               <Link key={i} href={`/treatments/${t.slug}`} className="card-hover" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', background: '#fff', borderRadius: 16, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.08)' }}>
-                <div style={{ height: 160, background: '#F0E8DF', flexShrink: 0, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(184,145,106,0.4)" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <div style={{ height: 160, background: '#F0E8DF', flexShrink: 0, position: 'relative' }}>
+                  {treatmentImageMap.get(t.slug) ? (
+                    <Image
+                      src={urlFor(treatmentImageMap.get(t.slug)).width(400).height(160).fit('crop').url()}
+                      alt={t.name}
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      sizes="(max-width: 600px) 100vw, 400px"
+                    />
+                  ) : (
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(184,145,106,0.4)" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    </div>
+                  )}
                   <div style={{ position: 'absolute', top: 12, left: 12, background: 'rgba(26,17,9,0.78)', color: '#FAF7F2', fontSize: 9.5, fontWeight: 500, letterSpacing: '0.1em', padding: '3px 8px', borderRadius: 999 }}>{t.badge}</div>
                 </div>
                 <div style={{ padding: '16px 18px 20px', flex: 1, display: 'flex', flexDirection: 'column' }}>
