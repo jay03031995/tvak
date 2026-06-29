@@ -1,10 +1,14 @@
+import Image from 'next/image'
 import Link from 'next/link'
-import { fetchHomePage, fetchSiteSettings } from '@/sanity/client'
+import { fetchHomePage, fetchSiteSettings, fetchDoctor, urlFor } from '@/sanity/client'
 
 export const revalidate = 10
 
 export default async function HomePage() {
-  const [page, settings] = await Promise.all([fetchHomePage(), fetchSiteSettings()]).catch(() => [null, null])
+  const [[page, settings], doctor] = await Promise.all([
+    Promise.all([fetchHomePage(), fetchSiteSettings()]).catch(() => [null, null]),
+    fetchDoctor().catch(() => null),
+  ])
 
   // Fallback data
   const hero = page?.hero || {}
@@ -240,7 +244,16 @@ export default async function HomePage() {
       {/* DOCTOR */}
       <section style={{ padding: '72px 20px' }}>
         <div style={{ maxWidth: 1180, margin: '0 auto' }} className="grid-hero">
-          <div style={{ borderRadius: 20, overflow: 'hidden', background: '#E8DED4', aspectRatio: '4/5' }} />
+          <div style={{ borderRadius: 20, overflow: 'hidden', background: '#E8DED4', aspectRatio: '4/5', position: 'relative' }}>
+            {doctor?.photo && (
+              <Image
+                src={urlFor(doctor.photo).width(600).height(750).fit('crop').url()}
+                alt={doctor.name || 'Dr. Omaima Jawed'}
+                fill
+                style={{ objectFit: 'cover' }}
+              />
+            )}
+          </div>
           <div>
             <span className="eyebrow">Your Doctor</span>
             <h2 style={{ fontWeight: 500, color: 'var(--text)', marginBottom: 16 }}>Dr. Omaima Jawed</h2>
