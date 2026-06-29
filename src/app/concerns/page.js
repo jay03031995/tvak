@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { fetchConcerns } from '@/sanity/client'
 
-export const revalidate = 60
+export const revalidate = 10
 export const metadata = { title: 'Concerns — Tvak & Asthi by Artham' }
 
 const FALLBACK = [

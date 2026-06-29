@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { fetchDoctor } from '@/sanity/client'
 
-export const revalidate = 60
+export const revalidate = 10
 export const metadata = { title: 'Dr. Omaima Jawed — Tvak & Asthi by Artham' }
 
 export default async function DoctorPage() {

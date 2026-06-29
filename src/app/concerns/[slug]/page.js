@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { fetchConcern, fetchConcerns } from '@/sanity/client'
 
-export const revalidate = 60
+export const revalidate = 10
 
 export async function generateStaticParams() {
   const base = [
@@ -370,16 +370,18 @@ export default async function ConcernPage({ params }) {
       {/* OUR APPROACH */}
       {c.approach?.length > 0 && (
         <section style={{ padding: '64px 20px', background: '#1A2744' }}>
-          <div style={{ maxWidth: 900, margin: '0 auto' }}>
-            <span className="eyebrow" style={{ color: '#B8916A' }}>How We Treat It</span>
-            <h2 style={{ fontWeight: 500, color: '#FAF7F2', marginBottom: 36 }}>Our approach</h2>
-            <div style={{ display: 'grid', gap: 14 }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 44 }}>
+              <span className="eyebrow" style={{ color: '#B8916A' }}>How We Treat It</span>
+              <h2 style={{ fontWeight: 500, color: '#FAF7F2', marginBottom: 0 }}>Our approach</h2>
+            </div>
+            <div className="grid-2" style={{ gap: 16 }}>
               {c.approach.map((step, i) => (
-                <div key={i} style={{ display: 'flex', gap: 16, alignItems: 'flex-start', padding: '22px', background: 'rgba(255,255,255,0.06)', borderRadius: 14, border: '1px solid rgba(255,255,255,0.1)' }}>
-                  <span style={{ width: 34, height: 34, borderRadius: '50%', background: '#B8916A', color: '#fff', fontSize: 13.5, fontWeight: 500, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{step.step || i + 1}</span>
+                <div key={i} style={{ display: 'flex', gap: 18, alignItems: 'flex-start', padding: '28px 26px', background: 'rgba(255,255,255,0.06)', borderRadius: 16, border: '1px solid rgba(255,255,255,0.1)' }}>
+                  <span style={{ width: 38, height: 38, borderRadius: '50%', background: '#B8916A', color: '#fff', fontSize: 14, fontWeight: 500, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{step.step || i + 1}</span>
                   <div>
-                    <div style={{ fontSize: 14.5, fontWeight: 500, color: '#FAF7F2', marginBottom: 6 }}>{step.title}</div>
-                    <div style={{ fontSize: 13.5, fontWeight: 300, color: '#C4A998', lineHeight: 1.7 }}>{step.description}</div>
+                    <div style={{ fontSize: 15, fontWeight: 500, color: '#FAF7F2', marginBottom: 8 }}>{step.title}</div>
+                    <div style={{ fontSize: 13.5, fontWeight: 300, color: '#C4A998', lineHeight: 1.75 }}>{step.description}</div>
                   </div>
                 </div>
               ))}

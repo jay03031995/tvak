@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { fetchHomePage, fetchSiteSettings } from '@/sanity/client'
 
-export const revalidate = 60
+export const revalidate = 10
 
 export default async function HomePage() {
   const [page, settings] = await Promise.all([fetchHomePage(), fetchSiteSettings()]).catch(() => [null, null])

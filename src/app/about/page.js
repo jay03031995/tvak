@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { fetchAboutPage } from '@/sanity/client'
 
-export const revalidate = 60
+export const revalidate = 10
 export const metadata = { title: 'About — Tvak & Asthi by Artham' }
 
 export default async function AboutPage() {

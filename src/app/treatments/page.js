@@ -1,7 +1,7 @@
 import { fetchTreatments } from '@/sanity/client'
 import TreatmentsFilter from '@/components/TreatmentsFilter'
 
-export const revalidate = 60
+export const revalidate = 10
 export const metadata = { title: 'Treatments — Tvak & Asthi by Artham' }
 
 const FALLBACK = [
