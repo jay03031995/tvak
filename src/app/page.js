@@ -139,7 +139,7 @@ export default async function HomePage() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 18 }}>
             {[
-              { name: 'HydraFacial MD', slug: 'hydrafacial-md', badge: 'SKIN', desc: 'Deep-cleanse, exfoliate and hydrate in one session. Instant glow, zero downtime.', duration: '45 min' },
+              { name: 'Hydrafacial', slug: 'hydrafacial', badge: 'SKIN', desc: 'Deep-cleanse, exfoliate and hydrate in one session. Instant glow, zero downtime.', duration: '45 min' },
               { name: 'Carbon Laser Facial', slug: 'carbon-laser-facial', badge: 'LASERS', desc: 'Tightens pores, controls oil and brightens dull skin — the Hollywood peel.', duration: '30 min' },
               { name: 'Acne Clearance Program', slug: 'acne-clearance', badge: 'SIGNATURE', desc: 'A complete medical plan combining therapy, peels and devices to clear active acne.', duration: '60 min' },
               { name: 'Acne Scar Revision (MNRF)', slug: 'acne-scar-mnrf', badge: 'ACNE SCARS', desc: 'Microneedling RF to rebuild collagen and smooth pitted scars.', duration: '60 min' },
@@ -156,14 +156,14 @@ export default async function HomePage() {
                 className="card-hover reveal"
                 style={{ '--d': `${i * 50}ms`, textDecoration: 'none', display: 'flex', flexDirection: 'column', background: '#fff', borderRadius: 16, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.08)' }}
               >
-                <div style={{ height: 160, background: '#F0E8DF', flexShrink: 0, position: 'relative' }}>
+                <div style={{ height: 252, background: '#F0E8DF', flexShrink: 0, position: 'relative' }}>
                   {treatmentImageMap.get(t.slug) ? (
                     <Image
-                      src={urlFor(treatmentImageMap.get(t.slug)).width(400).height(160).fit('crop').url()}
+                      src={urlFor(treatmentImageMap.get(t.slug)).width(363).height(252).fit('crop').url()}
                       alt={t.name}
                       fill
                       style={{ objectFit: 'cover' }}
-                      sizes="(max-width: 600px) 100vw, 400px"
+                      sizes="(max-width: 600px) 100vw, 363px"
                     />
                   ) : (
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>

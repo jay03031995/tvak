@@ -29,14 +29,14 @@ export default function TreatmentsFilter({ treatments }) {
         {filtered.map((t, i) => (
           <Link key={`${active}-${i}`} href={`/treatments/${t.slug?.current || '#'}`} className="card-hover"
             style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', background: '#fff', borderRadius: 16, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.09)' }}>
-            <div style={{ height: 170, background: '#F0E8DF', flexShrink: 0, position: 'relative' }}>
+            <div style={{ height: 252, background: '#F0E8DF', flexShrink: 0, position: 'relative' }}>
               {t.image ? (
                 <Image
-                  src={urlFor(t.image).width(400).height(170).fit('crop').url()}
+                  src={urlFor(t.image).width(363).height(252).fit('crop').url()}
                   alt={t.name}
                   fill
                   style={{ objectFit: 'cover' }}
-                  sizes="(max-width: 600px) 100vw, 400px"
+                  sizes="(max-width: 600px) 100vw, 363px"
                 />
               ) : (
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
