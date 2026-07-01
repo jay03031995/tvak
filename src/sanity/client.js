@@ -46,7 +46,7 @@ export async function fetchHomePage() {
     },
     concernsSection{
       ...,
-      featured[]->{name, slug, category, iconColor, iconBg}
+      featured[]->{name, slug, category, image, heroImage, iconColor, iconBg}
     }
   }`)
 }
@@ -68,7 +68,7 @@ export async function fetchTreatment(slug) {
 
 export async function fetchConcerns() {
   return serverClient.fetch(`*[_type == "concern"] | order(order asc){
-    name, slug, category, iconColor, iconBg
+    name, slug, category, image, heroImage, iconColor, iconBg
   }`)
 }
 
