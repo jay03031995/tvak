@@ -1,5 +1,6 @@
+import Image from 'next/image'
 import Link from 'next/link'
-import { fetchTreatment, fetchTreatments } from '@/sanity/client'
+import { fetchTreatment, fetchTreatments, urlFor } from '@/sanity/client'
 
 export const revalidate = 10
 
@@ -618,39 +619,53 @@ export default async function TreatmentPage({ params }) {
 
       {/* ── 1. HERO ── */}
       <section style={{ padding: '48px 20px 44px', background: 'linear-gradient(160deg,#F5EDE4 0%,#FAF7F2 60%,#EEE8E2 100%)' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <nav style={{ fontSize: 12, color: '#9A8A7A', fontWeight: 300, marginBottom: 24, display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            <Link href="/" style={{ color: '#9A8A7A' }}>Home</Link><span>/</span>
-            <Link href="/treatments" style={{ color: '#9A8A7A' }}>Treatments</Link><span>/</span>
-            <span style={{ color: 'var(--text)' }}>{t.name}</span>
-          </nav>
-          <span className="eyebrow">{t.category}</span>
-          <h1 style={{ fontWeight: 500, fontSize: 'clamp(26px,4vw,46px)', lineHeight: 1.15, marginBottom: 16, maxWidth: 700 }}>{t.name}</h1>
-          <p style={{ fontSize: 16, fontWeight: 300, color: '#4A3728', maxWidth: 620, lineHeight: 1.85, marginBottom: 28 }}>{t.tagline || t.description}</p>
-          {t.meta && Object.keys(t.meta).length > 0 && (
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 28 }}>
-              {Object.entries(t.meta).filter(([, v]) => v).map(([k, v]) => (
-                <div key={k} style={{ background: '#fff', borderRadius: 10, padding: '10px 18px', border: '1.5px solid rgba(26,17,9,0.09)' }}>
-                  <div style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#B8916A' }}>{k}</div>
-                  <div style={{ fontSize: 13, fontWeight: 400, color: 'var(--text)', marginTop: 3 }}>{v}</div>
-                </div>
-              ))}
+        <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: t.image ? '1fr 400px' : '1fr', gap: 52, alignItems: 'center' }} className={t.image ? 'treatment-hero-grid' : ''}>
+          <div>
+            <nav style={{ fontSize: 12, color: '#9A8A7A', fontWeight: 300, marginBottom: 24, display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+              <Link href="/" style={{ color: '#9A8A7A' }}>Home</Link><span>/</span>
+              <Link href="/treatments" style={{ color: '#9A8A7A' }}>Treatments</Link><span>/</span>
+              <span style={{ color: 'var(--text)' }}>{t.name}</span>
+            </nav>
+            <span className="eyebrow">{t.category}</span>
+            <h1 style={{ fontWeight: 500, fontSize: 'clamp(26px,4vw,46px)', lineHeight: 1.15, marginBottom: 16, maxWidth: 700 }}>{t.name}</h1>
+            <p style={{ fontSize: 16, fontWeight: 300, color: '#4A3728', maxWidth: 620, lineHeight: 1.85, marginBottom: 28 }}>{t.tagline || t.description}</p>
+            {t.meta && Object.keys(t.meta).length > 0 && (
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 28 }}>
+                {Object.entries(t.meta).filter(([, v]) => v).map(([k, v]) => (
+                  <div key={k} style={{ background: '#fff', borderRadius: 10, padding: '10px 18px', border: '1.5px solid rgba(26,17,9,0.09)' }}>
+                    <div style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#B8916A' }}>{k}</div>
+                    <div style={{ fontSize: 13, fontWeight: 400, color: 'var(--text)', marginTop: 3 }}>{v}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {t.benefits?.length > 0 && (
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 32 }}>
+                {t.benefits.slice(0, 3).map((b, i) => (
+                  <span key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12.5, fontWeight: 400, color: '#1A2744', background: 'rgba(26,39,68,0.07)', padding: '6px 14px', borderRadius: 999 }}>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4A6741" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    {b}
+                  </span>
+                ))}
+              </div>
+            )}
+            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+              <Link href="/contact" style={{ background: '#1A2744', color: '#fff', fontSize: 13.5, fontWeight: 400, padding: '13px 28px', borderRadius: 999, textDecoration: 'none' }}>Book Consultation</Link>
+              <a href="tel:09811997993" style={{ background: 'transparent', color: '#1A2744', fontSize: 13.5, fontWeight: 400, padding: '13px 28px', borderRadius: 999, border: '1.5px solid rgba(26,39,68,0.2)', textDecoration: 'none' }}>Call 098119 97993</a>
             </div>
-          )}
-          {t.benefits?.length > 0 && (
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 32 }}>
-              {t.benefits.slice(0, 3).map((b, i) => (
-                <span key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12.5, fontWeight: 400, color: '#1A2744', background: 'rgba(26,39,68,0.07)', padding: '6px 14px', borderRadius: 999 }}>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4A6741" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  {b}
-                </span>
-              ))}
-            </div>
-          )}
-          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-            <Link href="/contact" style={{ background: '#1A2744', color: '#fff', fontSize: 13.5, fontWeight: 400, padding: '13px 28px', borderRadius: 999, textDecoration: 'none' }}>Book Consultation</Link>
-            <a href="tel:09811997993" style={{ background: 'transparent', color: '#1A2744', fontSize: 13.5, fontWeight: 400, padding: '13px 28px', borderRadius: 999, border: '1.5px solid rgba(26,39,68,0.2)', textDecoration: 'none' }}>Call 098119 97993</a>
           </div>
+          {t.image && (
+            <div style={{ borderRadius: 20, overflow: 'hidden', aspectRatio: '4/5', position: 'relative', background: '#E8DED4', boxShadow: '0 16px 48px rgba(26,17,9,0.12)' }}>
+              <Image
+                src={urlFor(t.image).width(600).height(750).fit('crop').url()}
+                alt={t.name}
+                fill
+                style={{ objectFit: 'cover' }}
+                priority
+                sizes="(max-width: 768px) 100vw, 400px"
+              />
+            </div>
+          )}
         </div>
       </section>
 
@@ -825,27 +840,68 @@ export default async function TreatmentPage({ params }) {
             </p>
           )}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 20, marginBottom: 32 }}>
-            {[1, 2, 3].map(i => (
-              <div key={i} style={{ background: '#FAF7F2', borderRadius: 16, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.08)' }}>
-                <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', height: 210, background: '#F0E8DF' }}>
-                  <div style={{ background: '#E2D8CE', display: 'flex', alignItems: 'flex-end', padding: '10px' }}>
-                    <span style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(255,255,255,0.85)', color: '#4A3728', padding: '4px 8px', borderRadius: 4 }}>Before</span>
-                  </div>
-                  <div style={{ background: '#C8BDB0', display: 'flex', alignItems: 'flex-end', padding: '10px', justifyContent: 'flex-end' }}>
-                    <span style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(26,39,68,0.8)', color: '#FAF7F2', padding: '4px 8px', borderRadius: 4 }}>After</span>
-                  </div>
-                  <div style={{ position: 'absolute', left: '50%', top: 0, bottom: 0, width: 2, background: '#fff', transform: 'translateX(-50%)' }}>
-                    <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 28, height: 28, borderRadius: '50%', background: '#fff', boxShadow: '0 2px 8px rgba(0,0,0,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4A3728" strokeWidth="2.5"><path d="M9 18l-6-6 6-6M15 6l6 6-6 6"/></svg>
+            {t.beforeAfter?.length > 0
+              ? t.beforeAfter.map((ba, i) => (
+                <div key={i} style={{ background: '#FAF7F2', borderRadius: 16, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.08)' }}>
+                  <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', height: 220 }}>
+                    <div style={{ position: 'relative', background: '#E2D8CE' }}>
+                      {ba.before && (
+                        <Image
+                          src={urlFor(ba.before).width(300).height(220).fit('crop').url()}
+                          alt="Before"
+                          fill
+                          style={{ objectFit: 'cover' }}
+                          sizes="150px"
+                        />
+                      )}
+                      <span style={{ position: 'absolute', bottom: 8, left: 8, fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(255,255,255,0.9)', color: '#4A3728', padding: '3px 8px', borderRadius: 4 }}>Before</span>
+                    </div>
+                    <div style={{ position: 'relative', background: '#C8BDB0' }}>
+                      {ba.after && (
+                        <Image
+                          src={urlFor(ba.after).width(300).height(220).fit('crop').url()}
+                          alt="After"
+                          fill
+                          style={{ objectFit: 'cover' }}
+                          sizes="150px"
+                        />
+                      )}
+                      <span style={{ position: 'absolute', bottom: 8, right: 8, fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(26,39,68,0.85)', color: '#FAF7F2', padding: '3px 8px', borderRadius: 4 }}>After</span>
+                    </div>
+                    <div style={{ position: 'absolute', left: '50%', top: 0, bottom: 0, width: 2, background: '#fff', transform: 'translateX(-50%)', pointerEvents: 'none' }}>
+                      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 28, height: 28, borderRadius: '50%', background: '#fff', boxShadow: '0 2px 8px rgba(0,0,0,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4A3728" strokeWidth="2.5"><path d="M9 18l-6-6 6-6M15 6l6 6-6 6"/></svg>
+                      </div>
                     </div>
                   </div>
+                  <div style={{ padding: '14px 16px 18px' }}>
+                    <p style={{ fontSize: 12.5, fontWeight: 400, color: '#5A4A3A', margin: 0 }}>{ba.label || `Patient result · ${ba.sessions || t.meta?.Sessions || '3–6 sessions'}`}</p>
+                    <p style={{ fontSize: 11, fontWeight: 300, color: '#B8A898', marginTop: 4 }}>Individual results may vary.</p>
+                  </div>
                 </div>
-                <div style={{ padding: '14px 16px 18px' }}>
-                  <p style={{ fontSize: 12.5, fontWeight: 400, color: '#5A4A3A', margin: 0 }}>Patient result · {t.meta?.Sessions || '3–6 sessions'}</p>
-                  <p style={{ fontSize: 11, fontWeight: 300, color: '#B8A898', marginTop: 4 }}>Individual results may vary.</p>
+              ))
+              : [1, 2, 3].map(i => (
+                <div key={i} style={{ background: '#FAF7F2', borderRadius: 16, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.08)' }}>
+                  <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', height: 210, background: '#F0E8DF' }}>
+                    <div style={{ background: '#E2D8CE', display: 'flex', alignItems: 'flex-end', padding: '10px' }}>
+                      <span style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(255,255,255,0.85)', color: '#4A3728', padding: '4px 8px', borderRadius: 4 }}>Before</span>
+                    </div>
+                    <div style={{ background: '#C8BDB0', display: 'flex', alignItems: 'flex-end', padding: '10px', justifyContent: 'flex-end' }}>
+                      <span style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(26,39,68,0.8)', color: '#FAF7F2', padding: '4px 8px', borderRadius: 4 }}>After</span>
+                    </div>
+                    <div style={{ position: 'absolute', left: '50%', top: 0, bottom: 0, width: 2, background: '#fff', transform: 'translateX(-50%)' }}>
+                      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 28, height: 28, borderRadius: '50%', background: '#fff', boxShadow: '0 2px 8px rgba(0,0,0,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4A3728" strokeWidth="2.5"><path d="M9 18l-6-6 6-6M15 6l6 6-6 6"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ padding: '14px 16px 18px' }}>
+                    <p style={{ fontSize: 12.5, fontWeight: 400, color: '#5A4A3A', margin: 0 }}>Patient result · {t.meta?.Sessions || '3–6 sessions'}</p>
+                    <p style={{ fontSize: 11, fontWeight: 300, color: '#B8A898', marginTop: 4 }}>Individual results may vary.</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            }
           </div>
           <div style={{ textAlign: 'center' }}>
             <Link href="/before-after" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 400, color: '#1A2744', border: '1.5px solid rgba(26,39,68,0.2)', padding: '11px 24px', borderRadius: 999, textDecoration: 'none' }}>
@@ -920,9 +976,27 @@ export default async function TreatmentPage({ params }) {
             <h2 style={{ fontWeight: 500, marginBottom: 32 }}>Related Treatments</h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 16 }}>
               {t.relatedTreatments.map((rt, i) => (
-                <Link key={i} href={`/treatments/${rt.slug}`} style={{ textDecoration: 'none' }}>
-                  <div style={{ background: '#fff', borderRadius: 14, padding: '22px 20px', border: '1.5px solid rgba(26,17,9,0.09)', height: '100%', display: 'flex', flexDirection: 'column', gap: 8 }}>
-                    <div style={{ fontSize: 14, fontWeight: 500, color: 'var(--text)' }}>{rt.name}</div>
+                <Link key={i} href={`/treatments/${rt.slug?.current || rt.slug}`} className="card-hover" style={{ textDecoration: 'none', background: '#fff', borderRadius: 16, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.09)', display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ height: 160, background: '#F0E8DF', position: 'relative', flexShrink: 0 }}>
+                    {rt.image ? (
+                      <Image
+                        src={urlFor(rt.image).width(400).height(160).fit('crop').url()}
+                        alt={rt.name}
+                        fill
+                        style={{ objectFit: 'cover' }}
+                        sizes="300px"
+                      />
+                    ) : (
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(184,145,106,0.35)" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                      </div>
+                    )}
+                    {rt.category && (
+                      <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(26,17,9,0.72)', color: '#FAF7F2', fontSize: 9.5, fontWeight: 500, letterSpacing: '0.1em', padding: '3px 8px', borderRadius: 999 }}>{rt.category.toUpperCase()}</div>
+                    )}
+                  </div>
+                  <div style={{ padding: '16px 18px 18px', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ fontSize: 14, fontWeight: 500, color: 'var(--text)', marginBottom: 6 }}>{rt.name}</div>
                     <div style={{ fontSize: 12, fontWeight: 300, color: '#B8916A', marginTop: 'auto' }}>Explore treatment →</div>
                   </div>
                 </Link>

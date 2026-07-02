@@ -1,4 +1,4 @@
-import { Poppins } from 'next/font/google'
+import { Poppins, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import SiteShell from '@/components/SiteShell'
 
@@ -9,6 +9,13 @@ const poppins = Poppins({
   display: 'swap',
 })
 
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['400', '600', '700'],
+  variable: '--font-playfair',
+  display: 'swap',
+})
+
 export const metadata = {
   title: 'Tvak & Asthi by Artham — Aesthetic Dermatology, Noida',
   description: 'Doctor-led skin, hair and aesthetic clinic in Noida. Evidence-based treatments under Dr. Omaima Jawed, MBBS Aesthetic Physician.',
@@ -16,7 +23,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={poppins.variable}>
+    <html lang="en" className={`${poppins.variable} ${playfair.variable}`}>
       <body>
         <SiteShell>{children}</SiteShell>
       </body>

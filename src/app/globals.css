@@ -1,23 +1,34 @@
 @import "tailwindcss";
 
+/* ── Artham Brand Palette ── */
 :root {
-  --navy:     #1A2744;
-  --rose:     #C4847E;
-  --gold:     #B8916A;
-  --cream:    #FAF7F2;
-  --warm:     #F5EDE4;
-  --brown:    #3B2210;
-  --text:     #1A1109;
-  --muted:    #7A6A5A;
-  --border:   rgba(26,17,9,0.10);
+  /* Core brand colours */
+  --brown:    #543213;   /* Jambalaya — dark anchor, type, weight */
+  --bronze:   #844d28;   /* Burma Teak — warmth, primary accent */
+  --gold:     #feb847;   /* Coronation Gold — signal, highlights */
+  --cream:    #efdfc8;   /* Arabian White — background */
+  --warm:     #f1d0b4;   /* Summer Peach — warm section fields */
+  --charcoal: #483f37;   /* Armadillo — steadiness, professionalism */
+
+  /* Semantic tokens */
+  --text:     #3d3028;   /* body text — warm near-black */
+  --muted:    #7a6858;   /* secondary / caption text */
+  --border:   rgba(84,50,19,0.12);
+
+  /* Legacy aliases kept for inline JSX styles */
+  --navy:     #543213;   /* was navy blue → Jambalaya */
+  --rose:     #844d28;   /* was rose pink → Burma Teak */
 }
 
 @theme inline {
-  --font-sans: var(--font-poppins);
-  --color-cream: var(--cream);
-  --color-navy: var(--navy);
-  --color-rose: var(--rose);
-  --color-gold: var(--gold);
+  --font-sans:     var(--font-poppins);
+  --font-display:  var(--font-playfair);
+  --color-cream:   var(--cream);
+  --color-warm:    var(--warm);
+  --color-bronze:  var(--bronze);
+  --color-gold:    var(--gold);
+  --color-brown:   var(--brown);
+  --color-charcoal: var(--charcoal);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -35,25 +46,36 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5 {
+/* Headlines use Playfair Display per brand guide */
+h1, h2 {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--brown);
+}
+
+h3, h4, h5 {
   font-family: var(--font-poppins), system-ui, sans-serif;
   font-weight: 500;
   line-height: 1.2;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   margin: 0;
+  color: var(--brown);
 }
 
-h1 { font-size: clamp(26px, 4vw, 44px); }
-h2 { font-size: clamp(20px, 3vw, 32px); }
-h3 { font-size: clamp(15px, 2vw, 20px); font-weight: 500; }
+h1 { font-size: clamp(26px, 4vw, 46px); }
+h2 { font-size: clamp(20px, 3vw, 34px); }
+h3 { font-size: clamp(15px, 2vw, 20px); }
 
 p { margin: 0; font-size: 14px; font-weight: 300; line-height: 1.75; color: var(--muted); }
 
 a { color: inherit; text-decoration: none; }
 
-::selection { background: var(--rose); color: #fff; }
+::selection { background: var(--bronze); color: #fff; }
 
-/* Scroll reveal — --d CSS var sets stagger delay via transition-delay longhand */
+/* ── Scroll reveal ── */
 .reveal {
   opacity: 0;
   transform: translateY(20px);
@@ -75,7 +97,7 @@ a { color: inherit; text-decoration: none; }
 }
 .card-hover:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 36px rgba(26,17,9,0.10);
+  box-shadow: 0 12px 36px rgba(84,50,19,0.13);
 }
 
 /* ── Responsive layout grids ── */
@@ -91,6 +113,7 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 900px) {
   .grid-doctor  { grid-template-columns: 1fr; }
   .grid-contact { grid-template-columns: 1fr; }
+  .treatment-hero-grid { grid-template-columns: 1fr !important; }
 }
 
 @media (max-width: 768px) {
@@ -101,10 +124,7 @@ a { color: inherit; text-decoration: none; }
   .grid-expertise { grid-template-columns: 1fr; }
   .grid-stats   { gap: 28px; }
 
-  /* Section padding reduction on mobile */
   .sec { padding-left: 16px !important; padding-right: 16px !important; }
-
-  /* Hero image grid — hide on mobile */
   .hero-imgs { display: none !important; }
 }
 
@@ -148,13 +168,13 @@ a { color: inherit; text-decoration: none; }
 .hb-1 { animation: fadeUp 0.5s cubic-bezier(.22,.68,0,.99) 0.85s both; }
 .hb-2 { animation: fadeUp 0.5s cubic-bezier(.22,.68,0,.99) 0.95s both; }
 
-/* ── Section eyebrow ── */
+/* ── Section eyebrow tag ── */
 .eyebrow {
-  font-size: 11px;
-  font-weight: 500;
+  font-size: 10.5px;
+  font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--bronze);
   display: block;
   margin-bottom: 10px;
 }

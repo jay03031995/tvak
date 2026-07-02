@@ -50,13 +50,13 @@ export default async function HomePage() {
 
       {/* PROMO BANNER */}
       {settings?.promoBanner?.enabled && (
-        <div style={{ background: '#1A2744', padding: '10px 20px', textAlign: 'center' }}>
-          <p style={{ margin: 0, fontSize: 13, fontWeight: 300, color: '#FAF7F2' }}>
+        <div style={{ background: '#543213', padding: '10px 20px', textAlign: 'center' }}>
+          <p style={{ margin: 0, fontSize: 13, fontWeight: 300, color: '#efdfc8' }}>
             <strong style={{ fontWeight: 500 }}>{settings.promoBanner.label}</strong>{' '}
             {settings.promoBanner.text}
             {settings.promoBanner.linkText && (
               <Link href={settings.promoBanner.linkUrl || '/contact'}
-                style={{ color: '#B8916A', fontWeight: 400, marginLeft: 8 }}>
+                style={{ color: '#feb847', fontWeight: 500, marginLeft: 8 }}>
                 {settings.promoBanner.linkText} →
               </Link>
             )}
@@ -65,29 +65,29 @@ export default async function HomePage() {
       )}
 
       {/* HERO */}
-      <section style={{ padding: '72px 20px 64px', background: 'linear-gradient(160deg, #FAF7F2 55%, #F5EDE4)' }}>
+      <section style={{ padding: '72px 20px 64px', background: 'linear-gradient(160deg, #efdfc8 55%, #f1d0b4)' }}>
         <div style={{ maxWidth: 1180, margin: '0 auto' }} className="grid-hero">
           {/* Left — staggered text entrance via .au */}
           <div className="au">
             <span className="eyebrow">Dermatology · Aesthetics · Trichology</span>
             <h1 style={{ fontWeight: 500, fontSize: 'clamp(28px,4.5vw,50px)', lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: 20, color: 'var(--text)' }}>
               {hero.headingLine1 || 'The difference between'}{' '}
-              <em style={{ fontStyle: 'italic', fontWeight: 400, color: '#4A6741' }}>
+              <em style={{ fontStyle: 'italic', fontWeight: 400, color: '#844d28' }}>
                 {hero.headingItalic || 'covering concerns'}
               </em>{' '}
               {hero.headingLine2 || 'and'}{' '}
-              <em style={{ fontStyle: 'italic', fontWeight: 400, color: '#4A6741' }}>
+              <em style={{ fontStyle: 'italic', fontWeight: 400, color: '#844d28' }}>
                 {hero.headingItalic2 || 'correcting them.'}
               </em>
             </h1>
-            <p style={{ fontSize: 14, fontWeight: 300, lineHeight: 1.8, color: '#4A3728', maxWidth: 440, marginBottom: 32 }}>
+            <p style={{ fontSize: 14, fontWeight: 300, lineHeight: 1.8, color: '#543213', maxWidth: 440, marginBottom: 32 }}>
               {hero.subtext || "Noida's MD-led aesthetic clinic. Evidence-based care for skin, hair and ageing concerns — always under Dr. Omaima's expert eye."}
             </p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 44 }}>
-              <Link href="/contact" style={{ background: '#1A1109', color: '#FAF7F2', fontSize: 13, fontWeight: 400, padding: '13px 28px', borderRadius: 999, textDecoration: 'none', transition: 'background .18s' }}>
+              <Link href="/contact" style={{ background: '#543213', color: '#efdfc8', fontSize: 13, fontWeight: 500, padding: '13px 28px', borderRadius: 999, textDecoration: 'none', transition: 'background .18s' }}>
                 {hero.ctaPrimary || 'Book Consultation'}
               </Link>
-              <Link href="/treatments" style={{ background: 'transparent', color: '#1A1109', fontSize: 13, fontWeight: 400, padding: '13px 28px', borderRadius: 999, border: '1.5px solid rgba(26,17,9,0.2)', textDecoration: 'none' }}>
+              <Link href="/treatments" style={{ background: 'transparent', color: '#543213', fontSize: 13, fontWeight: 400, padding: '13px 28px', borderRadius: 999, border: '1.5px solid rgba(84,50,19,0.25)', textDecoration: 'none' }}>
                 {hero.ctaSecondary || 'Explore Treatments'}
               </Link>
             </div>
@@ -103,7 +103,7 @@ export default async function HomePage() {
               { img: page?.heroImage3, ratio: '1/1', cls: 'hi-3' },
               { img: page?.heroImage4, ratio: '3/4', cls: 'hi-4' },
             ].map(({ img, ratio, cls }, i) => (
-              <div key={i} className={cls} style={{ borderRadius: 16, overflow: 'hidden', background: '#E8DED4', aspectRatio: ratio, position: 'relative' }}>
+              <div key={i} className={cls} style={{ borderRadius: 16, overflow: 'hidden', background: '#e8d4be', aspectRatio: ratio, position: 'relative' }}>
                 {img && (
                   <Image
                     src={urlFor(img).width(400).fit('crop').url()}
@@ -135,7 +135,7 @@ export default async function HomePage() {
               <span className="eyebrow">{page?.treatmentsSection?.eyebrow || 'Our Services'}</span>
               <h2 style={{ fontWeight: 500, color: 'var(--text)', margin: 0 }}>{page?.treatmentsSection?.heading || 'Treatments we offer'}</h2>
             </div>
-            <Link href="/treatments" style={{ fontSize: 13, fontWeight: 400, color: '#1A2744', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>View all treatments →</Link>
+            <Link href="/treatments" style={{ fontSize: 13, fontWeight: 400, color: '#543213', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>View all treatments →</Link>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 18 }}>
             {[
@@ -154,42 +154,47 @@ export default async function HomePage() {
                 key={i}
                 href={`/treatments/${t.slug}`}
                 className="card-hover reveal"
-                style={{ '--d': `${i * 50}ms`, textDecoration: 'none', display: 'flex', flexDirection: 'column', background: '#fff', borderRadius: 16, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.08)' }}
+                style={{ '--d': `${i * 50}ms`, textDecoration: 'none', display: 'flex', flexDirection: 'column', background: '#fff', borderRadius: 20, overflow: 'hidden', border: '1.5px solid rgba(84,50,19,0.1)', boxShadow: '0 2px 12px rgba(84,50,19,0.06)' }}
               >
-                <div style={{ height: 160, background: '#F0E8DF', flexShrink: 0, position: 'relative' }}>
+                {/* Tall image */}
+                <div style={{ height: 240, background: '#e8d4be', flexShrink: 0, position: 'relative' }}>
                   {treatmentImageMap.get(t.slug) ? (
                     <Image
-                      src={urlFor(treatmentImageMap.get(t.slug)).width(400).height(160).fit('crop').url()}
+                      src={urlFor(treatmentImageMap.get(t.slug)).width(480).height(240).fit('crop').url()}
                       alt={t.name}
                       fill
                       style={{ objectFit: 'cover' }}
-                      sizes="(max-width: 600px) 100vw, 400px"
+                      sizes="(max-width: 600px) 100vw, 480px"
                     />
                   ) : (
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(184,145,106,0.4)" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(132,77,40,0.3)" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                     </div>
                   )}
-                  <div style={{ position: 'absolute', top: 12, left: 12, background: 'rgba(26,17,9,0.78)', color: '#FAF7F2', fontSize: 9.5, fontWeight: 500, letterSpacing: '0.1em', padding: '3px 8px', borderRadius: 999 }}>{t.badge}</div>
+                  {/* White pill badge */}
+                  <div style={{ position: 'absolute', top: 14, left: 14, background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(4px)', color: '#543213', fontSize: 9.5, fontWeight: 600, letterSpacing: '0.12em', padding: '4px 10px', borderRadius: 999 }}>{t.badge}</div>
                 </div>
-                <div style={{ padding: '16px 18px 20px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                  <h3 style={{ fontWeight: 500, fontSize: 14.5, color: 'var(--text)', marginBottom: 7, lineHeight: 1.3 }}>{t.name}</h3>
-                  <p style={{ fontSize: 12.5, fontWeight: 300, color: '#7A6A5A', lineHeight: 1.65, flex: 1 }}>{t.desc}</p>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 14, paddingTop: 12, borderTop: '1px solid rgba(26,17,9,0.07)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 12, fontWeight: 300, color: '#9A8A7A' }}>
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#9A8A7A" strokeWidth="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+
+                {/* Body */}
+                <div style={{ padding: '18px 20px 20px', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                  <h3 style={{ fontWeight: 600, fontSize: 15, color: 'var(--brown)', marginBottom: 8, lineHeight: 1.25 }}>{t.name}</h3>
+                  <p style={{ fontSize: 12.5, fontWeight: 300, color: '#7a6858', lineHeight: 1.65, flex: 1, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{t.desc}</p>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 16, paddingTop: 14, borderTop: '1px solid rgba(84,50,19,0.08)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 300, color: '#7a6858' }}>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#7a6858" strokeWidth="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                       {t.duration}
                     </div>
-                    <span style={{ fontSize: 12, fontWeight: 400, color: '#1A2744', display: 'flex', alignItems: 'center', gap: 3 }}>Explore →</span>
+                    {/* Pill button */}
+                    <span style={{ fontSize: 12.5, fontWeight: 500, color: '#543213', background: '#f1d0b4', padding: '7px 16px', borderRadius: 999 }}>Explore →</span>
                   </div>
                 </div>
               </Link>
             ))}
-            <Link href="/treatments" className="card-hover reveal" style={{ '--d': '500ms', textDecoration: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', background: '#3B2210', borderRadius: 16, overflow: 'hidden', minHeight: 280, padding: '28px 24px', position: 'relative' }}>
-              <div style={{ position: 'absolute', top: 20, left: 20, fontSize: 10.5, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#B8916A' }}>15 TREATMENTS</div>
-              <h3 style={{ fontWeight: 400, fontSize: 22, color: '#FAF7F2', fontStyle: 'italic', lineHeight: 1.2, marginBottom: 20 }}>Explore the full menu</h3>
-              <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'rgba(255,255,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FAF7F2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <Link href="/treatments" className="card-hover reveal" style={{ '--d': '500ms', textDecoration: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', background: '#543213', borderRadius: 20, overflow: 'hidden', minHeight: 280, padding: '28px 24px', position: 'relative' }}>
+              <div style={{ position: 'absolute', top: 20, left: 20, fontSize: 10.5, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#feb847' }}>15 TREATMENTS</div>
+              <h3 style={{ fontWeight: 400, fontSize: 22, color: '#efdfc8', fontStyle: 'italic', lineHeight: 1.2, marginBottom: 20 }}>Explore the full menu</h3>
+              <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#efdfc8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </div>
             </Link>
           </div>
@@ -197,14 +202,14 @@ export default async function HomePage() {
       </section>
 
       {/* BROWSE BY CONCERN */}
-      <section style={{ padding: '72px 20px', background: '#FAF7F2' }}>
+      <section style={{ padding: '72px 20px', background: '#efdfc8' }}>
         <div style={{ maxWidth: 1180, margin: '0 auto' }}>
           <div className="reveal" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 40, flexWrap: 'wrap', gap: 12 }}>
             <div>
               <span className="eyebrow">{page?.concernsSection?.eyebrow || 'Browse by Concern'}</span>
               <h2 style={{ fontWeight: 500, color: 'var(--text)', margin: 0 }}>{page?.concernsSection?.heading || 'New & popular concerns'}</h2>
             </div>
-            <Link href="/concerns" style={{ fontSize: 13, fontWeight: 400, color: '#1A2744', textDecoration: 'none' }}>See all concerns →</Link>
+            <Link href="/concerns" style={{ fontSize: 13, fontWeight: 400, color: '#543213', textDecoration: 'none' }}>See all concerns →</Link>
           </div>
           <div className="grid-3">
             {[
@@ -227,15 +232,15 @@ export default async function HomePage() {
               <div key={ci} className="reveal" style={{ '--d': `${ci * 100}ms` }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14, paddingBottom: 12, borderBottom: '1.5px solid rgba(26,17,9,0.1)' }}>
                   <h3 style={{ fontSize: 15, fontWeight: 500, color: 'var(--text)', margin: 0 }}>{col.cat}</h3>
-                  <Link href="/concerns" style={{ fontSize: 12, color: '#9A8A7A', textDecoration: 'none' }}>→</Link>
+                  <Link href="/concerns" style={{ fontSize: 12, color: '#7a6858', textDecoration: 'none' }}>→</Link>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {col.items.map((item, ii) => (
                     <Link key={ii} href={`/concerns/${item.slug}`} className="card-hover" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 12, padding: '14px 16px', background: '#fff', borderRadius: 12, border: '1.5px solid rgba(26,17,9,0.08)' }}>
-                      <div style={{ width: 34, height: 34, borderRadius: 9, background: '#F5EDE4', flexShrink: 0 }} />
+                      <div style={{ width: 34, height: 34, borderRadius: 9, background: '#efdfc8', border: '1px solid rgba(84,50,19,0.1)', flexShrink: 0 }} />
                       <div style={{ flex: 1 }}>
                         <div style={{ fontSize: 13.5, fontWeight: 400, color: 'var(--text)' }}>{item.name}</div>
-                        <div style={{ fontSize: 11.5, fontWeight: 300, color: '#9A8A7A', marginTop: 2 }}>{item.count} treatments</div>
+                        <div style={{ fontSize: 11.5, fontWeight: 300, color: '#7a6858', marginTop: 2 }}>{item.count} treatments</div>
                       </div>
                     </Link>
                   ))}
@@ -247,7 +252,7 @@ export default async function HomePage() {
       </section>
 
       {/* CURRENT OFFERS */}
-      <section style={{ padding: '72px 20px', background: '#F5EDE4' }}>
+      <section style={{ padding: '72px 20px', background: '#f1d0b4' }}>
         <div style={{ maxWidth: 1180, margin: '0 auto' }}>
           <div className="reveal" style={{ textAlign: 'center', marginBottom: 40 }}>
             <span className="eyebrow">Offers & Promotions</span>
@@ -255,15 +260,15 @@ export default async function HomePage() {
           </div>
           <div className="grid-2">
             {[
-              { bg: '#1A2744', eyebrow: 'Monsoon Special', heading: '20% off Acne & Scar treatments', sub: 'Valid through July 2026. Book now to lock in the offer.', btnBg: '#B8916A', btn: 'Claim offer →', delay: '0ms', subColor: '#A0B4C8' },
-              { bg: '#3B2210', eyebrow: 'New Patient Offer', heading: 'Free consultation for first-timers', sub: 'New to Tvak? Your first dermatologist consultation is on us.', btnBg: '#C4847E', btn: 'Book free consult →', delay: '100ms', subColor: '#C4A998' },
+              { bg: '#543213', eyebrow: 'Monsoon Special', heading: '20% off Acne & Scar treatments', sub: 'Valid through July 2026. Book now to lock in the offer.', btnBg: '#feb847', btn: 'Claim offer →', delay: '0ms', subColor: '#c8b09a' },
+              { bg: '#844d28', eyebrow: 'New Patient Offer', heading: 'Free consultation for first-timers', sub: 'New to Tvak? Your first dermatologist consultation is on us.', btnBg: '#feb847', btn: 'Book free consult →', delay: '100ms', subColor: '#e8d0b4' },
             ].map((o, i) => (
               <div key={i} className="reveal" style={{ '--d': o.delay, background: o.bg, borderRadius: 20, padding: '36px 32px', position: 'relative', overflow: 'hidden' }}>
                 <div style={{ position: 'absolute', top: -20, right: -20, width: 120, height: 120, borderRadius: '50%', background: 'rgba(255,255,255,0.06)' }} />
-                <div style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#B8916A', marginBottom: 16 }}>{o.eyebrow}</div>
-                <h3 style={{ fontWeight: 500, fontSize: 22, color: '#FAF7F2', marginBottom: 10, lineHeight: 1.2 }}>{o.heading}</h3>
+                <div style={{ fontSize: 10.5, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#feb847', marginBottom: 16 }}>{o.eyebrow}</div>
+                <h3 style={{ fontWeight: 600, fontSize: 22, color: '#efdfc8', marginBottom: 10, lineHeight: 1.2 }}>{o.heading}</h3>
                 <p style={{ fontSize: 13.5, fontWeight: 300, color: o.subColor, marginBottom: 28, lineHeight: 1.7 }}>{o.sub}</p>
-                <Link href="/contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: o.btnBg, color: '#fff', fontSize: 13, fontWeight: 400, padding: '11px 22px', borderRadius: 999, textDecoration: 'none' }}>{o.btn}</Link>
+                <Link href="/contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: o.btnBg, color: '#543213', fontSize: 13, fontWeight: 500, padding: '11px 22px', borderRadius: 999, textDecoration: 'none' }}>{o.btn}</Link>
               </div>
             ))}
           </div>
@@ -273,7 +278,7 @@ export default async function HomePage() {
       {/* DOCTOR */}
       <section style={{ padding: '72px 20px' }}>
         <div style={{ maxWidth: 1180, margin: '0 auto', alignItems: 'start' }} className="grid-hero">
-          <div className="reveal" style={{ borderRadius: 20, overflow: 'hidden', background: '#E8DED4', aspectRatio: '3/4', position: 'relative' }}>
+          <div className="reveal" style={{ borderRadius: 20, overflow: 'hidden', background: '#e8d4be', aspectRatio: '3/4', position: 'relative' }}>
             {doctor?.photo && (
               <Image
                 src={urlFor(doctor.photo).width(700).height(933).fit('crop').url()}
@@ -286,18 +291,18 @@ export default async function HomePage() {
           <div className="reveal" style={{ '--d': '150ms', paddingTop: 8 }}>
             <span className="eyebrow">Your Doctor</span>
             <h2 style={{ fontWeight: 500, color: 'var(--text)', marginBottom: 16 }}>{doctor?.name || 'Dr. Omaima Jawed'}</h2>
-            <p style={{ fontSize: 13, fontWeight: 300, color: '#B8916A', marginBottom: 16, letterSpacing: '0.04em' }}>
+            <p style={{ fontSize: 13, fontWeight: 300, color: '#844d28', marginBottom: 16, letterSpacing: '0.04em' }}>
               {doctor?.credentials || 'MBBS'} · {doctor?.title || 'Aesthetic Physician'} · {doctor?.experience || 5} Years Experience
             </p>
-            <p style={{ fontSize: 14, fontWeight: 300, color: '#4A3728', lineHeight: 1.8, marginBottom: 24 }}>
+            <p style={{ fontSize: 14, fontWeight: 300, color: '#543213', lineHeight: 1.8, marginBottom: 24 }}>
               {doctor?.shortBio || 'Dr. Omaima completed her MBBS and trained in aesthetic dermatology at leading institutes. She personally leads every procedure — from your first consultation to each follow-up session.'}
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 28 }}>
               {['Acne & Scar Treatment', 'Laser Procedures', 'Hair Restoration', 'Anti-Ageing', 'Chemical Peels'].map((s, si) => (
-                <span key={s} style={{ fontSize: 12, fontWeight: 400, color: '#4A3728', background: '#F5EDE4', padding: '5px 12px', borderRadius: 999, border: '1px solid rgba(26,17,9,0.1)', animation: `fadeUp 0.4s cubic-bezier(.22,.68,0,.99) ${si * 60 + 200}ms both` }}>{s}</span>
+                <span key={s} style={{ fontSize: 12, fontWeight: 400, color: '#543213', background: '#f1d0b4', padding: '5px 12px', borderRadius: 999, border: '1px solid rgba(84,50,19,0.15)', animation: `fadeUp 0.4s cubic-bezier(.22,.68,0,.99) ${si * 60 + 200}ms both` }}>{s}</span>
               ))}
             </div>
-            <Link href="/doctor" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 400, color: '#fff', background: '#1A2744', padding: '12px 26px', borderRadius: 999, textDecoration: 'none' }}>
+            <Link href="/doctor" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 500, color: '#efdfc8', background: '#543213', padding: '12px 26px', borderRadius: 999, textDecoration: 'none' }}>
               Full Profile →
             </Link>
           </div>
@@ -312,26 +317,26 @@ export default async function HomePage() {
               <span className="eyebrow">Real Results</span>
               <h2 style={{ fontWeight: 500, color: 'var(--text)', margin: 0 }}>Before & After</h2>
             </div>
-            <Link href="/before-after" style={{ fontSize: 13, fontWeight: 400, color: '#1A2744', textDecoration: 'none' }}>View all results →</Link>
+            <Link href="/before-after" style={{ fontSize: 13, fontWeight: 400, color: '#543213', textDecoration: 'none' }}>View all results →</Link>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 20 }}>
             {[
-              { treatment: 'Acne Clearance Program', result: 'Active acne cleared in 6 sessions', weeks: '8 weeks', cat: 'Acne & Scars', slug: 'acne-clearance', accent: '#FFF0EE', dot: '#C4847E' },
-              { treatment: 'Acne Scar Revision MNRF', result: 'Pitted scars visibly reduced', weeks: '12 weeks', cat: 'Acne & Scars', slug: 'acne-scar-mnrf', accent: '#F5EDE4', dot: '#B8916A' },
+              { treatment: 'Acne Clearance Program', result: 'Active acne cleared in 6 sessions', weeks: '8 weeks', cat: 'Acne & Scars', slug: 'acne-clearance', accent: '#FFF0EE', dot: '#844d28' },
+              { treatment: 'Acne Scar Revision MNRF', result: 'Pitted scars visibly reduced', weeks: '12 weeks', cat: 'Acne & Scars', slug: 'acne-scar-mnrf', accent: '#f1d0b4', dot: '#844d28' },
               { treatment: 'Melasma Treatment', result: 'Dark patches significantly faded', weeks: '10 weeks', cat: 'Pigmentation', slug: 'melasma', accent: '#EEF6FF', dot: '#6B9EC7' },
               { treatment: 'PRP Hair Restoration', result: 'Visible density improvement', weeks: '16 weeks', cat: 'Hair Restoration', slug: 'prp-hair', accent: '#EEFAF2', dot: '#2E7D52' },
             ].map((item, i) => (
               <Link key={i} href={`/treatments/${item.slug}`} className="card-hover reveal" style={{ '--d': `${i * 80}ms`, textDecoration: 'none', background: '#fff', borderRadius: 18, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.08)' }}>
-                <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', height: 200, background: '#F0E8DF' }}>
+                <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', height: 200, background: '#f1d0b4' }}>
                   <div style={{ background: '#E2D8CE', display: 'flex', alignItems: 'flex-end', padding: '10px', justifyContent: 'flex-start' }}>
-                    <span style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(255,255,255,0.85)', color: '#4A3728', padding: '4px 8px', borderRadius: 4 }}>Before</span>
+                    <span style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(255,255,255,0.85)', color: '#543213', padding: '4px 8px', borderRadius: 4 }}>Before</span>
                   </div>
                   <div style={{ background: '#D4C9BC', display: 'flex', alignItems: 'flex-end', padding: '10px', justifyContent: 'flex-end' }}>
-                    <span style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(26,39,68,0.8)', color: '#FAF7F2', padding: '4px 8px', borderRadius: 4 }}>After</span>
+                    <span style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(84,50,19,0.85)', color: '#efdfc8', padding: '4px 8px', borderRadius: 4 }}>After</span>
                   </div>
                   <div style={{ position: 'absolute', left: '50%', top: 0, bottom: 0, width: 2, background: '#fff', transform: 'translateX(-50%)' }}>
                     <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 28, height: 28, borderRadius: '50%', background: '#fff', boxShadow: '0 2px 8px rgba(0,0,0,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4A3728" strokeWidth="2.5"><path d="M9 18l-6-6 6-6M15 6l6 6-6 6"/></svg>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#543213" strokeWidth="2.5"><path d="M9 18l-6-6 6-6M15 6l6 6-6 6"/></svg>
                     </div>
                   </div>
                   <div style={{ position: 'absolute', top: 12, left: 12, background: item.accent, borderRadius: 6, padding: '3px 9px' }}>
@@ -340,23 +345,23 @@ export default async function HomePage() {
                 </div>
                 <div style={{ padding: '16px 18px 20px' }}>
                   <h3 style={{ fontWeight: 500, fontSize: 14, color: 'var(--text)', marginBottom: 6, lineHeight: 1.3 }}>{item.treatment}</h3>
-                  <p style={{ fontSize: 13, fontWeight: 300, color: '#7A6A5A', marginBottom: 12, lineHeight: 1.55 }}>{item.result}</p>
+                  <p style={{ fontSize: 13, fontWeight: 300, color: '#7a6858', marginBottom: 12, lineHeight: 1.55 }}>{item.result}</p>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: 11.5, fontWeight: 400, color: '#9A8A7A', background: '#F5EDE4', padding: '4px 10px', borderRadius: 999 }}>Results in {item.weeks}</span>
-                    <span style={{ fontSize: 12, fontWeight: 400, color: '#1A2744' }}>View treatment →</span>
+                    <span style={{ fontSize: 11.5, fontWeight: 400, color: '#543213', background: '#f1d0b4', padding: '4px 10px', borderRadius: 999 }}>Results in {item.weeks}</span>
+                    <span style={{ fontSize: 12, fontWeight: 500, color: '#844d28' }}>View →</span>
                   </div>
                 </div>
               </Link>
             ))}
           </div>
-          <p style={{ textAlign: 'center', fontSize: 12, fontWeight: 300, color: '#9A8A7A', marginTop: 28 }}>
+          <p style={{ textAlign: 'center', fontSize: 12, fontWeight: 300, color: '#7a6858', marginTop: 28 }}>
             Individual results may vary. All procedures performed by Dr. Omaima Jawed, MBBS.
           </p>
         </div>
       </section>
 
       {/* TESTIMONIALS — auto-scrolling carousel */}
-      <section style={{ padding: '72px 20px', background: '#FAF7F2' }}>
+      <section style={{ padding: '72px 20px', background: '#efdfc8' }}>
         <div style={{ maxWidth: 1180, margin: '0 auto' }}>
           <div className="reveal" style={{ textAlign: 'center', marginBottom: 48 }}>
             <span className="eyebrow">{page?.testimonials?.eyebrow || 'Patient Stories'}</span>
@@ -378,19 +383,19 @@ export default async function HomePage() {
       </section>
 
       {/* CTA BANNER */}
-      <section style={{ padding: '64px 20px', background: '#3B2210' }}>
+      <section style={{ padding: '64px 20px', background: '#543213' }}>
         <div className="reveal" style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{ fontWeight: 500, color: '#FAF7F2', marginBottom: 12 }}>
+          <h2 style={{ fontWeight: 500, color: '#efdfc8', marginBottom: 12 }}>
             {page?.ctaBanner?.heading || 'Ready to correct, not just cover?'}
           </h2>
-          <p style={{ fontSize: 14, fontWeight: 300, color: '#C4A998', marginBottom: 32 }}>
+          <p style={{ fontSize: 14, fontWeight: 300, color: '#e8d0b4', marginBottom: 32 }}>
             {page?.ctaBanner?.subtext || 'Book a consultation with Dr. Omaima and get a personalised treatment plan.'}
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/contact" style={{ background: '#C4847E', color: '#fff', fontSize: 13, fontWeight: 400, padding: '13px 32px', borderRadius: 999, textDecoration: 'none' }}>
+            <Link href="/contact" style={{ background: '#feb847', color: '#543213', fontSize: 13, fontWeight: 500, padding: '13px 32px', borderRadius: 999, textDecoration: 'none' }}>
               {page?.ctaBanner?.primaryCta || 'Book Appointment'}
             </Link>
-            <a href="tel:09811997993" style={{ background: 'rgba(255,255,255,0.08)', color: '#FAF7F2', fontSize: 13, fontWeight: 400, padding: '13px 32px', borderRadius: 999, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }}>
+            <a href="tel:09811997993" style={{ background: 'rgba(255,255,255,0.08)', color: '#efdfc8', fontSize: 13, fontWeight: 400, padding: '13px 32px', borderRadius: 999, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }}>
               {page?.ctaBanner?.secondaryCta || 'Call 09811997993'}
             </a>
           </div>
