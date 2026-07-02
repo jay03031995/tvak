@@ -123,6 +123,13 @@ a { color: inherit; text-decoration: none; }
   .grid-form    { grid-template-columns: 1fr; }
   .grid-expertise { grid-template-columns: 1fr; }
   .grid-stats   { gap: 28px; }
+  .doctor-card-home {
+    grid-template-columns: 1fr !important;
+    padding: 14px !important;
+  }
+  .doctor-card-home > div:first-child {
+    max-height: 360px;
+  }
 
   .sec { padding-left: 16px !important; padding-right: 16px !important; }
   .hero-imgs { display: none !important; }
@@ -177,4 +184,33 @@ a { color: inherit; text-decoration: none; }
   color: var(--bronze);
   display: block;
   margin-bottom: 10px;
+}
+
+.concern-article h2 {
+  font-size: clamp(20px, 2.4vw, 28px);
+  color: var(--text);
+  margin: 34px 0 12px;
+}
+
+.concern-article p {
+  color: #4A3728;
+  line-height: 1.85;
+  margin-bottom: 16px;
+}
+
+.concern-article ul {
+  margin: 0 0 22px;
+  padding-left: 20px;
+  color: #4A3728;
+}
+
+.concern-article li {
+  margin-bottom: 9px;
+  line-height: 1.75;
+}
+
+@media (max-width: 768px) {
+  .concern-hero-grid {
+    grid-template-columns: 1fr !important;
+  }
 }

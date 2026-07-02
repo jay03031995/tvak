@@ -1,5 +1,6 @@
+import Image from 'next/image'
 import Link from 'next/link'
-import { fetchConcerns } from '@/sanity/client'
+import { fetchConcerns, urlFor } from '@/sanity/client'
 
 export const revalidate = 10
 export const metadata = { title: 'Concerns — Tvak & Asthi by Artham' }
@@ -44,9 +45,21 @@ export default async function ConcernsPage() {
                 <h2 style={{ fontWeight: 500, fontSize: 18, marginBottom: 20, color: 'var(--text)' }}>{cat}</h2>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 14 }}>
                   {filtered.map((c, i) => (
-                    <Link key={i} href={`/concerns/${c.slug?.current || '#'}`} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 12, padding: '16px', background: '#fff', borderRadius: 14, border: '1.5px solid rgba(26,17,9,0.09)', transition: 'transform .2s, box-shadow .2s' }}>
-                      <span style={{ width: 36, height: 36, borderRadius: 9, background: c.iconBg || '#F5EDE4', flexShrink: 0 }} />
-                      <span style={{ fontSize: 13.5, fontWeight: 400, color: 'var(--text)' }}>{c.name}</span>
+                    <Link key={i} href={`/concerns/${c.slug?.current || '#'}`} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 12, padding: '12px', background: '#fff', borderRadius: 14, border: '1.5px solid rgba(26,17,9,0.09)', transition: 'transform .2s, box-shadow .2s', minHeight: 72 }}>
+                      <span style={{ width: 48, height: 48, borderRadius: 10, background: c.iconBg || '#F5EDE4', flexShrink: 0, overflow: 'hidden', position: 'relative', display: 'block' }}>
+                        {(c.image || c.heroImage) ? (
+                          <Image
+                            src={urlFor(c.image || c.heroImage).width(120).height(120).fit('crop').url()}
+                            alt=""
+                            fill
+                            style={{ objectFit: 'cover' }}
+                            sizes="48px"
+                          />
+                        ) : (
+                          <span style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(255,255,255,0.25), rgba(184,145,106,0.16))' }} />
+                        )}
+                      </span>
+                      <span style={{ fontSize: 13.5, fontWeight: 400, color: 'var(--text)', lineHeight: 1.35 }}>{c.name}</span>
                     </Link>
                   ))}
                 </div>

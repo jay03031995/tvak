@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { fetchHomePage, fetchSiteSettings, fetchDoctor, fetchTreatments, urlFor } from '@/sanity/client'
+import { fetchHomePage, fetchSiteSettings, fetchDoctor, fetchTreatments, fetchConcerns, urlFor } from '@/sanity/client'
 import AnimatedStats from '@/components/AnimatedStats'
 import MarqueeTrustBar from '@/components/MarqueeTrustBar'
 import AnimatedFAQ from '@/components/AnimatedFAQ'
@@ -9,15 +9,28 @@ import AnimatedTestimonials from '@/components/AnimatedTestimonials'
 export const revalidate = 10
 
 export default async function HomePage() {
-  const [[page, settings], doctor, sanityTreatments] = await Promise.all([
+  const [[page, settings], doctor, sanityTreatments, sanityConcerns] = await Promise.all([
     Promise.all([fetchHomePage(), fetchSiteSettings()]).catch(() => [null, null]),
     fetchDoctor().catch(() => null),
     fetchTreatments().catch(() => []),
+    fetchConcerns().catch(() => []),
   ])
 
   const treatmentImageMap = new Map(
     (sanityTreatments || []).filter(t => t.slug?.current && t.image).map(t => [t.slug.current, t.image])
   )
+  const concernMap = new Map(
+    (sanityConcerns || []).filter(c => c.slug?.current).map(c => [c.slug.current, c])
+  )
+  const concernCard = (fallback) => {
+    const cms = concernMap.get(fallback.slug)
+    return {
+      ...fallback,
+      name: cms?.name || fallback.name,
+      image: cms?.image || cms?.heroImage,
+      iconBg: cms?.iconBg,
+    }
+  }
 
   // Fallback data
   const hero = page?.hero || {}
@@ -65,12 +78,12 @@ export default async function HomePage() {
       )}
 
       {/* HERO */}
-      <section style={{ padding: '72px 20px 64px', background: 'linear-gradient(160deg, #efdfc8 55%, #f1d0b4)' }}>
-        <div style={{ maxWidth: 1180, margin: '0 auto' }} className="grid-hero">
+      <section style={{ padding: '32px 20px', minHeight: 'calc(100vh - 80px)', display: 'flex', alignItems: 'center', background: 'linear-gradient(160deg, #efdfc8 55%, #f1d0b4)' }}>
+        <div style={{ maxWidth: 1180, margin: '0 auto', width: '100%' }} className="grid-hero">
           {/* Left — staggered text entrance via .au */}
           <div className="au">
             <span className="eyebrow">Dermatology · Aesthetics · Trichology</span>
-            <h1 style={{ fontWeight: 500, fontSize: 'clamp(28px,4.5vw,50px)', lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: 20, color: 'var(--text)' }}>
+            <h1 style={{ fontWeight: 600, fontSize: 'clamp(28px,4vw,46px)', lineHeight: 1.1, letterSpacing: '-0.02em', marginBottom: 20, color: 'var(--brown)' }}>
               {hero.headingLine1 || 'The difference between'}{' '}
               <em style={{ fontStyle: 'italic', fontWeight: 400, color: '#844d28' }}>
                 {hero.headingItalic || 'covering concerns'}
@@ -80,10 +93,10 @@ export default async function HomePage() {
                 {hero.headingItalic2 || 'correcting them.'}
               </em>
             </h1>
-            <p style={{ fontSize: 14, fontWeight: 300, lineHeight: 1.8, color: '#543213', maxWidth: 440, marginBottom: 32 }}>
+            <p style={{ fontSize: 14, fontWeight: 300, lineHeight: 1.75, color: '#7a6858', maxWidth: 430, marginBottom: 28 }}>
               {hero.subtext || "Noida's MD-led aesthetic clinic. Evidence-based care for skin, hair and ageing concerns — always under Dr. Omaima's expert eye."}
             </p>
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 44 }}>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 36 }}>
               <Link href="/contact" style={{ background: '#543213', color: '#efdfc8', fontSize: 13, fontWeight: 500, padding: '13px 28px', borderRadius: 999, textDecoration: 'none', transition: 'background .18s' }}>
                 {hero.ctaPrimary || 'Book Consultation'}
               </Link>
@@ -91,17 +104,16 @@ export default async function HomePage() {
                 {hero.ctaSecondary || 'Explore Treatments'}
               </Link>
             </div>
-            {/* Animated count-up stats */}
             <AnimatedStats stats={heroStats} />
           </div>
 
           {/* Right — staggered image grid */}
-          <div className="hero-imgs" style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+          <div className="hero-imgs" style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
             {[
-              { img: page?.heroImage1, ratio: '3/4', cls: 'hi-1' },
+              { img: page?.heroImage1, ratio: '4/5', cls: 'hi-1' },
               { img: page?.heroImage2, ratio: '1/1', cls: 'hi-2' },
               { img: page?.heroImage3, ratio: '1/1', cls: 'hi-3' },
-              { img: page?.heroImage4, ratio: '3/4', cls: 'hi-4' },
+              { img: page?.heroImage4, ratio: '4/5', cls: 'hi-4' },
             ].map(({ img, ratio, cls }, i) => (
               <div key={i} className={cls} style={{ borderRadius: 16, overflow: 'hidden', background: '#e8d4be', aspectRatio: ratio, position: 'relative' }}>
                 {img && (
@@ -114,10 +126,10 @@ export default async function HomePage() {
                 )}
               </div>
             ))}
-            <div className="hb-1" style={{ position: 'absolute', bottom: 16, left: -16, background: '#fff', borderRadius: 999, padding: '10px 18px', boxShadow: '0 4px 24px rgba(26,17,9,0.12)', fontSize: 12, fontWeight: 400 }}>
+            <div className="hb-1" style={{ position: 'absolute', bottom: 16, left: -16, background: '#fff', borderRadius: 999, padding: '10px 18px', boxShadow: '0 4px 24px rgba(84,50,19,0.12)', fontSize: 12, fontWeight: 400 }}>
               Doctor-led every session
             </div>
-            <div className="hb-2" style={{ position: 'absolute', top: 16, right: -16, background: '#fff', borderRadius: 999, padding: '10px 18px', boxShadow: '0 4px 24px rgba(26,17,9,0.12)', fontSize: 12, fontWeight: 400 }}>
+            <div className="hb-2" style={{ position: 'absolute', top: 16, right: -16, background: '#fff', borderRadius: 999, padding: '10px 18px', boxShadow: '0 4px 24px rgba(84,50,19,0.12)', fontSize: 12, fontWeight: 400 }}>
               US-FDA cleared devices
             </div>
           </div>
@@ -139,7 +151,7 @@ export default async function HomePage() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 18 }}>
             {[
-              { name: 'HydraFacial MD', slug: 'hydrafacial-md', badge: 'SKIN', desc: 'Deep-cleanse, exfoliate and hydrate in one session. Instant glow, zero downtime.', duration: '45 min' },
+              { name: 'Hydrafacial', slug: 'hydrafacial', badge: 'SKIN', desc: 'Deep-cleanse, exfoliate and hydrate in one session. Instant glow, zero downtime.', duration: '45 min' },
               { name: 'Carbon Laser Facial', slug: 'carbon-laser-facial', badge: 'LASERS', desc: 'Tightens pores, controls oil and brightens dull skin — the Hollywood peel.', duration: '30 min' },
               { name: 'Acne Clearance Program', slug: 'acne-clearance', badge: 'SIGNATURE', desc: 'A complete medical plan combining therapy, peels and devices to clear active acne.', duration: '60 min' },
               { name: 'Acne Scar Revision (MNRF)', slug: 'acne-scar-mnrf', badge: 'ACNE SCARS', desc: 'Microneedling RF to rebuild collagen and smooth pitted scars.', duration: '60 min' },
@@ -156,15 +168,14 @@ export default async function HomePage() {
                 className="card-hover reveal"
                 style={{ '--d': `${i * 50}ms`, textDecoration: 'none', display: 'flex', flexDirection: 'column', background: '#fff', borderRadius: 20, overflow: 'hidden', border: '1.5px solid rgba(84,50,19,0.1)', boxShadow: '0 2px 12px rgba(84,50,19,0.06)' }}
               >
-                {/* Tall image */}
-                <div style={{ height: 240, background: '#e8d4be', flexShrink: 0, position: 'relative' }}>
+                <div style={{ height: 252, background: '#e8d4be', flexShrink: 0, position: 'relative' }}>
                   {treatmentImageMap.get(t.slug) ? (
                     <Image
-                      src={urlFor(treatmentImageMap.get(t.slug)).width(480).height(240).fit('crop').url()}
+                      src={urlFor(treatmentImageMap.get(t.slug)).width(363).height(252).fit('crop').url()}
                       alt={t.name}
                       fill
                       style={{ objectFit: 'cover' }}
-                      sizes="(max-width: 600px) 100vw, 480px"
+                      sizes="(max-width: 600px) 100vw, 363px"
                     />
                   ) : (
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
@@ -228,7 +239,7 @@ export default async function HomePage() {
                 { name: 'Volume Loss', count: 2, slug: 'volume-loss' },
                 { name: 'Sagging & Laxity', count: 3, slug: 'sagging' },
               ]},
-            ].map((col, ci) => (
+            ].map((col, ci) => ({ ...col, items: col.items.map(concernCard) })).map((col, ci) => (
               <div key={ci} className="reveal" style={{ '--d': `${ci * 100}ms` }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14, paddingBottom: 12, borderBottom: '1.5px solid rgba(26,17,9,0.1)' }}>
                   <h3 style={{ fontSize: 15, fontWeight: 500, color: 'var(--text)', margin: 0 }}>{col.cat}</h3>
@@ -236,8 +247,20 @@ export default async function HomePage() {
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {col.items.map((item, ii) => (
-                    <Link key={ii} href={`/concerns/${item.slug}`} className="card-hover" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 12, padding: '14px 16px', background: '#fff', borderRadius: 12, border: '1.5px solid rgba(26,17,9,0.08)' }}>
-                      <div style={{ width: 34, height: 34, borderRadius: 9, background: '#efdfc8', border: '1px solid rgba(84,50,19,0.1)', flexShrink: 0 }} />
+                    <Link key={ii} href={`/concerns/${item.slug}`} className="card-hover" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 12, padding: '12px 14px', background: '#fff', borderRadius: 12, border: '1.5px solid rgba(84,50,19,0.08)', minHeight: 68 }}>
+                      <div style={{ width: 42, height: 42, borderRadius: 10, background: item.iconBg || '#f1d0b4', flexShrink: 0, overflow: 'hidden', position: 'relative' }}>
+                        {item.image ? (
+                          <Image
+                            src={urlFor(item.image).width(120).height(120).fit('crop').url()}
+                            alt=""
+                            fill
+                            style={{ objectFit: 'cover' }}
+                            sizes="42px"
+                          />
+                        ) : (
+                          <span style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(255,255,255,0.25), rgba(132,77,40,0.16))' }} />
+                        )}
+                      </div>
                       <div style={{ flex: 1 }}>
                         <div style={{ fontSize: 13.5, fontWeight: 400, color: 'var(--text)' }}>{item.name}</div>
                         <div style={{ fontSize: 11.5, fontWeight: 300, color: '#7a6858', marginTop: 2 }}>{item.count} treatments</div>
@@ -276,28 +299,29 @@ export default async function HomePage() {
       </section>
 
       {/* DOCTOR */}
-      <section style={{ padding: '72px 20px' }}>
-        <div style={{ maxWidth: 1180, margin: '0 auto', alignItems: 'start' }} className="grid-hero">
-          <div className="reveal" style={{ borderRadius: 20, overflow: 'hidden', background: '#e8d4be', aspectRatio: '3/4', position: 'relative' }}>
+      <section style={{ padding: '56px 20px' }}>
+        <div className="reveal doctor-card-home" style={{ maxWidth: 980, margin: '0 auto', display: 'grid', gridTemplateColumns: '240px 1fr', gap: 28, alignItems: 'center', background: '#fff', borderRadius: 18, border: '1.5px solid rgba(84,50,19,0.08)', padding: 18, boxShadow: '0 14px 42px rgba(84,50,19,0.06)' }}>
+          <div style={{ borderRadius: 14, overflow: 'hidden', background: '#e8d4be', aspectRatio: '4/5', position: 'relative' }}>
             {doctor?.photo && (
               <Image
-                src={urlFor(doctor.photo).width(700).height(933).fit('crop').url()}
+                src={urlFor(doctor.photo).width(420).height(525).fit('crop').url()}
                 alt={doctor.name || 'Dr. Omaima Jawed'}
                 fill
                 style={{ objectFit: 'cover', objectPosition: 'top center' }}
+                sizes="(max-width: 768px) 100vw, 240px"
               />
             )}
           </div>
-          <div className="reveal" style={{ '--d': '150ms', paddingTop: 8 }}>
+          <div style={{ padding: '8px 10px 8px 0' }}>
             <span className="eyebrow">Your Doctor</span>
-            <h2 style={{ fontWeight: 500, color: 'var(--text)', marginBottom: 16 }}>{doctor?.name || 'Dr. Omaima Jawed'}</h2>
-            <p style={{ fontSize: 13, fontWeight: 300, color: '#844d28', marginBottom: 16, letterSpacing: '0.04em' }}>
+            <h2 style={{ fontWeight: 500, color: 'var(--text)', marginBottom: 10, fontSize: 'clamp(22px,3vw,30px)' }}>{doctor?.name || 'Dr. Omaima Jawed'}</h2>
+            <p style={{ fontSize: 12.5, fontWeight: 400, color: '#844d28', marginBottom: 12, letterSpacing: '0.04em' }}>
               {doctor?.credentials || 'MBBS'} · {doctor?.title || 'Aesthetic Physician'} · {doctor?.experience || 5} Years Experience
             </p>
-            <p style={{ fontSize: 14, fontWeight: 300, color: '#543213', lineHeight: 1.8, marginBottom: 24 }}>
+            <p style={{ fontSize: 13.5, fontWeight: 300, color: '#7a6858', lineHeight: 1.7, marginBottom: 18, maxWidth: 560 }}>
               {doctor?.shortBio || 'Dr. Omaima completed her MBBS and trained in aesthetic dermatology at leading institutes. She personally leads every procedure — from your first consultation to each follow-up session.'}
             </p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 28 }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7, marginBottom: 20 }}>
               {['Acne & Scar Treatment', 'Laser Procedures', 'Hair Restoration', 'Anti-Ageing', 'Chemical Peels'].map((s, si) => (
                 <span key={s} style={{ fontSize: 12, fontWeight: 400, color: '#543213', background: '#f1d0b4', padding: '5px 12px', borderRadius: 999, border: '1px solid rgba(84,50,19,0.15)', animation: `fadeUp 0.4s cubic-bezier(.22,.68,0,.99) ${si * 60 + 200}ms both` }}>{s}</span>
               ))}

@@ -13,6 +13,7 @@ export default defineType({
     }),
     defineField({ name: 'description', title: 'Description (intro paragraph for hero)', type: 'text', rows: 4 }),
     defineField({ name: 'longDescription', title: 'Detailed Description (for SEO section)', type: 'text', rows: 6 }),
+    defineField({ name: 'image', title: 'Image (for concern cards)', type: 'image', options: { hotspot: true } }),
     defineField({ name: 'heroImage', title: 'Hero / Banner Image', type: 'image', options: { hotspot: true } }),
     defineField({ name: 'iconColor', title: 'Icon Color (hex, e.g. #E05A5A)', type: 'string' }),
     defineField({ name: 'iconBg', title: 'Icon Background Color (hex, e.g. #FFF0EE)', type: 'string' }),
@@ -42,6 +43,28 @@ export default defineType({
     }),
     defineField({
       name: 'preventionTips', title: 'Prevention & Lifestyle Tips (one per item)', type: 'array',
+      of: [defineArrayMember({ type: 'string' })]
+    }),
+    defineField({
+      name: 'causes', title: 'Causes (one per item)', type: 'array',
+      of: [defineArrayMember({ type: 'string' })]
+    }),
+    defineField({
+      name: 'symptoms', title: 'Symptoms (one per item)', type: 'array',
+      of: [defineArrayMember({ type: 'string' })]
+    }),
+    defineField({ name: 'diagnosis', title: 'Diagnosis', type: 'text', rows: 4 }),
+    defineField({
+      name: 'treatmentOptions', title: 'Treatment Options (one per item)', type: 'array',
+      of: [defineArrayMember({ type: 'string' })]
+    }),
+    defineField({
+      name: 'treatmentBenefits', title: 'Benefits of Treatment (one per item)', type: 'array',
+      of: [defineArrayMember({ type: 'string' })]
+    }),
+    defineField({ name: 'recoveryAftercare', title: 'Recovery / Aftercare', type: 'text', rows: 4 }),
+    defineField({
+      name: 'whyChooseClinic', title: 'Why Choose the Clinic (one per item)', type: 'array',
       of: [defineArrayMember({ type: 'string' })]
     }),
     defineField({

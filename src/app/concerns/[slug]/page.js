@@ -1,5 +1,6 @@
+import Image from 'next/image'
 import Link from 'next/link'
-import { fetchConcern, fetchConcerns } from '@/sanity/client'
+import { fetchConcern, fetchConcerns, urlFor } from '@/sanity/client'
 
 export const revalidate = 10
 
@@ -26,7 +27,12 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = await params
   const c = await fetchConcern(slug).catch(() => null)
-  return { title: c ? `${c.name} — Tvak & Asthi` : 'Concern — Tvak & Asthi' }
+  const fallback = FALLBACK_CONCERNS[slug]
+  const metaConcern = c || fallback
+  return {
+    title: metaConcern ? `${metaConcern.name} Treatment in Noida — Tvak & Asthi` : 'Concern — Tvak & Asthi',
+    description: metaConcern?.description?.slice(0, 155) || 'Doctor-led skin, hair, and aesthetic concern treatment at Tvak & Asthi by Artham.',
+  }
 }
 
 const FALLBACK_CONCERNS = {
@@ -331,6 +337,74 @@ const FALLBACK_CONCERNS = {
   },
 }
 
+const categoryContext = {
+  'Hair & Scalp': {
+    anatomy: 'scalp and hair follicle health',
+  },
+  'Anti-Ageing': {
+    anatomy: 'collagen, elastin, facial volume, and skin quality',
+  },
+  'Skin & Face': {
+    anatomy: 'skin barrier, pigment, oil glands, inflammation, and texture',
+  },
+}
+
+function sentenceList(items, fallback) {
+  return items?.length ? items : fallback
+}
+
+function buildSeoContent(c) {
+  const context = categoryContext[c.category] || categoryContext['Skin & Face']
+  const treatmentNames = c.treatments?.length ? c.treatments.map(t => t.name).join(', ') : 'medical skincare, procedure-based care, and follow-up reviews'
+  const tags = c.tags?.length ? c.tags.slice(0, 4).join(', ') : `${c.name.toLowerCase()} patterns`
+  const approachSummary = c.approach?.length
+    ? c.approach.map(step => step.title).filter(Boolean).join(', ')
+    : 'consultation, diagnosis, treatment planning, and maintenance'
+
+  return {
+    intro: c.longDescription || `${c.name} is best treated when the visible concern and its underlying triggers are assessed together. At Tvak & Asthi by Artham, Dr. Omaima Jawed evaluates ${context.anatomy} before recommending any procedure, so the plan is based on diagnosis rather than guesswork. The aim is not only to improve what you see today, but also to reduce recurrence, protect the skin or scalp barrier, and help you maintain results safely.`,
+    what: `${c.description} Because every patient has a different skin type, lifestyle, medical history, and treatment goal, ${c.name.toLowerCase()} needs a personalised plan. A consultation helps distinguish whether the concern is active, stable, inflammatory, pigment-related, hormonal, structural, or maintenance-related. That distinction matters because the same visible symptom can need very different treatment pathways.`,
+    causes: sentenceList(c.causes, [
+      `Genetic tendency, hormones, age-related change, or individual skin biology can make some people more prone to ${c.name.toLowerCase()}.`,
+      `Sun exposure, pollution, heat, friction, harsh products, or inconsistent skincare can worsen ${tags}.`,
+      `Delayed treatment, picking, over-the-counter steroid use, or mismatched home routines may make the concern more persistent.`,
+      `Lifestyle factors such as stress, poor sleep, nutritional gaps, and irregular aftercare can slow improvement.`,
+    ]),
+    symptoms: sentenceList(c.symptoms, [
+      `Visible change in the affected area, often noticed as ${tags}.`,
+      'Texture, tone, density, redness, flaking, pigmentation, or laxity changes that do not settle with basic home care.',
+      'Recurring flare-ups or gradual progression over weeks to months.',
+      'Reduced confidence, cosmetic concern, or discomfort that affects daily routines.',
+    ]),
+    diagnosis: c.diagnosis || `Diagnosis starts with a detailed consultation, medical history, medication review, and close examination of the affected area. Dr. Omaima may assess severity, distribution, triggers, previous treatments, and response to skincare or medicines. For some patients, dermoscopy, trichoscopy, Wood's lamp examination, photographs, or blood tests may be advised. The goal is to confirm what is driving ${c.name.toLowerCase()} before choosing a procedure, because correct diagnosis prevents unnecessary sessions and reduces the risk of irritation, pigmentation, or relapse.`,
+    treatmentOptions: sentenceList(c.treatmentOptions, [
+      `A doctor-led plan may combine prescription home care with in-clinic procedures such as ${treatmentNames}.`,
+      `The clinic approach usually follows: ${approachSummary}.`,
+      'Treatment intensity is adjusted to your skin tone, sensitivity, downtime preference, and medical history.',
+      'Maintenance sessions and review visits are planned once the active concern has improved, so results do not fade quickly.',
+    ]),
+    benefits: sentenceList(c.treatmentBenefits, [
+      `A structured plan can improve the visible signs of ${c.name.toLowerCase()} while reducing avoidable irritation.`,
+      'Doctor supervision helps match procedure depth, device settings, and active ingredients to Indian skin tones.',
+      'Patients get clearer expectations about timelines, downtime, number of sessions, and maintenance.',
+      'Treating the cause as well as the surface concern helps results look more natural and last longer.',
+    ]),
+    aftercare: c.recoveryAftercare || `Recovery depends on the treatment selected. Many plans have little to no downtime, while peels, lasers, injectables, or collagen-stimulating procedures can involve temporary redness, dryness, swelling, or sensitivity. Aftercare usually includes gentle cleansing, moisturiser, strict SPF, avoiding heat or active exfoliants for a short period, and following any prescription routine exactly. Dr. Omaima explains what is normal after each session, when to restart actives, and when to return for review.`,
+    why: sentenceList(c.whyChooseClinic, [
+      'Every consultation and procedure is doctor-led by Dr. Omaima Jawed.',
+      'Treatment planning is personalised for Indian skin tones and local climate triggers.',
+      'The clinic combines medical diagnosis, evidence-based technology, and realistic maintenance advice.',
+      'Patients receive clear guidance on preparation, downtime, aftercare, and follow-up.',
+    ]),
+    faqs: c.faqs?.length ? c.faqs : [
+      { question: `How many sessions are needed for ${c.name}?`, answer: 'The number of sessions depends on severity, duration, skin type, and the treatment selected. Mild concerns may improve within a few visits, while long-standing or deeper concerns usually need a structured course with maintenance.' },
+      { question: `Is treatment for ${c.name.toLowerCase()} safe for Indian skin?`, answer: 'Yes, when the diagnosis, device settings, peel strength, and home care are selected carefully. The clinic uses conservative, skin-tone-aware protocols to reduce the risk of post-inflammatory pigmentation.' },
+      { question: 'Will the results be permanent?', answer: 'Some improvements can be long-lasting, but ageing, hormones, sun exposure, lifestyle, and genetics can still influence recurrence. Maintenance skincare and periodic reviews help preserve results.' },
+      { question: 'Can I combine treatments?', answer: 'Combination plans are common, but they should be sequenced properly. Dr. Omaima decides what can be combined safely and what should be spaced apart.' },
+    ],
+  }
+}
+
 export default async function ConcernPage({ params }) {
   const { slug } = await params
   const concern = await fetchConcern(slug).catch(() => null)
@@ -339,12 +413,14 @@ export default async function ConcernPage({ params }) {
     category: 'Skin & Face', description: 'Our doctor-led approach addresses this concern with a personalised treatment plan.',
     tags: [], approach: [], treatments: [],
   }
+  const seo = buildSeoContent(c)
 
   return (
     <div style={{ background: 'var(--cream)' }}>
       {/* HERO */}
       <section style={{ padding: '44px 20px 36px', background: 'linear-gradient(180deg,#F5EDE4,#FAF7F2)' }}>
-        <div style={{ maxWidth: 1180, margin: '0 auto' }}>
+        <div style={{ maxWidth: 1180, margin: '0 auto', display: 'grid', gridTemplateColumns: (c.heroImage || c.image) ? '1.35fr 0.65fr' : '1fr', gap: 32, alignItems: 'center' }} className="concern-hero-grid">
+          <div>
           <div style={{ fontSize: 12.5, color: '#9A8A7A', fontWeight: 300, marginBottom: 20, display: 'flex', gap: 6 }}>
             <Link href="/" style={{ color: '#9A8A7A' }}>Home</Link><span>/</span>
             <Link href="/concerns" style={{ color: '#9A8A7A' }}>Concerns</Link><span>/</span>
@@ -364,7 +440,76 @@ export default async function ConcernPage({ params }) {
             <Link href="/contact" style={{ background: '#1A2744', color: '#fff', fontSize: 13, fontWeight: 400, padding: '12px 26px', borderRadius: 999, textDecoration: 'none' }}>Book Consultation</Link>
             <a href="tel:09811997993" style={{ background: 'transparent', color: '#1A2744', fontSize: 13, fontWeight: 400, padding: '12px 26px', borderRadius: 999, border: '1.5px solid rgba(26,39,68,0.2)', textDecoration: 'none' }}>Call 098119 97993</a>
           </div>
+          </div>
+          {(c.heroImage || c.image) && (
+            <div style={{ position: 'relative', aspectRatio: '4/3', borderRadius: 18, overflow: 'hidden', background: '#E8DED4', boxShadow: '0 18px 48px rgba(26,17,9,0.10)' }}>
+              <Image
+                src={urlFor(c.heroImage || c.image).width(620).height(465).fit('crop').url()}
+                alt={c.name}
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 768px) 100vw, 360px"
+                priority
+              />
+            </div>
+          )}
         </div>
+      </section>
+
+      {/* SEO CONTENT */}
+      <section style={{ padding: '64px 20px', background: '#fff' }}>
+        <article className="concern-article" style={{ maxWidth: 860, margin: '0 auto' }}>
+          <p style={{ fontSize: 15, lineHeight: 1.9, color: '#4A3728', marginBottom: 28 }}>{seo.intro}</p>
+
+          <h2>What is {c.name}?</h2>
+          <p>{seo.what}</p>
+
+          <h2>Causes of {c.name}</h2>
+          <p>The cause is often multi-factorial, which is why a one-size-fits-all cream or procedure rarely works well for every patient. Common contributors include:</p>
+          <ul>
+            {seo.causes.map((item, i) => <li key={i}>{item}</li>)}
+          </ul>
+
+          <h2>Symptoms and signs to watch for</h2>
+          <p>Patients often seek help when the concern becomes recurrent, visible in photographs, difficult to conceal, or uncomfortable. Typical signs include:</p>
+          <ul>
+            {seo.symptoms.map((item, i) => <li key={i}>{item}</li>)}
+          </ul>
+
+          <h2>Diagnosis</h2>
+          <p>{seo.diagnosis}</p>
+
+          <h2>Treatment options</h2>
+          <p>At Tvak & Asthi, treatment is selected after the diagnosis, not before it. Depending on your examination, Dr. Omaima may recommend a staged plan that starts by calming active disease or irritation, then moves toward correction and maintenance.</p>
+          <ul>
+            {seo.treatmentOptions.map((item, i) => <li key={i}>{item}</li>)}
+          </ul>
+
+          <h2>Benefits of timely treatment</h2>
+          <p>Early, medically guided care can prevent the concern from becoming deeper, more resistant, or more expensive to correct later. Benefits can include:</p>
+          <ul>
+            {seo.benefits.map((item, i) => <li key={i}>{item}</li>)}
+          </ul>
+
+          <h2>Recovery and aftercare</h2>
+          <p>{seo.aftercare}</p>
+
+          <h2>Why choose Tvak & Asthi by Artham?</h2>
+          <p>The clinic is designed for patients who want aesthetic improvement without losing medical judgement. You receive a clear explanation of what is happening, why it is happening, and what each step of treatment is meant to achieve.</p>
+          <ul>
+            {seo.why.map((item, i) => <li key={i}>{item}</li>)}
+          </ul>
+
+          <h2>FAQs about {c.name}</h2>
+          <div style={{ display: 'grid', gap: 14 }}>
+            {seo.faqs.map((faq, i) => (
+              <section key={i} style={{ padding: '20px 22px', borderRadius: 14, background: '#FAF7F2', border: '1px solid rgba(26,17,9,0.08)' }}>
+                <h3 style={{ fontSize: 15, marginBottom: 8, color: 'var(--text)' }}>{faq.question}</h3>
+                <p>{faq.answer}</p>
+              </section>
+            ))}
+          </div>
+        </article>
       </section>
 
       {/* OUR APPROACH */}
@@ -399,8 +544,20 @@ export default async function ConcernPage({ params }) {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 20 }}>
               {c.treatments.map((t, i) => (
                 <Link key={i} href={`/treatments/${t.slug?.current || '#'}`} className="card-hover" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', background: '#fff', borderRadius: 16, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.09)' }}>
-                  <div style={{ height: 160, background: '#F0E8DF', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(184,145,106,0.5)" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  <div style={{ height: 252, background: '#F0E8DF', flexShrink: 0, position: 'relative' }}>
+                    {t.image ? (
+                      <Image
+                        src={urlFor(t.image).width(363).height(252).fit('crop').url()}
+                        alt={t.name}
+                        fill
+                        style={{ objectFit: 'cover' }}
+                        sizes="(max-width: 600px) 100vw, 363px"
+                      />
+                    ) : (
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(184,145,106,0.5)" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                      </div>
+                    )}
                   </div>
                   <div style={{ padding: '18px 20px 22px', flex: 1, display: 'flex', flexDirection: 'column' }}>
                     <h3 style={{ fontWeight: 500, fontSize: 15, color: 'var(--text)', marginBottom: 10 }}>{t.name}</h3>
