@@ -40,6 +40,7 @@ export async function fetchSiteSettings() {
 export async function fetchHomePage() {
   return serverClient.fetch(`*[_type == "homePage" && _id == "singleton-homePage"][0]{
     ...,
+    heroVideoFile { asset->{ url } },
     treatmentsSection{
       ...,
       featured[]->{name, slug, category, tagline, image, rating, reviewCount}

@@ -77,64 +77,82 @@ export default async function HomePage() {
         </div>
       )}
 
-      {/* HERO */}
-      <section style={{ padding: '32px 20px', minHeight: 'calc(100vh - 80px)', display: 'flex', alignItems: 'center', background: 'linear-gradient(160deg, #efdfc8 55%, #f1d0b4)' }}>
-        <div style={{ maxWidth: 1180, margin: '0 auto', width: '100%' }} className="grid-hero">
-          {/* Left — staggered text entrance via .au */}
-          <div className="au">
-            <span className="eyebrow">Dermatology · Aesthetics · Trichology</span>
-            <h1 style={{ fontWeight: 600, fontSize: 'clamp(28px,4vw,46px)', lineHeight: 1.1, letterSpacing: '-0.02em', marginBottom: 20, color: 'var(--brown)' }}>
-              {hero.headingLine1 || 'The difference between'}{' '}
-              <em style={{ fontStyle: 'italic', fontWeight: 400, color: '#844d28' }}>
-                {hero.headingItalic || 'covering concerns'}
-              </em>{' '}
-              {hero.headingLine2 || 'and'}{' '}
-              <em style={{ fontStyle: 'italic', fontWeight: 400, color: '#844d28' }}>
-                {hero.headingItalic2 || 'correcting them.'}
-              </em>
-            </h1>
-            <p style={{ fontSize: 14, fontWeight: 300, lineHeight: 1.75, color: '#7a6858', maxWidth: 430, marginBottom: 28 }}>
-              {hero.subtext || "Noida's MD-led aesthetic clinic. Evidence-based care for skin, hair and ageing concerns — always under Dr. Omaima's expert eye."}
-            </p>
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 36 }}>
-              <Link href="/contact" style={{ background: '#543213', color: '#efdfc8', fontSize: 13, fontWeight: 500, padding: '13px 28px', borderRadius: 999, textDecoration: 'none', transition: 'background .18s' }}>
+      {/* HERO — full-screen video */}
+      {(() => {
+        const videoSrc = page?.heroVideoUrl || page?.heroVideoFile?.asset?.url
+        const fallbackImg = page?.heroFallbackImage
+        return (
+          <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+
+            {/* Video / fallback background */}
+            {videoSrc ? (
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}
+                poster={fallbackImg ? urlFor(fallbackImg).width(1600).url() : undefined}
+              >
+                <source src={videoSrc} type="video/mp4" />
+              </video>
+            ) : fallbackImg ? (
+              <Image
+                src={urlFor(fallbackImg).width(1600).height(900).fit('crop').url()}
+                alt=""
+                fill
+                priority
+                style={{ objectFit: 'cover', zIndex: 0 }}
+              />
+            ) : (
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(160deg, #efdfc8 55%, #f1d0b4)', zIndex: 0 }} />
+            )}
+
+            {/* Dark gradient overlay — stronger at bottom for text legibility */}
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.12) 40%, rgba(0,0,0,0.62) 100%)', zIndex: 1 }} />
+
+            {/* Left vertical social links */}
+            <div style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', zIndex: 3, display: 'flex', flexDirection: 'column', gap: 20, padding: '0 12px' }}>
+              {['INSTAGRAM', 'TWITTER', 'FACEBOOK'].map(s => (
+                <a key={s} href="#" aria-label={s}
+                  style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)', fontSize: 9.5, fontWeight: 500, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.65)', textDecoration: 'none', transition: 'color .15s' }}>
+                  {s}
+                </a>
+              ))}
+            </div>
+
+            {/* Right vertical contact links */}
+            <div style={{ position: 'absolute', right: 0, top: '50%', transform: 'translateY(-50%)', zIndex: 3, display: 'flex', flexDirection: 'column', gap: 20, padding: '0 12px' }}>
+              {[{ label: 'CALL US', href: 'tel:09811997993' }, { label: 'WHATSAPP', href: 'https://wa.me/919811997993' }].map(({ label, href }) => (
+                <a key={label} href={href}
+                  style={{ writingMode: 'vertical-rl', fontSize: 9.5, fontWeight: 500, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.65)', textDecoration: 'none', transition: 'color .15s' }}>
+                  {label}
+                </a>
+              ))}
+            </div>
+
+            {/* Center CTA button (upper-middle) */}
+            <div style={{ position: 'relative', zIndex: 2, flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '15vh' }}>
+              <Link href="/contact"
+                style={{ background: 'rgba(239,223,200,0.88)', backdropFilter: 'blur(6px)', color: '#543213', fontSize: 13.5, fontWeight: 500, padding: '14px 36px', borderRadius: 999, textDecoration: 'none', letterSpacing: '0.04em', boxShadow: '0 4px 20px rgba(0,0,0,0.18)', transition: 'background .2s' }}>
                 {hero.ctaPrimary || 'Book Consultation'}
               </Link>
-              <Link href="/treatments" style={{ background: 'transparent', color: '#543213', fontSize: 13, fontWeight: 400, padding: '13px 28px', borderRadius: 999, border: '1.5px solid rgba(84,50,19,0.25)', textDecoration: 'none' }}>
-                {hero.ctaSecondary || 'Explore Treatments'}
-              </Link>
             </div>
-            <AnimatedStats stats={heroStats} />
-          </div>
 
-          {/* Right — staggered image grid */}
-          <div className="hero-imgs" style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-            {[
-              { img: page?.heroImage1, ratio: '4/5', cls: 'hi-1' },
-              { img: page?.heroImage2, ratio: '1/1', cls: 'hi-2' },
-              { img: page?.heroImage3, ratio: '1/1', cls: 'hi-3' },
-              { img: page?.heroImage4, ratio: '4/5', cls: 'hi-4' },
-            ].map(({ img, ratio, cls }, i) => (
-              <div key={i} className={cls} style={{ borderRadius: 16, overflow: 'hidden', background: '#e8d4be', aspectRatio: ratio, position: 'relative' }}>
-                {img && (
-                  <Image
-                    src={urlFor(img).width(400).fit('crop').url()}
-                    alt=""
-                    fill
-                    style={{ objectFit: 'cover' }}
-                  />
-                )}
-              </div>
-            ))}
-            <div className="hb-1" style={{ position: 'absolute', bottom: 16, left: -16, background: '#fff', borderRadius: 999, padding: '10px 18px', boxShadow: '0 4px 24px rgba(84,50,19,0.12)', fontSize: 12, fontWeight: 400 }}>
-              Doctor-led every session
+            {/* Bottom headline + sub */}
+            <div className="au" style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 32px 80px', maxWidth: 900, margin: '0 auto', width: '100%' }}>
+              <h1 style={{ fontWeight: 600, fontSize: 'clamp(28px,4.5vw,58px)', lineHeight: 1.08, letterSpacing: '-0.02em', color: '#fff', marginBottom: 18, textShadow: '0 2px 20px rgba(0,0,0,0.3)' }}>
+                {(hero.headingLine1 || 'Advanced Aesthetics &') + ' '}
+                {hero.headingLine2 || 'Skin Wellness at Tvak & Asthi'}
+              </h1>
+              <p style={{ fontSize: 15, fontWeight: 300, color: 'rgba(255,255,255,0.82)', lineHeight: 1.65, margin: '0 auto', maxWidth: 560 }}>
+                {hero.subtext || "Noida's MD-led aesthetic clinic — evidence-based care for skin, hair and ageing concerns."}
+              </p>
             </div>
-            <div className="hb-2" style={{ position: 'absolute', top: 16, right: -16, background: '#fff', borderRadius: 999, padding: '10px 18px', boxShadow: '0 4px 24px rgba(84,50,19,0.12)', fontSize: 12, fontWeight: 400 }}>
-              US-FDA cleared devices
-            </div>
-          </div>
-        </div>
-      </section>
+
+          </section>
+        )
+      })()}
 
       {/* TRUST BAR — infinite marquee */}
       <MarqueeTrustBar items={trustBar} />

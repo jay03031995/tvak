@@ -29,6 +29,25 @@ export default defineType({
         }),
       ]
     }),
+    defineField({
+      name: 'heroVideoFile',
+      title: '🎬 Hero Video (Upload)',
+      type: 'file',
+      description: 'Upload an MP4 / WebM video. Used as the hero background. Max ~50 MB recommended.',
+      options: { accept: 'video/*' },
+    }),
+    defineField({
+      name: 'heroVideoUrl',
+      title: '🔗 Hero Video URL (External)',
+      type: 'url',
+      description: 'Alternatively paste a direct .mp4 link (e.g. from Cloudinary or Vimeo CDN). Takes precedence over uploaded file.',
+    }),
+    defineField({
+      name: 'heroFallbackImage',
+      title: '🖼 Hero Fallback Image (shown when video fails or on mobile)',
+      type: 'image',
+      options: { hotspot: true },
+    }),
     defineField({ name: 'heroImage1', title: '🖼 Hero Image 1 — Large Left', type: 'image', options: { hotspot: true } }),
     defineField({ name: 'heroImage2', title: '🖼 Hero Image 2 — Top Right', type: 'image', options: { hotspot: true } }),
     defineField({ name: 'heroImage3', title: '🖼 Hero Image 3 — Bottom Left', type: 'image', options: { hotspot: true } }),
