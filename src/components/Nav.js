@@ -1,6 +1,7 @@
 'use client'
 import { useState, useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 // ── CONDITIONS DATA ──────────────────────────────────────────────
@@ -188,18 +189,15 @@ export default function Nav({ onBook }) {
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 20px', height: 64, display: 'flex', alignItems: 'center', gap: 4 }}>
 
           {/* Logo */}
-          <Link href="/" style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-            <div style={{ width: 36, height: 36, borderRadius: 9, background: 'linear-gradient(135deg,#543213 50%,#844d28)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <span style={{ fontWeight: 700, fontSize: 18, color: '#fff', letterSpacing: '-0.04em' }}>A</span>
-            </div>
-            <div style={{ lineHeight: 1 }}>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 2 }}>
-                <span style={{ fontSize: 13, fontWeight: 600, color: '#543213', letterSpacing: '0.07em' }}>TVAK</span>
-                <span style={{ fontSize: 11, fontWeight: 300, color: '#844d28', margin: '0 2px' }}>&amp;</span>
-                <span style={{ fontSize: 13, fontWeight: 600, color: '#844d28', letterSpacing: '0.07em' }}>ASTHI</span>
-              </div>
-              <div style={{ fontSize: 7.5, fontWeight: 500, letterSpacing: '0.25em', color: '#844d28', marginTop: 2 }}>BY ARTHAM</div>
-            </div>
+          <Link href="/" style={{ flexShrink: 0, display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+            <Image
+              src="/artham-logo.png"
+              alt="Artham Aesthetique"
+              width={120}
+              height={48}
+              priority
+              style={{ objectFit: 'contain', height: 48, width: 'auto' }}
+            />
           </Link>
 
           {/* Desktop nav */}

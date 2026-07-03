@@ -214,3 +214,23 @@ a { color: inherit; text-decoration: none; }
     grid-template-columns: 1fr !important;
   }
 }
+
+/* ── 3-panel hero ── */
+.hero-3panel {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  min-height: 100vh;
+}
+
+@media (max-width: 900px) {
+  .hero-3panel {
+    grid-template-columns: 1fr !important;
+    min-height: unset !important;
+  }
+  .hero-panel-side {
+    min-height: 45vh !important;
+  }
+  .hero-panel-center {
+    min-height: 65vh !important;
+  }
+}

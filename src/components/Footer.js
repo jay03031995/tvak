@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Footer() {
   return (
@@ -6,14 +7,14 @@ export default function Footer() {
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '56px 20px 32px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 40 }}>
         {/* Brand */}
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-            <div style={{ width: 36, height: 36, borderRadius: 9, background: 'linear-gradient(135deg,#efdfc8 50%,#844d28)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <span style={{ fontWeight: 700, fontSize: 18, color: '#543213', letterSpacing: '-0.04em' }}>A</span>
-            </div>
-            <div>
-              <div style={{ fontSize: 12, fontWeight: 500, letterSpacing: '0.1em', color: '#efdfc8' }}>TVAK & ASTHI</div>
-              <div style={{ fontSize: 8, fontWeight: 400, letterSpacing: '0.22em', color: '#feb847' }}>BY ARTHAM</div>
-            </div>
+          <div style={{ marginBottom: 16 }}>
+            <Image
+              src="/artham-logo.png"
+              alt="Artham Aesthetique"
+              width={110}
+              height={44}
+              style={{ objectFit: 'contain', height: 44, width: 'auto', filter: 'brightness(0) invert(1) opacity(0.9)' }}
+            />
           </div>
           <p style={{ fontSize: 13, fontWeight: 300, color: '#c8b09a', lineHeight: 1.7, marginBottom: 20 }}>
             Noida's MD-led aesthetic clinic. Evidence-based care for skin, hair and ageing concerns.
