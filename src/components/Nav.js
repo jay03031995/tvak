@@ -185,82 +185,87 @@ export default function Nav({ onBook }) {
   return (
     <>
       {/* ── STICKY NAV ── */}
-      <header style={{ position: 'sticky', top: 0, zIndex: 200, background: 'rgba(239,223,200,0.97)', backdropFilter: 'blur(10px)', borderBottom: '1px solid rgba(26,17,9,0.08)', fontFamily: 'var(--font-poppins), system-ui, sans-serif' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 20px', height: 64, display: 'flex', alignItems: 'center', gap: 4 }}>
+      <header style={{ position: 'sticky', top: 0, zIndex: 200, background: '#fff', borderBottom: '1px solid rgba(84,50,19,0.1)', fontFamily: 'var(--font-poppins), system-ui, sans-serif' }}>
+        {/* ── Desktop: 3-column grid — left nav | LOGO | right nav ── */}
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: '0 20px', height: 70, display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', gap: 8 }} className="nav-desktop">
 
-          {/* Logo */}
-          <Link href="/" style={{ flexShrink: 0, display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-            <Image
-              src="/artham-logo.png"
-              alt="Artham Aesthetique"
-              width={120}
-              height={48}
-              priority
-              style={{ objectFit: 'contain', height: 48, width: 'auto' }}
-            />
-          </Link>
-
-          {/* Desktop nav */}
-          <nav style={{ display: 'flex', alignItems: 'center', marginLeft: 20, gap: 2 }} onMouseLeave={closeMegaSoon}>
-            {/* Conditions */}
+          {/* LEFT — hamburger + left links */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 4 }} onMouseLeave={closeMegaSoon}>
+            {/* Hamburger circle */}
+            <button onClick={() => { setMenuOpen(o => !o); setSearchOpen(false); setHoverMenu('') }}
+              style={{ width: 40, height: 40, borderRadius: '50%', background: '#543213', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginRight: 6 }}>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            </button>
+            {/* Left nav */}
             <button style={navLinkStyle(isOn('/concerns'))} onMouseEnter={() => openMega('conditions')} onClick={() => openMega(hoverMenu === 'conditions' ? '' : 'conditions')}>
               Conditions {chevron(hoverMenu === 'conditions')}
             </button>
-            {/* Treatments */}
             <button style={navLinkStyle(isOn('/treatments'))} onMouseEnter={() => openMega('treatments')} onClick={() => openMega(hoverMenu === 'treatments' ? '' : 'treatments')}>
               Treatments {chevron(hoverMenu === 'treatments')}
             </button>
-            {/* Specialized Clinics */}
             <button style={navLinkStyle(false)} onMouseEnter={() => openMega('clinics')} onClick={() => openMega(hoverMenu === 'clinics' ? '' : 'clinics')}>
-              Specialized Clinics {chevron(hoverMenu === 'clinics')}
-            </button>
-            <Link href="/doctor" style={navLinkStyle(isOn('/doctor'))} onMouseEnter={closeMega}>Our Doctor</Link>
-            <Link href="/about" style={navLinkStyle(isOn('/about'))} onMouseEnter={closeMega}>About</Link>
-            <Link href="/contact" style={navLinkStyle(isOn('/contact'))} onMouseEnter={closeMega}>Contact</Link>
-          </nav>
-
-          {/* Desktop right */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginLeft: 'auto' }}>
-            {[
-              { href: 'https://instagram.com', label: 'Instagram', d: <><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></> },
-              { href: 'https://wa.me/919811997993', label: 'WhatsApp', d: <path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 21l2.2-5.3A8.5 8.5 0 1 1 21 11.5Z"/> },
-            ].map(s => (
-              <a key={s.label} href={s.href} target="_blank" rel="noopener" aria-label={s.label}
-                style={{ color: '#7a6858', display: 'flex', transition: 'color .15s' }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{s.d}</svg>
-              </a>
-            ))}
-            <div style={{ width: 1, height: 20, background: 'rgba(26,17,9,0.12)' }} />
-            <button onClick={() => { setSearchOpen(o => !o); setHoverMenu('') }}
-              style={{ width: 32, height: 32, borderRadius: 8, border: 'none', background: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#7a6858' }}>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-            </button>
-            <button onClick={onBook}
-              style={{ background: '#543213', color: '#fff', fontSize: 12.5, fontWeight: 500, padding: '8px 20px', borderRadius: 999, border: 'none', cursor: 'pointer', flexShrink: 0, transition: 'background .18s' }}>
-              Book Now
+              Clinics {chevron(hoverMenu === 'clinics')}
             </button>
           </div>
 
-          {/* Mobile toggle */}
-          <div style={{ display: 'none', alignItems: 'center', gap: 8, marginLeft: 'auto' }} className="mobile-nav-toggle">
-            <button onClick={() => { setSearchOpen(o => !o); setMenuOpen(false) }}
-              style={{ width: 36, height: 36, borderRadius: 8, border: '1px solid rgba(26,17,9,0.13)', background: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#7a6858' }}>
+          {/* CENTER — Logo */}
+          <Link href="/" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none' }} onClick={closeMega}>
+            <Image src="/artham-logo.png" alt="Artham Aesthetique" width={130} height={56} priority
+              style={{ objectFit: 'contain', height: 56, width: 'auto' }} />
+          </Link>
+
+          {/* RIGHT — right links + phone + book + search */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 4 }} onMouseLeave={closeMegaSoon}>
+            <Link href="/doctor" style={navLinkStyle(isOn('/doctor'))} onMouseEnter={closeMega}>About Doctor</Link>
+            <Link href="/about" style={navLinkStyle(isOn('/about'))} onMouseEnter={closeMega}>About Us</Link>
+            <Link href="/contact" style={navLinkStyle(isOn('/contact'))} onMouseEnter={closeMega}>Contact Us</Link>
+            <div style={{ width: 1, height: 20, background: 'rgba(84,50,19,0.12)', margin: '0 4px' }} />
+            {/* Phone */}
+            <a href="tel:09811997993" style={{ display: 'flex', alignItems: 'center', gap: 6, color: '#543213', textDecoration: 'none', fontSize: 13, fontWeight: 400, whiteSpace: 'nowrap' }}>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#feb847" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.48l3-.1a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.08 6.08l1.79-1.79a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              +91 98119 97993
+            </a>
+            {/* Book button */}
+            <button onClick={onBook}
+              style={{ background: '#feb847', color: '#543213', fontSize: 13, fontWeight: 600, padding: '9px 22px', borderRadius: 999, border: 'none', cursor: 'pointer', flexShrink: 0, letterSpacing: '0.02em' }}>
+              Book Appointment
+            </button>
+            {/* Search */}
+            <button onClick={() => { setSearchOpen(o => !o); setHoverMenu('') }}
+              style={{ width: 34, height: 34, borderRadius: '50%', border: '1.5px solid rgba(84,50,19,0.15)', background: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#543213' }}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
             </button>
-            <button onClick={() => { setMenuOpen(o => !o); setSearchOpen(false) }}
-              style={{ width: 36, height: 36, borderRadius: 8, border: '1px solid rgba(26,17,9,0.13)', background: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#543213" strokeWidth="2" strokeLinecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          </div>
+        </div>
+
+        {/* ── Mobile header ── */}
+        <div style={{ display: 'none', padding: '0 16px', height: 60, alignItems: 'center', justifyContent: 'space-between' }} className="nav-mobile">
+          <button onClick={() => { setMenuOpen(o => !o); setSearchOpen(false) }}
+            style={{ width: 38, height: 38, borderRadius: '50%', background: '#543213', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          </button>
+          <Link href="/" style={{ textDecoration: 'none' }}>
+            <Image src="/artham-logo.png" alt="Artham Aesthetique" width={100} height={40} priority style={{ objectFit: 'contain', height: 40, width: 'auto' }} />
+          </Link>
+          <div style={{ display: 'flex', gap: 8 }}>
+            <button onClick={() => { setSearchOpen(o => !o); setMenuOpen(false) }}
+              style={{ width: 38, height: 38, borderRadius: '50%', border: '1.5px solid rgba(84,50,19,0.2)', background: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#543213' }}>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+            </button>
+            <button onClick={onBook}
+              style={{ background: '#feb847', color: '#543213', fontSize: 12, fontWeight: 600, padding: '8px 16px', borderRadius: 999, border: 'none', cursor: 'pointer' }}>
+              Book
             </button>
           </div>
         </div>
 
         {/* Search bar */}
         {searchOpen && (
-          <div style={{ borderTop: '1px solid rgba(26,17,9,0.08)', background: '#fff', boxShadow: '0 4px 20px rgba(26,17,9,0.06)' }}>
-            <div style={{ maxWidth: 640, margin: '0 auto', padding: '12px 20px', display: 'flex', alignItems: 'center', gap: 10, background: '#f1d0b4', borderRadius: 12, margin: '8px 20px' }}>
+          <div style={{ borderTop: '1px solid rgba(84,50,19,0.08)', background: '#fff' }}>
+            <div style={{ maxWidth: 640, margin: '8px auto', padding: '0 20px', display: 'flex', alignItems: 'center', gap: 10, background: '#f1d0b4', borderRadius: 12 }}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7a6858" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
               <input value={searchQ} onChange={e => setSearchQ(e.target.value)} placeholder="Search treatments, concerns…"
-                style={{ flex: 1, background: 'none', border: 'none', outline: 'none', padding: '8px 0', fontSize: 14, color: '#3d3028', fontWeight: 300 }} autoFocus />
+                style={{ flex: 1, background: 'none', border: 'none', outline: 'none', padding: '10px 0', fontSize: 14, color: '#3d3028', fontWeight: 300 }} autoFocus />
               <button onClick={() => { setSearchOpen(false); setSearchQ('') }} style={{ border: 'none', background: 'none', cursor: 'pointer', color: '#7a6858', display: 'flex', padding: 4 }}>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
               </button>
@@ -270,7 +275,7 @@ export default function Nav({ onBook }) {
       </header>
 
       {/* ── CONDITIONS MEGA ── */}
-      <div style={{ position: 'fixed', left: 0, right: 0, zIndex: 190, top: 64, opacity: hoverMenu === 'conditions' ? 1 : 0, pointerEvents: hoverMenu === 'conditions' ? 'auto' : 'none', transform: hoverMenu === 'conditions' ? 'translateY(0)' : 'translateY(-8px)', transition: 'opacity .2s, transform .22s' }}
+      <div style={{ position: 'fixed', left: 0, right: 0, zIndex: 190, top: 70, opacity: hoverMenu === 'conditions' ? 1 : 0, pointerEvents: hoverMenu === 'conditions' ? 'auto' : 'none', transform: hoverMenu === 'conditions' ? 'translateY(0)' : 'translateY(-8px)', transition: 'opacity .2s, transform .22s' }}
         onMouseEnter={keepMega} onMouseLeave={closeMegaSoon}>
         <div style={{ background: '#fff', borderBottom: '1px solid rgba(26,17,9,0.08)', boxShadow: '0 16px 48px rgba(26,17,9,0.1)' }}>
           <div style={{ maxWidth: 1280, margin: '0 auto', padding: '28px 20px 32px', display: 'grid', gridTemplateColumns: '2fr 1.2fr 1fr 0.8fr', gap: 40 }}>
@@ -297,7 +302,7 @@ export default function Nav({ onBook }) {
       </div>
 
       {/* ── TREATMENTS MEGA ── */}
-      <div style={{ position: 'fixed', left: 0, right: 0, zIndex: 190, top: 64, opacity: hoverMenu === 'treatments' ? 1 : 0, pointerEvents: hoverMenu === 'treatments' ? 'auto' : 'none', transform: hoverMenu === 'treatments' ? 'translateY(0)' : 'translateY(-8px)', transition: 'opacity .2s, transform .22s' }}
+      <div style={{ position: 'fixed', left: 0, right: 0, zIndex: 190, top: 70, opacity: hoverMenu === 'treatments' ? 1 : 0, pointerEvents: hoverMenu === 'treatments' ? 'auto' : 'none', transform: hoverMenu === 'treatments' ? 'translateY(0)' : 'translateY(-8px)', transition: 'opacity .2s, transform .22s' }}
         onMouseEnter={keepMega} onMouseLeave={closeMegaSoon}>
         <div style={{ background: '#fff', borderBottom: '1px solid rgba(26,17,9,0.08)', boxShadow: '0 16px 48px rgba(26,17,9,0.1)', maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}>
           <div style={{ maxWidth: 1280, margin: '0 auto', padding: '28px 20px 32px', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 32 }}>
@@ -327,7 +332,7 @@ export default function Nav({ onBook }) {
       </div>
 
       {/* ── SPECIALIZED CLINICS DROPDOWN ── */}
-      <div style={{ position: 'fixed', left: 0, right: 0, zIndex: 190, top: 64, opacity: hoverMenu === 'clinics' ? 1 : 0, pointerEvents: hoverMenu === 'clinics' ? 'auto' : 'none', transform: hoverMenu === 'clinics' ? 'translateY(0)' : 'translateY(-8px)', transition: 'opacity .2s, transform .22s' }}
+      <div style={{ position: 'fixed', left: 0, right: 0, zIndex: 190, top: 70, opacity: hoverMenu === 'clinics' ? 1 : 0, pointerEvents: hoverMenu === 'clinics' ? 'auto' : 'none', transform: hoverMenu === 'clinics' ? 'translateY(0)' : 'translateY(-8px)', transition: 'opacity .2s, transform .22s' }}
         onMouseEnter={keepMega} onMouseLeave={closeMegaSoon}>
         <div style={{ background: '#fff', borderBottom: '1px solid rgba(26,17,9,0.08)', boxShadow: '0 16px 48px rgba(26,17,9,0.1)' }}>
           <div style={{ maxWidth: 1280, margin: '0 auto', padding: '24px 20px 28px', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8 }}>
@@ -414,8 +419,8 @@ export default function Nav({ onBook }) {
 
       <style>{`
         @media (max-width: 1024px) {
-          nav { display: none !important; }
-          .mobile-nav-toggle { display: flex !important; }
+          .nav-desktop { display: none !important; }
+          .nav-mobile  { display: flex !important; }
         }
       `}</style>
     </>

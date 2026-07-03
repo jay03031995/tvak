@@ -77,137 +77,83 @@ export default async function HomePage() {
         </div>
       )}
 
-      {/* HERO — 3-panel Artham banner */}
+      {/* HERO — full-screen video, dark Artham palette */}
       {(() => {
         const videoSrc = page?.heroVideoUrl || page?.heroVideoFile?.asset?.url
-        const centerImg = page?.heroImage2 || page?.heroFallbackImage
+        const fallbackImg = page?.heroFallbackImage || page?.heroImage1
         return (
-          <section className="hero-3panel">
+          <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
 
-            {/* ── PANEL 1 — Dark brand anchor with circular logo ── */}
-            <div className="hero-panel-side" style={{ background: '#1a0c04', position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '52px 36px 48px', overflow: 'hidden' }}>
-              {/* Faint clinic photo behind */}
-              {page?.heroImage1 && (
-                <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-                  <Image src={urlFor(page.heroImage1).width(600).height(1000).fit('crop').url()} alt="" fill style={{ objectFit: 'cover', opacity: 0.22 }} />
-                </div>
-              )}
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(26,12,4,0.75) 0%, rgba(26,12,4,0.92) 100%)', zIndex: 1 }} />
+            {/* Background — video or image or dark gradient */}
+            {videoSrc ? (
+              <video autoPlay muted loop playsInline
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}
+                poster={fallbackImg ? urlFor(fallbackImg).width(1600).url() : undefined}>
+                <source src={videoSrc} type="video/mp4" />
+              </video>
+            ) : fallbackImg ? (
+              <Image src={urlFor(fallbackImg).width(1600).height(900).fit('crop').url()} alt="" fill priority style={{ objectFit: 'cover', zIndex: 0 }} />
+            ) : (
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #1a0c04 0%, #2e1608 50%, #543213 100%)', zIndex: 0 }} />
+            )}
 
-              {/* Eyebrow */}
-              <div style={{ position: 'relative', zIndex: 2 }}>
-                <span style={{ fontSize: 9, fontWeight: 600, letterSpacing: '0.22em', color: '#feb847' }}>DERMATOLOGY · AESTHETICS · TRICHOLOGY</span>
-              </div>
+            {/* Dark overlay — strong so text is always readable */}
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.72) 100%)', zIndex: 1 }} />
 
-              {/* Circular logo medallion */}
-              <div style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 1, padding: '32px 0' }}>
-                <div style={{ width: 200, height: 200, borderRadius: '50%', border: '1.5px solid rgba(254,184,71,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-                  <div style={{ position: 'absolute', inset: 8, borderRadius: '50%', border: '1px solid rgba(254,184,71,0.18)' }} />
-                  <Image src="/artham-logo.png" alt="Artham Aesthetique" width={150} height={150} style={{ objectFit: 'contain', opacity: 0.88 }} />
-                </div>
-              </div>
-
-              {/* Bottom tagline */}
-              <div style={{ position: 'relative', zIndex: 2 }}>
-                <h2 style={{ fontSize: 'clamp(18px,1.8vw,26px)', fontWeight: 700, color: '#fff', lineHeight: 1.2, letterSpacing: '0.04em', textTransform: 'uppercase', margin: 0 }}>
-                  WHERE SCIENCE<br />
-                  <span style={{ color: '#feb847' }}>MEETS</span><br />
-                  SOULFUL CARE
-                </h2>
-              </div>
+            {/* Vertical social — left edge */}
+            <div style={{ position: 'absolute', left: 18, top: '50%', transform: 'translateY(-50%)', zIndex: 3, display: 'flex', flexDirection: 'column', gap: 22 }}>
+              {['INSTAGRAM', 'TWITTER', 'FACEBOOK'].map(s => (
+                <a key={s} href="#" aria-label={s}
+                  style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)', fontSize: 9, fontWeight: 500, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color .15s' }}>
+                  {s}
+                </a>
+              ))}
             </div>
 
-            {/* ── PANEL 2 — Center: video or image + hero quote ── */}
-            <div className="hero-panel-center" style={{ position: 'relative', overflow: 'hidden' }}>
-              {/* Video background */}
-              {videoSrc ? (
-                <video autoPlay muted loop playsInline
-                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}
-                  poster={centerImg ? urlFor(centerImg).width(900).url() : undefined}>
-                  <source src={videoSrc} type="video/mp4" />
-                </video>
-              ) : centerImg ? (
-                <Image src={urlFor(centerImg).width(900).height(1100).fit('crop').url()} alt="" fill priority style={{ objectFit: 'cover', zIndex: 0 }} />
-              ) : (
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(160deg, #844d28 0%, #543213 100%)', zIndex: 0 }} />
-              )}
-              {/* Gradient overlay */}
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(20,10,4,0.15) 0%, rgba(20,10,4,0.55) 55%, rgba(20,10,4,0.88) 100%)', zIndex: 1 }} />
+            {/* Vertical contact — right edge */}
+            <div style={{ position: 'absolute', right: 18, top: '50%', transform: 'translateY(-50%)', zIndex: 3, display: 'flex', flexDirection: 'column', gap: 22 }}>
+              {[{ label: 'CALL US', href: 'tel:09811997993' }, { label: 'WHATSAPP', href: 'https://wa.me/919811997993' }].map(({ label, href }) => (
+                <a key={label} href={href}
+                  style={{ writingMode: 'vertical-rl', fontSize: 9, fontWeight: 500, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color .15s' }}>
+                  {label}
+                </a>
+              ))}
+            </div>
 
-              {/* Vertical social links */}
-              <div style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', zIndex: 3, display: 'flex', flexDirection: 'column', gap: 18 }}>
-                {['INSTAGRAM', 'TWITTER', 'FACEBOOK'].map(s => (
-                  <a key={s} href="#" aria-label={s}
-                    style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)', fontSize: 9, fontWeight: 500, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.55)', textDecoration: 'none' }}>
-                    {s}
-                  </a>
+            {/* Upper center — "Schedule Now" style pill CTA */}
+            <div style={{ position: 'relative', zIndex: 2, flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '18vh' }}>
+              <Link href="/contact"
+                style={{ background: '#f1d0b4', color: '#543213', fontSize: 14, fontWeight: 500, padding: '14px 40px', borderRadius: 999, textDecoration: 'none', letterSpacing: '0.06em', boxShadow: '0 6px 28px rgba(0,0,0,0.25)' }}>
+                {hero.ctaPrimary || 'Schedule Now'}
+              </Link>
+            </div>
+
+            {/* Lower center — headline + sub */}
+            <div className="au" style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 40px 80px', maxWidth: 860, margin: '0 auto', width: '100%' }}>
+              <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.24em', color: '#feb847', marginBottom: 20, textTransform: 'uppercase' }}>
+                {hero.eyebrow || 'Dermatology · Aesthetics · Trichology'}
+              </p>
+              <h1 style={{ fontWeight: 600, fontSize: 'clamp(28px,4.2vw,56px)', lineHeight: 1.08, letterSpacing: '-0.02em', color: '#fff', marginBottom: 20, textShadow: '0 2px 24px rgba(0,0,0,0.4)' }}>
+                {hero.headingLine1 || 'The difference between'}{' '}
+                <em style={{ fontStyle: 'italic', fontWeight: 400, color: '#feb847' }}>
+                  {hero.headingItalic || 'covering concerns'}
+                </em>{' '}
+                {hero.headingLine2 || 'and'}{' '}
+                <em style={{ fontStyle: 'italic', fontWeight: 400, color: '#feb847' }}>
+                  {hero.headingItalic2 || 'correcting them.'}
+                </em>
+              </h1>
+              <p style={{ fontSize: 15, fontWeight: 300, color: 'rgba(255,255,255,0.75)', lineHeight: 1.7, margin: '0 auto', maxWidth: 520 }}>
+                {hero.subtext || "Noida's MD-led aesthetic clinic — evidence-based care for skin, hair and ageing concerns."}
+              </p>
+              {/* Stats row */}
+              <div style={{ display: 'flex', justifyContent: 'center', gap: 40, marginTop: 36, flexWrap: 'wrap' }}>
+                {heroStats.map((s, i) => (
+                  <div key={i} style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: 22, fontWeight: 700, color: '#feb847', lineHeight: 1 }}>{s.value}</div>
+                    <div style={{ fontSize: 10.5, fontWeight: 400, color: 'rgba(255,255,255,0.55)', letterSpacing: '0.1em', marginTop: 5 }}>{s.label}</div>
+                  </div>
                 ))}
-              </div>
-
-              {/* Hero quote text — bottom */}
-              <div className="au" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '0 44px 52px', zIndex: 2 }}>
-                <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.22em', color: '#feb847', marginBottom: 16, textTransform: 'uppercase' }}>
-                  {hero.eyebrow || 'WHAT IF...'}
-                </p>
-                <h1 style={{ fontWeight: 600, fontSize: 'clamp(22px,2.8vw,42px)', color: '#fff', lineHeight: 1.08, letterSpacing: '-0.02em', marginBottom: 16 }}>
-                  {hero.headingLine1 || 'The difference between'}{' '}
-                  <em style={{ fontStyle: 'italic', fontWeight: 400, color: '#feb847' }}>
-                    {hero.headingItalic || 'covering concerns'}
-                  </em>{' '}
-                  {hero.headingLine2 || 'and'}{' '}
-                  <em style={{ fontStyle: 'italic', fontWeight: 400, color: '#feb847' }}>
-                    {hero.headingItalic2 || 'correcting them.'}
-                  </em>
-                </h1>
-                <p style={{ fontSize: 13.5, fontWeight: 300, color: 'rgba(255,255,255,0.75)', lineHeight: 1.7, maxWidth: 400 }}>
-                  {hero.subtext || "Noida's MD-led aesthetic clinic. Evidence-based care for skin, hair and ageing."}
-                </p>
-              </div>
-            </div>
-
-            {/* ── PANEL 3 — Dark CTA with gold logo ── */}
-            <div className="hero-panel-side" style={{ background: '#0d0704', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '52px 36px 48px', position: 'relative', overflow: 'hidden' }}>
-              {/* Subtle radial gold glow */}
-              <div style={{ position: 'absolute', bottom: -60, left: '50%', transform: 'translateX(-50%)', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(254,184,71,0.12) 0%, transparent 70%)', pointerEvents: 'none' }} />
-
-              {/* Top label */}
-              <div style={{ position: 'relative', zIndex: 1 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-                  <div style={{ flex: 1, height: 1, background: 'rgba(254,184,71,0.35)' }} />
-                  <span style={{ fontSize: 9, fontWeight: 500, letterSpacing: '0.2em', color: 'rgba(254,184,71,0.7)', whiteSpace: 'nowrap' }}>SOMETHING IS ABOUT TO ALIGN</span>
-                  <div style={{ flex: 1, height: 1, background: 'rgba(254,184,71,0.35)' }} />
-                </div>
-              </div>
-
-              {/* Gold tinted logo */}
-              <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 1, padding: '24px 0' }}>
-                <Image src="/artham-logo.png" alt="" width={190} height={190}
-                  style={{ objectFit: 'contain', filter: 'sepia(1) saturate(4) brightness(0.85) hue-rotate(5deg)', opacity: 0.75 }} />
-              </div>
-
-              {/* Bottom CTA */}
-              <div style={{ position: 'relative', zIndex: 1 }}>
-                <p style={{ fontSize: 13, fontStyle: 'italic', fontWeight: 300, color: 'rgba(255,255,255,0.6)', marginBottom: 28, lineHeight: 1.65 }}>
-                  Aligning Science. Enhancing Confidence.
-                </p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                  <Link href="/contact"
-                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#feb847', color: '#543213', fontSize: 13, fontWeight: 600, padding: '14px 28px', borderRadius: 999, textDecoration: 'none', letterSpacing: '0.03em' }}>
-                    {hero.ctaPrimary || 'Book Consultation'}
-                  </Link>
-                  <Link href="/treatments"
-                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'transparent', color: 'rgba(255,255,255,0.65)', fontSize: 13, fontWeight: 300, padding: '13px 28px', borderRadius: 999, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)' }}>
-                    {hero.ctaSecondary || 'Explore Treatments'}
-                  </Link>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'center', gap: 20, marginTop: 24 }}>
-                  {(hero.stats || heroStats).slice(0, 2).map((s, i) => (
-                    <div key={i} style={{ textAlign: 'center' }}>
-                      <div style={{ fontSize: 20, fontWeight: 700, color: '#feb847', lineHeight: 1 }}>{s.value}</div>
-                      <div style={{ fontSize: 10, fontWeight: 400, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.08em', marginTop: 4 }}>{s.label}</div>
-                    </div>
-                  ))}
-                </div>
               </div>
             </div>
 
