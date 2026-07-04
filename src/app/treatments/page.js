@@ -23,11 +23,11 @@ export default async function TreatmentsPage() {
 
   return (
     <div style={{ background: 'var(--cream)' }}>
-      <section style={{ padding: '52px 20px 44px', background: 'linear-gradient(180deg,#F5EDE4,#FAF7F2)' }}>
+      <section style={{ padding: '52px 20px 44px', background: 'linear-gradient(180deg,#f5e6d0,#f5e6d0)' }}>
         <div style={{ maxWidth: 1180, margin: '0 auto' }}>
           <span className="eyebrow">All Services</span>
           <h1 style={{ fontWeight: 500, marginBottom: 12 }}>Treatments</h1>
-          <p style={{ fontSize: 14, fontWeight: 300, color: '#7A6A5A', maxWidth: 520 }}>
+          <p style={{ fontSize: 14, fontWeight: 300, color: '#7a6858', maxWidth: 520 }}>
             Every procedure performed by Dr. Omaima. US-FDA cleared devices. Personalised to your skin.
           </p>
         </div>

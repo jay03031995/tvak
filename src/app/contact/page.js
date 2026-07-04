@@ -43,11 +43,11 @@ export default async function ContactPage() {
 
   return (
     <div style={{ background: 'var(--cream)' }}>
-      <section style={{ padding: '52px 20px 44px', background: 'linear-gradient(180deg,#F5EDE4,#FAF7F2)' }}>
+      <section style={{ padding: '52px 20px 44px', background: 'linear-gradient(180deg,#f5e6d0,#f5e6d0)' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <span className="eyebrow">{hero.eyebrow || 'Get in Touch'}</span>
           <h1 style={{ fontWeight: 500, marginBottom: 12 }}>{hero.heading || 'Book a Consultation'}</h1>
-          <p style={{ fontSize: 14, fontWeight: 300, color: '#7A6A5A', maxWidth: 480 }}>
+          <p style={{ fontSize: 14, fontWeight: 300, color: '#7a6858', maxWidth: 480 }}>
             {hero.subtext || "Fill the form below and we'll get back within a few hours, or call/WhatsApp us directly."}
           </p>
         </div>
@@ -64,29 +64,29 @@ export default async function ContactPage() {
               <div className="grid-form">
                 <div>
                   <label style={{ display: 'block', fontSize: 12, fontWeight: 500, color: '#4A3728', marginBottom: 6, letterSpacing: '0.04em' }}>Full Name</label>
-                  <input type="text" placeholder="Your name" style={{ width: '100%', padding: '11px 14px', borderRadius: 10, border: '1.5px solid rgba(26,17,9,0.14)', fontSize: 13.5, fontWeight: 300, outline: 'none', background: '#FAF7F2', fontFamily: 'inherit' }} />
+                  <input type="text" placeholder="Your name" style={{ width: '100%', padding: '11px 14px', borderRadius: 10, border: '1.5px solid rgba(26,17,9,0.14)', fontSize: 13.5, fontWeight: 300, outline: 'none', background: '#f5e6d0', fontFamily: 'inherit' }} />
                 </div>
                 <div>
                   <label style={{ display: 'block', fontSize: 12, fontWeight: 500, color: '#4A3728', marginBottom: 6, letterSpacing: '0.04em' }}>Phone Number</label>
-                  <input type="tel" placeholder="10-digit mobile" style={{ width: '100%', padding: '11px 14px', borderRadius: 10, border: '1.5px solid rgba(26,17,9,0.14)', fontSize: 13.5, fontWeight: 300, outline: 'none', background: '#FAF7F2', fontFamily: 'inherit' }} />
+                  <input type="tel" placeholder="10-digit mobile" style={{ width: '100%', padding: '11px 14px', borderRadius: 10, border: '1.5px solid rgba(26,17,9,0.14)', fontSize: 13.5, fontWeight: 300, outline: 'none', background: '#f5e6d0', fontFamily: 'inherit' }} />
                 </div>
               </div>
               <div>
                 <label style={{ display: 'block', fontSize: 12, fontWeight: 500, color: '#4A3728', marginBottom: 6, letterSpacing: '0.04em' }}>Email (optional)</label>
-                <input type="email" placeholder="email@example.com" style={{ width: '100%', padding: '11px 14px', borderRadius: 10, border: '1.5px solid rgba(26,17,9,0.14)', fontSize: 13.5, fontWeight: 300, outline: 'none', background: '#FAF7F2', fontFamily: 'inherit' }} />
+                <input type="email" placeholder="email@example.com" style={{ width: '100%', padding: '11px 14px', borderRadius: 10, border: '1.5px solid rgba(26,17,9,0.14)', fontSize: 13.5, fontWeight: 300, outline: 'none', background: '#f5e6d0', fontFamily: 'inherit' }} />
               </div>
               <div>
                 <label style={{ display: 'block', fontSize: 12, fontWeight: 500, color: '#4A3728', marginBottom: 6, letterSpacing: '0.04em' }}>Main Concern</label>
-                <select style={{ width: '100%', padding: '11px 14px', borderRadius: 10, border: '1.5px solid rgba(26,17,9,0.14)', fontSize: 13.5, fontWeight: 300, outline: 'none', background: '#FAF7F2', fontFamily: 'inherit', appearance: 'none' }}>
+                <select style={{ width: '100%', padding: '11px 14px', borderRadius: 10, border: '1.5px solid rgba(26,17,9,0.14)', fontSize: 13.5, fontWeight: 300, outline: 'none', background: '#f5e6d0', fontFamily: 'inherit', appearance: 'none' }}>
                   <option value="">Select a concern</option>
                   {concerns.map(c => <option key={c} value={c}>{c}</option>)}
                 </select>
               </div>
               <div>
                 <label style={{ display: 'block', fontSize: 12, fontWeight: 500, color: '#4A3728', marginBottom: 6, letterSpacing: '0.04em' }}>Message (optional)</label>
-                <textarea placeholder="Tell us more about your concern…" rows={4} style={{ width: '100%', padding: '11px 14px', borderRadius: 10, border: '1.5px solid rgba(26,17,9,0.14)', fontSize: 13.5, fontWeight: 300, outline: 'none', background: '#FAF7F2', fontFamily: 'inherit', resize: 'vertical' }} />
+                <textarea placeholder="Tell us more about your concern…" rows={4} style={{ width: '100%', padding: '11px 14px', borderRadius: 10, border: '1.5px solid rgba(26,17,9,0.14)', fontSize: 13.5, fontWeight: 300, outline: 'none', background: '#f5e6d0', fontFamily: 'inherit', resize: 'vertical' }} />
               </div>
-              <button type="submit" style={{ background: '#1A2744', color: '#fff', fontSize: 13.5, fontWeight: 400, padding: '14px', borderRadius: 999, border: 'none', cursor: 'pointer', letterSpacing: '0.02em', transition: 'background .18s' }}>
+              <button type="submit" style={{ background: '#844d28', color: '#fff', fontSize: 13.5, fontWeight: 400, padding: '14px', borderRadius: 999, border: 'none', cursor: 'pointer', letterSpacing: '0.02em', transition: 'background .18s' }}>
                 Send Message
               </button>
             </form>
@@ -96,19 +96,19 @@ export default async function ContactPage() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             {infoCards.map((info, i) => (
               <div key={i} style={{ background: '#fff', borderRadius: 14, padding: '20px', border: '1.5px solid rgba(26,17,9,0.09)', display: 'flex', gap: 14, alignItems: 'flex-start' }}>
-                <div style={{ width: 38, height: 38, borderRadius: 10, background: '#EEF1F8', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A2744" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{info.icon}</svg>
+                <div style={{ width: 38, height: 38, borderRadius: 10, background: '#f5e6d0', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#844d28" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{info.icon}</svg>
                 </div>
                 <div>
-                  <div style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#9A8A7A', marginBottom: 4 }}>{info.label}</div>
+                  <div style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(72,63,55,0.55)', marginBottom: 4 }}>{info.label}</div>
                   <a href={info.link} target={info.link.startsWith('http') ? '_blank' : undefined} rel="noopener"
-                    style={{ fontSize: 13.5, fontWeight: 400, color: '#1A2744', textDecoration: 'none', lineHeight: 1.5 }}>{info.value}</a>
+                    style={{ fontSize: 13.5, fontWeight: 400, color: '#844d28', textDecoration: 'none', lineHeight: 1.5 }}>{info.value}</a>
                 </div>
               </div>
             ))}
 
             <div style={{ background: '#fff', borderRadius: 14, padding: '20px', border: '1.5px solid rgba(26,17,9,0.09)' }}>
-              <div style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#9A8A7A', marginBottom: 14 }}>Clinic Hours</div>
+              <div style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(72,63,55,0.55)', marginBottom: 14 }}>Clinic Hours</div>
               {hours.map((h, i) => (
                 <div key={i} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, fontWeight: 300, color: '#4A3728', paddingBottom: 8, borderBottom: i < hours.length - 1 ? '1px solid rgba(26,17,9,0.07)' : 'none', marginBottom: 8 }}>
                   <span>{h.days}</span>

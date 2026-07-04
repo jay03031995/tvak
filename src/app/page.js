@@ -63,7 +63,7 @@ export default async function HomePage() {
 
       {/* PROMO BANNER */}
       {settings?.promoBanner?.enabled && (
-        <div style={{ background: '#543213', padding: '10px 20px', textAlign: 'center' }}>
+        <div style={{ background: '#844d28', padding: '10px 20px', textAlign: 'center' }}>
           <p style={{ margin: 0, fontSize: 13, fontWeight: 300, color: '#efdfc8' }}>
             <strong style={{ fontWeight: 500 }}>{settings.promoBanner.label}</strong>{' '}
             {settings.promoBanner.text}
@@ -94,7 +94,7 @@ export default async function HomePage() {
             ) : fallbackImg ? (
               <Image src={urlFor(fallbackImg).width(1600).height(900).fit('crop').url()} alt="" fill priority style={{ objectFit: 'cover', zIndex: 0 }} />
             ) : (
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #1a0c04 0%, #2e1608 50%, #543213 100%)', zIndex: 0 }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #1a0c04 0%, #2e1608 50%, #844d28 100%)', zIndex: 0 }} />
             )}
 
             {/* Dark overlay — strong so text is always readable */}
@@ -123,7 +123,7 @@ export default async function HomePage() {
             {/* Upper center — "Schedule Now" style pill CTA */}
             <div style={{ position: 'relative', zIndex: 2, flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '18vh' }}>
               <Link href="/contact"
-                style={{ background: '#f1d0b4', color: '#543213', fontSize: 14, fontWeight: 500, padding: '14px 40px', borderRadius: 999, textDecoration: 'none', letterSpacing: '0.06em', boxShadow: '0 6px 28px rgba(0,0,0,0.25)' }}>
+                style={{ background: '#f1d0b4', color: '#844d28', fontSize: 14, fontWeight: 500, padding: '14px 40px', borderRadius: 999, textDecoration: 'none', letterSpacing: '0.06em', boxShadow: '0 6px 28px rgba(0,0,0,0.25)' }}>
                 {hero.ctaPrimary || 'Schedule Now'}
               </Link>
             </div>
@@ -172,7 +172,7 @@ export default async function HomePage() {
               <span className="eyebrow">{page?.treatmentsSection?.eyebrow || 'Our Services'}</span>
               <h2 style={{ fontWeight: 500, color: 'var(--text)', margin: 0 }}>{page?.treatmentsSection?.heading || 'Treatments we offer'}</h2>
             </div>
-            <Link href="/treatments" style={{ fontSize: 13, fontWeight: 400, color: '#543213', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>View all treatments →</Link>
+            <Link href="/treatments" style={{ fontSize: 13, fontWeight: 400, color: '#844d28', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>View all treatments →</Link>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 18 }}>
             {[
@@ -208,7 +208,7 @@ export default async function HomePage() {
                     </div>
                   )}
                   {/* White pill badge */}
-                  <div style={{ position: 'absolute', top: 14, left: 14, background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(4px)', color: '#543213', fontSize: 9.5, fontWeight: 600, letterSpacing: '0.12em', padding: '4px 10px', borderRadius: 999 }}>{t.badge}</div>
+                  <div style={{ position: 'absolute', top: 14, left: 14, background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(4px)', color: '#844d28', fontSize: 9.5, fontWeight: 600, letterSpacing: '0.12em', padding: '4px 10px', borderRadius: 999 }}>{t.badge}</div>
                 </div>
 
                 {/* Body */}
@@ -221,12 +221,12 @@ export default async function HomePage() {
                       {t.duration}
                     </div>
                     {/* Pill button */}
-                    <span style={{ fontSize: 12.5, fontWeight: 500, color: '#543213', background: '#f1d0b4', padding: '7px 16px', borderRadius: 999 }}>Explore →</span>
+                    <span style={{ fontSize: 12.5, fontWeight: 500, color: '#844d28', background: '#f1d0b4', padding: '7px 16px', borderRadius: 999 }}>Explore →</span>
                   </div>
                 </div>
               </Link>
             ))}
-            <Link href="/treatments" className="card-hover reveal" style={{ '--d': '500ms', textDecoration: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', background: '#543213', borderRadius: 20, overflow: 'hidden', minHeight: 280, padding: '28px 24px', position: 'relative' }}>
+            <Link href="/treatments" className="card-hover reveal" style={{ '--d': '500ms', textDecoration: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', background: '#844d28', borderRadius: 20, overflow: 'hidden', minHeight: 280, padding: '28px 24px', position: 'relative' }}>
               <div style={{ position: 'absolute', top: 20, left: 20, fontSize: 10.5, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#feb847' }}>15 TREATMENTS</div>
               <h3 style={{ fontWeight: 400, fontSize: 22, color: '#efdfc8', fontStyle: 'italic', lineHeight: 1.2, marginBottom: 20 }}>Explore the full menu</h3>
               <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -245,7 +245,7 @@ export default async function HomePage() {
               <span className="eyebrow">{page?.concernsSection?.eyebrow || 'Browse by Concern'}</span>
               <h2 style={{ fontWeight: 500, color: 'var(--text)', margin: 0 }}>{page?.concernsSection?.heading || 'New & popular concerns'}</h2>
             </div>
-            <Link href="/concerns" style={{ fontSize: 13, fontWeight: 400, color: '#543213', textDecoration: 'none' }}>See all concerns →</Link>
+            <Link href="/concerns" style={{ fontSize: 13, fontWeight: 400, color: '#844d28', textDecoration: 'none' }}>See all concerns →</Link>
           </div>
           <div className="grid-3">
             {[
@@ -308,7 +308,7 @@ export default async function HomePage() {
           </div>
           <div className="grid-2">
             {[
-              { bg: '#543213', eyebrow: 'Monsoon Special', heading: '20% off Acne & Scar treatments', sub: 'Valid through July 2026. Book now to lock in the offer.', btnBg: '#feb847', btn: 'Claim offer →', delay: '0ms', subColor: '#c8b09a' },
+              { bg: '#844d28', eyebrow: 'Monsoon Special', heading: '20% off Acne & Scar treatments', sub: 'Valid through July 2026. Book now to lock in the offer.', btnBg: '#feb847', btn: 'Claim offer →', delay: '0ms', subColor: '#c8b09a' },
               { bg: '#844d28', eyebrow: 'New Patient Offer', heading: 'Free consultation for first-timers', sub: 'New to Tvak? Your first dermatologist consultation is on us.', btnBg: '#feb847', btn: 'Book free consult →', delay: '100ms', subColor: '#e8d0b4' },
             ].map((o, i) => (
               <div key={i} className="reveal" style={{ '--d': o.delay, background: o.bg, borderRadius: 20, padding: '36px 32px', position: 'relative', overflow: 'hidden' }}>
@@ -316,7 +316,7 @@ export default async function HomePage() {
                 <div style={{ fontSize: 10.5, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#feb847', marginBottom: 16 }}>{o.eyebrow}</div>
                 <h3 style={{ fontWeight: 600, fontSize: 22, color: '#efdfc8', marginBottom: 10, lineHeight: 1.2 }}>{o.heading}</h3>
                 <p style={{ fontSize: 13.5, fontWeight: 300, color: o.subColor, marginBottom: 28, lineHeight: 1.7 }}>{o.sub}</p>
-                <Link href="/contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: o.btnBg, color: '#543213', fontSize: 13, fontWeight: 500, padding: '11px 22px', borderRadius: 999, textDecoration: 'none' }}>{o.btn}</Link>
+                <Link href="/contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: o.btnBg, color: '#844d28', fontSize: 13, fontWeight: 500, padding: '11px 22px', borderRadius: 999, textDecoration: 'none' }}>{o.btn}</Link>
               </div>
             ))}
           </div>
@@ -348,10 +348,10 @@ export default async function HomePage() {
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7, marginBottom: 20 }}>
               {['Acne & Scar Treatment', 'Laser Procedures', 'Hair Restoration', 'Anti-Ageing', 'Chemical Peels'].map((s, si) => (
-                <span key={s} style={{ fontSize: 12, fontWeight: 400, color: '#543213', background: '#f1d0b4', padding: '5px 12px', borderRadius: 999, border: '1px solid rgba(84,50,19,0.15)', animation: `fadeUp 0.4s cubic-bezier(.22,.68,0,.99) ${si * 60 + 200}ms both` }}>{s}</span>
+                <span key={s} style={{ fontSize: 12, fontWeight: 400, color: '#844d28', background: '#f1d0b4', padding: '5px 12px', borderRadius: 999, border: '1px solid rgba(84,50,19,0.15)', animation: `fadeUp 0.4s cubic-bezier(.22,.68,0,.99) ${si * 60 + 200}ms both` }}>{s}</span>
               ))}
             </div>
-            <Link href="/doctor" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 500, color: '#efdfc8', background: '#543213', padding: '12px 26px', borderRadius: 999, textDecoration: 'none' }}>
+            <Link href="/doctor" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 500, color: '#efdfc8', background: '#844d28', padding: '12px 26px', borderRadius: 999, textDecoration: 'none' }}>
               Full Profile →
             </Link>
           </div>
@@ -366,26 +366,26 @@ export default async function HomePage() {
               <span className="eyebrow">Real Results</span>
               <h2 style={{ fontWeight: 500, color: 'var(--text)', margin: 0 }}>Before & After</h2>
             </div>
-            <Link href="/before-after" style={{ fontSize: 13, fontWeight: 400, color: '#543213', textDecoration: 'none' }}>View all results →</Link>
+            <Link href="/before-after" style={{ fontSize: 13, fontWeight: 400, color: '#844d28', textDecoration: 'none' }}>View all results →</Link>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 20 }}>
             {[
               { treatment: 'Acne Clearance Program', result: 'Active acne cleared in 6 sessions', weeks: '8 weeks', cat: 'Acne & Scars', slug: 'acne-clearance', accent: '#FFF0EE', dot: '#844d28' },
               { treatment: 'Acne Scar Revision MNRF', result: 'Pitted scars visibly reduced', weeks: '12 weeks', cat: 'Acne & Scars', slug: 'acne-scar-mnrf', accent: '#f1d0b4', dot: '#844d28' },
-              { treatment: 'Melasma Treatment', result: 'Dark patches significantly faded', weeks: '10 weeks', cat: 'Pigmentation', slug: 'melasma', accent: '#EEF6FF', dot: '#6B9EC7' },
-              { treatment: 'PRP Hair Restoration', result: 'Visible density improvement', weeks: '16 weeks', cat: 'Hair Restoration', slug: 'prp-hair', accent: '#EEFAF2', dot: '#2E7D52' },
+              { treatment: 'Melasma Treatment', result: 'Dark patches significantly faded', weeks: '10 weeks', cat: 'Pigmentation', slug: 'melasma', accent: '#f5e6d0', dot: '#b8894a' },
+              { treatment: 'PRP Hair Restoration', result: 'Visible density improvement', weeks: '16 weeks', cat: 'Hair Restoration', slug: 'prp-hair', accent: '#f5e6d0', dot: '#b8894a' },
             ].map((item, i) => (
               <Link key={i} href={`/treatments/${item.slug}`} className="card-hover reveal" style={{ '--d': `${i * 80}ms`, textDecoration: 'none', background: '#fff', borderRadius: 18, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.08)' }}>
                 <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', height: 200, background: '#f1d0b4' }}>
                   <div style={{ background: '#E2D8CE', display: 'flex', alignItems: 'flex-end', padding: '10px', justifyContent: 'flex-start' }}>
-                    <span style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(255,255,255,0.85)', color: '#543213', padding: '4px 8px', borderRadius: 4 }}>Before</span>
+                    <span style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(255,255,255,0.85)', color: '#844d28', padding: '4px 8px', borderRadius: 4 }}>Before</span>
                   </div>
                   <div style={{ background: '#D4C9BC', display: 'flex', alignItems: 'flex-end', padding: '10px', justifyContent: 'flex-end' }}>
                     <span style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(84,50,19,0.85)', color: '#efdfc8', padding: '4px 8px', borderRadius: 4 }}>After</span>
                   </div>
                   <div style={{ position: 'absolute', left: '50%', top: 0, bottom: 0, width: 2, background: '#fff', transform: 'translateX(-50%)' }}>
                     <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 28, height: 28, borderRadius: '50%', background: '#fff', boxShadow: '0 2px 8px rgba(0,0,0,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#543213" strokeWidth="2.5"><path d="M9 18l-6-6 6-6M15 6l6 6-6 6"/></svg>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#844d28" strokeWidth="2.5"><path d="M9 18l-6-6 6-6M15 6l6 6-6 6"/></svg>
                     </div>
                   </div>
                   <div style={{ position: 'absolute', top: 12, left: 12, background: item.accent, borderRadius: 6, padding: '3px 9px' }}>
@@ -396,7 +396,7 @@ export default async function HomePage() {
                   <h3 style={{ fontWeight: 500, fontSize: 14, color: 'var(--text)', marginBottom: 6, lineHeight: 1.3 }}>{item.treatment}</h3>
                   <p style={{ fontSize: 13, fontWeight: 300, color: '#7a6858', marginBottom: 12, lineHeight: 1.55 }}>{item.result}</p>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: 11.5, fontWeight: 400, color: '#543213', background: '#f1d0b4', padding: '4px 10px', borderRadius: 999 }}>Results in {item.weeks}</span>
+                    <span style={{ fontSize: 11.5, fontWeight: 400, color: '#844d28', background: '#f1d0b4', padding: '4px 10px', borderRadius: 999 }}>Results in {item.weeks}</span>
                     <span style={{ fontSize: 12, fontWeight: 500, color: '#844d28' }}>View →</span>
                   </div>
                 </div>
@@ -432,7 +432,7 @@ export default async function HomePage() {
       </section>
 
       {/* CTA BANNER */}
-      <section style={{ padding: '64px 20px', background: '#543213' }}>
+      <section style={{ padding: '64px 20px', background: '#844d28' }}>
         <div className="reveal" style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
           <h2 style={{ fontWeight: 500, color: '#efdfc8', marginBottom: 12 }}>
             {page?.ctaBanner?.heading || 'Ready to correct, not just cover?'}
@@ -441,7 +441,7 @@ export default async function HomePage() {
             {page?.ctaBanner?.subtext || 'Book a consultation with Dr. Omaima and get a personalised treatment plan.'}
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/contact" style={{ background: '#feb847', color: '#543213', fontSize: 13, fontWeight: 500, padding: '13px 32px', borderRadius: 999, textDecoration: 'none' }}>
+            <Link href="/contact" style={{ background: '#feb847', color: '#844d28', fontSize: 13, fontWeight: 500, padding: '13px 32px', borderRadius: 999, textDecoration: 'none' }}>
               {page?.ctaBanner?.primaryCta || 'Book Appointment'}
             </Link>
             <a href="tel:09811997993" style={{ background: 'rgba(255,255,255,0.08)', color: '#efdfc8', fontSize: 13, fontWeight: 400, padding: '13px 32px', borderRadius: 999, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }}>

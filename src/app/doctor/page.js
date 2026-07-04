@@ -30,12 +30,12 @@ export default async function DoctorPage() {
   return (
     <div style={{ background: 'var(--cream)' }}>
       {/* STATS STRIP */}
-      <section style={{ padding: '40px 20px', background: '#1A2744' }}>
+      <section style={{ padding: '40px 20px', background: '#844d28' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }} className="grid-stats">
           {stats.map((s, i) => (
             <div key={i} style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: 'clamp(24px,3.5vw,36px)', fontWeight: 500, color: '#FAF7F2', lineHeight: 1 }}>{s.value}</div>
-              <div style={{ fontSize: 12, fontWeight: 300, color: '#A0B4C8', marginTop: 6 }}>{s.label}</div>
+              <div style={{ fontSize: 'clamp(24px,3.5vw,36px)', fontWeight: 500, color: '#f5e6d0', lineHeight: 1 }}>{s.value}</div>
+              <div style={{ fontSize: 12, fontWeight: 300, color: '#b8894a', marginTop: 6 }}>{s.label}</div>
             </div>
           ))}
         </div>
@@ -50,7 +50,7 @@ export default async function DoctorPage() {
             {/* About */}
             <span className="eyebrow">Your Doctor</span>
             <h1 style={{ fontWeight: 500, marginBottom: 6 }}>{d.name || 'Dr. Omaima Jawed'}</h1>
-            <p style={{ fontSize: 13.5, fontWeight: 400, color: '#B8916A', marginBottom: 28, letterSpacing: '0.04em' }}>
+            <p style={{ fontSize: 13.5, fontWeight: 400, color: '#b8894a', marginBottom: 28, letterSpacing: '0.04em' }}>
               {d.credentials || 'MBBS'} · {d.title || 'Aesthetic Physician'} · {d.experience || 5} Years Experience
             </p>
 
@@ -67,7 +67,7 @@ export default async function DoctorPage() {
             <div style={{ marginBottom: 40 }} className="grid-expertise">
               {specialties.map((s, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4A6741" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8894a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                   <span style={{ fontSize: 13.5, fontWeight: 400, color: '#4A3728' }}>{s}</span>
                 </div>
               ))}
@@ -79,19 +79,19 @@ export default async function DoctorPage() {
               {education.map((e, i) => (
                 <div key={i} style={{ display: 'flex', gap: 0, paddingBottom: 24 }}>
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginRight: 16, flexShrink: 0 }}>
-                    <div style={{ width: 14, height: 14, borderRadius: '50%', background: '#1A2744', flexShrink: 0, marginTop: 3 }} />
+                    <div style={{ width: 14, height: 14, borderRadius: '50%', background: '#844d28', flexShrink: 0, marginTop: 3 }} />
                     {i < education.length - 1 && <div style={{ width: 2, flex: 1, background: '#E0D8D0', marginTop: 4 }} />}
                   </div>
                   <div>
                     <div style={{ fontSize: 14.5, fontWeight: 500, color: 'var(--text)', marginBottom: 4 }}>{e.degree}</div>
-                    <div style={{ fontSize: 13, fontWeight: 300, color: '#9A8A7A' }}>{e.institution}{e.year ? ` · ${e.year}` : ''}</div>
+                    <div style={{ fontSize: 13, fontWeight: 300, color: 'rgba(72,63,55,0.55)' }}>{e.institution}{e.year ? ` · ${e.year}` : ''}</div>
                   </div>
                 </div>
               ))}
             </div>
 
             {/* Philosophy */}
-            <div style={{ background: '#F5EDE4', borderRadius: 16, padding: '28px 28px', borderLeft: '3px solid #B8916A', marginTop: 8 }}>
+            <div style={{ background: '#f5e6d0', borderRadius: 16, padding: '28px 28px', borderLeft: '3px solid #b8894a', marginTop: 8 }}>
               <p style={{ fontSize: 14.5, fontStyle: 'italic', fontWeight: 300, color: '#4A3728', lineHeight: 1.85, margin: 0 }}>
                 "Every patient who sits in my chair deserves honest advice. I will never recommend a treatment you don't need, and I will always tell you what results are realistically achievable for your skin."
               </p>
@@ -129,15 +129,15 @@ export default async function DoctorPage() {
                   { icon: <><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/></>, text: 'In-clinic & online video' },
                 ].map((item, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9A8A7A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{item.icon}</svg>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(72,63,55,0.55)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{item.icon}</svg>
                     <span style={{ fontSize: 13, fontWeight: 300, color: '#4A3728' }}>{item.text}</span>
                   </div>
                 ))}
               </div>
-              <Link href="/contact" style={{ display: 'block', textAlign: 'center', background: '#1A2744', color: '#fff', fontSize: 13.5, fontWeight: 400, padding: '13px', borderRadius: 10, textDecoration: 'none', marginBottom: 10 }}>
+              <Link href="/contact" style={{ display: 'block', textAlign: 'center', background: '#844d28', color: '#fff', fontSize: 13.5, fontWeight: 400, padding: '13px', borderRadius: 10, textDecoration: 'none', marginBottom: 10 }}>
                 Book Appointment
               </Link>
-              <a href="https://wa.me/919811997993" target="_blank" rel="noopener" style={{ display: 'block', textAlign: 'center', background: '#fff', color: '#4A6741', fontSize: 13.5, fontWeight: 400, padding: '13px', borderRadius: 10, textDecoration: 'none', border: '1.5px solid rgba(74,103,65,0.25)' }}>
+              <a href="https://wa.me/919811997993" target="_blank" rel="noopener" style={{ display: 'block', textAlign: 'center', background: '#fff', color: '#b8894a', fontSize: 13.5, fontWeight: 400, padding: '13px', borderRadius: 10, textDecoration: 'none', border: '1.5px solid rgba(74,103,65,0.25)' }}>
                 Ask on WhatsApp
               </a>
             </div>
@@ -146,7 +146,7 @@ export default async function DoctorPage() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section style={{ padding: '64px 20px', background: '#FAF7F2' }}>
+      <section style={{ padding: '64px 20px', background: '#f5e6d0' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <span className="eyebrow">Patient Stories</span>
           <h2 style={{ fontWeight: 500, marginBottom: 32 }}>What patients say</h2>
@@ -158,12 +158,12 @@ export default async function DoctorPage() {
             ].map((t, i) => (
               <div key={i} style={{ background: '#fff', borderRadius: 16, padding: '24px 22px', border: '1.5px solid rgba(26,17,9,0.08)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
-                  <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#1A2744', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <span style={{ fontSize: 13, fontWeight: 500, color: '#FAF7F2' }}>{t.initials}</span>
+                  <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#844d28', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <span style={{ fontSize: 13, fontWeight: 500, color: '#f5e6d0' }}>{t.initials}</span>
                   </div>
                   <div>
                     <div style={{ fontSize: 13.5, fontWeight: 500, color: 'var(--text)' }}>{t.name}</div>
-                    <div style={{ fontSize: 11.5, fontWeight: 300, color: '#9A8A7A' }}>{t.treatment}</div>
+                    <div style={{ fontSize: 11.5, fontWeight: 300, color: 'rgba(72,63,55,0.55)' }}>{t.treatment}</div>
                   </div>
                   <div style={{ marginLeft: 'auto', display: 'flex', gap: 1 }}>
                     {[...Array(5)].map((_, si) => <svg key={si} width="11" height="11" viewBox="0 0 24 24" fill="#FBBC04"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7Z"/></svg>)}

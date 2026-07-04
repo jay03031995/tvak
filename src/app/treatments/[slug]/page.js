@@ -618,12 +618,12 @@ export default async function TreatmentPage({ params }) {
     <article style={{ background: 'var(--cream)' }}>
 
       {/* ── 1. HERO ── */}
-      <section style={{ padding: '48px 20px 44px', background: 'linear-gradient(160deg,#F5EDE4 0%,#FAF7F2 60%,#EEE8E2 100%)' }}>
+      <section style={{ padding: '48px 20px 44px', background: 'linear-gradient(160deg,#f5e6d0 0%,#f5e6d0 60%,#EEE8E2 100%)' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: t.image ? '1fr 400px' : '1fr', gap: 52, alignItems: 'center' }} className={t.image ? 'treatment-hero-grid' : ''}>
           <div>
-            <nav style={{ fontSize: 12, color: '#9A8A7A', fontWeight: 300, marginBottom: 24, display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-              <Link href="/" style={{ color: '#9A8A7A' }}>Home</Link><span>/</span>
-              <Link href="/treatments" style={{ color: '#9A8A7A' }}>Treatments</Link><span>/</span>
+            <nav style={{ fontSize: 12, color: 'rgba(72,63,55,0.55)', fontWeight: 300, marginBottom: 24, display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+              <Link href="/" style={{ color: 'rgba(72,63,55,0.55)' }}>Home</Link><span>/</span>
+              <Link href="/treatments" style={{ color: 'rgba(72,63,55,0.55)' }}>Treatments</Link><span>/</span>
               <span style={{ color: 'var(--text)' }}>{t.name}</span>
             </nav>
             <span className="eyebrow">{t.category}</span>
@@ -633,7 +633,7 @@ export default async function TreatmentPage({ params }) {
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 28 }}>
                 {Object.entries(t.meta).filter(([, v]) => v).map(([k, v]) => (
                   <div key={k} style={{ background: '#fff', borderRadius: 10, padding: '10px 18px', border: '1.5px solid rgba(26,17,9,0.09)' }}>
-                    <div style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#B8916A' }}>{k}</div>
+                    <div style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#b8894a' }}>{k}</div>
                     <div style={{ fontSize: 13, fontWeight: 400, color: 'var(--text)', marginTop: 3 }}>{v}</div>
                   </div>
                 ))}
@@ -642,16 +642,16 @@ export default async function TreatmentPage({ params }) {
             {t.benefits?.length > 0 && (
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 32 }}>
                 {t.benefits.slice(0, 3).map((b, i) => (
-                  <span key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12.5, fontWeight: 400, color: '#1A2744', background: 'rgba(26,39,68,0.07)', padding: '6px 14px', borderRadius: 999 }}>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4A6741" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12.5, fontWeight: 400, color: '#844d28', background: 'rgba(132,77,40,0.07)', padding: '6px 14px', borderRadius: 999 }}>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#b8894a" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
                     {b}
                   </span>
                 ))}
               </div>
             )}
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-              <Link href="/contact" style={{ background: '#1A2744', color: '#fff', fontSize: 13.5, fontWeight: 400, padding: '13px 28px', borderRadius: 999, textDecoration: 'none' }}>Book Consultation</Link>
-              <a href="tel:09811997993" style={{ background: 'transparent', color: '#1A2744', fontSize: 13.5, fontWeight: 400, padding: '13px 28px', borderRadius: 999, border: '1.5px solid rgba(26,39,68,0.2)', textDecoration: 'none' }}>Call 098119 97993</a>
+              <Link href="/contact" style={{ background: '#844d28', color: '#fff', fontSize: 13.5, fontWeight: 400, padding: '13px 28px', borderRadius: 999, textDecoration: 'none' }}>Book Consultation</Link>
+              <a href="tel:09811997993" style={{ background: 'transparent', color: '#844d28', fontSize: 13.5, fontWeight: 400, padding: '13px 28px', borderRadius: 999, border: '1.5px solid rgba(132,77,40,0.2)', textDecoration: 'none' }}>Call 098119 97993</a>
             </div>
           </div>
           {t.image && (
@@ -680,22 +680,22 @@ export default async function TreatmentPage({ params }) {
                 <p key={i} style={{ marginBottom: 18 }}>{para}</p>
               ))}
             </div>
-            <div style={{ marginTop: 8, padding: '20px 22px', background: '#F5F9F4', borderRadius: 12, border: '1.5px solid rgba(74,103,65,0.15)' }}>
-              <div style={{ fontSize: 11.5, fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#4A6741', marginBottom: 8 }}>Why dermatologists recommend it</div>
-              <p style={{ fontSize: 13.5, fontWeight: 300, color: '#3A2A1A', lineHeight: 1.75, margin: 0 }}>
+            <div style={{ marginTop: 8, padding: '20px 22px', background: '#f5e6d0', borderRadius: 12, border: '1.5px solid rgba(74,103,65,0.15)' }}>
+              <div style={{ fontSize: 11.5, fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#b8894a', marginBottom: 8 }}>Why dermatologists recommend it</div>
+              <p style={{ fontSize: 13.5, fontWeight: 300, color: '#483f37', lineHeight: 1.75, margin: 0 }}>
                 {t.name} is a clinically validated procedure performed by Dr. Omaima using medical-grade technology. Every treatment plan is personalised based on your skin type, concern severity, and treatment goals.
               </p>
             </div>
           </div>
-          <div style={{ background: '#F5EDE4', borderRadius: 16, padding: '28px 24px', border: '1.5px solid rgba(184,145,106,0.2)', position: 'sticky', top: 20 }}>
-            <div style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#B8916A', marginBottom: 18 }}>Quick Facts</div>
+          <div style={{ background: '#f5e6d0', borderRadius: 16, padding: '28px 24px', border: '1.5px solid rgba(184,145,106,0.2)', position: 'sticky', top: 20 }}>
+            <div style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#b8894a', marginBottom: 18 }}>Quick Facts</div>
             {t.meta && Object.entries(t.meta).filter(([, v]) => v).map(([k, v]) => (
               <div key={k} style={{ marginBottom: 14, paddingBottom: 14, borderBottom: '1px solid rgba(184,145,106,0.15)' }}>
-                <div style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9A8A7A', marginBottom: 3 }}>{k}</div>
-                <div style={{ fontSize: 13.5, fontWeight: 400, color: '#3A2A1A' }}>{v}</div>
+                <div style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(72,63,55,0.55)', marginBottom: 3 }}>{k}</div>
+                <div style={{ fontSize: 13.5, fontWeight: 400, color: '#483f37' }}>{v}</div>
               </div>
             ))}
-            <Link href="/contact" style={{ display: 'block', textAlign: 'center', background: '#1A2744', color: '#fff', fontSize: 13, fontWeight: 400, padding: '12px 20px', borderRadius: 999, textDecoration: 'none', marginTop: 8 }}>Book a Free Consultation</Link>
+            <Link href="/contact" style={{ display: 'block', textAlign: 'center', background: '#844d28', color: '#fff', fontSize: 13, fontWeight: 400, padding: '12px 20px', borderRadius: 999, textDecoration: 'none', marginTop: 8 }}>Book a Free Consultation</Link>
           </div>
         </div>
       </section>
@@ -706,12 +706,12 @@ export default async function TreatmentPage({ params }) {
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <span className="eyebrow">Conditions Treated</span>
             <h2 style={{ fontWeight: 500, marginBottom: 12 }}>What does {t.name} help with?</h2>
-            <p style={{ fontSize: 14, fontWeight: 300, color: '#5A4A3A', maxWidth: 640, lineHeight: 1.8, marginBottom: 32 }}>
+            <p style={{ fontSize: 14, fontWeight: 300, color: '#483f37', maxWidth: 640, lineHeight: 1.8, marginBottom: 32 }}>
               {t.name} is clinically effective for the following skin and hair concerns. Click any condition to learn more about our approach.
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 40 }}>
               {t.concerns.map((c, i) => (
-                <Link key={i} href={`/concerns/${c.slug}`} style={{ fontSize: 13, fontWeight: 400, color: '#1A2744', background: '#fff', border: '1.5px solid rgba(26,39,68,0.15)', padding: '8px 18px', borderRadius: 999, textDecoration: 'none' }}>
+                <Link key={i} href={`/concerns/${c.slug}`} style={{ fontSize: 13, fontWeight: 400, color: '#844d28', background: '#fff', border: '1.5px solid rgba(132,77,40,0.15)', padding: '8px 18px', borderRadius: 999, textDecoration: 'none' }}>
                   {c.name} →
                 </Link>
               ))}
@@ -720,11 +720,11 @@ export default async function TreatmentPage({ params }) {
               {t.concerns.map((c, i) => (
                 <Link key={i} href={`/concerns/${c.slug}`} style={{ textDecoration: 'none' }}>
                   <div style={{ background: '#fff', borderRadius: 14, padding: '22px 20px', border: '1.5px solid rgba(26,17,9,0.09)', height: '100%', display: 'flex', flexDirection: 'column', gap: 10 }}>
-                    <div style={{ width: 36, height: 36, borderRadius: '50%', background: '#F5EDE4', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#B8916A" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 8 16 12 12 16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                    <div style={{ width: 36, height: 36, borderRadius: '50%', background: '#f5e6d0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#b8894a" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 8 16 12 12 16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
                     </div>
                     <div style={{ fontSize: 13.5, fontWeight: 500, color: 'var(--text)' }}>{c.name}</div>
-                    <div style={{ fontSize: 12, fontWeight: 300, color: '#B8916A', marginTop: 'auto' }}>View concern page →</div>
+                    <div style={{ fontSize: 12, fontWeight: 300, color: '#b8894a', marginTop: 'auto' }}>View concern page →</div>
                   </div>
                 </Link>
               ))}
@@ -735,14 +735,14 @@ export default async function TreatmentPage({ params }) {
 
       {/* ── 5. BENEFITS ── */}
       {t.benefits?.length > 0 && (
-        <section style={{ padding: '72px 20px', background: '#1A2744' }}>
+        <section style={{ padding: '72px 20px', background: '#844d28' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-            <span className="eyebrow" style={{ color: '#B8916A' }}>Why Choose This</span>
-            <h2 style={{ fontWeight: 500, color: '#FAF7F2', marginBottom: 36 }}>Benefits of {t.name}</h2>
+            <span className="eyebrow" style={{ color: '#b8894a' }}>Why Choose This</span>
+            <h2 style={{ fontWeight: 500, color: '#f5e6d0', marginBottom: 36 }}>Benefits of {t.name}</h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 14 }}>
               {t.benefits.map((b, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 12, padding: '18px 20px', background: 'rgba(255,255,255,0.07)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.1)' }}>
-                  <span style={{ width: 24, height: 24, borderRadius: '50%', background: '#B8916A', color: '#fff', fontSize: 11, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>✓</span>
+                  <span style={{ width: 24, height: 24, borderRadius: '50%', background: '#b8894a', color: '#fff', fontSize: 11, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>✓</span>
                   <span style={{ fontSize: 13.5, fontWeight: 300, color: '#E8DED4', lineHeight: 1.6 }}>{b}</span>
                 </div>
               ))}
@@ -753,19 +753,19 @@ export default async function TreatmentPage({ params }) {
 
       {/* ── 6. IDEAL CANDIDATE ── */}
       {t.idealCandidate && (
-        <section style={{ padding: '72px 20px', background: '#FAF7F2' }}>
+        <section style={{ padding: '72px 20px', background: '#f5e6d0' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
             <div>
               <span className="eyebrow">Is This Right For You?</span>
               <h2 style={{ fontWeight: 500, marginBottom: 18 }}>Who is an ideal candidate?</h2>
               <p style={{ fontSize: 14.5, fontWeight: 300, color: '#4A3728', lineHeight: 1.85, marginBottom: 28 }}>{t.idealCandidate}</p>
-              <Link href="/contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 400, color: '#1A2744', border: '1.5px solid rgba(26,39,68,0.2)', padding: '11px 22px', borderRadius: 999, textDecoration: 'none' }}>Check if you're suitable →</Link>
+              <Link href="/contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 400, color: '#844d28', border: '1.5px solid rgba(132,77,40,0.2)', padding: '11px 22px', borderRadius: 999, textDecoration: 'none' }}>Check if you're suitable →</Link>
             </div>
             <div style={{ background: '#fff', borderRadius: 16, padding: '28px 24px', border: '1.5px solid rgba(26,17,9,0.09)' }}>
-              <div style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#B8916A', marginBottom: 16 }}>Good candidates typically have</div>
+              <div style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#b8894a', marginBottom: 16 }}>Good candidates typically have</div>
               {(t.concerns?.length ? t.concerns : t.benefits?.slice(0, 5).map(b => ({ name: b })) || []).map((item, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', borderBottom: '1px solid rgba(26,17,9,0.07)' }}>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4A6741" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b8894a" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
                   <span style={{ fontSize: 13, fontWeight: 300, color: '#4A3728' }}>{item.name}</span>
                 </div>
               ))}
@@ -780,14 +780,14 @@ export default async function TreatmentPage({ params }) {
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <span className="eyebrow">The Procedure</span>
             <h2 style={{ fontWeight: 500, marginBottom: 10 }}>How {t.name} is performed</h2>
-            <p style={{ fontSize: 14, fontWeight: 300, color: '#5A4A3A', maxWidth: 580, lineHeight: 1.8, marginBottom: 36 }}>Every treatment at Tvak & Asthi is personally performed by Dr. Omaima — not a therapist or technician.</p>
+            <p style={{ fontSize: 14, fontWeight: 300, color: '#483f37', maxWidth: 580, lineHeight: 1.8, marginBottom: 36 }}>Every treatment at Tvak & Asthi is personally performed by Dr. Omaima — not a therapist or technician.</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {t.howItWorks.map((step, i) => (
-                <div key={i} style={{ display: 'flex', gap: 20, alignItems: 'flex-start', padding: '24px', background: '#F9F6F2', borderRadius: 16, border: '1.5px solid rgba(26,17,9,0.07)' }}>
-                  <span style={{ width: 40, height: 40, borderRadius: '50%', background: '#1A2744', color: '#FAF7F2', fontSize: 14, fontWeight: 500, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{step.step || i + 1}</span>
+                <div key={i} style={{ display: 'flex', gap: 20, alignItems: 'flex-start', padding: '24px', background: '#f5e6d0', borderRadius: 16, border: '1.5px solid rgba(26,17,9,0.07)' }}>
+                  <span style={{ width: 40, height: 40, borderRadius: '50%', background: '#844d28', color: '#f5e6d0', fontSize: 14, fontWeight: 500, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{step.step || i + 1}</span>
                   <div>
                     <div style={{ fontSize: 15, fontWeight: 500, color: 'var(--text)', marginBottom: 6 }}>{step.title}</div>
-                    <div style={{ fontSize: 13.5, fontWeight: 300, color: '#5A4A3A', lineHeight: 1.75 }}>{step.description}</div>
+                    <div style={{ fontSize: 13.5, fontWeight: 300, color: '#483f37', lineHeight: 1.75 }}>{step.description}</div>
                   </div>
                 </div>
               ))}
@@ -807,7 +807,7 @@ export default async function TreatmentPage({ params }) {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                   {t.preparation.map((step, i) => (
                     <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', padding: '14px 16px', background: '#fff', borderRadius: 12, border: '1.5px solid rgba(26,17,9,0.08)' }}>
-                      <span style={{ width: 22, height: 22, borderRadius: '50%', background: '#F5EDE4', color: '#B8916A', fontSize: 11, fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{i + 1}</span>
+                      <span style={{ width: 22, height: 22, borderRadius: '50%', background: '#f5e6d0', color: '#b8894a', fontSize: 11, fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{i + 1}</span>
                       <span style={{ fontSize: 13.5, fontWeight: 300, color: '#4A3728', lineHeight: 1.65 }}>{step}</span>
                     </div>
                   ))}
@@ -835,14 +835,14 @@ export default async function TreatmentPage({ params }) {
           <span className="eyebrow">Real Results</span>
           <h2 style={{ fontWeight: 500, marginBottom: 10 }}>What results can you expect?</h2>
           {t.meta?.Results && (
-            <p style={{ fontSize: 14, fontWeight: 300, color: '#5A4A3A', marginBottom: 32, maxWidth: 560 }}>
+            <p style={{ fontSize: 14, fontWeight: 300, color: '#483f37', marginBottom: 32, maxWidth: 560 }}>
               Most patients see {t.meta.Results.toLowerCase()} results. Individual outcomes vary based on skin type, concern severity, and adherence to aftercare.
             </p>
           )}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 20, marginBottom: 32 }}>
             {t.beforeAfter?.length > 0
               ? t.beforeAfter.map((ba, i) => (
-                <div key={i} style={{ background: '#FAF7F2', borderRadius: 16, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.08)' }}>
+                <div key={i} style={{ background: '#f5e6d0', borderRadius: 16, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.08)' }}>
                   <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', height: 220 }}>
                     <div style={{ position: 'relative', background: '#E2D8CE' }}>
                       {ba.before && (
@@ -866,7 +866,7 @@ export default async function TreatmentPage({ params }) {
                           sizes="150px"
                         />
                       )}
-                      <span style={{ position: 'absolute', bottom: 8, right: 8, fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(26,39,68,0.85)', color: '#FAF7F2', padding: '3px 8px', borderRadius: 4 }}>After</span>
+                      <span style={{ position: 'absolute', bottom: 8, right: 8, fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(132,77,40,0.85)', color: '#f5e6d0', padding: '3px 8px', borderRadius: 4 }}>After</span>
                     </div>
                     <div style={{ position: 'absolute', left: '50%', top: 0, bottom: 0, width: 2, background: '#fff', transform: 'translateX(-50%)', pointerEvents: 'none' }}>
                       <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 28, height: 28, borderRadius: '50%', background: '#fff', boxShadow: '0 2px 8px rgba(0,0,0,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -875,19 +875,19 @@ export default async function TreatmentPage({ params }) {
                     </div>
                   </div>
                   <div style={{ padding: '14px 16px 18px' }}>
-                    <p style={{ fontSize: 12.5, fontWeight: 400, color: '#5A4A3A', margin: 0 }}>{ba.label || `Patient result · ${ba.sessions || t.meta?.Sessions || '3–6 sessions'}`}</p>
+                    <p style={{ fontSize: 12.5, fontWeight: 400, color: '#483f37', margin: 0 }}>{ba.label || `Patient result · ${ba.sessions || t.meta?.Sessions || '3–6 sessions'}`}</p>
                     <p style={{ fontSize: 11, fontWeight: 300, color: '#B8A898', marginTop: 4 }}>Individual results may vary.</p>
                   </div>
                 </div>
               ))
               : [1, 2, 3].map(i => (
-                <div key={i} style={{ background: '#FAF7F2', borderRadius: 16, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.08)' }}>
+                <div key={i} style={{ background: '#f5e6d0', borderRadius: 16, overflow: 'hidden', border: '1.5px solid rgba(26,17,9,0.08)' }}>
                   <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', height: 210, background: '#F0E8DF' }}>
                     <div style={{ background: '#E2D8CE', display: 'flex', alignItems: 'flex-end', padding: '10px' }}>
                       <span style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(255,255,255,0.85)', color: '#4A3728', padding: '4px 8px', borderRadius: 4 }}>Before</span>
                     </div>
                     <div style={{ background: '#C8BDB0', display: 'flex', alignItems: 'flex-end', padding: '10px', justifyContent: 'flex-end' }}>
-                      <span style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(26,39,68,0.8)', color: '#FAF7F2', padding: '4px 8px', borderRadius: 4 }}>After</span>
+                      <span style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'rgba(132,77,40,0.8)', color: '#f5e6d0', padding: '4px 8px', borderRadius: 4 }}>After</span>
                     </div>
                     <div style={{ position: 'absolute', left: '50%', top: 0, bottom: 0, width: 2, background: '#fff', transform: 'translateX(-50%)' }}>
                       <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 28, height: 28, borderRadius: '50%', background: '#fff', boxShadow: '0 2px 8px rgba(0,0,0,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -896,7 +896,7 @@ export default async function TreatmentPage({ params }) {
                     </div>
                   </div>
                   <div style={{ padding: '14px 16px 18px' }}>
-                    <p style={{ fontSize: 12.5, fontWeight: 400, color: '#5A4A3A', margin: 0 }}>Patient result · {t.meta?.Sessions || '3–6 sessions'}</p>
+                    <p style={{ fontSize: 12.5, fontWeight: 400, color: '#483f37', margin: 0 }}>Patient result · {t.meta?.Sessions || '3–6 sessions'}</p>
                     <p style={{ fontSize: 11, fontWeight: 300, color: '#B8A898', marginTop: 4 }}>Individual results may vary.</p>
                   </div>
                 </div>
@@ -904,7 +904,7 @@ export default async function TreatmentPage({ params }) {
             }
           </div>
           <div style={{ textAlign: 'center' }}>
-            <Link href="/before-after" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 400, color: '#1A2744', border: '1.5px solid rgba(26,39,68,0.2)', padding: '11px 24px', borderRadius: 999, textDecoration: 'none' }}>
+            <Link href="/before-after" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 400, color: '#844d28', border: '1.5px solid rgba(132,77,40,0.2)', padding: '11px 24px', borderRadius: 999, textDecoration: 'none' }}>
               View full Before & After gallery →
             </Link>
           </div>
@@ -917,13 +917,13 @@ export default async function TreatmentPage({ params }) {
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <span className="eyebrow">Transparency</span>
             <h2 style={{ fontWeight: 500, marginBottom: 12 }}>Risks & Side Effects</h2>
-            <p style={{ fontSize: 14, fontWeight: 300, color: '#5A4A3A', maxWidth: 600, lineHeight: 1.8, marginBottom: 28 }}>
+            <p style={{ fontSize: 14, fontWeight: 300, color: '#483f37', maxWidth: 600, lineHeight: 1.8, marginBottom: 28 }}>
               At Tvak & Asthi, we believe in complete transparency. While {t.name} is a clinically established procedure, the following effects can occasionally occur:
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 12 }}>
               {t.risks.map((risk, i) => (
                 <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', padding: '14px 16px', background: '#FFF8F3', borderRadius: 12, border: '1.5px solid rgba(184,145,106,0.2)' }}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B8916A" strokeWidth="2" strokeLinecap="round" style={{ flexShrink: 0, marginTop: 1 }}><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8894a" strokeWidth="2" strokeLinecap="round" style={{ flexShrink: 0, marginTop: 1 }}><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                   <span style={{ fontSize: 13.5, fontWeight: 300, color: '#4A3728', lineHeight: 1.65 }}>{risk}</span>
                 </div>
               ))}
@@ -937,12 +937,12 @@ export default async function TreatmentPage({ params }) {
         <div style={{ maxWidth: 900, margin: '0 auto', background: '#fff', borderRadius: 20, padding: '32px', border: '1.5px solid rgba(26,17,9,0.09)', display: 'grid', gridTemplateColumns: '80px 1fr', gap: 24, alignItems: 'start' }}>
           <div style={{ width: 80, height: 80, borderRadius: '50%', background: 'linear-gradient(135deg,#E8DED4,#D4C8BC)', flexShrink: 0 }} />
           <div>
-            <div style={{ fontSize: 12, fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#B8916A', marginBottom: 8 }}>A note from Dr. Omaima</div>
+            <div style={{ fontSize: 12, fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#b8894a', marginBottom: 8 }}>A note from Dr. Omaima</div>
             <p style={{ fontSize: 14.5, fontWeight: 300, color: '#4A3728', lineHeight: 1.9, marginBottom: 16, fontStyle: 'italic' }}>
               "Every {t.name} treatment at Tvak & Asthi is personally performed by me — not a technician. I will give you an honest assessment of what results are genuinely achievable for your specific skin, and how many sessions are realistically needed."
             </p>
             <div style={{ fontSize: 13.5, fontWeight: 500, color: 'var(--text)' }}>Dr. Omaima Jawed</div>
-            <div style={{ fontSize: 12.5, fontWeight: 300, color: '#9A8A7A' }}>MBBS · Aesthetic Physician · 5 Years Experience</div>
+            <div style={{ fontSize: 12.5, fontWeight: 300, color: 'rgba(72,63,55,0.55)' }}>MBBS · Aesthetic Physician · 5 Years Experience</div>
           </div>
         </div>
       </section>
@@ -955,10 +955,10 @@ export default async function TreatmentPage({ params }) {
             <h2 style={{ fontWeight: 500, marginBottom: 32 }}>Frequently asked questions</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               {t.faqs.map((f, i) => (
-                <details key={i} style={{ background: '#F9F6F2', borderRadius: 12, border: '1.5px solid rgba(26,17,9,0.07)', overflow: 'hidden' }}>
+                <details key={i} style={{ background: '#f5e6d0', borderRadius: 12, border: '1.5px solid rgba(26,17,9,0.07)', overflow: 'hidden' }}>
                   <summary style={{ padding: '18px 22px', fontSize: 14, fontWeight: 400, cursor: 'pointer', listStyle: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, color: 'var(--text)' }}>
                     {f.question}
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B8916A" strokeWidth="2" strokeLinecap="round" style={{ flexShrink: 0 }}><path d="m6 9 6 6 6-6"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b8894a" strokeWidth="2" strokeLinecap="round" style={{ flexShrink: 0 }}><path d="m6 9 6 6 6-6"/></svg>
                   </summary>
                   <p style={{ margin: 0, padding: '4px 22px 20px', fontSize: 13.5, fontWeight: 300, color: '#4A3728', lineHeight: 1.8 }}>{f.answer}</p>
                 </details>
@@ -992,12 +992,12 @@ export default async function TreatmentPage({ params }) {
                       </div>
                     )}
                     {rt.category && (
-                      <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(26,17,9,0.72)', color: '#FAF7F2', fontSize: 9.5, fontWeight: 500, letterSpacing: '0.1em', padding: '3px 8px', borderRadius: 999 }}>{rt.category.toUpperCase()}</div>
+                      <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(26,17,9,0.72)', color: '#f5e6d0', fontSize: 9.5, fontWeight: 500, letterSpacing: '0.1em', padding: '3px 8px', borderRadius: 999 }}>{rt.category.toUpperCase()}</div>
                     )}
                   </div>
                   <div style={{ padding: '16px 18px 18px', flex: 1, display: 'flex', flexDirection: 'column' }}>
                     <div style={{ fontSize: 14, fontWeight: 500, color: 'var(--text)', marginBottom: 6 }}>{rt.name}</div>
-                    <div style={{ fontSize: 12, fontWeight: 300, color: '#B8916A', marginTop: 'auto' }}>Explore treatment →</div>
+                    <div style={{ fontSize: 12, fontWeight: 300, color: '#b8894a', marginTop: 'auto' }}>Explore treatment →</div>
                   </div>
                 </Link>
               ))}
@@ -1014,9 +1014,9 @@ export default async function TreatmentPage({ params }) {
             <h2 style={{ fontWeight: 500, marginBottom: 28 }}>Prevention & Maintenance Tips</h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 14 }}>
               {t.preventionTips.map((tip, i) => (
-                <div key={i} style={{ display: 'flex', gap: 14, alignItems: 'flex-start', padding: '18px 20px', background: '#F9F6F2', borderRadius: 12, border: '1.5px solid rgba(26,17,9,0.07)' }}>
+                <div key={i} style={{ display: 'flex', gap: 14, alignItems: 'flex-start', padding: '18px 20px', background: '#f5e6d0', borderRadius: 12, border: '1.5px solid rgba(26,17,9,0.07)' }}>
                   <span style={{ width: 28, height: 28, borderRadius: '50%', background: '#E8F0E4', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4A6741" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#b8894a" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
                   </span>
                   <span style={{ fontSize: 13.5, fontWeight: 300, color: '#4A3728', lineHeight: 1.7 }}>{tip}</span>
                 </div>
@@ -1027,16 +1027,16 @@ export default async function TreatmentPage({ params }) {
       )}
 
       {/* ── 16. BOOK CTA ── */}
-      <section style={{ padding: '80px 20px', background: '#3B2210' }}>
+      <section style={{ padding: '80px 20px', background: '#1a1512' }}>
         <div style={{ maxWidth: 600, margin: '0 auto', textAlign: 'center' }}>
-          <div style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#B8916A', marginBottom: 14 }}>Ready to start?</div>
-          <h2 style={{ fontWeight: 500, color: '#FAF7F2', marginBottom: 14 }}>Book your {t.name} consultation</h2>
-          <p style={{ fontSize: 14, fontWeight: 300, color: '#C4A998', marginBottom: 36 }}>
+          <div style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#b8894a', marginBottom: 14 }}>Ready to start?</div>
+          <h2 style={{ fontWeight: 500, color: '#f5e6d0', marginBottom: 14 }}>Book your {t.name} consultation</h2>
+          <p style={{ fontSize: 14, fontWeight: 300, color: '#c8b09a', marginBottom: 36 }}>
             Speak directly with Dr. Omaima to find out if {t.name} is right for your skin. All consultations are medical-grade and personalised.
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/contact" style={{ background: '#C4847E', color: '#fff', fontSize: 13.5, fontWeight: 400, padding: '14px 32px', borderRadius: 999, textDecoration: 'none' }}>Book Consultation</Link>
-            <a href="https://wa.me/919811997993" target="_blank" rel="noopener" style={{ background: 'rgba(255,255,255,0.1)', color: '#FAF7F2', fontSize: 13.5, fontWeight: 400, padding: '14px 32px', borderRadius: 999, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }}>WhatsApp Us</a>
+            <Link href="/contact" style={{ background: '#844d28', color: '#fff', fontSize: 13.5, fontWeight: 400, padding: '14px 32px', borderRadius: 999, textDecoration: 'none' }}>Book Consultation</Link>
+            <a href="https://wa.me/919811997993" target="_blank" rel="noopener" style={{ background: 'rgba(255,255,255,0.1)', color: '#f5e6d0', fontSize: 13.5, fontWeight: 400, padding: '14px 32px', borderRadius: 999, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }}>WhatsApp Us</a>
           </div>
         </div>
       </section>

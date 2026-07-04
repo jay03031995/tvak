@@ -418,12 +418,12 @@ export default async function ConcernPage({ params }) {
   return (
     <div style={{ background: 'var(--cream)' }}>
       {/* HERO */}
-      <section style={{ padding: '44px 20px 36px', background: 'linear-gradient(180deg,#F5EDE4,#FAF7F2)' }}>
+      <section style={{ padding: '44px 20px 36px', background: 'linear-gradient(180deg,#f5e6d0,#f5e6d0)' }}>
         <div style={{ maxWidth: 1180, margin: '0 auto', display: 'grid', gridTemplateColumns: (c.heroImage || c.image) ? '1.35fr 0.65fr' : '1fr', gap: 32, alignItems: 'center' }} className="concern-hero-grid">
           <div>
-          <div style={{ fontSize: 12.5, color: '#9A8A7A', fontWeight: 300, marginBottom: 20, display: 'flex', gap: 6 }}>
-            <Link href="/" style={{ color: '#9A8A7A' }}>Home</Link><span>/</span>
-            <Link href="/concerns" style={{ color: '#9A8A7A' }}>Concerns</Link><span>/</span>
+          <div style={{ fontSize: 12.5, color: 'rgba(72,63,55,0.55)', fontWeight: 300, marginBottom: 20, display: 'flex', gap: 6 }}>
+            <Link href="/" style={{ color: 'rgba(72,63,55,0.55)' }}>Home</Link><span>/</span>
+            <Link href="/concerns" style={{ color: 'rgba(72,63,55,0.55)' }}>Concerns</Link><span>/</span>
             <span style={{ color: 'var(--text)', fontWeight: 400 }}>{c.name}</span>
           </div>
           <span className="eyebrow">{c.category}</span>
@@ -437,8 +437,8 @@ export default async function ConcernPage({ params }) {
             </div>
           )}
           <div style={{ display: 'flex', gap: 10, marginTop: 28, flexWrap: 'wrap' }}>
-            <Link href="/contact" style={{ background: '#1A2744', color: '#fff', fontSize: 13, fontWeight: 400, padding: '12px 26px', borderRadius: 999, textDecoration: 'none' }}>Book Consultation</Link>
-            <a href="tel:09811997993" style={{ background: 'transparent', color: '#1A2744', fontSize: 13, fontWeight: 400, padding: '12px 26px', borderRadius: 999, border: '1.5px solid rgba(26,39,68,0.2)', textDecoration: 'none' }}>Call 098119 97993</a>
+            <Link href="/contact" style={{ background: '#844d28', color: '#fff', fontSize: 13, fontWeight: 400, padding: '12px 26px', borderRadius: 999, textDecoration: 'none' }}>Book Consultation</Link>
+            <a href="tel:09811997993" style={{ background: 'transparent', color: '#844d28', fontSize: 13, fontWeight: 400, padding: '12px 26px', borderRadius: 999, border: '1.5px solid rgba(132,77,40,0.2)', textDecoration: 'none' }}>Call 098119 97993</a>
           </div>
           </div>
           {(c.heroImage || c.image) && (
@@ -503,7 +503,7 @@ export default async function ConcernPage({ params }) {
           <h2>FAQs about {c.name}</h2>
           <div style={{ display: 'grid', gap: 14 }}>
             {seo.faqs.map((faq, i) => (
-              <section key={i} style={{ padding: '20px 22px', borderRadius: 14, background: '#FAF7F2', border: '1px solid rgba(26,17,9,0.08)' }}>
+              <section key={i} style={{ padding: '20px 22px', borderRadius: 14, background: '#f5e6d0', border: '1px solid rgba(26,17,9,0.08)' }}>
                 <h3 style={{ fontSize: 15, marginBottom: 8, color: 'var(--text)' }}>{faq.question}</h3>
                 <p>{faq.answer}</p>
               </section>
@@ -514,19 +514,19 @@ export default async function ConcernPage({ params }) {
 
       {/* OUR APPROACH */}
       {c.approach?.length > 0 && (
-        <section style={{ padding: '64px 20px', background: '#1A2744' }}>
+        <section style={{ padding: '64px 20px', background: '#844d28' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: 44 }}>
-              <span className="eyebrow" style={{ color: '#B8916A' }}>How We Treat It</span>
-              <h2 style={{ fontWeight: 500, color: '#FAF7F2', marginBottom: 0 }}>Our approach</h2>
+              <span className="eyebrow" style={{ color: '#b8894a' }}>How We Treat It</span>
+              <h2 style={{ fontWeight: 500, color: '#f5e6d0', marginBottom: 0 }}>Our approach</h2>
             </div>
             <div className="grid-2" style={{ gap: 16 }}>
               {c.approach.map((step, i) => (
                 <div key={i} style={{ display: 'flex', gap: 18, alignItems: 'flex-start', padding: '28px 26px', background: 'rgba(255,255,255,0.06)', borderRadius: 16, border: '1px solid rgba(255,255,255,0.1)' }}>
-                  <span style={{ width: 38, height: 38, borderRadius: '50%', background: '#B8916A', color: '#fff', fontSize: 14, fontWeight: 500, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{step.step || i + 1}</span>
+                  <span style={{ width: 38, height: 38, borderRadius: '50%', background: '#b8894a', color: '#fff', fontSize: 14, fontWeight: 500, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{step.step || i + 1}</span>
                   <div>
-                    <div style={{ fontSize: 15, fontWeight: 500, color: '#FAF7F2', marginBottom: 8 }}>{step.title}</div>
-                    <div style={{ fontSize: 13.5, fontWeight: 300, color: '#C4A998', lineHeight: 1.75 }}>{step.description}</div>
+                    <div style={{ fontSize: 15, fontWeight: 500, color: '#f5e6d0', marginBottom: 8 }}>{step.title}</div>
+                    <div style={{ fontSize: 13.5, fontWeight: 300, color: '#c8b09a', lineHeight: 1.75 }}>{step.description}</div>
                   </div>
                 </div>
               ))}
@@ -564,7 +564,7 @@ export default async function ConcernPage({ params }) {
                     <div style={{ display: 'flex', alignItems: 'center', gap: 5, paddingTop: 12, borderTop: '1px solid rgba(26,17,9,0.07)', marginTop: 'auto' }}>
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="#FBBC04"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7Z"/></svg>
                       <span style={{ fontSize: 12.5, fontWeight: 400, color: '#4A3728' }}>{t.rating}</span>
-                      <span style={{ fontSize: 12.5, fontWeight: 300, color: '#9A8A7A' }}>· {t.reviewCount} reviews</span>
+                      <span style={{ fontSize: 12.5, fontWeight: 300, color: 'rgba(72,63,55,0.55)' }}>· {t.reviewCount} reviews</span>
                     </div>
                   </div>
                 </Link>
@@ -575,13 +575,13 @@ export default async function ConcernPage({ params }) {
       )}
 
       {/* CTA */}
-      <section style={{ padding: '56px 20px', background: '#3B2210' }}>
+      <section style={{ padding: '56px 20px', background: '#1a1512' }}>
         <div style={{ maxWidth: 600, margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{ fontWeight: 500, color: '#FAF7F2', marginBottom: 10 }}>Concerned about {c.name}?</h2>
-          <p style={{ fontSize: 13.5, fontWeight: 300, color: '#C4A998', marginBottom: 28 }}>Book a consultation with Dr. Omaima for a personalised treatment plan.</p>
+          <h2 style={{ fontWeight: 500, color: '#f5e6d0', marginBottom: 10 }}>Concerned about {c.name}?</h2>
+          <p style={{ fontSize: 13.5, fontWeight: 300, color: '#c8b09a', marginBottom: 28 }}>Book a consultation with Dr. Omaima for a personalised treatment plan.</p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/contact" style={{ background: '#C4847E', color: '#fff', fontSize: 13, fontWeight: 400, padding: '13px 32px', borderRadius: 999, textDecoration: 'none' }}>Book Consultation</Link>
-            <a href="https://wa.me/919811997993" target="_blank" rel="noopener" style={{ background: 'rgba(255,255,255,0.1)', color: '#FAF7F2', fontSize: 13, fontWeight: 400, padding: '13px 32px', borderRadius: 999, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }}>WhatsApp Us</a>
+            <Link href="/contact" style={{ background: '#844d28', color: '#fff', fontSize: 13, fontWeight: 400, padding: '13px 32px', borderRadius: 999, textDecoration: 'none' }}>Book Consultation</Link>
+            <a href="https://wa.me/919811997993" target="_blank" rel="noopener" style={{ background: 'rgba(255,255,255,0.1)', color: '#f5e6d0', fontSize: 13, fontWeight: 400, padding: '13px 32px', borderRadius: 999, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }}>WhatsApp Us</a>
           </div>
         </div>
       </section>
