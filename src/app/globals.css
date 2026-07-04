@@ -1,81 +1,294 @@
 @import "tailwindcss";
 
-/* ── Artham Brand Palette ── */
+/* =========================================================
+   ARTHAM — Brand CSS (Colours + Fonts + Presets)
+   "Where Science meets Soulful Care."
+   ========================================================= */
+
+/* ── Google Fonts (Tiro Devanagari Hindi via @import) ── */
+@import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi&display=swap');
+
+/* ---------- 1. Design Tokens ---------- */
 :root {
-  /* Core brand colours */
-  --brown:    #543213;   /* Jambalaya — dark anchor, type, weight */
-  --bronze:   #844d28;   /* Burma Teak — warmth, primary accent */
-  --gold:     #feb847;   /* Coronation Gold — signal, highlights */
-  --cream:    #efdfc8;   /* Arabian White — background */
-  --warm:     #f1d0b4;   /* Summer Peach — warm section fields */
-  --charcoal: #483f37;   /* Armadillo — steadiness, professionalism */
+  /* Artham Brand Colours */
+  --burma-teak:      #844d28;   /* Primary brand */
+  --arabian-white:   #efdfc8;   /* Primary background */
+  --armadillo:       #483f37;   /* Dark background & body text */
+  --coronation-gold: #b8894a;   /* Accent — dots, hairlines */
+  --summer-peach:    #f5e6d0;   /* Lighter background variant */
+  --ink:             #1a1512;   /* Rarely-used deep neutral */
+  --black:           #000000;
 
-  /* Semantic tokens */
-  --text:     #3d3028;   /* body text — warm near-black */
-  --muted:    #7a6858;   /* secondary / caption text */
-  --border:   rgba(84,50,19,0.12);
+  /* RGB channels for rgba() */
+  --burma-teak-rgb:      132, 77, 40;
+  --arabian-white-rgb:   239, 223, 200;
+  --armadillo-rgb:       72, 63, 55;
+  --coronation-gold-rgb: 184, 137, 74;
 
-  /* Legacy aliases kept for inline JSX styles */
-  --navy:     #543213;   /* was navy blue → Jambalaya */
-  --rose:     #844d28;   /* was rose pink → Burma Teak */
+  /* Semantic aliases (used throughout JSX) */
+  --brown:    var(--armadillo);
+  --bronze:   var(--burma-teak);
+  --gold:     var(--coronation-gold);
+  --cream:    var(--arabian-white);
+  --warm:     var(--summer-peach);
+  --charcoal: var(--armadillo);
+  --text:     var(--armadillo);
+  --muted:    rgba(var(--armadillo-rgb), 0.65);
+  --border:   rgba(var(--burma-teak-rgb), 0.14);
+
+  /* Legacy aliases */
+  --navy: var(--armadillo);
+  --rose: var(--burma-teak);
+
+  /* Font stacks */
+  --font-devanagari: "Tiro Devanagari Hindi", serif;
+  --font-headline:   var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-body:       var(--font-poppins), "Poppins", system-ui, sans-serif;
+  --font-fine:       var(--font-raleway), "Raleway", system-ui, sans-serif;
+  --font-secondary:  var(--font-montserrat), "Montserrat", system-ui, sans-serif;
+
+  /* Type scale */
+  --fs-hero:      clamp(2.25rem, 5.5vw, 4rem);
+  --fs-section:   clamp(2.4rem, 5vw, 4rem);
+  --fs-card:      clamp(1.5rem, 2.8vw, 2.25rem);
+  --fs-body-lg:   clamp(1rem, 1.4vw, 1.125rem);
+  --fs-body:      1rem;
+  --fs-small:     0.875rem;
+  --fs-overline:  0.6875rem;
+
+  /* Rhythm */
+  --lh-body:     1.9;
+  --lh-headline: 1.05;
+  --tr-overline: 0.35em;
+  --tr-button:   0.3em;
+  --tr-headline: 0.02em;
 }
 
 @theme inline {
-  --font-sans:     var(--font-poppins);
-  --font-display:  var(--font-playfair);
-  --color-cream:   var(--cream);
-  --color-warm:    var(--warm);
-  --color-bronze:  var(--bronze);
-  --color-gold:    var(--gold);
-  --color-brown:   var(--brown);
-  --color-charcoal: var(--charcoal);
+  --font-sans:      var(--font-body);
+  --font-display:   var(--font-headline);
+  --color-cream:    var(--arabian-white);
+  --color-warm:     var(--summer-peach);
+  --color-bronze:   var(--burma-teak);
+  --color-gold:     var(--coronation-gold);
+  --color-brown:    var(--armadillo);
+  --color-charcoal: var(--armadillo);
 }
 
+/* ---------- 2. Base Reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: var(--cream);
-  color: var(--text);
-  font-family: var(--font-poppins), system-ui, sans-serif;
+  background-color: var(--arabian-white);
+  color: var(--armadillo);
+  font-family: var(--font-body);
   font-size: 14px;
   font-weight: 300;
-  line-height: 1.7;
+  line-height: var(--lh-body);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Headlines use Playfair Display per brand guide */
+/* ---------- 3. Typography ---------- */
+
+/* Headlines — Playfair Display */
 h1, h2 {
-  font-family: var(--font-playfair), Georgia, serif;
+  font-family: var(--font-headline);
   font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  line-height: var(--lh-headline);
+  letter-spacing: var(--tr-headline);
   margin: 0;
-  color: var(--brown);
+  color: var(--armadillo);
 }
 
+/* Sub-headings — Poppins */
 h3, h4, h5 {
-  font-family: var(--font-poppins), system-ui, sans-serif;
+  font-family: var(--font-body);
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: -0.01em;
   margin: 0;
-  color: var(--brown);
+  color: var(--burma-teak);
 }
 
 h1 { font-size: clamp(26px, 4vw, 46px); }
 h2 { font-size: clamp(20px, 3vw, 34px); }
 h3 { font-size: clamp(15px, 2vw, 20px); }
 
-p { margin: 0; font-size: 14px; font-weight: 300; line-height: 1.75; color: var(--muted); }
+p { margin: 0; font-size: 14px; font-weight: 300; line-height: var(--lh-body); color: var(--muted); }
 
 a { color: inherit; text-decoration: none; }
 
-::selection { background: var(--bronze); color: #fff; }
+/* Montserrat for buttons & overlines */
+button, .btn-artham-primary, .btn-artham-outline {
+  font-family: var(--font-secondary);
+}
 
-/* ── Scroll reveal ── */
+/* Devanagari wordmark */
+.artham-devanagari {
+  font-family: var(--font-devanagari);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  color: var(--burma-teak);
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+.artham-devanagari--hero { font-size: clamp(2rem, 4vw, 3.25rem); }
+
+::selection { background: var(--burma-teak); color: var(--arabian-white); }
+
+/* ---------- 4. Artham Typography Presets ---------- */
+
+.artham-h1 {
+  font-family: var(--font-headline);
+  font-weight: 600;
+  font-size: var(--fs-hero);
+  line-height: var(--lh-headline);
+  letter-spacing: var(--tr-headline);
+  text-transform: uppercase;
+  color: var(--armadillo);
+  margin: 0;
+}
+
+.artham-h2 {
+  font-family: var(--font-headline);
+  font-weight: 400;
+  font-size: var(--fs-section);
+  line-height: var(--lh-headline);
+  color: var(--burma-teak);
+  margin: 0;
+}
+.artham-h2 em, .artham-h2 .italic {
+  font-style: italic;
+  color: var(--armadillo);
+}
+
+.artham-h3 {
+  font-family: var(--font-headline);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--fs-card);
+  color: var(--armadillo);
+  margin: 0;
+}
+
+.artham-body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-body);
+  color: rgba(var(--armadillo-rgb), 0.85);
+}
+
+.artham-overline, .eyebrow {
+  font-family: var(--font-secondary);
+  font-weight: 400;
+  font-size: var(--fs-overline);
+  letter-spacing: var(--tr-overline);
+  text-transform: uppercase;
+  color: var(--burma-teak);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.artham-fine {
+  font-family: var(--font-fine);
+  font-weight: 300;
+  font-size: var(--fs-small);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(var(--armadillo-rgb), 0.70);
+}
+
+.artham-quote {
+  font-family: var(--font-headline);
+  font-style: italic;
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  line-height: 1.4;
+  color: var(--burma-teak);
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--coronation-gold);
+}
+
+/* ---------- 5. Button Presets ---------- */
+
+.btn-artham-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2.25rem;
+  background-color: var(--burma-teak);
+  color: var(--arabian-white);
+  font-family: var(--font-secondary);
+  font-size: var(--fs-overline);
+  font-weight: 400;
+  letter-spacing: var(--tr-button);
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 500ms ease;
+}
+.btn-artham-primary:hover { background-color: var(--armadillo); }
+
+.btn-artham-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2.25rem;
+  background-color: transparent;
+  color: var(--burma-teak);
+  font-family: var(--font-secondary);
+  font-size: var(--fs-overline);
+  font-weight: 400;
+  letter-spacing: var(--tr-button);
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid rgba(var(--burma-teak-rgb), 0.6);
+  cursor: pointer;
+  transition: all 500ms ease;
+}
+.btn-artham-outline:hover {
+  background-color: var(--burma-teak);
+  color: var(--arabian-white);
+  border-color: var(--burma-teak);
+}
+
+/* ---------- 6. Section Background Combos ---------- */
+
+.section-light  { background-color: var(--arabian-white); color: var(--armadillo); }
+.section-dark   { background-color: var(--armadillo); color: var(--arabian-white); }
+.section-brand  { background-color: var(--burma-teak); color: var(--arabian-white); }
+.section-peach  { background-color: var(--summer-peach); color: var(--armadillo); }
+
+/* ---------- 7. Colour Utility Classes ---------- */
+.bg-burma     { background-color: var(--burma-teak); }
+.bg-arabian   { background-color: var(--arabian-white); }
+.bg-armadillo { background-color: var(--armadillo); }
+.bg-gold      { background-color: var(--coronation-gold); }
+.bg-peach     { background-color: var(--summer-peach); }
+
+.text-burma     { color: var(--burma-teak); }
+.text-arabian   { color: var(--arabian-white); }
+.text-armadillo { color: var(--armadillo); }
+.text-gold      { color: var(--coronation-gold); }
+
+/* ---------- 8. Hairlines ---------- */
+.hairline {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--burma-teak), transparent);
+  opacity: 0.4;
+  border: 0;
+}
+.hairline-gold {
+  height: 1px;
+  background: var(--coronation-gold);
+  opacity: 0.6;
+  border: 0;
+}
+
+/* ---------- 9. Scroll Reveal ---------- */
 .reveal {
   opacity: 0;
   transform: translateY(20px);
@@ -84,23 +297,21 @@ a { color: inherit; text-decoration: none; }
 }
 .reveal.vis { opacity: 1; transform: translateY(0); }
 
-/* Above-fold hero entry */
+/* Above-fold entry */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 .au { animation: fadeUp 0.6s cubic-bezier(.22,.68,0,.99) both; }
 
-/* Card hover lift */
-.card-hover {
-  transition: transform 0.22s, box-shadow 0.22s;
-}
+/* ---------- 10. Card Hover ---------- */
+.card-hover { transition: transform 0.22s, box-shadow 0.22s; }
 .card-hover:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 36px rgba(84,50,19,0.13);
+  box-shadow: 0 12px 36px rgba(var(--burma-teak-rgb), 0.14);
 }
 
-/* ── Responsive layout grids ── */
+/* ---------- 11. Layout Grids ---------- */
 .grid-hero    { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
 .grid-2       { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .grid-3       { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
@@ -127,43 +338,35 @@ a { color: inherit; text-decoration: none; }
     grid-template-columns: 1fr !important;
     padding: 14px !important;
   }
-  .doctor-card-home > div:first-child {
-    max-height: 360px;
-  }
-
+  .doctor-card-home > div:first-child { max-height: 360px; }
   .sec { padding-left: 16px !important; padding-right: 16px !important; }
   .hero-imgs { display: none !important; }
+  .concern-hero-grid { grid-template-columns: 1fr !important; }
 }
 
-/* ── Marquee trust bar ── */
+/* ---------- 12. Marquee ---------- */
 .marquee-track {
-  display: flex;
-  gap: 12px;
-  width: max-content;
+  display: flex; gap: 12px; width: max-content;
   animation: marquee 30s linear infinite;
 }
 .marquee-track:hover { animation-play-state: paused; }
-
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
 
-/* ── Testimonials auto-scroll ── */
+/* ---------- 13. Testimonials ---------- */
 .testimonials-track {
-  display: flex;
-  gap: 20px;
-  width: max-content;
+  display: flex; gap: 20px; width: max-content;
   animation: scrollTrack 38s linear infinite;
 }
 .testimonials-track:hover { animation-play-state: paused; }
-
 @keyframes scrollTrack {
   from { transform: translateX(0); }
   to   { transform: translateX(-33.333%); }
 }
 
-/* ── Hero image staggered entrance ── */
+/* ---------- 14. Hero Image Entrance ---------- */
 @keyframes imgFadeIn {
   from { opacity: 0; transform: scale(0.96) translateY(10px); }
   to   { opacity: 1; transform: scale(1) translateY(0); }
@@ -175,62 +378,21 @@ a { color: inherit; text-decoration: none; }
 .hb-1 { animation: fadeUp 0.5s cubic-bezier(.22,.68,0,.99) 0.85s both; }
 .hb-2 { animation: fadeUp 0.5s cubic-bezier(.22,.68,0,.99) 0.95s both; }
 
-/* ── Section eyebrow tag ── */
-.eyebrow {
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--bronze);
-  display: block;
-  margin-bottom: 10px;
-}
+/* ---------- 15. Concern Article ---------- */
+.concern-article h2 { font-size: clamp(20px, 2.4vw, 28px); color: var(--armadillo); margin: 34px 0 12px; }
+.concern-article p  { color: var(--armadillo); line-height: 1.85; margin-bottom: 16px; }
+.concern-article ul { margin: 0 0 22px; padding-left: 20px; color: var(--armadillo); }
+.concern-article li { margin-bottom: 9px; line-height: 1.75; }
 
-.concern-article h2 {
-  font-size: clamp(20px, 2.4vw, 28px);
-  color: var(--text);
-  margin: 34px 0 12px;
-}
-
-.concern-article p {
-  color: #4A3728;
-  line-height: 1.85;
-  margin-bottom: 16px;
-}
-
-.concern-article ul {
-  margin: 0 0 22px;
-  padding-left: 20px;
-  color: #4A3728;
-}
-
-.concern-article li {
-  margin-bottom: 9px;
-  line-height: 1.75;
-}
-
-@media (max-width: 768px) {
-  .concern-hero-grid {
-    grid-template-columns: 1fr !important;
-  }
-}
-
-/* ── 3-panel hero ── */
-.hero-3panel {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr 1fr;
-  min-height: 100vh;
-}
-
+/* ---------- 16. Hero 3-panel ---------- */
+.hero-3panel { display: grid; grid-template-columns: 1fr 1.4fr 1fr; min-height: 100vh; }
 @media (max-width: 900px) {
-  .hero-3panel {
-    grid-template-columns: 1fr !important;
-    min-height: unset !important;
-  }
-  .hero-panel-side {
-    min-height: 45vh !important;
-  }
-  .hero-panel-center {
-    min-height: 65vh !important;
-  }
+  .hero-3panel { grid-template-columns: 1fr !important; min-height: unset !important; }
+  .hero-panel-side   { min-height: 45vh !important; }
+  .hero-panel-center { min-height: 65vh !important; }
 }
+
+/* ---------- 17. Scrollbar ---------- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--arabian-white); }
+::-webkit-scrollbar-thumb { background: var(--burma-teak); border-radius: 999px; }
